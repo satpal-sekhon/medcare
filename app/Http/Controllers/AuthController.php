@@ -20,4 +20,8 @@ class AuthController extends Controller
     public function forgot_password(){
         return view('forgot-password');
     }
+
+    public function verify_email(){
+        return view('verify-email');
+    }
 }
