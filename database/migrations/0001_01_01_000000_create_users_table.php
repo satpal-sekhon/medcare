@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('email', 100)->unique();
-            $table->integer('phone_number', 12)->nullable();
+            $table->string('phone_number', 12)->nullable();
             $table->string('blood_group', 4)->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('pincode')->nullable();
             $table->string('profile_pic')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
