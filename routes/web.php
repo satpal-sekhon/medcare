@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,6 +19,7 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::resources([
     '/products' => ProductController::class,
+    '/wishlist' => WishlistController::class,
 ]);
 
 Route::middleware('auth')->group(function () {

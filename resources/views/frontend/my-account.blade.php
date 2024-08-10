@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="tab-pane fade" id="pills-wishlist" role="tabpanel">
-                            @include('frontend.partials.my-account.wishlists')
+                            @include('frontend.partials.my-account.wishlist')
                         </div>
 
                         <div class="tab-pane fade" id="pills-address" role="tabpanel">

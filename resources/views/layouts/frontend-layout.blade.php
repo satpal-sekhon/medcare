@@ -155,7 +155,7 @@
                                         </a>
                                     </li>
                                     <li class="right-side">
-                                        <a href="wishlist.html" class="btn p-0 position-relative header-wishlist">
+                                        <a href="{{ route('wishlist.index') }}" class="btn p-0 position-relative header-wishlist">
                                             <i data-feather="heart"></i>
                                         </a>
                                     </li>
@@ -1275,7 +1275,7 @@
                                     <a href="order-tracking.html" class="text-content">Track Order</a>
                                 </li>
                                 <li>
-                                    <a href="wishlist.html" class="text-content">Your Wishlist</a>
+                                    <a href="{{ route('wishlist.index') }}" class="text-content">Your Wishlist</a>
                                 </li>
                                 <li>
                                     <a href="search.html" class="text-content">Search</a>
