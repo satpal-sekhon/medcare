@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,15 +63,15 @@
             <div class="header-wrapper m-0">
                 <div class="header-logo-wrapper p-0">
                     <div class="logo-wrapper">
-                        <a href="index-2.html">
-                            <img class="img-fluid main-logo" src="admin-assets/images/logo/1.png" alt="logo">
-                            <img class="img-fluid white-logo" src="admin-assets/images/logo/1-white.png" alt="logo">
+                        <a href="{{ route('admin-dashboard') }}">
+                            <img class="img-fluid main-logo" src="{{ asset('admin-assets/images/logo/1.png') }}" alt="logo">
+                            <img class="img-fluid white-logo" src="{{ asset('admin-assets/images/logo/1-white.png') }}" alt="logo">
                         </a>
                     </div>
                     <div class="toggle-sidebar">
                         <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
-                        <a href="index-2.html">
-                            <img src="admin-assets/images/logo/1.png" class="img-fluid" alt="">
+                        <a href="{{ route('admin-dashboard') }}">
+                            <img src="{{ asset('admin-assets/images/logo/1.png') }}" class="img-fluid" alt="">
                         </a>
                     </div>
                 </div>
@@ -144,7 +145,7 @@
                         </li>
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
                             <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="admin-assets/images/users/4.jpg" alt="">
+                                <img class="user-profile rounded-circle" src="{{ asset('admin-assets/images/users/4.jpg') }}" alt="">
                                 <div class="user-name-hide media-body">
                                     <span>Emay Walter</span>
                                     <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i></p>
@@ -197,8 +198,8 @@
                 <div id="sidebarEffect"></div>
                 <div>
                     <div class="logo-wrapper logo-wrapper-center">
-                        <a href="index-2.html" data-bs-original-title="" title="">
-                            <img class="img-fluid for-white" src="admin-assets/images/logo/full-white.png" alt="logo">
+                        <a href="{{ route('admin-dashboard') }}" data-bs-original-title="" title="">
+                            <img class="img-fluid for-white" src="{{ asset('admin-assets/images/logo/full-white.png') }}" alt="logo">
                         </a>
                         <div class="back-btn">
                             <i class="fa fa-angle-left"></i>
@@ -208,9 +209,10 @@
                         </div>
                     </div>
                     <div class="logo-icon-wrapper">
-                        <a href="index-2.html">
-                            <img class="img-fluid main-logo main-white" src="admin-assets/images/logo/logo.png" alt="logo">
-                            <img class="img-fluid main-logo main-dark" src="admin-assets/images/logo/logo-white.png"
+                        <a href="{{ route('admin-dashboard') }}">
+                            <img class="img-fluid main-logo main-white" src="{{ asset('admin-assets/images/logo/logo.png') }}"
+                                alt="logo">
+                            <img class="img-fluid main-logo main-dark" src="{{ asset('admin-assets/images/logo/logo-white.png') }}"
                                 alt="logo">
                         </a>
                     </div>
@@ -224,7 +226,7 @@
                                 <li class="back-btn"></li>
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="index-2.html">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin-dashboard') }}">
                                         <i class="ri-home-line"></i>
                                         <span>Dashboard</span>
                                     </a>
@@ -237,7 +239,7 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="products.html">Prodcts</a>
+                                            <a href="{{ route('admin.products.index') }}">Products</a>
                                         </li>
 
                                         <li>
@@ -499,4 +501,5 @@
     <!-- Theme js -->
     <script src="{{ asset('admin-assets/js/script.js') }}"></script>
 </body>
+
 </html>

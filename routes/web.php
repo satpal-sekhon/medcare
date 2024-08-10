@@ -33,4 +33,5 @@ Route::get('/my-account', [AccountController::class, 'user_account']);
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
+    Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
 });

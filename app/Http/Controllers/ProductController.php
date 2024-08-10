@@ -16,6 +16,14 @@ class ProductController extends Controller
     }
 
     /**
+     * Display a listing of the admin resource.
+     */
+    public function admin_index()
+    {
+        return view('admin.products.index');
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
