@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -18,3 +19,9 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::resources([
     '/products' => ProductController::class,
 ]);
+
+Route::middleware('auth')->group(function () {
+    //Route::get('/my-account', [AccountController::class, 'user_account']);
+});
+
+Route::get('/my-account', [AccountController::class, 'user_account']);
