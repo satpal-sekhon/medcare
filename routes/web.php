@@ -16,7 +16,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/signup', [AuthController::class, 'signup'])->name('sign-up');
 Route::get('/verify-email', [AuthController::class, 'verify_email'])->name('verify-email');
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
