@@ -3,9 +3,11 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -33,5 +35,25 @@ Route::get('/my-account', [AccountController::class, 'user_account']);
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
+      
+    // Primary categories routes
+    Route::get('/primary-categories', [PrimaryCategoryController::class, 'admin_primary_categories_index'])->name('admin.primary-categories.index');
+    Route::get('/primary-categories/create', [PrimaryCategoryController::class, 'create'])->name('admin.primary-categories.create');
+        
+    // Categories routes
+    Route::get('/categories', [CategoryController::class, 'admin_categories_index'])->name('admin.categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+        
+    // Sub-categories routes
+    Route::get('/sub-categories', [ProductController::class, 'admin_sub_categories_index'])->name('admin.sub-categories.index');
+    Route::get('/sub-categories/create', [ProductController::class, 'create'])->name('admin.sub-categories.create');
+        
+    // Brands routes
+    Route::get('/brands', [ProductController::class, 'admin_brands_index'])->name('admin.brands.index');
+    Route::get('/brands/create', [ProductController::class, 'create'])->name('admin.brands.create');
+      
+    // Product management routes
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+        
 });

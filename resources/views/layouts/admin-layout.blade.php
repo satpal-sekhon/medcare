@@ -47,6 +47,8 @@
 
     <!-- App css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/style.css') }}">
+
+    @stack('styles')
 </head>
 
 <body>
@@ -234,16 +236,16 @@
 
                                 <li class="sidebar-list">
                                     <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                                        <i class="ri-store-3-line"></i>
-                                        <span>Product</span>
+                                        <i class="ri-list-check-2"></i>
+                                        <span>Primary Category</span>
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="{{ route('admin.products.index') }}">Products</a>
+                                            <a href="{{ route('admin.primary-categories.index') }}">Primary Category List</a>
                                         </li>
 
                                         <li>
-                                            <a href="add-new-product.html">Add New Products</a>
+                                            <a href="{{ route('admin.primary-categories.create') }}">Add New Primary Category</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -255,11 +257,61 @@
                                     </a>
                                     <ul class="sidebar-submenu">
                                         <li>
-                                            <a href="category.html">Category List</a>
+                                            <a href="{{ route('admin.categories.index') }}">Category List</a>
                                         </li>
 
                                         <li>
-                                            <a href="add-new-category.html">Add New Category</a>
+                                            <a href="{{ route('admin.categories.create') }}">Add New Category</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i class="ri-list-check-2"></i>
+                                        <span>Sub Category</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="{{ route('admin.categories.index') }}">Subcategories List</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('admin.categories.create') }}">Add New Sub Category</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i class="ri-store-3-line"></i>
+                                        <span>Brands</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="{{ route('admin.brands.index') }}">Brands</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('admin.brands.create') }}">Add New brand</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                
+                                <li class="sidebar-list">
+                                    <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                                        <i class="ri-store-3-line"></i>
+                                        <span>Product</span>
+                                    </a>
+                                    <ul class="sidebar-submenu">
+                                        <li>
+                                            <a href="{{ route('admin.products.index') }}">Products</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('admin.products.create') }}">Add New Products</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -480,14 +532,6 @@
     <!-- Plugins JS -->
     <script src="{{ asset('admin-assets/js/sidebar-menu.js') }}"></script>
 
-    <!-- Apexchar js -->
-    <script src="{{ asset('admin-assets/js/chart/apex-chart/apex-chart1.js') }}"></script>
-    <script src="{{ asset('admin-assets/js/chart/apex-chart/moment.min.js') }}"></script>
-    <script src="{{ asset('admin-assets/js/chart/apex-chart/apex-chart.js') }}"></script>
-    <script src="{{ asset('admin-assets/js/chart/apex-chart/stock-prices.js') }}"></script>
-    <script src="{{ asset('admin-assets/js/chart/apex-chart/chart-custom1.js') }}"></script>
-
-
     <!-- slick slider js -->
     <script src="{{ asset('admin-assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('admin-assets/js/custom-slick.js') }}"></script>
@@ -500,6 +544,8 @@
 
     <!-- Theme js -->
     <script src="{{ asset('admin-assets/js/script.js') }}"></script>
+    
+    @stack('scripts')
 </body>
 
 </html>
