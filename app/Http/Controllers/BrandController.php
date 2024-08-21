@@ -15,6 +15,10 @@ class BrandController extends Controller
         //
     }
 
+    public function admin_brands_index(){
+        return view('admin.brands.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -6,7 +6,7 @@
         <div class="card card-table">
             <div class="card-body">
                 <div class="title-header option-title d-sm-flex d-block">
-                    <h5>All Category</h5>
+                    <h5>Primary Categories</h5>
                     <div class="right-options">
                         <ul>
                             <li>
@@ -23,7 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Icon</th>
                                     <th>Image</th>
                                     <th>Option</th>
                                 </tr>
@@ -31,12 +30,6 @@
                             <tbody>
                                 <tr>
                                     <td>Buscuit</td>
-                                    <td>
-                                        <div class="table-image">
-                                            <img src="{{ asset('admin-assets/images/product/1.png') }}" class="img-fluid"
-                                                alt="">
-                                        </div>
-                                    </td>
                                     <td>
                                         <div class="table-image">
                                             <img src="{{ asset('admin-assets/images/product/1.png') }}" class="img-fluid"

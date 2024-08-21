@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -50,8 +51,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/sub-categories/create', [ProductController::class, 'create'])->name('admin.sub-categories.create');
         
     // Brands routes
-    Route::get('/brands', [ProductController::class, 'admin_brands_index'])->name('admin.brands.index');
-    Route::get('/brands/create', [ProductController::class, 'create'])->name('admin.brands.create');
+    Route::get('/brands', [BrandController::class, 'admin_brands_index'])->name('admin.brands.index');
+    Route::get('/brands/create', [BrandController::class, 'create'])->name('admin.brands.create');
       
     // Product management routes
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
