@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
                 <div class="image-contain">
-                    <img src="{{ asset('assets/images/inner-page/forgot.png') }}" class="img-fluid" alt="">
+                    <img src="{{ asset('assets/images/page/forgot.png') }}" class="img-fluid" alt="">
                 </div>
             </div>
 
@@ -15,7 +15,6 @@
                 <div class="d-flex align-items-center justify-content-center h-100">
                     <div class="log-in-box">
                         <div class="log-in-title">
-                            <h3>Welcome To Fastkart</h3>
                             <h4>Forgot your password</h4>
                         </div>
 

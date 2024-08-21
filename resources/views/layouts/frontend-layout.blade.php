@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/assets/images/favicon/1.png" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" type="image/x-icon">
     <title>Heal Deal</title>
 
     <!-- Google font -->
@@ -871,18 +871,17 @@
                         <div class="footer-logo">
                             <div class="theme-logo">
                                 <a href="{{ route('home') }}">
-                                    <img src="{{ asset('assets/images/logo/1.png') }}" class="blur-up lazyload" alt="">
+                                    <img src="{{ asset('assets/images/logo/2.png') }}" class="blur-up lazyload" alt="">
                                 </a>
                             </div>
 
                             <div class="footer-logo-contain">
-                                <p>We are a friendly bar serving a variety of cocktails, wines and beers. Our bar is a
-                                    perfect place for a couple.</p>
+                                <p>Medical Life is an Medicine Ecommerce website we deliver Medicine in Retail & Wholesale price..</p>
 
                                 <ul class="address">
                                     <li>
                                         <i data-feather="home"></i>
-                                        <a href="javascript:void(0)">1418 Riverwood Drive, CA 96052, US</a>
+                                        <a href="javascript:void(0)">Noida, Sector 78, India</a>
                                     </li>
                                     <li>
                                         <i data-feather="mail"></i>
@@ -1004,21 +1003,6 @@
                                     </div>
                                 </li>
 
-                                <li class="social-app mb-0">
-                                    <h5 class="mb-2 text-content">Download App :</h5>
-                                    <ul>
-                                        <li class="mb-0">
-                                            <a href="https://play.google.com/store/apps" target="_blank">
-                                                <img src="/assets/images/playstore.svg" class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                        <li class="mb-0">
-                                            <a href="https://www.apple.com/in/app-store/" target="_blank">
-                                                <img src="/assets/images/appstore.svg" class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1027,11 +1011,11 @@
 
             <div class="sub-footer section-small-space">
                 <div class="reserve">
-                    <h6 class="text-content">©2022 Fastkart All rights reserved</h6>
+                    <h6 class="text-content">©2022 Heal+ All rights reserved</h6>
                 </div>
 
                 <div class="payment">
-                    <img src="/assets/images/payment/1.png" class="blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/images/payment-methods.png') }}" class="blur-up lazyload" alt="">
                 </div>
 
                 <div class="social-link">
@@ -1064,288 +1048,6 @@
     </footer>
     <!-- Footer Section End -->
 
-    <!-- Quick View Modal Box Start -->
-    <div class="modal fade theme-modal view-modal" id="view" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
-            <div class="modal-content">
-                <div class="modal-header p-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-sm-4 g-2">
-                        <div class="col-lg-6">
-                            <div class="slider-image">
-                                <img src="/assets/images/product/category/1.jpg" class="img-fluid blur-up lazyload"
-                                    alt="">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="right-sidebar-modal">
-                                <h4 class="title-name">Peanut Butter Bite Premium Butter Cookies 600 g</h4>
-                                <h4 class="price">$36.99</h4>
-                                <div class="product-rating">
-                                    <ul class="rating">
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star"></i>
-                                        </li>
-                                    </ul>
-                                    <span class="ms-2">8 Reviews</span>
-                                    <span class="ms-2 text-danger">6 sold in last 16 hours</span>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h4>Product Details :</h4>
-                                    <p>Candy canes sugar plum tart cotton candy chupa chups sugar plum chocolate I love.
-                                        Caramels marshmallow icing dessert candy canes I love soufflé I love toffee.
-                                        Marshmallow pie sweet sweet roll sesame snaps tiramisu jelly bear claw. Bonbon
-                                        muffin I love carrot cake sugar plum dessert bonbon.</p>
-                                </div>
-
-                                <ul class="brand-list">
-                                    <li>
-                                        <div class="brand-box">
-                                            <h5>Brand Name:</h5>
-                                            <h6>Black Forest</h6>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="brand-box">
-                                            <h5>Product Code:</h5>
-                                            <h6>W0690034</h6>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="brand-box">
-                                            <h5>Product Type:</h5>
-                                            <h6>White Cream Cake</h6>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <div class="select-size">
-                                    <h4>Cake Size :</h4>
-                                    <select class="form-select select-form-size">
-                                        <option selected>Select Size</option>
-                                        <option value="1.2">1/2 KG</option>
-                                        <option value="0">1 KG</option>
-                                        <option value="1.5">1/5 KG</option>
-                                        <option value="red">Red Roses</option>
-                                        <option value="pink">With Pink Roses</option>
-                                    </select>
-                                </div>
-
-                                <div class="modal-button">
-                                    <button onclick="location.href = '{{ route('cart') }}';"
-                                        class="btn btn-md add-cart-button icon">Add To Cart</button>
-                                    <button onclick="location.href = 'product-left.html';"
-                                        class="btn theme-bg-color view-button icon text-white fw-bold btn-md">
-                                        View More Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick View Modal Box End -->
-
-    <!-- Location Modal Start -->
-    <div class="modal location-modal fade theme-modal" id="locationModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Choose your Delivery Location</h5>
-                    <p class="mt-1 text-content">Enter your address and we will specify the offer for your area.</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="location-list">
-                        <div class="search-input">
-                            <input type="search" class="form-control" placeholder="Search Your Area">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-
-                        <div class="disabled-box">
-                            <h6>Select a Location</h6>
-                        </div>
-
-                        <ul class="location-select custom-height">
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Alabama</h6>
-                                    <span>Min: $130</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Arizona</h6>
-                                    <span>Min: $150</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>California</h6>
-                                    <span>Min: $110</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Colorado</h6>
-                                    <span>Min: $140</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Florida</h6>
-                                    <span>Min: $160</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Georgia</h6>
-                                    <span>Min: $120</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Kansas</h6>
-                                    <span>Min: $170</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Minnesota</h6>
-                                    <span>Min: $120</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>New York</h6>
-                                    <span>Min: $110</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <h6>Washington</h6>
-                                    <span>Min: $130</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Location Modal End -->
-
-    <!-- Deal Box Modal Start -->
-    <div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title w-100" id="deal_today">Deal Today</h5>
-                        <p class="mt-1 text-content">Recommended deals for you.</p>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="deal-offer-box">
-                        <ul class="deal-offer-list">
-                            <li class="list-1">
-                                <div class="deal-offer-contain">
-                                    <a href="#" class="deal-image">
-                                        <img src="/assets/images/vegetable/product/10.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <a href="#" class="deal-contain">
-                                        <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                                        <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                                    </a>
-                                </div>
-                            </li>
-
-                            <li class="list-2">
-                                <div class="deal-offer-contain">
-                                    <a href="#" class="deal-image">
-                                        <img src="/assets/images/vegetable/product/11.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <a href="#" class="deal-contain">
-                                        <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                                        <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                                    </a>
-                                </div>
-                            </li>
-
-                            <li class="list-3">
-                                <div class="deal-offer-contain">
-                                    <a href="#" class="deal-image">
-                                        <img src="/assets/images/vegetable/product/12.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <a href="#" class="deal-contain">
-                                        <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                                        <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                                    </a>
-                                </div>
-                            </li>
-
-                            <li class="list-1">
-                                <div class="deal-offer-contain">
-                                    <a href="#" class="deal-image">
-                                        <img src="/assets/images/vegetable/product/13.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <a href="#" class="deal-contain">
-                                        <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
-                                        <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Deal Box Modal End -->
-
     <!-- Bg overlay Start -->
     <div class="bg-overlay"></div>
     <!-- Bg overlay End -->
@@ -1362,22 +1064,14 @@
     <script src="{{ asset('assets/js/bootstrap/popper.min.js') }}"></script>
 
     <!-- feather icon js-->
-    <script src="{{ asset('assets/js/feather/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather/feather.min.js') }}"5></script>
     <script src="{{ asset('assets/js/feather/feather-icon.js') }}"></script>
 
     <!-- Lazyload Js -->
     <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 
-    <!-- Slick js-->
-    <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
-    <script src="{{ asset('assets/js/slick/slick-animation.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick/custom_slick.js') }}"></script>
-
     <!-- Auto Height Js -->
     <script src="{{ asset('assets/js/auto-height.js') }}"></script>
-
-    <!-- Timer Js -->
-    <script src="{{ asset('assets/js/timer1.js') }}"></script>
 
     <!-- Fly Cart Js -->
     <script src="{{ asset('assets/js/fly-cart.js') }}"></script>
@@ -1391,9 +1085,6 @@
 
     <!-- script js -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
-
-    <!-- theme setting js -->
-    <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
 </body>
 
 </html>
