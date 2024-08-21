@@ -18,7 +18,8 @@
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4">
+                            <form class="row g-4" action="{{ route('') }}">
+                                @csrf
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
                                         <input type="email" class="form-control" id="email" placeholder="Email Address">
