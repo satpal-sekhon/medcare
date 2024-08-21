@@ -12,42 +12,56 @@
                 </div>
 
                 <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                    
+                    @if ($errors->has('message'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('message') }}
+                    </div>
+                @endif
+                
+
                     <div class="log-in-box">
                         <div class="log-in-title">
                             <h4>Log In Your Account</h4>
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4" action="{{ route('') }}">
+                            <form class="row g-4" method="POST" action="{{ route('authenticate') }}">
                                 @csrf
+
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
-                                        <input type="email" class="form-control" id="email" placeholder="Email Address">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}">
                                         <label for="email">Email Address</label>
+                                        @if ($errors->has('email'))
+                                            <div class="error">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
-                                        <input type="password" class="form-control" id="password"
+                                        <input type="password" class="form-control" name="password" id="password"
                                             placeholder="Password">
                                         <label for="password">Password</label>
+                                        @if ($errors->has('password'))
+                                            <div class="error">{{ $errors->first('password') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="forgot-box">
                                         <div class="form-check ps-0 m-0 remember-box">
-                                            <input class="checkbox_animated check-box" type="checkbox"
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">Remember me</label>
+                                            <input class="checkbox_animated check-box" type="checkbox" id="rememberMe">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div>
                                         <a href="{{ route('forgot-password') }}" class="forgot-password">Forgot Password?</a>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <button class="btn btn-animation w-100 justify-content-center" type="submit">Log In</button>
+                                    <button type="submit" class="btn btn-animation w-100 justify-content-center">Log In</button>
                                 </div>
                             </form>
                         </div>

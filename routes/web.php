@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/signup', [AuthController::class, 'signup'])->name('sign-up');
 Route::get('/verify-email', [AuthController::class, 'verify_email'])->name('verify-email');
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
@@ -28,10 +30,9 @@ Route::resources([
 ]);
 
 Route::middleware('auth')->group(function () {
-    //Route::get('/my-account', [AccountController::class, 'user_account']);
+    Route::get('/my-account', [AccountController::class, 'user_account'])->name('my-account');
 });
 
-Route::get('/my-account', [AccountController::class, 'user_account']);
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
@@ -55,5 +56,4 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Product management routes
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
-        
 });

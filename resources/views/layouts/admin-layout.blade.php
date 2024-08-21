@@ -501,7 +501,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="button-box">
                         <button type="button" class="btn btn--no" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn  btn--yes btn-primary">Yes</button>
+                        <a href="{{ route('logout') }}" class="btn  btn--yes btn-primary">Yes</a>
                     </div>
                 </div>
             </div>
