@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/assets/images/favicon/1.png" type="image/x-icon">
-    <title>On-demand last-mile delivery</title>
+    <title>Heal Deal</title>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -29,6 +30,8 @@
 
     <!-- Template css -->
     <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 </head>
 
 <body class="bg-effect">
@@ -45,7 +48,7 @@
     <!-- Loader End -->
 
     <!-- Header Start -->
-    <header class="pb-md-4 pb-0">
+    <header class="pb-0">
         <div class="header-top">
             <div class="container-fluid-lg">
                 <div class="row">
@@ -61,18 +64,19 @@
                             <div class="notification-slider">
                                 <div>
                                     <div class="timer-notification">
-                                        <h6>
-                                            <strong class="me-1">Welcome to Fastkart!</strong>
-                                            Wrap new offers/gift every single day on Weekends.
-                                            <strong class="ms-1">New Coupon Code: Fast024</strong>
+                                        <h6><strong class="me-1">Welcome to Medine Shop!</strong>Wrap new offers/gift
+                                            every single day on Weekends.<strong class="ms-1">New Coupon Code: Med2589
+                                            </strong>
+
                                         </h6>
                                     </div>
                                 </div>
 
                                 <div>
                                     <div class="timer-notification">
-                                        <h6>Something you love is now on sale!
-                                            <a href="#" class="text-white">Buy Now!</a>
+                                        <h6>Extra 50% Off on All Generic Medicine
+                                            <a href="javascript:void(0)" class="text-white">Buy Now
+                                                !</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -96,21 +100,11 @@
                                 </span>
                             </button>
                             <a href="{{ route('home') }}" class="web-logo nav-logo">
-                                <img src="{{ asset('assets/images/logo/1.png') }}" class="img-fluid blur-up lazyload" alt="">
+                                <img src="{{ asset('assets/images/logo/1.png') }}" class="img-fluid blur-up lazyload"
+                                    alt="">
                             </a>
 
                             <div class="middle-box">
-                                <div class="location-box">
-                                    <button class="btn location-button" data-bs-toggle="modal"
-                                        data-bs-target="#locationModal">
-                                        <span class="location-arrow">
-                                            <i data-feather="map-pin"></i>
-                                        </span>
-                                        <span class="locat-name">Your Location</span>
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </button>
-                                </div>
-
                                 <div class="search-box">
                                     <div class="input-group">
                                         <input type="search" class="form-control" placeholder="I'm searching for...">
@@ -155,7 +149,8 @@
                                         </a>
                                     </li>
                                     <li class="right-side">
-                                        <a href="{{ route('wishlist.index') }}" class="btn p-0 position-relative header-wishlist">
+                                        <a href="{{ route('wishlist.index') }}"
+                                            class="btn p-0 position-relative header-wishlist">
                                             <i data-feather="heart"></i>
                                         </a>
                                     </li>
@@ -216,7 +211,8 @@
                                                 </div>
 
                                                 <div class="button-group">
-                                                    <a href="{{ route('cart') }}" class="btn btn-sm cart-button">View Cart</a>
+                                                    <a href="{{ route('cart') }}" class="btn btn-sm cart-button">View
+                                                        Cart</a>
                                                     <a href="{{ route('checkout') }}" class="btn btn-sm cart-button theme-bg-color
                                                     text-white">Checkout</a>
                                                 </div>
@@ -259,7 +255,7 @@
             </div>
         </div>
 
-        <div class="container-fluid-lg">
+        <div class="container-fluid-lg py-2">
             <div class="row">
                 <div class="col-12">
                     <div class="header-nav">
@@ -682,33 +678,67 @@
                                     </div>
                                     <div class="offcanvas-body">
                                         <ul class="navbar-nav">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                                            <li class="nav-item dropdown dropdown-mega">
+                                                <a class="nav-link dropdown-toggle ps-xl-2 ps-0"
+                                                    href="javascript:void(0)" data-bs-toggle="dropdown">MEDICINES +</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">Ayurvedic</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">Aleopathy</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">Homeopathy</a>
+                                                    </li>
+                                                </ul>
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('products.index') }}">Shop</a>
+                                                <a class="nav-link" href="{{ route('products.index') }}">Brands</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Lab Test</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Pharmacy</a>
                                             </li>
 
                                             <li class="nav-item">
                                                 <a class="nav-link" href="#">Doctors</a>
                                             </li>
 
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#">Pharmacy Shops</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#">Laboratories</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                                    data-bs-toggle="dropdown">COMPANY +</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">About Us</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">FAQs</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">Promotions</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ route('contact-us') }}">Contact Us</a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="header-nav-right">
+                            <a href="#"><button class="btn deal-button" >
+                                <i data-feather="zap"></i>
+                                <span>Quick Order</span>
+                            </button></a>
                         </div>
                     </div>
                 </div>
@@ -781,7 +811,7 @@
         </div>
     </section>
     @endif
-    
+
     @yield('content')
 
     <!-- Footer Section Start -->
@@ -979,14 +1009,12 @@
                                     <ul>
                                         <li class="mb-0">
                                             <a href="https://play.google.com/store/apps" target="_blank">
-                                                <img src="/assets/images/playstore.svg" class="blur-up lazyload"
-                                                    alt="">
+                                                <img src="/assets/images/playstore.svg" class="blur-up lazyload" alt="">
                                             </a>
                                         </li>
                                         <li class="mb-0">
                                             <a href="https://www.apple.com/in/app-store/" target="_blank">
-                                                <img src="/assets/images/appstore.svg" class="blur-up lazyload"
-                                                    alt="">
+                                                <img src="/assets/images/appstore.svg" class="blur-up lazyload" alt="">
                                             </a>
                                         </li>
                                     </ul>
@@ -1367,4 +1395,5 @@
     <!-- theme setting js -->
     <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
 </body>
+
 </html>
