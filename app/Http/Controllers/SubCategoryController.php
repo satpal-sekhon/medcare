@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PrimaryCategory;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class SubCategoryController extends Controller
 {
@@ -44,7 +46,7 @@ class SubCategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/categories', 'public');
+            $imagePath = $request->file('image')->store('images/sub-categories', 'public');
         }
 
         SubCategory::create([
@@ -101,7 +103,6 @@ class SubCategoryController extends Controller
         ]);
     }
 
-    
 
     /**
      * Display the specified resource.
@@ -125,7 +126,38 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, SubCategory $subCategory)
     {
-        //
+        $request->validate([
+            'primary_category' => 'required',
+            'category' => 'required',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('sub_categories')->ignore($subCategory->id)
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = $subCategory->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            $imagePath = $request->file('image')->store('images/sub-categories', 'public');
+        }
+
+        $subCategory->update([
+            'primary_category_id' => $request->input('primary_category'),
+            'category_id' => $request->input('category'),
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('admin.sub-categories.index')->with('success', 'Sub Category updated successfully!');
     }
 
     /**
@@ -133,6 +165,17 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        //
+        $imagePath = $subCategory->image;
+
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
+
+        $subCategory->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Sub Category deleted successfully.'
+        ]);
     }
 }

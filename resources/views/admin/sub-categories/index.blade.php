@@ -109,7 +109,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="category" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="sub category" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>

@@ -120,7 +120,7 @@ class PrimaryCategoryController extends Controller
         $imagePath = $primaryCategory->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath) {
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
                 Storage::disk('public')->delete($imagePath);
             }
 
@@ -143,11 +143,11 @@ class PrimaryCategoryController extends Controller
     {
         $imagePath = $primaryCategory->image;
 
-        if ($imagePath) {
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
         }
 
-        PrimaryCategory::where('id', $primaryCategory->id)->delete();
+        $primaryCategory->delete();
 
         return response()->json([
             'success' => true,
