@@ -32,7 +32,24 @@ class PrimaryCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/primary-categories', 'public');
+        }
+
+        PrimaryCategory::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'image' => $imagePath
+        ]);
+
+        return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
     }
 
     /**
