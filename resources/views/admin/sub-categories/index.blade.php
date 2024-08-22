@@ -57,7 +57,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('categories.get') }}",
+                        url: "{{ route('sub-categories.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"

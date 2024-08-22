@@ -10,47 +10,46 @@
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
-                        <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
+                        <form id="create-sub-category-form" action="{{ route('sub-categories.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+
                             <div class="mb-2">
                                 <label class="form-label-title col-sm-4 mb-0">Primary Category</label>
-                                
-                                <select name="primary_category" id="primary_category"  @class(['form-control', 'is-invalid' => $errors->first('primary_category')])>
+                                <select name="primary_category" id="primary_category" class="form-control">
                                     <option value="" selected disabled>Select Primary Category</option>
                                     @foreach ($primary_categories as $primary_category)
-                                        <option value="{{ $primary_category->id }}">{{ $primary_category->name }}</option>
+                                        <option value="{{ $primary_category->id }}" {{ old('primary_category') == $primary_category->id ? 'selected' : '' }}>
+                                            {{ $primary_category->name }}
+                                        </option>
                                     @endforeach
                                 </select>
-
                                 @if ($errors->has('primary_category'))
-                                    <div class="invalid-feedback d-block`">{{ $errors->first('primary_category') }}</div>
+                                    <div class="invalid-feedback d-block">{{ $errors->first('primary_category') }}</div>
                                 @endif
                             </div>
+
                             <div class="mb-2">
                                 <label class="form-label-title col-sm-4 mb-0">Category</label>
-                                
-                                <select name="category" id="category"  @class(['form-control', 'is-invalid' => $errors->first('category')])>
+                                <select name="category" id="category" class="form-control">
                                     <option value="" selected disabled>Select Category</option>
                                 </select>
-
                                 @if ($errors->has('category'))
-                                    <div class="invalid-feedback d-block`">{{ $errors->first('category') }}</div>
+                                    <div class="invalid-feedback d-block">{{ $errors->first('category') }}</div>
                                 @endif
                             </div>
 
                             <div class="mb-2">
                                 <label class="form-label-title mb-0">Category Name</label>
-                                <input type="text" name="name" placeholder="Category Name" value="{{ old('name') }}"
-                                    @class(['form-control', 'is-invalid' => $errors->first('name')])>
+                                <input type="text" name="name" placeholder="Category Name" value="{{ old('name') }}" class="form-control">
                                 @if ($errors->has('name'))
-                                    <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
+                                    <div class="invalid-feedback d-block">{{ $errors->first('name') }}</div>
                                 @endif
                             </div>
 
                             <div class="mb-2">
                                 <label class="form-label-title">Category Image</label>
                                 <div class="form-group">
-                                    <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid' => $errors->first('image')])>
+                                    <input type="file" name="image" accept="image/*" class="form-control">
                                     @if ($errors->has('image'))
                                         <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
                                     @endif
@@ -59,10 +58,7 @@
 
                             <div class="mb-2">
                                 <label class="form-label-title mb-0">Description</label>
-                                <textarea name="description" placeholder="Enter Description" @class([
-                                    'form-control',
-                                    'is-invalid' => $errors->first('description'),
-                                ])>{{ old('description') }}</textarea>
+                                <textarea name="description" placeholder="Enter Description" class="form-control">{{ old('description') }}</textarea>
                                 @if ($errors->has('description'))
                                     <div class="invalid-feedback d-block">{{ $errors->first('description') }}</div>
                                 @endif
@@ -80,27 +76,44 @@
 
     @push('scripts')
         <script>
-            $(function(){
-                $('[name="primary_category"]').change(function(){
+            $(document).ready(function(){
+                // Function to populate categories based on primary category
+                function populateCategories(primaryCategoryId, selectedCategoryId) {
                     $.ajax({
                         url: "{{ route('categories.get-by-primary-category') }}",
                         method: 'GET',
                         data: {
-                            category_id: $(this).val()
+                            category_id: primaryCategoryId
                         },
-                        success:function(response){
+                        success: function(response){
                             if(response.success){
                                 let categories = response.categories;
-                                $('[name="category"]').html(`<option value="" selected disabled>Select Category</option>`);
+                                let $categorySelect = $('#category');
+                                $categorySelect.html('<option value="" selected disabled>Select Category</option>');
 
-                                for(let i=0; i<categories.length; i++){
-                                    $('[name="category"]').append(`<option value="${categories[i].id}">${categories[i].name}</option>`);
-                                }
+                                categories.forEach(function(category){
+                                    $categorySelect.append(`<option value="${category.id}" ${selectedCategoryId == category.id ? 'selected' : ''}>${category.name}</option>`);
+                                });
                             }
                         }
-                    })
-                })
-            })
+                    });
+                }
+
+                // Get old primary category value
+                let oldPrimaryCategory = "{{ old('primary_category') }}";
+                let oldCategory = "{{ old('category') }}";
+
+                // If there's an old primary category, populate categories on load
+                if (oldPrimaryCategory) {
+                    populateCategories(oldPrimaryCategory, oldCategory);
+                }
+
+                // On change event for primary category
+                $('#primary_category').change(function(){
+                    let selectedPrimaryCategoryId = $(this).val();
+                    populateCategories(selectedPrimaryCategoryId, '');
+                });
+            });
         </script>
     @endpush
 @endsection

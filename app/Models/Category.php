@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'primary_category_id',
-        'name',
-        'image',
-        'description',
-    ];
+    protected $guarded=[];
 
     public function primaryCategory()
     {

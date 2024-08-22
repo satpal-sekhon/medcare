@@ -34,8 +34,74 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'primary_category' => 'required',
+            'category' => 'required',
+            'name' => 'required|string|max:255|unique:categories',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/categories', 'public');
+        }
+
+        SubCategory::create([
+            'primary_category_id' => $request->input('primary_category'),
+            'category_id' => $request->input('category'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'image' => $imagePath
+        ]);
+
+        return redirect()->route('admin.sub-categories.index')->with('success', 'Sub Category saved successfully!');
     }
+
+    public function get(Request $request)
+    {
+        // Define the columns to be used for ordering
+        $columns = ['category_name', 'image', 'primary_category_name'];
+
+        // Create the initial query with necessary joins and selects
+        $query = SubCategory::query()
+            ->select('sub_categories.id', 'sub_categories.name as category_name', 'sub_categories.name', 'sub_categories.image', 'primary_categories.name as primary_category_name')
+            ->leftJoin('primary_categories', 'sub_categories.primary_category_id', '=', 'primary_categories.id')
+            ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id'); // Adjust according to your actual join condition
+
+        // Apply search filter if present
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('categories.name', 'like', "%{$search}%");
+        }
+
+        // Total records count before filtering
+        $totalRecords = SubCategory::count();
+
+        // Filtered records count after applying search
+        $filteredRecords = $query->count();
+
+        // Apply ordering if specified
+        if ($request->has('order')) {
+            $orderColumnIndex = $request->order[0]['column'];
+            $orderColumn = $columns[$orderColumnIndex] ?? 'category_name'; // Default to 'category_name' if column index is out of bounds
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        // Apply pagination
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        // Return the JSON response
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
+    }
+
+    
 
     /**
      * Display the specified resource.
@@ -50,7 +116,8 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        //
+        $primary_categories = PrimaryCategory::all();
+        return view('admin.sub-categories.edit', compact('subCategory', 'primary_categories'));
     }
 
     /**
