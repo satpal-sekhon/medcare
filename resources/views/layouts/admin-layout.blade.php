@@ -25,10 +25,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/vendors/scrollbar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/vendors/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/vendors/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin-assets/css/vendors/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/vendors/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/style.css') }}">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.min.css') }}">
 
     @stack('styles')
 </head>
@@ -86,7 +85,7 @@
     <script src="{{ asset('admin-assets/js/script.js') }}"></script>
     <script src="{{ asset('admin-assets/js/custom.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
 
     @stack('scripts')
 
