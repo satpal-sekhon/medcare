@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
-            
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images/categories', 'public');
@@ -92,6 +92,16 @@ class CategoryController extends Controller
             "recordsTotal" => $totalRecords,
             "recordsFiltered" => $filteredRecords,
             "data" => $data
+        ]);
+    }
+
+    function getByPrimaryCategory(Request $request)
+    {
+        $categories = Category::select('id', 'name')->where('primary_category_id', $request->category_id)->get();
+
+        return response()->json([
+            'success' => true,
+            'categories' => $categories
         ]);
     }
 

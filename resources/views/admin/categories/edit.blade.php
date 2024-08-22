@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-header-2">
-                        <h5>Edit Primary Category</h5>
+                        <h5>Edit Category</h5>
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
@@ -21,7 +21,7 @@
                                     'form-control',
                                     'is-invalid' => $errors->first('primary_category'),
                                 ])>
-                                    <option value="" disabled>Select Category</option>
+                                    <option value="" disabled>Select Primary Category</option>
                                     @foreach ($primary_categories as $primary_category)
                                         <option value="{{ $primary_category->id }}" @selected($primary_category->id == $category->primary_category_id)>{{ $primary_category->name }}</option>
                                     @endforeach

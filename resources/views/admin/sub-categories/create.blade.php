@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-header-2">
-                        <h5>Create Category</h5>
+                        <h5>Create Sub Category</h5>
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
@@ -24,6 +24,17 @@
 
                                 @if ($errors->has('primary_category'))
                                     <div class="invalid-feedback d-block`">{{ $errors->first('primary_category') }}</div>
+                                @endif
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label-title col-sm-4 mb-0">Category</label>
+                                
+                                <select name="category" id="category"  @class(['form-control', 'is-invalid' => $errors->first('category')])>
+                                    <option value="" selected disabled>Select Category</option>
+                                </select>
+
+                                @if ($errors->has('category'))
+                                    <div class="invalid-feedback d-block`">{{ $errors->first('category') }}</div>
                                 @endif
                             </div>
 
@@ -66,4 +77,30 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(function(){
+                $('[name="primary_category"]').change(function(){
+                    $.ajax({
+                        url: "{{ route('categories.get-by-primary-category') }}",
+                        method: 'GET',
+                        data: {
+                            category_id: $(this).val()
+                        },
+                        success:function(response){
+                            if(response.success){
+                                let categories = response.categories;
+                                $('[name="category"]').html(`<option value="" selected disabled>Select Category</option>`);
+
+                                for(let i=0; i<categories.length; i++){
+                                    $('[name="category"]').append(`<option value="${categories[i].id}">${categories[i].name}</option>`);
+                                }
+                            }
+                        }
+                    })
+                })
+            })
+        </script>
+    @endpush
 @endsection

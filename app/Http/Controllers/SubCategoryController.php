@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PrimaryCategory;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,17 @@ class SubCategoryController extends Controller
         //
     }
 
+    public function admin_subcategories_index(){
+        return view('admin.sub-categories.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $primary_categories = PrimaryCategory::all();
+        return view('admin.sub-categories.create', compact('primary_categories'));
     }
 
     /**
