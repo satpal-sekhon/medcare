@@ -52,6 +52,35 @@ class PrimaryCategoryController extends Controller
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
     }
 
+    public function get(Request $request){
+        $columns = ['name', 'image']; // Define the columns
+
+        $query = PrimaryCategory::query();
+
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count();
+
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

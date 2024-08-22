@@ -1,6 +1,6 @@
 @if ($hasPlugin('dataTable'))
 @push('styles')
-<link rel="stylesheet" type="text/css" href="assets/css/datatables.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
 @endpush
 
 @push('scripts')

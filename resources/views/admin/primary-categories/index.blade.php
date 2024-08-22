@@ -27,7 +27,7 @@
                 
                 <div>
                     <div class="table-responsive">
-                        <table class="table all-package theme-table table-product" id="table_id">
+                        <table class="table all-package theme-table">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -35,39 +35,7 @@
                                     <th>Option</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Buscuit</td>
-                                    <td>
-                                        <div class="table-image">
-                                            <img src="{{ asset('admin-assets/images/product/1.png') }}" class="img-fluid"
-                                                alt="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li>
-                                                <a href="order-detail.html">
-                                                    <i class="ri-eye-line"></i>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="javascript:void(0)">
-                                                    <i class="ri-pencil-line"></i>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -77,4 +45,56 @@
 </div>
 
 <x-include-plugins :plugins="['dataTable']" />
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('primary-categories.get') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    }
+                },
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { 
+                        data: 'image', 
+                        name: 'image',
+                        render: function(data, type, row) {
+                            let defaultImagePath = 'assets/images/default-product.png';
+                            let imageUrl = data ? 'storage/' + data : defaultImagePath;
+
+                            return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" style="width: 100px; height: auto;">`;
+                        }
+                    },
+                    {
+                        data: null,
+                        name: 'actions',
+                        render: function(data, type, row) {
+                            return `
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ri-pencil-line"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalToggle">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            `;
+                        }
+                    }
+                ]
+            });
+        });
+</script>
+@endpush
 @endsection

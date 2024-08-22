@@ -26,7 +26,7 @@
                         <div class="mb-4 row align-items-center">
                             <label class="col-sm-3 col-form-label form-label-title">Category Image</label>
                             <div class="form-group col-sm-9">
-                                <input type="file" name="image" @class(["form-control", "is-invalid"=> $errors->first('image')])>
+                                <input type="file" name="image" accept="image/*" @class(["form-control", "is-invalid"=> $errors->first('image')])>
                                 @if ($errors->has('image'))
                                     <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
                                 @endif
