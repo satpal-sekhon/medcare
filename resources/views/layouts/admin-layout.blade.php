@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/vendors/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('admin-assets/css/vendors/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     @stack('styles')
 </head>
@@ -81,7 +84,56 @@
     <script src="{{ asset('admin-assets/js/custom-slick.js') }}"></script>
     <script src="{{ asset('admin-assets/js/sidebareffect.js') }}"></script>
     <script src="{{ asset('admin-assets/js/script.js') }}"></script>
-    
+    <script src="{{ asset('admin-assets/js/custom.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     @stack('scripts')
+
+    <script>
+        $(function() {
+            $(document).on('click', '.delete-btn', function() {
+                let source = $(this).data('source');
+                let endpoint = $(this).data('endpoint');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: `Do you really want to delete this ${source}?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: endpoint,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                window.table.ajax.reload();
+                                Swal.fire(
+                                    'Deleted!',
+                                    `${source} record has been deleted.`,
+                                    'success'
+                                );
+                            },
+                            error: function(xhr) {
+                                Swal.fire(
+                                    'Error!',
+                                    'An error occurred while deleting.',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            })
+        })
+    </script>
 </body>
+
 </html>

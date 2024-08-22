@@ -39,11 +39,19 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
       
     // Primary categories routes
+    Route::resource('primary-categories', PrimaryCategoryController::class, [
+        'names' => [
+            'create' => 'admin.primary-categories.create',
+            'store' => 'primary-categories.store',
+            'edit' => 'primary-categories.edit',
+            'update' => 'primary-categories.update',
+            'destroy' => 'primary-categories.destroy',
+        ]
+    ]);
+
     Route::get('/primary-categories', [PrimaryCategoryController::class, 'admin_primary_categories_index'])->name('admin.primary-categories.index');
-    Route::get('/primary-categories/create', [PrimaryCategoryController::class, 'create'])->name('admin.primary-categories.create');
-    Route::post('/primary-categories/create', [PrimaryCategoryController::class, 'store'])->name('primary-categories.store');
     Route::post('/primary-categories/get', [PrimaryCategoryController::class, 'get'])->name('primary-categories.get');
-        
+
     // Categories routes
     Route::get('/categories', [CategoryController::class, 'admin_categories_index'])->name('admin.categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');

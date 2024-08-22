@@ -110,6 +110,11 @@ class PrimaryCategoryController extends Controller
      */
     public function destroy(PrimaryCategory $primaryCategory)
     {
-        //
+        PrimaryCategory::where('id', $primaryCategory->id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Primary category deleted successfully.'
+        ]);
     }
 }

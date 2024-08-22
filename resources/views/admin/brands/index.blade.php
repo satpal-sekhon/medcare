@@ -72,8 +72,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -116,8 +115,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -159,8 +157,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -202,8 +199,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -246,8 +242,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -290,8 +285,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -334,8 +328,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -378,8 +371,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -421,8 +413,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -465,8 +456,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
@@ -509,8 +499,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle">
+                                                <a href="javascript:void(0)">
                                                     <i class="ri-delete-bin-line"></i>
                                                 </a>
                                             </li>
