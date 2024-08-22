@@ -38,7 +38,6 @@ class PrimaryCategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:primary_categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'description' => 'required|string',
         ]);
 
         $imagePath = null;
@@ -57,7 +56,7 @@ class PrimaryCategoryController extends Controller
 
     public function get(Request $request)
     {
-        $columns = ['name', 'image']; // Define the columns
+        $columns = ['name', 'image'];
 
         $query = PrimaryCategory::query();
 

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('primary_category_id')->references('id')->on('primary_categories');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('primary_category_id')->references('id')->on('primary_categories')->onDelete('cascade');;
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');;
         });
     }
 

@@ -11,7 +11,7 @@
                             <ul>
                                 <li>
                                     <a class="align-items-center btn btn-theme d-flex"
-                                        href="{{ route('admin.primary-categories.create') }}">
+                                        href="{{ route('primary-categories.create') }}">
                                         <i data-feather="plus-square"></i> Add New
                                     </a>
                                 </li>
