@@ -22,7 +22,7 @@
                                     'is-invalid' => $errors->first('primary_category'),
                                 ])>
                                     <option value="" disabled>Select Primary Category</option>
-                                    @foreach ($primary_categories as $primary_category)
+                                    @foreach ($primaryCategories as $primary_category)
                                         <option value="{{ $primary_category->id }}" @selected($primary_category->id == $category->primary_category_id)>{{ $primary_category->name }}</option>
                                     @endforeach
                                 </select>

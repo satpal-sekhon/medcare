@@ -17,7 +17,7 @@
                                 <label class="form-label-title col-sm-4 mb-0">Primary Category</label>
                                 <select name="primary_category" id="primary_category" class="form-control">
                                     <option value="" selected disabled>Select Primary Category</option>
-                                    @foreach ($primary_categories as $primary_category)
+                                    @foreach ($primaryCategories as $primary_category)
                                         <option value="{{ $primary_category->id }}" {{ old('primary_category') == $primary_category->id ? 'selected' : '' }}>
                                             {{ $primary_category->name }}
                                         </option>

@@ -18,7 +18,7 @@
                                 <label class="form-label-title col-sm-4 mb-0">Primary Category</label>
                                 <select name="primary_category" id="primary_category" class="form-control {{ $errors->first('primary_category') ? 'is-invalid' : '' }}">
                                     <option value="" disabled>Select Primary Category</option>
-                                    @foreach ($primary_categories as $primary_category)
+                                    @foreach ($primaryCategories as $primary_category)
                                         <option value="{{ $primary_category->id }}" {{ $primary_category->id == $subCategory->primary_category_id ? 'selected' : '' }}>
                                             {{ $primary_category->name }}
                                         </option>
@@ -94,7 +94,7 @@
                             if(response.success){
                                 let categories = response.categories;
                                 let $subCategorySelect = $('#category');
-                                $subCategorySelect.html('<option value="" disabled>Select Category</option>');
+                                $subCategorySelect.html(`<option value="" disabled ${!selectedCategoryId ? 'selected' : ''}>Select Category</option>`);
 
                                 categories.forEach(function(category){
                                     $subCategorySelect.append(`<option value="${category.id}" ${selectedCategoryId == category.id ? 'selected' : ''}>${category.name}</option>`);

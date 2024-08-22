@@ -25,8 +25,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $primary_categories = PrimaryCategory::all();
-        return view('admin.sub-categories.create', compact('primary_categories'));
+        $primaryCategories = PrimaryCategory::all();
+        return view('admin.sub-categories.create', compact('primaryCategories'));
     }
 
     /**
@@ -116,8 +116,8 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        $primary_categories = PrimaryCategory::all();
-        return view('admin.sub-categories.edit', compact('subCategory', 'primary_categories'));
+        $primaryCategories = PrimaryCategory::all();
+        return view('admin.sub-categories.edit', compact('subCategory', 'primaryCategories'));
     }
 
     /**

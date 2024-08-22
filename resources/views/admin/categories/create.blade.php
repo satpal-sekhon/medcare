@@ -17,7 +17,7 @@
                                 
                                 <select name="primary_category" id="primary_category"  @class(['form-control', 'is-invalid' => $errors->first('primary_category')])>
                                     <option value="" selected disabled>Select Primary Category</option>
-                                    @foreach ($primary_categories as $primary_category)
+                                    @foreach ($primaryCategories as $primary_category)
                                         <option value="{{ $primary_category->id }}">{{ $primary_category->name }}</option>
                                     @endforeach
                                 </select>
