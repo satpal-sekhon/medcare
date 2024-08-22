@@ -88,12 +88,13 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
+                                let editUrl = `{{ route('primary-categories.edit', ':id') }}`.replace(':id', row.id);
                                 let deleteUrl = `{{ route('primary-categories.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="${editUrl}">
                                             <i class="ri-pencil-line"></i>
                                         </a>
                                     </li>

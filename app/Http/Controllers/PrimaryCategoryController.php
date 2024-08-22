@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PrimaryCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class PrimaryCategoryController extends Controller
 {
@@ -15,7 +17,8 @@ class PrimaryCategoryController extends Controller
         //
     }
 
-    public function admin_primary_categories_index(){
+    public function admin_primary_categories_index()
+    {
         return view('admin.primary-categories.index');
     }
 
@@ -33,9 +36,9 @@ class PrimaryCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'name' => 'required|string|max:255|unique:primary_categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'required|string',
         ]);
 
         $imagePath = null;
@@ -52,7 +55,8 @@ class PrimaryCategoryController extends Controller
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
     }
 
-    public function get(Request $request){
+    public function get(Request $request)
+    {
         $columns = ['name', 'image']; // Define the columns
 
         $query = PrimaryCategory::query();
@@ -94,7 +98,7 @@ class PrimaryCategoryController extends Controller
      */
     public function edit(PrimaryCategory $primaryCategory)
     {
-        //
+        return view('admin.primary-categories.edit', compact('primaryCategory'));
     }
 
     /**
@@ -102,7 +106,34 @@ class PrimaryCategoryController extends Controller
      */
     public function update(Request $request, PrimaryCategory $primaryCategory)
     {
-        //
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('primary_categories')->ignore($primaryCategory->id)
+            ],
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $imagePath = $primaryCategory->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            $imagePath = $request->file('image')->store('images/primary-categories', 'public');
+        }
+
+        $primaryCategory->update([
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('admin.primary-categories.index')->with('success', 'Primary Category updated successfully!');
     }
 
     /**
@@ -110,6 +141,12 @@ class PrimaryCategoryController extends Controller
      */
     public function destroy(PrimaryCategory $primaryCategory)
     {
+        $imagePath = $primaryCategory->image;
+
+        if ($imagePath) {
+            Storage::disk('public')->delete($imagePath);
+        }
+
         PrimaryCategory::where('id', $primaryCategory->id)->delete();
 
         return response()->json([
