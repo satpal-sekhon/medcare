@@ -38,6 +38,7 @@ class PrimaryCategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:primary_categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
         ]);
 
         $imagePath = null;
@@ -112,8 +113,8 @@ class PrimaryCategoryController extends Controller
                 'max:255',
                 Rule::unique('primary_categories')->ignore($primaryCategory->id)
             ],
-            'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
         ]);
 
         $imagePath = $primaryCategory->image;

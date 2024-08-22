@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\PrimaryCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -40,8 +41,9 @@ class CategoryController extends Controller
             'primary_category' => 'required',
             'name' => 'required|string|max:255|unique:categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
         ]);
-
+            
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images/categories', 'public');
@@ -62,7 +64,7 @@ class CategoryController extends Controller
         $columns = ['name', 'image', 'primary_category_name'];
 
         $query = Category::query()
-            ->select('categories.id', 'categories.name', 'categories.image') 
+            ->select('categories.id', 'categories.name', 'categories.image')
             ->leftJoin('primary_categories', 'categories.primary_category_id', '=', 'primary_categories.id')
             ->addSelect('primary_categories.name as primary_category_name');
 
@@ -73,7 +75,7 @@ class CategoryController extends Controller
 
         // Total records count before filtering
         $totalRecords = Category::count();
-        
+
         // Filtered records count after applying search
         $filteredRecords = $query->count();
 
@@ -107,7 +109,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $primary_categories = PrimaryCategory::all();
+        return view('admin.categories.edit', compact('category', 'primary_categories'));
     }
 
     /**
@@ -115,7 +118,36 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'primary_category' => 'required',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories')->ignore($category->id)
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = $category->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            $imagePath = $request->file('image')->store('images/categories', 'public');
+        }
+
+        $category->update([
+            'primary_category_id' => $request->input('primary_category'),
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');
     }
 
     /**
