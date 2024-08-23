@@ -46,9 +46,9 @@
                             <li>
                                 <a href="{{ route('admin.categories.index') }}">Categories</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('admin.sub-categories.index') }}">Sub Categories</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
 
