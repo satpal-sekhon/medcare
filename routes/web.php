@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,18 +40,20 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
       
     // Primary categories routes
+    Route::resource('primary-categories', PrimaryCategoryController::class);
     Route::get('/primary-categories', [PrimaryCategoryController::class, 'admin_primary_categories_index'])->name('admin.primary-categories.index');
-    Route::get('/primary-categories/create', [PrimaryCategoryController::class, 'create'])->name('admin.primary-categories.create');
-    Route::post('/primary-categories/create', [PrimaryCategoryController::class, 'store'])->name('primary-categories.store');
     Route::post('/primary-categories/get', [PrimaryCategoryController::class, 'get'])->name('primary-categories.get');
-        
+
     // Categories routes
+    Route::resource('categories', CategoryController::class);
     Route::get('/categories', [CategoryController::class, 'admin_categories_index'])->name('admin.categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-        
+    Route::post('/categories/get', [CategoryController::class, 'get'])->name('categories.get');
+    Route::get('/categories-by-primary-category', [CategoryController::class, 'getByPrimaryCategory'])->name('categories.get-by-primary-category');
+
     // Sub-categories routes
-    Route::get('/sub-categories', [ProductController::class, 'admin_sub_categories_index'])->name('admin.sub-categories.index');
-    Route::get('/sub-categories/create', [ProductController::class, 'create'])->name('admin.sub-categories.create');
+    Route::resource('sub-categories', SubCategoryController::class);
+    Route::get('/sub-categories', [SubCategoryController::class, 'admin_subcategories_index'])->name('admin.sub-categories.index');
+    Route::post('/sub-categories/get', [SubCategoryController::class, 'get'])->name('sub-categories.get');
         
     // Brands routes
     Route::get('/brands', [BrandController::class, 'admin_brands_index'])->name('admin.brands.index');

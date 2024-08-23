@@ -6,16 +6,19 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-header-2">
-                        <h5>Create Primary Category</h5>
+                        <h5>Edit Primary Category</h5>
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
-                        <form action="{{ route('primary-categories.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('primary-categories.update', [$primaryCategory->id]) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
+
                             <div class="mb-3">
                                 <label class="form-label-title mb-0">Category Name</label>
-                                <input type="text" name="name" placeholder="Category Name" value="{{ old('name') }}"
-                                    @class(['form-control', 'is-invalid' => $errors->first('name')])>
+                                <input type="text" name="name" placeholder="Category Name"
+                                    value="{{ old('name', $primaryCategory->name) }}" @class(['form-control', 'is-invalid' => $errors->first('name')])>
                                 @if ($errors->has('name'))
                                     <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
                                 @endif
@@ -28,6 +31,11 @@
                                     @if ($errors->has('image'))
                                         <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
                                     @endif
+
+                                    @if ($primaryCategory->image)
+                                        <img src="{{ asset('storage/' . $primaryCategory->image) }}" alt=""
+                                            style="width: 100px; height: auto;">
+                                    @endif
                                 </div>
                             </div>
 
@@ -36,7 +44,7 @@
                                 <textarea name="description" placeholder="Enter Description" @class([
                                     'form-control',
                                     'is-invalid' => $errors->first('description'),
-                                ])>{{ old('description') }}</textarea>
+                                ])>{{ old('description', $primaryCategory->description) }}</textarea>
                                 @if ($errors->has('description'))
                                     <div class="invalid-feedback d-block">{{ $errors->first('description') }}</div>
                                 @endif

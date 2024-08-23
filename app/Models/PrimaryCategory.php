@@ -8,10 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PrimaryCategory extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'image',
-        'description',
-    ];
+    protected $guarded=[];
 }

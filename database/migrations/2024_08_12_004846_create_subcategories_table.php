@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subcategories', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('primary_category_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('primary_category_id')->references('id')->on('primary_categories');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('primary_category_id')->references('id')->on('primary_categories')->onDelete('cascade');;
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');;
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subcategories');
+        Schema::dropIfExists('sub_categories');
     }
 };

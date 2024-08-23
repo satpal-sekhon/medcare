@@ -6,12 +6,12 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Primary Categories</h5>
+                        <h5>Sub Categories</h5>
                         <div class="right-options">
                             <ul>
                                 <li>
                                     <a class="align-items-center btn btn-theme d-flex"
-                                        href="{{ route('primary-categories.create') }}">
+                                        href="{{ route('sub-categories.create') }}">
                                         <i data-feather="plus-square"></i> Add New
                                     </a>
                                 </li>
@@ -32,6 +32,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Primary Category</th>
+                                        <th>Category</th>
                                         <th>Name</th>
                                         <th>Image</th>
                                         <th>Option</th>
@@ -55,7 +57,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('primary-categories.get') }}",
+                        url: "{{ route('sub-categories.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -67,6 +69,14 @@
                             render: function(data, type, row, meta) {
                                 return meta.row + 1;
                             }
+                        },
+                        {
+                            data: 'primary_category_name',
+                            name: 'primary_category_name'
+                        },
+                        {
+                            data: 'primary_category_name',
+                            name: 'primary_category_name'
                         },
                         {
                             data: 'name',
@@ -88,8 +98,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('primary-categories.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('primary-categories.destroy', ':id') }}`.replace(':id', row.id);
+                                let editUrl = `{{ route('sub-categories.edit', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('sub-categories.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
@@ -99,7 +109,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="primary category" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="sub category" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>
