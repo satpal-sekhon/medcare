@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -24,7 +26,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
     /**
@@ -32,8 +34,56 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:brands',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/brands', 'public');
+        }
+
+        Brand::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'image' => $imagePath
+        ]);
+
+        return redirect()->route('admin.brands.index')->with('success', 'Brand saved successfully!');
     }
+
+    public function get(Request $request)
+    {
+        $columns = ['name', 'image'];
+
+        $query = Brand::query();
+
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count();
+
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
+    }
+
 
     /**
      * Display the specified resource.
@@ -64,6 +114,17 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $imagePath = $brand->image;
+
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
+
+        $brand->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Brand deleted successfully.'
+        ]);
     }
 }

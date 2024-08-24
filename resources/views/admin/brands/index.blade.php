@@ -11,7 +11,7 @@
                             <ul>
                                 <li>
                                     <a class="align-items-center btn btn-theme d-flex"
-                                        href="{{ route('primary-categories.create') }}">
+                                        href="{{ route('brands.create') }}">
                                         <i data-feather="plus-square"></i> Add New
                                     </a>
                                 </li>
@@ -55,7 +55,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('primary-categories.get') }}",
+                        url: "{{ route('brands.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -80,7 +80,7 @@
                                 let defaultImagePath = 'assets/images/default-product.png';
                                 let imageUrl = data ? 'storage/' + data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Brand Image" class="dt-image">`;
                             }
                         },
                         {
@@ -88,8 +88,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('primary-categories.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('primary-categories.destroy', ':id') }}`.replace(':id', row.id);
+                                let editUrl = `{{ route('brands.edit', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('brands.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
@@ -99,7 +99,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="primary category" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="brand" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>

@@ -56,9 +56,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/sub-categories/get', [SubCategoryController::class, 'get'])->name('sub-categories.get');
         
     // Brands routes
+    Route::resource('brands', BrandController::class);
     Route::get('/brands', [BrandController::class, 'admin_brands_index'])->name('admin.brands.index');
-    Route::get('/brands/create', [BrandController::class, 'create'])->name('admin.brands.create');
-      
+    Route::post('/brands/get', [BrandController::class, 'get'])->name('brands.get');
+
     // Product management routes
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');

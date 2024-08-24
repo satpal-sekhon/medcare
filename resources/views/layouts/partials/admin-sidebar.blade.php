@@ -63,7 +63,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.brands.create') }}">Add New brand</a>
+                                <a href="{{ route('brands.create') }}">Add New brand</a>
                             </li>
                         </ul>
                     </li>
