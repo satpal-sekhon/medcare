@@ -48,7 +48,7 @@
                     <div class="media-body p-0">
                         <span class="m-0">Total Products</span>
                         <h4 class="mb-0 counter">893
-                            <a href="add-new-product.html" class="badge badge-light-secondary grow">
+                            <a href="{{ route('products.create') }}" class="badge badge-light-secondary grow">
                                 ADD NEW</a>
                         </h4>
                     </div>

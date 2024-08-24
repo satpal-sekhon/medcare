@@ -238,12 +238,12 @@
                             </div>
 
                             <div class="buy-box">
-                                <a href="wishlist.html">
+                                <a href="#">
                                     <i data-feather="heart"></i>
                                     <span>Add To Wishlist</span>
                                 </a>
 
-                                <a href="compare.html">
+                                <a href="#">
                                     <i data-feather="shuffle"></i>
                                     <span>Add To Compare</span>
                                 </a>
@@ -1033,13 +1033,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1119,13 +1119,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1204,13 +1204,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1290,13 +1290,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1376,13 +1376,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1462,13 +1462,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>
@@ -1549,13 +1549,13 @@
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                            <a href="compare.html">
+                                            <a href="#">
                                                 <i data-feather="refresh-cw"></i>
                                             </a>
                                         </li>
 
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                            <a href="wishlist.html" class="notifi-wishlist">
+                                            <a href="#" class="notifi-wishlist">
                                                 <i data-feather="heart"></i>
                                             </a>
                                         </li>

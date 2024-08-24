@@ -18,7 +18,7 @@
                                     Needs</span></h1>
                             <p class="w-75 d-none d-sm-block">Vegetables contain many vitamins and minerals that are
                                 good for your health.</p>
-                            <button onclick="location.href = 'shop-left-sidebar.html';"
+                            <button onclick="location.href = '#';"
                                 class="btn btn-animation mt-xxl-4 mt-2 home-button mend-auto">Shop Now <i
                                     class="fa-solid fa-right-long icon"></i></button>
                         </div>
@@ -37,7 +37,7 @@
                                     </h2>
                                     <h3 class="theme-color">Nut Collection</h3>
                                     <p class="w-75">We deliver organic vegetables & fruits</p>
-                                    <a href="shop-left-sidebar.html" class="shop-button">Shop Now <i
+                                    <a href="#" class="shop-button">Shop Now <i
                                             class="fa-solid fa-right-long"></i></a>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                     <h3 class="mt-0 theme-color fw-bold">Healthy Food</h3>
                                     <h4 class="text-danger">Organic Market</h4>
                                     <p class="organic">Start your daily shopping with some Organic food</p>
-                                    <a href="shop-left-sidebar.html" class="shop-button">Shop Now <i
+                                    <a href="#" class="shop-button">Shop Now <i
                                             class="fa-solid fa-right-long"></i></a>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                             <h5>Hot Deals on New Items</h5>
                             <h6 class="text-content">Daily Essentials Eggs & Dairy</h6>
                         </div>
-                        <a href="shop-left-sidebar.html" class="banner-button text-white">Shop Now <i
+                        <a href="#" class="banner-button text-white">Shop Now <i
                                 class="fa-solid fa-right-long ms-2"></i></a>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             <h5>Buy More & Save More</h5>
                             <h6 class="text-content">Fresh Vegetables</h6>
                         </div>
-                        <a href="shop-left-sidebar.html" class="banner-button text-white">Shop Now <i
+                        <a href="#" class="banner-button text-white">Shop Now <i
                                 class="fa-solid fa-right-long ms-2"></i></a>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                             <h5>Organic Meat Prepared</h5>
                             <h6 class="text-content">Delivered to Your Home</h6>
                         </div>
-                        <a href="shop-left-sidebar.html" class="banner-button text-white">Shop Now <i
+                        <a href="#" class="banner-button text-white">Shop Now <i
                                 class="fa-solid fa-right-long ms-2"></i></a>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                             <h5>Buy More & Save More</h5>
                             <h6 class="text-content">Nuts & Snacks</h6>
                         </div>
-                        <a href="shop-left-sidebar.html" class="banner-button text-white">Shop Now <i
+                        <a href="#" class="banner-button text-white">Shop Now <i
                                 class="fa-solid fa-right-long ms-2"></i></a>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/vegetable.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Vegetables & Fruit</a>
+                                        <a href="#">Vegetables & Fruit</a>
                                     </h5>
                                 </div>
                             </li>
@@ -154,7 +154,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/cup.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Beverages</a>
+                                        <a href="#">Beverages</a>
                                     </h5>
                                 </div>
                             </li>
@@ -162,7 +162,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/meats.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Meats & Seafood</a>
+                                        <a href="#">Meats & Seafood</a>
                                     </h5>
                                 </div>
                             </li>
@@ -170,7 +170,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/breakfast.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Breakfast & Dairy</a>
+                                        <a href="#">Breakfast & Dairy</a>
                                     </h5>
                                 </div>
                             </li>
@@ -178,7 +178,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/frozen.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Frozen Foods</a>
+                                        <a href="#">Frozen Foods</a>
                                     </h5>
                                 </div>
                             </li>
@@ -186,7 +186,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/biscuit.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Biscuits & Snacks</a>
+                                        <a href="#">Biscuits & Snacks</a>
                                     </h5>
                                 </div>
                             </li>
@@ -194,7 +194,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/grocery.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Grocery & Staples</a>
+                                        <a href="#">Grocery & Staples</a>
                                     </h5>
                                 </div>
                             </li>
@@ -202,7 +202,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/drink.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Wines & Alcohol Drinks</a>
+                                        <a href="#">Wines & Alcohol Drinks</a>
                                     </h5>
                                 </div>
                             </li>
@@ -210,7 +210,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/milk.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Milk & Dairies</a>
+                                        <a href="#">Milk & Dairies</a>
                                     </h5>
                                 </div>
                             </li>
@@ -218,7 +218,7 @@
                                 <div class="category-list">
                                     <img src="/assets/svg/1/pet.svg" class="blur-up lazyload" alt="">
                                     <h5>
-                                        <a href="shop-left-sidebar.html">Pet Foods</a>
+                                        <a href="#">Pet Foods</a>
                                     </h5>
                                 </div>
                             </li>
@@ -228,21 +228,21 @@
                             <li>
                                 <div class="category-list">
                                     <h5 class="ms-0 text-title">
-                                        <a href="shop-left-sidebar.html">Value of the Day</a>
+                                        <a href="#">Value of the Day</a>
                                     </h5>
                                 </div>
                             </li>
                             <li>
                                 <div class="category-list">
                                     <h5 class="ms-0 text-title">
-                                        <a href="shop-left-sidebar.html">Top 50 Offers</a>
+                                        <a href="#">Top 50 Offers</a>
                                     </h5>
                                 </div>
                             </li>
                             <li class="mb-0">
                                 <div class="category-list">
                                     <h5 class="ms-0 text-title">
-                                        <a href="shop-left-sidebar.html">New Arrivals</a>
+                                        <a href="#">New Arrivals</a>
                                     </h5>
                                 </div>
                             </li>
@@ -258,7 +258,7 @@
                                     <h3 class="text-uppercase fw-normal"><span
                                             class="theme-color fw-bold">Freshes</span> Products</h3>
                                     <h3 class="fw-light">every hour</h3>
-                                    <button onclick="location.href = 'shop-left-sidebar.html';"
+                                    <button onclick="location.href = '#';"
                                         class="btn btn-animation btn-md mend-auto">Shop Now <i
                                             class="fa-solid fa-arrow-right icon"></i></button>
                                 </div>
@@ -275,7 +275,7 @@
                                     <h2 class="text-uppercase fw-normal mb-0 text-russo theme-color">fresh</h2>
                                     <h2 class="text-uppercase fw-normal text-title">Vegetables</h2>
                                     <p class="mb-3">Super Offer to 50% Off</p>
-                                    <button onclick="location.href = 'shop-left-sidebar.html';"
+                                    <button onclick="location.href = '#';"
                                         class="btn btn-animation btn-md mend-auto">Shop Now <i
                                             class="fa-solid fa-arrow-right icon"></i></button>
                                 </div>
@@ -290,14 +290,14 @@
                             <ul class="product-list border-0 p-0 d-block">
                                 <li>
                                     <div class="offer-product">
-                                        <a href="product-left-thumbnail.html" class="offer-image">
+                                        <a href="#" class="offer-image">
                                             <img src="/assets/images/vegetable/product/23.png" class="blur-up lazyload"
                                                 alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="product-left-thumbnail.html" class="text-title">
+                                                <a href="#" class="text-title">
                                                     <h6 class="name">Meatigo Premium Goat Curry</h6>
                                                 </a>
                                                 <span>450 G</span>
@@ -309,14 +309,14 @@
 
                                 <li>
                                     <div class="offer-product">
-                                        <a href="product-left-thumbnail.html" class="offer-image">
+                                        <a href="#" class="offer-image">
                                             <img src="/assets/images/vegetable/product/24.png" class="blur-up lazyload"
                                                 alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="product-left-thumbnail.html" class="text-title">
+                                                <a href="#" class="text-title">
                                                     <h6 class="name">Dates Medjoul Premium Imported</h6>
                                                 </a>
                                                 <span>450 G</span>
@@ -328,14 +328,14 @@
 
                                 <li>
                                     <div class="offer-product">
-                                        <a href="product-left-thumbnail.html" class="offer-image">
+                                        <a href="#" class="offer-image">
                                             <img src="/assets/images/vegetable/product/25.png" class="blur-up lazyload"
                                                 alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="product-left-thumbnail.html" class="text-title">
+                                                <a href="#" class="text-title">
                                                     <h6 class="name">Good Life Walnut Kernels</h6>
                                                 </a>
                                                 <span>200 G</span>
@@ -347,14 +347,14 @@
 
                                 <li class="mb-0">
                                     <div class="offer-product">
-                                        <a href="product-left-thumbnail.html" class="offer-image">
+                                        <a href="#" class="offer-image">
                                             <img src="/assets/images/vegetable/product/26.png" class="blur-up lazyload"
                                                 alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="product-left-thumbnail.html" class="text-title">
+                                                <a href="#" class="text-title">
                                                     <h6 class="name">Apple Red Premium Imported</h6>
                                                 </a>
                                                 <span>1 KG</span>
@@ -454,7 +454,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/1.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -468,21 +468,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Fantasy Crunchy Choco Chip Cookies</h6>
                                                 </a>
 
@@ -541,7 +541,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/2.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -555,21 +555,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Cold Brew Coffee Instant Coffee 50 g</h6>
                                                 </a>
 
@@ -632,7 +632,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/3.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -646,21 +646,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Peanut Butter Bite Premium Butter Cookies 600 g
                                                     </h6>
                                                 </a>
@@ -723,7 +723,7 @@
                                                 <span>NEW</span>
                                             </div>
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/4.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -737,21 +737,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">SnackAmor Combo Pack of Jowar Stick and Jowar
                                                         Chips</h6>
                                                 </a>
@@ -815,7 +815,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/5.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -829,21 +829,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Yumitos Chilli Sprinkled Potato Chips 100 g
                                                     </h6>
                                                 </a>
@@ -903,7 +903,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/6.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -917,21 +917,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Neu Farm Unpolished Desi Toor Dal 1 kg</h6>
                                                 </a>
 
@@ -997,7 +997,7 @@
                                                 <span>NEW</span>
                                             </div>
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/7.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1011,21 +1011,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">healthy Long Life Toned Milk 1 L</h6>
                                                 </a>
 
@@ -1084,7 +1084,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/8.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1098,21 +1098,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Dog Treats Natural Yak Milk Bars For Small Dogs
                                                         100g</h6>
                                                 </a>
@@ -1176,7 +1176,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/9.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1190,21 +1190,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Raw Mutton Leg, Packaging 5 Kg</h6>
                                                 </a>
 
@@ -1263,7 +1263,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/10.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1277,21 +1277,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Blended Instant Coffee 50 g Buy 1 Get 1 Free
                                                     </h6>
                                                 </a>
@@ -1355,7 +1355,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/3.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1369,21 +1369,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Peanut Butter Bite Premium Butter Cookies 600 g
                                                     </h6>
                                                 </a>
@@ -1443,7 +1443,7 @@
                                     <div class="col-12 px-0">
                                         <div class="product-box">
                                             <div class="product-image">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <img src="/assets/images/vegetable/product/5.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
@@ -1457,21 +1457,21 @@
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Compare">
-                                                        <a href="compare.html">
+                                                        <a href="#">
                                                             <i data-feather="refresh-cw"></i>
                                                         </a>
                                                     </li>
 
                                                     <li data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Wishlist">
-                                                        <a href="wishlist.html" class="notifi-wishlist">
+                                                        <a href="#" class="notifi-wishlist">
                                                             <i data-feather="heart"></i>
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="product-detail">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h6 class="name">Yumitos Chilli Sprinkled Potato Chips 100 g
                                                     </h6>
                                                 </a>
@@ -1545,7 +1545,7 @@
 
                 <div class="category-slider-2 product-wrapper no-arrow">
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/vegetable.svg" class="blur-up lazyload" alt="">
                                 <h5>Vegetables & Fruit</h5>
@@ -1554,7 +1554,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/cup.svg" class="blur-up lazyload" alt="">
                                 <h5>Beverages</h5>
@@ -1563,7 +1563,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/meats.svg" class="blur-up lazyload" alt="">
                                 <h5>Meats & Seafood</h5>
@@ -1572,7 +1572,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/breakfast.svg" class="blur-up lazyload" alt="">
                                 <h5>Breakfast</h5>
@@ -1581,7 +1581,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/frozen.svg" class="blur-up lazyload" alt="">
                                 <h5>Frozen Foods</h5>
@@ -1590,7 +1590,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/milk.svg" class="blur-up lazyload" alt="">
                                 <h5>Milk & Dairies</h5>
@@ -1599,7 +1599,7 @@
                     </div>
 
                     <div>
-                        <a href="shop-left-sidebar.html" class="category-box category-dark">
+                        <a href="#" class="category-box category-dark">
                             <div>
                                 <img src="/assets/svg/1/pet.svg" class="blur-up lazyload" alt="">
                                 <h5>Pet Food</h5>
@@ -1617,7 +1617,7 @@
                                     <div>
                                         <h3 class="text-exo">50% offer</h3>
                                         <h4 class="text-russo fw-normal theme-color mb-2">Testy Mushrooms</h4>
-                                        <button onclick="location.href = 'shop-left-sidebar.html';"
+                                        <button onclick="location.href = '#';"
                                             class="btn btn-animation btn-sm mend-auto">Shop Now <i
                                                 class="fa-solid fa-arrow-right icon"></i></button>
                                     </div>
@@ -1632,7 +1632,7 @@
                                     <div>
                                         <h3 class="text-exo">50% offer</h3>
                                         <h4 class="text-russo fw-normal theme-color mb-2">Fresh MEAT</h4>
-                                        <button onclick="location.href = 'shop-left-sidebar.html';"
+                                        <button onclick="location.href = '#';"
                                             class="btn btn-animation btn-sm mend-auto">Shop Now <i
                                                 class="fa-solid fa-arrow-right icon"></i></button>
                                     </div>
@@ -1659,7 +1659,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/1.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -1672,20 +1672,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Chocolate Powder</h6>
                                             </a>
 
@@ -1748,7 +1748,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/2.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -1761,20 +1761,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Sandwich Cookies</h6>
                                             </a>
 
@@ -1837,7 +1837,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/3.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -1850,20 +1850,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Butter Croissant</h6>
                                             </a>
 
@@ -1926,7 +1926,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/4.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -1939,20 +1939,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Dark Chocolate</h6>
                                             </a>
 
@@ -2015,7 +2015,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/5.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -2028,20 +2028,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Mix-sweet-food</h6>
                                             </a>
 
@@ -2104,7 +2104,7 @@
                                 <div class="col-12 px-0">
                                     <div class="product-box">
                                         <div class="product-image">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <img src="/assets/images/vegetable/product/4.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
@@ -2117,20 +2117,20 @@
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html">
+                                                    <a href="#">
                                                         <i data-feather="refresh-cw"></i>
                                                     </a>
                                                 </li>
 
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="wishlist.html" class="notifi-wishlist">
+                                                    <a href="#" class="notifi-wishlist">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="product-detail">
-                                            <a href="product-left-thumbnail.html">
+                                            <a href="#">
                                                 <h6 class="name h-100">Dark Chocolate</h6>
                                             </a>
 
@@ -2214,7 +2214,7 @@
                                         <h3 class="mt-2 mb-3">TAKE ON THE DAY!</h3>
                                         <p class="text-content banner-text">In publishing and graphic design, Lorem
                                             ipsum is a placeholder text commonly used to demonstrate.</p>
-                                        <button onclick="location.href = 'shop-left-sidebar.html';"
+                                        <button onclick="location.href = '#';"
                                             class="btn btn-animation btn-sm mend-auto">Shop Now <i
                                                 class="fa-solid fa-arrow-right icon"></i></button>
                                     </div>
@@ -2223,7 +2223,7 @@
                         </div>
 
                         <div class="col-xxl-4 col-xl-12 col-md-5">
-                            <a href="shop-left-sidebar.html" class="banner-contain hover-effect h-100">
+                            <a href="#" class="banner-contain hover-effect h-100">
                                 <img src="/assets/images/vegetable/banner/13.jpg" class="bg-img blur-up lazyload"
                                     alt="">
                                 <div class="banner-details p-center-left p-4 h-100">
@@ -2255,14 +2255,14 @@
                         <ul class="product-list">
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/11.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Tuffets Whole Wheat Bread</h6>
                                             </a>
                                             <span>500 G</span>
@@ -2274,14 +2274,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/12.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Potato</h6>
                                             </a>
                                             <span>500 G</span>
@@ -2293,14 +2293,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/13.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Green Chilli</h6>
                                             </a>
                                             <span>200 G</span>
@@ -2312,14 +2312,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/14.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Muffets Burger Bun</h6>
                                             </a>
                                             <span>150 G</span>
@@ -2335,14 +2335,14 @@
                         <ul class="product-list">
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/15.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Tuffets Britannia Cheezza</h6>
                                             </a>
                                             <span>500 G</span>
@@ -2354,14 +2354,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/16.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Long Life Toned Milk</h6>
                                             </a>
                                             <span>1 L</span>
@@ -2373,14 +2373,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/17.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Organic Tomato</h6>
                                             </a>
                                             <span>1 KG</span>
@@ -2392,14 +2392,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/18.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Organic Jam</h6>
                                             </a>
                                             <span>150 G</span>
@@ -2415,14 +2415,14 @@
                         <ul class="product-list">
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/19.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Good Life Refined Sunflower Oil</h6>
                                             </a>
                                             <span>1 L</span>
@@ -2434,14 +2434,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/20.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Good Life Raw Peanuts</h6>
                                             </a>
                                             <span>500 G</span>
@@ -2453,14 +2453,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/21.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">TufBest Farms Mong Dal</h6>
                                             </a>
                                             <span>1 KG</span>
@@ -2472,14 +2472,14 @@
 
                             <li>
                                 <div class="offer-product">
-                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                    <a href="#" class="offer-image">
                                         <img src="/assets/images/vegetable/product/22.png" class="blur-up lazyload"
                                             alt="">
                                     </a>
 
                                     <div class="offer-detail">
                                         <div>
-                                            <a href="product-left-thumbnail.html" class="text-title">
+                                            <a href="#" class="text-title">
                                                 <h6 class="name">Frooti Mango Drink</h6>
                                             </a>
                                             <span>160 ML</span>
@@ -2500,7 +2500,7 @@
                                 <h6 class="ls-expanded theme-color mb-sm-3 mb-1">SUMMER</h6>
                                 <h2 class="banner-title">VEGETABLE</h2>
                                 <h5 class="lh-sm mx-auto mt-1 text-content">Save up to 5% OFF</h5>
-                                <button onclick="location.href = 'shop-left-sidebar.html';"
+                                <button onclick="location.href = '#';"
                                     class="btn btn-animation btn-sm mx-auto mt-sm-3 mt-2">Shop Now <i
                                         class="fa-solid fa-arrow-right icon"></i></button>
                             </div>

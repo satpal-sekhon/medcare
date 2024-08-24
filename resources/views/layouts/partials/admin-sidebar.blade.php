@@ -80,7 +80,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.products.create') }}">Add New Products</a>
+                                <a href="{{ route('products.create') }}">Add New Product</a>
                             </li>
                         </ul>
                     </li>
@@ -128,13 +128,13 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="profile-setting.html">Profile Setting</a>
+                                <a href="#">Profile Setting</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="reports.html">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
                             <i class="ri-file-chart-line"></i>
                             <span>Reports</span>
                         </a>

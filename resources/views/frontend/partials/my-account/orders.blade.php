@@ -23,13 +23,13 @@
                                         </div>
 
                                         <div class="product-order-detail">
-                                            <a href="product-left-thumbnail.html" class="order-image">
+                                            <a href="#" class="order-image">
                                                 <img src="../assets/images/vegetable/product/1.png"
                                                     class="blur-up lazyload" alt="">
                                             </a>
 
                                             <div class="order-wrap">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h3>Fantasy Crunchy Choco Chip Cookies</h3>
                                                 </a>
                                                 <p class="text-content">Cheddar dolcelatte gouda. Macaroni cheese
@@ -101,13 +101,13 @@
                                         </div>
 
                                         <div class="product-order-detail">
-                                            <a href="product-left-thumbnail.html" class="order-image">
+                                            <a href="#" class="order-image">
                                                 <img src="../assets/images/vegetable/product/2.png" alt=""
                                                     class="blur-up lazyload">
                                             </a>
 
                                             <div class="order-wrap">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h3>Cold Brew Coffee Instant Coffee 50 g</h3>
                                                 </a>
                                                 <p class="text-content">Pecorino paneer port-salut when the cheese
@@ -178,13 +178,13 @@
                                         </div>
 
                                         <div class="product-order-detail">
-                                            <a href="product-left-thumbnail.html" class="order-image">
+                                            <a href="#" class="order-image">
                                                 <img src="../assets/images/vegetable/product/3.png" alt=""
                                                     class="blur-up lazyload">
                                             </a>
 
                                             <div class="order-wrap">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h3>Peanut Butter Bite Premium Butter Cookies 600 g</h3>
                                                 </a>
                                                 <p class="text-content">Cow bavarian bergkase mascarpone paneer
@@ -255,13 +255,13 @@
                                         </div>
 
                                         <div class="product-order-detail">
-                                            <a href="product-left-thumbnail.html" class="order-image">
+                                            <a href="#" class="order-image">
                                                 <img src="../assets/images/vegetable/product/4.png"
                                                     class="blur-up lazyload" alt="">
                                             </a>
 
                                             <div class="order-wrap">
-                                                <a href="product-left-thumbnail.html">
+                                                <a href="#">
                                                     <h3>SnackAmor Combo Pack of Jowar Stick and Jowar Chips</h3>
                                                 </a>
                                                 <p class="text-content">The big cheese cream cheese pepper jack

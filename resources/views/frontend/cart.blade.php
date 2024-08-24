@@ -13,14 +13,14 @@
                                 <tr class="product-box-contain">
                                     <td class="product-detail">
                                         <div class="product border-0">
-                                            <a href="product-left-thumbnail.html" class="product-image">
+                                            <a href="# class="product-image">
                                                 <img src="../assets/images/vegetable/product/1.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="product-left-thumbnail.html">Bell pepper</a>
+                                                        <a href="#>Bell pepper</a>
                                                     </li>
 
                                                     <li class="text-content"><span class="text-title">Sold
@@ -105,14 +105,14 @@
                                 <tr class="product-box-contain">
                                     <td class="product-detail">
                                         <div class="product border-0">
-                                            <a href="product-left-thumbnail.html" class="product-image">
+                                            <a href="# class="product-image">
                                                 <img src="../assets/images/vegetable/product/2.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="product-left-thumbnail.html">Eggplant</a>
+                                                        <a href="#>Eggplant</a>
                                                     </li>
 
                                                     <li class="text-content"><span class="text-title">Sold
@@ -200,14 +200,14 @@
                                 <tr class="product-box-contain">
                                     <td class="product-detail">
                                         <div class="product border-0">
-                                            <a href="product-left-thumbnail.html" class="product-image">
+                                            <a href="# class="product-image">
                                                 <img src="../assets/images/vegetable/product/3.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="product-left-thumbnail.html">Onion</a>
+                                                        <a href="#>Onion</a>
                                                     </li>
 
                                                     <li class="text-content"><span class="text-title">Sold By:</span> Basket</li>

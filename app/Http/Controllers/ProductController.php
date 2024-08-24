@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\PrimaryCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $primaryCategories = PrimaryCategory::all();
+        $brands = Brand::all();
+        return view('admin.products.create', compact('primaryCategories', 'brands'));
     }
 
     /**

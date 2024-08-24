@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
             $table->string('name');
+            $table->text('thumbnail')->nullable();
             $table->text('composition')->nullable();
             $table->boolean('is_prescription_required')->default(false);
             $table->enum('stock_status', ['In Stock', 'Out of Stock'])->default('In Stock');

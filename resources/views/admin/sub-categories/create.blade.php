@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
-                        <form id="create-sub-category-form" action="{{ route('sub-categories.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('sub-categories.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-2">
@@ -18,7 +18,7 @@
                                 <select name="primary_category" id="primary_category" class="form-control">
                                     <option value="" selected disabled>Select Primary Category</option>
                                     @foreach ($primaryCategories as $primary_category)
-                                        <option value="{{ $primary_category->id }}" {{ old('primary_category') == $primary_category->id ? 'selected' : '' }}>
+                                        <option value="{{ $primary_category->id }}"  @selected(old('primary_category')==$primary_category->id)>
                                             {{ $primary_category->name }}
                                         </option>
                                     @endforeach

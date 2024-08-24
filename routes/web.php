@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
+    // Dashboard route
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
       
     // Primary categories routes
@@ -50,7 +51,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::post('/categories/get', [CategoryController::class, 'get'])->name('categories.get');
     Route::get('/categories-by-primary-category', [CategoryController::class, 'getByPrimaryCategory'])->name('categories.get-by-primary-category');
 
-    // Sub-categories routes
+    // Sub Categories routes
     Route::resource('sub-categories', SubCategoryController::class);
     Route::get('/sub-categories', [SubCategoryController::class, 'admin_subcategories_index'])->name('admin.sub-categories.index');
     Route::post('/sub-categories/get', [SubCategoryController::class, 'get'])->name('sub-categories.get');
@@ -60,7 +61,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/brands', [BrandController::class, 'admin_brands_index'])->name('admin.brands.index');
     Route::post('/brands/get', [BrandController::class, 'get'])->name('brands.get');
 
-    // Product management routes
+    // Products routes
+    Route::resource('products', ProductController::class);
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
 });

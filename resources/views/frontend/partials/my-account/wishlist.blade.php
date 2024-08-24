@@ -12,7 +12,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/2.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -27,7 +27,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Vegetable</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Fresh Bread and Pastry Flour 200 g</h5>
                         </a>
                         <p class="text-content mt-1 mb-2 product-content">Cheesy feet
@@ -67,7 +67,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/3.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -82,7 +82,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Vegetable</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Peanut Butter Bite Premium Butter Cookies
                                 600 g</h5>
                         </a>
@@ -123,7 +123,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/4.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -138,7 +138,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Snacks</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">SnackAmor Combo Pack of Jowar Stick and
                                 Jowar Chips</h5>
                         </a>
@@ -181,7 +181,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/5.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -196,7 +196,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Snacks</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Yumitos Chilli Sprinkled Potato Chips 100 g
                             </h5>
                         </a>
@@ -237,7 +237,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/6.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -252,7 +252,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Vegetable</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Fantasy Crunchy Choco Chip Cookies</h5>
                         </a>
                         <p class="text-content mt-1 mb-2 product-content">Bavarian
@@ -293,7 +293,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/7.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -308,7 +308,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Vegetable</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Fresh Bread and Pastry Flour 200 g</h5>
                         </a>
                         <p class="text-content mt-1 mb-2 product-content">Melted cheese
@@ -348,7 +348,7 @@
             <div class="product-box-3 theme-bg-white h-100">
                 <div class="product-header">
                     <div class="product-image">
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <img src="../assets/images/cake/product/2.png" class="img-fluid blur-up lazyload" alt="">
                         </a>
 
@@ -363,7 +363,7 @@
                 <div class="product-footer">
                     <div class="product-detail">
                         <span class="span-name">Vegetable</span>
-                        <a href="product-left-thumbnail.html">
+                        <a href="#">
                             <h5 class="name">Fresh Bread and Pastry Flour 200 g</h5>
                         </a>
                         <p class="text-content mt-1 mb-2 product-content">Squirty cheese

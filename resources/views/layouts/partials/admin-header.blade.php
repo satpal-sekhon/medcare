@@ -80,19 +80,19 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
-                            <a href="all-users.html">
+                            <a href="#">
                                 <i data-feather="users"></i>
                                 <span>Users</span>
                             </a>
                         </li>
                         <li>
-                            <a href="order-list.html">
+                            <a href="#">
                                 <i data-feather="archive"></i>
                                 <span>Orders</span>
                             </a>
                         </li>
                         <li>
-                            <a href="profile-setting.html">
+                            <a href="#">
                                 <i data-feather="settings"></i>
                                 <span>Settings</span>
                             </a>
