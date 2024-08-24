@@ -114,10 +114,12 @@
                                 _token: "{{ csrf_token() }}"
                             },
                             success: function(response) {
+                                let capitalized_source = source.charAt(0).toUpperCase() + source.slice(1);
+
                                 window.table.ajax.reload();
                                 Swal.fire(
                                     'Deleted!',
-                                    `${source} record has been deleted.`,
+                                    `${capitalized_source} has been deleted.`,
                                     'success'
                                 );
                             },

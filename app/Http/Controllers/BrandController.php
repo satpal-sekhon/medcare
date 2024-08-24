@@ -48,7 +48,8 @@ class BrandController extends Controller
         Brand::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $imagePath
+            'image' => $imagePath,
+            'flag' => $request->input('flag')
         ]);
 
         return redirect()->route('admin.brands.index')->with('success', 'Brand saved successfully!');
@@ -98,7 +99,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('admin.brands.edit', compact('brand'));
     }
 
     /**
@@ -106,7 +107,35 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('brands')->ignore($brand->id)
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = $brand->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            $imagePath = $request->file('image')->store('images/brands', 'public');
+        }
+
+        $brand->update([
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'description' => $request->input('description'),
+            'flag' => $request->input('flag')
+        ]);
+
+        return redirect()->route('admin.brands.index')->with('success', 'Brand updated successfully!');
     }
 
     /**
