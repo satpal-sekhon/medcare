@@ -53,7 +53,8 @@ class CategoryController extends Controller
             'primary_category_id' => $request->input('primary_category'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $imagePath
+            'image' => $imagePath,
+            'flag' => $request->input('flag')
         ]);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category saved successfully!');
@@ -155,6 +156,7 @@ class CategoryController extends Controller
             'name' => $request->input('name'),
             'image' => $imagePath,
             'description' => $request->input('description'),
+            'flag' => $request->input('flag')
         ]);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');

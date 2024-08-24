@@ -57,6 +57,13 @@
                                 @endif
                             </div>
 
+                            <div class="mb-3 d-flex align-items-center gap-4">
+                                <label class="form-label-title">Show On Homepage</label>
+                                <label class="switch">
+                                    <input type="checkbox" name="flag" value="SHOW_ON_HOMEPAGE"><span class="switch-state"></span>
+                                </label>
+                            </div>
+
                             <div class="mb-4">
                                 <button type="submit" class="btn w-100 theme-bg-color text-white">Save</button>
                             </div>
