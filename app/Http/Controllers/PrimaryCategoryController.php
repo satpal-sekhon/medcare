@@ -49,7 +49,8 @@ class PrimaryCategoryController extends Controller
         PrimaryCategory::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'image' => $imagePath
+            'image' => $imagePath,
+            'flag' => $request->input('flag')
         ]);
 
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
@@ -131,6 +132,7 @@ class PrimaryCategoryController extends Controller
             'name' => $request->input('name'),
             'image' => $imagePath,
             'description' => $request->input('description'),
+            'flag' => $request->input('flag')
         ]);
 
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary Category updated successfully!');
