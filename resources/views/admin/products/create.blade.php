@@ -6,16 +6,16 @@
 
 
         <div class="theme-form theme-form-2 mega-form">
-            <form action="{{ route('sub-categories.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('products.store') }}" id="productForm" method="post" enctype="multipart/form-data">
                 @csrf
 
                 @include('admin.products.partials.product-information')
 
                 @include('admin.products.partials.product-pricing')
 
-                @include('admin.products.partials.product-variants')
-
                 @include('admin.products.partials.product-images')
+
+                @include('admin.products.partials.product-variants')
 
                 @include('admin.products.partials.product-description')
 
@@ -27,7 +27,11 @@
     </div>
 </div>
 
-<x-include-plugins :plugins="['ckEditor']"></x-include-plugins>
+
+<x-include-plugins :plugins="['ckEditor', 'jQueryValidate']"></x-include-plugins>
+
+@include('admin.products.partials.validate-product')
+
 
 @push('scripts')
 <script>

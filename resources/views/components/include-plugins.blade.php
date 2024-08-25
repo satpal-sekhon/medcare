@@ -26,3 +26,9 @@
 </script>
 @endpush
 @endif
+
+@if($hasPlugin('jQueryValidate'))
+@push('scripts')
+<script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+@endpush
+@endif

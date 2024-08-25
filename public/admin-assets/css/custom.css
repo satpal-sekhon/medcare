@@ -3,3 +3,9 @@
     height: auto;
     max-height: 86px;
 }
+
+.image-preview button{
+    position: absolute;
+    top: 0;
+    left: 12px;
+}
