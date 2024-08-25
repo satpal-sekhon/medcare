@@ -21,12 +21,12 @@ return new class extends Migration
             $table->text('composition')->nullable();
             $table->boolean('is_prescription_required')->default(false);
             $table->enum('stock_status', ['In Stock', 'Out of Stock'])->default('In Stock');
-            $table->decimal('customer_price', 8, 2)->default(0);
-            $table->decimal('vendor_price', 8, 2)->default(0);
-            $table->decimal('mrp', 8, 2)->default(0);
+            $table->decimal('customer_price', 8, 2)->default(0.00);
+            $table->decimal('vendor_price', 8, 2)->default(0.00);
+            $table->decimal('mrp', 8, 2)->default(0.00);
             $table->date('expiry_date')->nullable();
             $table->text('short_description')->nullable();
-            $table->text('Ingredients')->nullable();
+            $table->text('ingredients')->nullable();
             $table->longtext('description')->nullable();
             $table->timestamps();
 

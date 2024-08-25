@@ -13,9 +13,11 @@
 
                 @include('admin.products.partials.product-pricing')
 
+                @include('admin.products.partials.product-variants')
+
                 @include('admin.products.partials.product-images')
 
-                @include('admin.products.partials.product-variants')
+                @include('admin.products.partials.product-additional-details')
 
                 @include('admin.products.partials.product-description')
 

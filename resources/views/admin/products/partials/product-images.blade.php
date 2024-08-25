@@ -9,9 +9,6 @@
             <div class="form-group">
                 <input type="file" name="thumbnail" accept="image/*" class="form-control" id="thumbnailInput">
                 <div id="thumbnailPreview" class="image-preview row"></div>
-                @if ($errors->has('thumbnail'))
-                <div class="invalid-feedback d-block">{{ $errors->first('thumbnail') }}</div>
-                @endif
             </div>
         </div>
 
@@ -20,9 +17,6 @@
             <div class="form-group">
                 <input type="file" name="images[]" accept="image/*" class="form-control" id="imagesInput" multiple>
                 <div id="imagesPreview" class="image-preview row"></div>
-                @if ($errors->has('images'))
-                <div class="invalid-feedback d-block">{{ $errors->first('images') }}</div>
-                @endif
             </div>
         </div>
     </div>
@@ -46,6 +40,12 @@
             fileArray = files.slice(); // Update the fileArray
 
             files.forEach(function(file) {
+                // Check file size before preview
+                if (file.size > 2.5 * 1024 * 1024) {
+                    alert('File size must be less than 2.5 MB.');
+                    return;
+                }
+
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
 
