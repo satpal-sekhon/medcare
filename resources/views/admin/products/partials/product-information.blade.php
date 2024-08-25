@@ -67,14 +67,24 @@
             <div class="invalid-feedback d-block">{{ $errors->first('name') }}</div>
             @endif
         </div>
-
-        <div class="mb-3">
-            <label class="form-label-title mb-0">Enter Composition</label>
-            <textarea name="composition" placeholder="Enter Composition"
-                class="form-control">{{ old('composition') }}</textarea>
-            @if ($errors->has('composition'))
-            <div class="invalid-feedback d-block">{{ $errors->first('composition') }}</div>
-            @endif
+       
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label-title mb-0">Enter Composition</label>
+                <textarea name="composition" placeholder="Enter Composition"
+                    class="form-control">{{ old('composition') }}</textarea>
+                @if ($errors->has('composition'))
+                <div class="invalid-feedback d-block">{{ $errors->first('composition') }}</div>
+                @endif
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label-title col-sm-4 mb-0">Ingredients</label>
+                <textarea name="ingredients" placeholder="Enter ingredients"
+                    class="form-control">{{ old('ingredients') }}</textarea>
+                @if ($errors->has('ingredients'))
+                <div class="invalid-feedback d-block">{{ $errors->first('ingredients') }}</div>
+                @endif
+            </div>
         </div>
 
         <div class="mb-3">
@@ -88,15 +98,6 @@
 
         <div class="row">
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Ingredients</label>
-                <textarea name="ingredients" placeholder="Enter ingredients"
-                    class="form-control">{{ old('ingredients') }}</textarea>
-                @if ($errors->has('ingredients'))
-                <div class="invalid-feedback d-block">{{ $errors->first('ingredients') }}</div>
-                @endif
-            </div>
-
-            <div class="mb-3 col-md-6">
                 <label class="form-label-title col-sm-4 mb-0">Select Disease</label>
                 <select name="disease" id="disease" class="form-control">
                     <option value="" selected disabled>Select Disease</option>
@@ -105,6 +106,15 @@
                 <div class="invalid-feedback d-block">{{ $errors->first('disease') }}</div>
                 @endif
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label class="form-label-title col-sm-4 mb-0">Expiry Date</label>
+                <input type="text" name="expiry_date" placeholder="Expiry Date" value="{{ old('name') }}" class="form-control">
+                @if ($errors->has('expiry_date'))
+                <div class="invalid-feedback d-block">{{ $errors->first('expiry_date') }}</div>
+                @endif
+            </div>
         </div>
+
     </div>
 </div>

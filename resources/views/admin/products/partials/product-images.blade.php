@@ -18,8 +18,8 @@
             <label class="form-label-title">Product Images</label>
             <div class="form-group">
                 <input type="file" name="images[]" accept="image/*" class="form-control" multiple>
-                @if ($errors->has('thumbnail'))
-                <div class="invalid-feedback d-block">{{ $errors->first('timageshumbnail') }}</div>
+                @if ($errors->has('images'))
+                <div class="invalid-feedback d-block">{{ $errors->first('images') }}</div>
                 @endif
             </div>
         </div>

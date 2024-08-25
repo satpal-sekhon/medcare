@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('name');
-            $table->decimal('customer_price')->default(0);
-            $table->decimal('vendor_price')->default(0);
+            $table->date('expiry_date')->nullable();
+            $table->decimal('customer_price', 8, 2)->default(0.00);
+            $table->decimal('vendor_price', 8, 2)->default(0.00);
+            $table->decimal('mrp')->default(0.00);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
