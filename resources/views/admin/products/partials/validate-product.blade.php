@@ -96,7 +96,6 @@
             $('#productForm').validate().settings.rules[`variants[${index}][price_customer]`] = "required";
             $('#productForm').validate().settings.rules[`variants[${index}][price_vendor]`] = "required";
             $('#productForm').validate().settings.rules[`variants[${index}][mrp]`] = "required";
-            $('#productForm').validate().settings.rules[`variants[${index}][expiry_date]`] = "required";
         });
     })
 </script>

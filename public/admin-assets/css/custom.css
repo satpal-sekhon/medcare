@@ -9,3 +9,7 @@
     top: 0;
     left: 12px;
 }
+
+.preview-img{
+    max-width: 100%;
+}

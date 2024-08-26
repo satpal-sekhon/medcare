@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Primary Category</label>
+                <label class="form-label-title mb-0">Primary Category</label>
                 <select name="primary_category" id="primary_category" class="form-control">
                     <option value="" selected disabled>Select Primary Category</option>
                     @foreach ($primaryCategories as $primary_category)
@@ -19,7 +19,7 @@
             </div>
 
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Category</label>
+                <label class="form-label-title mb-0">Category</label>
                 <select name="category" id="category" class="form-control">
                     <option value="" selected disabled>Select Category</option>
                 </select>
@@ -28,7 +28,7 @@
 
         <div class="row">
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Brand</label>
+                <label class="form-label-title mb-0">Brand</label>
                 <select name="brand" id="brand" class="form-control">
                     <option value="" selected disabled>Select Brand</option>
                     @foreach ($brands as $brand)
@@ -40,7 +40,7 @@
             </div>
 
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Stock Status</label>
+                <label class="form-label-title mb-0">Stock Status</label>
                 <select name="stock_status" id="stock_status" class="form-control">
                     <option value="In Stock">In Stock</option>
                     <option value="Out of Stock">Out of Stock</option>

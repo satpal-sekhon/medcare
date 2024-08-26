@@ -63,7 +63,6 @@
             $('#productForm').validate().settings.rules[`variants[${rowCount}][price_customer]`] = "required";
             $('#productForm').validate().settings.rules[`variants[${rowCount}][price_vendor]`] = "required";
             $('#productForm').validate().settings.rules[`variants[${rowCount}][mrp]`] = "required";
-            $('#productForm').validate().settings.rules[`variants[${rowCount}][expiry_date]`] = "required";
         });
 
         $(document).on('click', '.remove-btn', function() {

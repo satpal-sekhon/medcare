@@ -8,6 +8,7 @@ use App\Models\PrimaryCategory;
 use App\Models\Product;
 use App\Models\ProductDisease;
 use App\Models\ProductImage;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -74,6 +75,20 @@ class ProductController extends Controller
                 ProductImage::create([
                     'product_id' => $product->id,
                     'path' => $path
+                ]);
+            }
+        }
+
+        $variants = $request->input('variants');
+        if($variants){
+            foreach ($variants as $variant) {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'name' => $variant['variant_name'],
+                    'customer_price' => $variant['price_customer'],
+                    'vendor_price' => $variant['price_vendor'],
+                    'mrp' => $variant['mrp'],
+                    'expiry_date' => $variant['expiry_date'],
                 ]);
             }
         }
