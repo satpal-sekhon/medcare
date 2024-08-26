@@ -6,8 +6,9 @@
 
 
         <div class="theme-form theme-form-2 mega-form">
-            <form action="{{ route('products.store') }}" id="productForm" method="post" enctype="multipart/form-data">
+            <form action="{{ route('products.update', [$product->id]) }}" id="productForm" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 @include('admin.products.partials.product-information')
 
@@ -58,6 +59,15 @@
                     }
                 }
             });
+        }
+
+        // Get old primary category value
+        let savedPrimaryCategoryId = "{{ $product->primary_category_id }}";
+        let savedCategoryId = "{{ $product->category_id }}";
+
+        // If there's an old primary category, populate categories on load
+        if (savedPrimaryCategoryId) {
+            populateCategories(savedPrimaryCategoryId, savedCategoryId);
         }
 
         // On change event for primary category

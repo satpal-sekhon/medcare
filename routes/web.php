@@ -70,4 +70,5 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // Products routes
     Route::resource('products', ProductController::class);
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
+    Route::post('/products/get', [ProductController::class, 'get'])->name('products.get');
 });

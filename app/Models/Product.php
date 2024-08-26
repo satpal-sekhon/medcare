@@ -9,4 +9,14 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function productImages()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }

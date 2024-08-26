@@ -5,7 +5,7 @@
         </div>
 
         <div class="mb-3">
-            <textarea id="editor" name="description"></textarea>
+            <textarea id="editor" name="description">{{ $product->description ?? '' }}</textarea>
         </div>
     </div>
 </div>
