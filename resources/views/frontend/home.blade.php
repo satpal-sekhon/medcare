@@ -9,7 +9,7 @@
             <div class="col-xl-8 ratio_65">
                 <div class="home-contain h-100">
                     <div class="h-100">
-                        <img src="/assets/images/vegetable/banner/1.jpg" class="bg-img blur-up lazyload" alt="">
+                        <img src="/assets/images/banners/1.jpg" class="bg-img blur-up lazyload" alt="">
                     </div>
                     <div class="home-detail p-center-left w-75">
                         <div>
@@ -30,15 +30,14 @@
                 <div class="row g-4">
                     <div class="col-xl-12 col-md-6">
                         <div class="home-contain">
-                            <img src="/assets/images/vegetable/banner/2.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/2.jpg" class="bg-img blur-up lazyload" alt="">
                             <div class="home-detail p-center-left home-p-sm w-75">
                                 <div>
                                     <h2 class="mt-0 text-danger">45% <span class="discount text-title">OFF</span>
                                     </h2>
                                     <h3 class="theme-color">Nut Collection</h3>
                                     <p class="w-75">We deliver organic vegetables & fruits</p>
-                                    <a href="#" class="shop-button">Shop Now <i
-                                            class="fa-solid fa-right-long"></i></a>
+                                    <a href="#" class="shop-button">Shop Now <i class="fa-solid fa-right-long"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -46,14 +45,13 @@
 
                     <div class="col-xl-12 col-md-6">
                         <div class="home-contain">
-                            <img src="/assets/images/vegetable/banner/3.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/3.jpg" class="bg-img blur-up lazyload" alt="">
                             <div class="home-detail p-center-left home-p-sm w-75">
                                 <div>
                                     <h3 class="mt-0 theme-color fw-bold">Healthy Food</h3>
                                     <h4 class="text-danger">Organic Market</h4>
                                     <p class="organic">Start your daily shopping with some Organic food</p>
-                                    <a href="#" class="shop-button">Shop Now <i
-                                            class="fa-solid fa-right-long"></i></a>
+                                    <a href="#" class="shop-button">Shop Now <i class="fa-solid fa-right-long"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +69,7 @@
         <div class="banner-slider">
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/vegetable/banner/4.jpg" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/4.jpg" class="bg-img blur-up lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -86,7 +84,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/vegetable/banner/5.jpg" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/5.jpg" class="bg-img blur-up lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -101,7 +99,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/vegetable/banner/6.jpg" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/6.jpg" class="bg-img blur-up lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -116,7 +114,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/vegetable/banner/7.jpg" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/7.jpg" class="bg-img blur-up lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -251,7 +249,7 @@
 
                     <div class="ratio_156 section-t-space">
                         <div class="home-contain hover-effect">
-                            <img src="/assets/images/vegetable/banner/8.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/8.jpg" class="bg-img blur-up lazyload" alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>
                                     <h6 class="text-yellow home-banner">Seafood</h6>
@@ -268,7 +266,7 @@
 
                     <div class="ratio_medium section-t-space">
                         <div class="home-contain hover-effect">
-                            <img src="/assets/images/vegetable/banner/11.jpg" class="img-fluid blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/11.jpg" class="img-fluid blur-up lazyload" alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>
                                     <h4 class="text-yellow text-exo home-banner">Organic</h4>
@@ -283,90 +281,8 @@
                         </div>
                     </div>
 
-                    <div class="section-t-space">
-                        <div class="category-menu">
-                            <h3>Trending Products</h3>
-
-                            <ul class="product-list border-0 p-0 d-block">
-                                <li>
-                                    <div class="offer-product">
-                                        <a href="#" class="offer-image">
-                                            <img src="/assets/images/vegetable/product/23.png" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-
-                                        <div class="offer-detail">
-                                            <div>
-                                                <a href="#" class="text-title">
-                                                    <h6 class="name">Meatigo Premium Goat Curry</h6>
-                                                </a>
-                                                <span>450 G</span>
-                                                <h6 class="price theme-color">$ 70.00</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="offer-product">
-                                        <a href="#" class="offer-image">
-                                            <img src="/assets/images/vegetable/product/24.png" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-
-                                        <div class="offer-detail">
-                                            <div>
-                                                <a href="#" class="text-title">
-                                                    <h6 class="name">Dates Medjoul Premium Imported</h6>
-                                                </a>
-                                                <span>450 G</span>
-                                                <h6 class="price theme-color">$ 40.00</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="offer-product">
-                                        <a href="#" class="offer-image">
-                                            <img src="/assets/images/vegetable/product/25.png" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-
-                                        <div class="offer-detail">
-                                            <div>
-                                                <a href="#" class="text-title">
-                                                    <h6 class="name">Good Life Walnut Kernels</h6>
-                                                </a>
-                                                <span>200 G</span>
-                                                <h6 class="price theme-color">$ 52.00</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="mb-0">
-                                    <div class="offer-product">
-                                        <a href="#" class="offer-image">
-                                            <img src="/assets/images/vegetable/product/26.png" class="blur-up lazyload"
-                                                alt="">
-                                        </a>
-
-                                        <div class="offer-detail">
-                                            <div>
-                                                <a href="#" class="text-title">
-                                                    <h6 class="name">Apple Red Premium Imported</h6>
-                                                </a>
-                                                <span>1 KG</span>
-                                                <h6 class="price theme-color">$ 80.00</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    @include('frontend.partials.home.trending-products')
+                   
                     <div class="section-t-space">
                         <div class="category-menu">
                             <h3>Customer Comment</h3>
@@ -455,7 +371,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/1.png"
+                                                    <img src="/assets/images/product/1.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -542,7 +458,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/2.png"
+                                                    <img src="/assets/images/product/2.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -633,7 +549,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/3.png"
+                                                    <img src="/assets/images/product/3.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -724,7 +640,7 @@
                                             </div>
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/4.png"
+                                                    <img src="/assets/images/product/4.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -816,7 +732,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/5.png"
+                                                    <img src="/assets/images/product/5.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -904,7 +820,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/6.png"
+                                                    <img src="/assets/images/product/6.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -998,7 +914,7 @@
                                             </div>
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/7.png"
+                                                    <img src="/assets/images/product/7.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1085,7 +1001,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/8.png"
+                                                    <img src="/assets/images/product/8.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1177,7 +1093,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/9.png"
+                                                    <img src="/assets/images/product/9.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1264,7 +1180,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/10.png"
+                                                    <img src="/assets/images/product/10.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1356,7 +1272,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/3.png"
+                                                    <img src="/assets/images/product/3.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1444,7 +1360,7 @@
                                         <div class="product-box">
                                             <div class="product-image">
                                                 <a href="#">
-                                                    <img src="/assets/images/vegetable/product/5.png"
+                                                    <img src="/assets/images/product/5.png"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <ul class="product-option">
@@ -1543,7 +1459,7 @@
                     <p>Top Categories Of The Week</p>
                 </div>
 
-                <div class="category-slider-2 product-wrapper no-arrow">
+                <div class="category-slider product-wrapper no-arrow">
                     <div>
                         <a href="#" class="category-box category-dark">
                             <div>
@@ -1612,7 +1528,7 @@
                     <div class="row g-md-4 g-3">
                         <div class="col-md-6">
                             <div class="banner-contain hover-effect">
-                                <img src="/assets/images/vegetable/banner/9.jpg" class="bg-img blur-up lazyload" alt="">
+                                <img src="/assets/images/banners/9.jpg" class="bg-img blur-up lazyload" alt="">
                                 <div class="banner-details p-center-left p-4">
                                     <div>
                                         <h3 class="text-exo">50% offer</h3>
@@ -1626,8 +1542,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="banner-contain hover-effect">
-                                <img src="/assets/images/vegetable/banner/10.jpg" class="bg-img blur-up lazyload"
-                                    alt="">
+                                <img src="/assets/images/banners/10.jpg" class="bg-img blur-up lazyload" alt="">
                                 <div class="banner-details p-center-left p-4">
                                     <div>
                                         <h3 class="text-exo">50% offer</h3>
@@ -1660,7 +1575,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/1.png"
+                                                <img src="/assets/images/product/1.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -1749,7 +1664,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/2.png"
+                                                <img src="/assets/images/product/2.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -1838,7 +1753,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/3.png"
+                                                <img src="/assets/images/product/3.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -1927,7 +1842,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/4.png"
+                                                <img src="/assets/images/product/4.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -2016,7 +1931,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/5.png"
+                                                <img src="/assets/images/product/5.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -2105,7 +2020,7 @@
                                     <div class="product-box">
                                         <div class="product-image">
                                             <a href="#">
-                                                <img src="/assets/images/vegetable/product/4.png"
+                                                <img src="/assets/images/product/4.png"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <ul class="product-option">
@@ -2192,7 +2107,7 @@
 
                 <div class="section-t-space">
                     <div class="banner-contain">
-                        <img src="/assets/images/vegetable/banner/15.jpg" class="bg-img blur-up lazyload" alt="">
+                        <img src="/assets/images/banners/15.jpg" class="bg-img blur-up lazyload" alt="">
                         <div class="banner-details p-center p-4 text-white text-center">
                             <div>
                                 <h3 class="lh-base fw-bold offer-text">Get $3 Cashback! Min Order of $30</h3>
@@ -2206,8 +2121,7 @@
                     <div class="row g-md-4 g-3">
                         <div class="col-xxl-8 col-xl-12 col-md-7">
                             <div class="banner-contain hover-effect">
-                                <img src="/assets/images/vegetable/banner/12.jpg" class="bg-img blur-up lazyload"
-                                    alt="">
+                                <img src="/assets/images/banners/12.jpg" class="bg-img blur-up lazyload" alt="">
                                 <div class="banner-details p-center-left p-4">
                                     <div>
                                         <h2 class="text-kaushan fw-normal theme-color">Get Ready To</h2>
@@ -2224,8 +2138,7 @@
 
                         <div class="col-xxl-4 col-xl-12 col-md-5">
                             <a href="#" class="banner-contain hover-effect h-100">
-                                <img src="/assets/images/vegetable/banner/13.jpg" class="bg-img blur-up lazyload"
-                                    alt="">
+                                <img src="/assets/images/banners/13.jpg" class="bg-img blur-up lazyload" alt="">
                                 <div class="banner-details p-center-left p-4 h-100">
                                     <div>
                                         <h2 class="text-kaushan fw-normal text-danger">20% Off</h2>
@@ -2238,263 +2151,11 @@
                     </div>
                 </div>
 
-                <div class="title d-block">
-                    <div>
-                        <h2>Our best Seller</h2>
-                        <span class="title-leaf">
-                            <svg class="icon-width">
-                                <use xlink:href="/assets/svg/leaf.svg#leaf"></use>
-                            </svg>
-                        </span>
-                        <p>A virtual assistant collects the products from your list</p>
-                    </div>
-                </div>
-
-                <div class="best-selling-slider product-wrapper wow fadeInUp">
-                    <div>
-                        <ul class="product-list">
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/11.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Tuffets Whole Wheat Bread</h6>
-                                            </a>
-                                            <span>500 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/12.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Potato</h6>
-                                            </a>
-                                            <span>500 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/13.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Green Chilli</h6>
-                                            </a>
-                                            <span>200 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/14.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Muffets Burger Bun</h6>
-                                            </a>
-                                            <span>150 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul class="product-list">
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/15.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Tuffets Britannia Cheezza</h6>
-                                            </a>
-                                            <span>500 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/16.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Long Life Toned Milk</h6>
-                                            </a>
-                                            <span>1 L</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/17.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Organic Tomato</h6>
-                                            </a>
-                                            <span>1 KG</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/18.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Organic Jam</h6>
-                                            </a>
-                                            <span>150 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul class="product-list">
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/19.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Good Life Refined Sunflower Oil</h6>
-                                            </a>
-                                            <span>1 L</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/20.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Good Life Raw Peanuts</h6>
-                                            </a>
-                                            <span>500 G</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/21.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">TufBest Farms Mong Dal</h6>
-                                            </a>
-                                            <span>1 KG</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="offer-product">
-                                    <a href="#" class="offer-image">
-                                        <img src="/assets/images/vegetable/product/22.png" class="blur-up lazyload"
-                                            alt="">
-                                    </a>
-
-                                    <div class="offer-detail">
-                                        <div>
-                                            <a href="#" class="text-title">
-                                                <h6 class="name">Frooti Mango Drink</h6>
-                                            </a>
-                                            <span>160 ML</span>
-                                            <h6 class="price theme-color">$ 10.00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                @include('frontend.partials.home.best-seller')
 
                 <div class="section-t-space">
                     <div class="banner-contain hover-effect">
-                        <img src="/assets/images/vegetable/banner/14.jpg" class="bg-img blur-up lazyload" alt="">
+                        <img src="/assets/images/banners/14.jpg" class="bg-img blur-up lazyload" alt="">
                         <div class="banner-details p-center banner-b-space w-100 text-center">
                             <div>
                                 <h6 class="ls-expanded theme-color mb-sm-3 mb-1">SUMMER</h6>
@@ -2513,4 +2174,139 @@
 </section>
 <!-- Product Section End -->
 
+<x-include-plugins :plugins="['slickSlider']"></x-include-plugins>
+
+@push('scripts')
+<script>
+    $(function(){
+        $('.category-slider').slick({
+            arrows: true,
+            infinite: true,
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            responsive: [{
+                breakpoint: 1745,
+                settings: {
+                    slidesToShow: 6,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                }
+            },
+            {
+                breakpoint: 1540,
+                settings: {
+                    slidesToShow: 5,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                }
+            },
+            {
+                breakpoint: 910,
+                settings: {
+                    slidesToShow: 4,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                }
+            },
+            {
+                breakpoint: 730,
+                settings: {
+                    slidesToShow: 3,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                }
+            },
+            {
+                breakpoint: 410,
+                settings: {
+                    slidesToShow: 2,
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                }
+            },
+            ]
+        });
+
+        $('.banner-slider').slick({
+            arrows: false,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            dots: false,
+            responsive: [{
+                breakpoint: 1387,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 966,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 34,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    fade: true,
+                }
+            },
+            ]
+        });
+
+        $('.product-box-slider').slick({
+            infinite: true,
+            arrows: true,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            pauseOnHover: true,
+            responsive: [{
+                breakpoint: 1680,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },
+            {
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4,
+                }
+            }, {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                }
+            },
+            {
+                breakpoint: 660,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            ]
+        });
+
+    })
+</script>
+@endpush
 @endsection

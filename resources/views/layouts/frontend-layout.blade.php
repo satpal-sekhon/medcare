@@ -32,6 +32,8 @@
     <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
+    @stack('styles')
 </head>
 
 <body class="bg-effect">
@@ -1085,6 +1087,8 @@
 
     <!-- script js -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 </html>

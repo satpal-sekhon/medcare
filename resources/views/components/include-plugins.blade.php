@@ -45,3 +45,13 @@
 <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
 @endpush
 @endif
+
+@if($hasPlugin('slickSlider'))
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
+@endpush
+@push('scripts')
+<script src="{{ asset('assets/js/slick/slick.js') }}"></script>
+<script src="{{ asset('assets/js/slick/slick-animation.min.js') }}"></script>
+@endpush
+@endif
