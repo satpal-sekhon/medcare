@@ -37,7 +37,8 @@ class ProductController extends Controller
         $primaryCategories = PrimaryCategory::all();
         $brands = Brand::all();
         $diseases = Disease::all();
-        return view('admin.products.create', compact('primaryCategories', 'brands', 'diseases'));
+        $product = null;
+        return view('admin.products.create', compact('primaryCategories', 'brands', 'diseases', 'product'));
     }
 
     /**
@@ -106,6 +107,48 @@ class ProductController extends Controller
         ], 200);
     }
 
+    public function get(Request $request)
+    {
+        // Define the columns to be used for ordering
+        $columns = ['category_name', 'image', 'primary_category_name'];
+
+        // Create the initial query with necessary joins and selects
+        $query = Product::query()
+            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'brands.name as brand_name')
+            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id');
+
+        // Apply search filter if present
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('categories.name', 'like', "%{$search}%");
+        }
+
+        // Total records count before filtering
+        $totalRecords = Product::count();
+
+        // Filtered records count after applying search
+        $filteredRecords = $query->count();
+
+        // Apply ordering if specified
+        if ($request->has('order')) {
+            $orderColumnIndex = $request->order[0]['column'];
+            $orderColumn = $columns[$orderColumnIndex] ?? 'category_name'; // Default to 'category_name' if column index is out of bounds
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        // Apply pagination
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        // Return the JSON response
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -119,7 +162,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $primaryCategories = PrimaryCategory::all();
+        $brands = Brand::all();
+        $diseases = Disease::all();
+        return view('admin.products.edit', compact('product', 'primaryCategories', 'brands', 'diseases'));
     }
 
     /**

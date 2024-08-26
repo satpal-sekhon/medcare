@@ -10,8 +10,7 @@
                 <select name="primary_category" id="primary_category" class="form-control">
                     <option value="" selected disabled>Select Primary Category</option>
                     @foreach ($primaryCategories as $primary_category)
-                    <option value="{{ $primary_category->id }}" {{ old('primary_category')==$primary_category->id ?
-                        'selected' : '' }}>
+                    <option value="{{ $primary_category->id }}"  @selected($primary_category->id == ($product->primary_category_id ?? 0))>
                         {{ $primary_category->name }}
                     </option>
                     @endforeach
@@ -32,7 +31,7 @@
                 <select name="brand" id="brand" class="form-control">
                     <option value="" selected disabled>Select Brand</option>
                     @foreach ($brands as $brand)
-                    <option value="{{ $brand->id }}" @selected(old('brand')==$brand->id)>
+                    <option value="{{ $brand->id }}" @selected($brand->id==($product->brand_id ?? 0))>
                         {{ $brand->name }}
                     </option>
                     @endforeach
@@ -50,7 +49,7 @@
 
         <div class="mb-3">
             <label class="form-label-title mb-0">Product Name</label>
-            <input type="text" name="name" placeholder="Product Name" value="{{ old('name') }}" class="form-control">
+            <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control">
         </div>
 
         <div class="d-flex gap-4 align-items-center">

@@ -8,19 +8,19 @@
             <div class="mb-3 col-md-6">
                 <label class="form-label-title mb-0">Enter Composition</label>
                 <textarea name="composition" placeholder="Enter Composition"
-                    class="form-control">{{ old('composition') }}</textarea>
+                    class="form-control">{{ $product->composition ?? '' }}</textarea>
             </div>
             <div class="mb-3 col-md-6">
                 <label class="form-label-title col-sm-4 mb-0">Ingredients</label>
                 <textarea name="ingredients" placeholder="Enter ingredients"
-                    class="form-control">{{ old('ingredients') }}</textarea>
+                    class="form-control">{{ $product->ingredients ?? '' }}</textarea>
             </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label-title mb-0">Short Description</label>
             <textarea name="short_description" placeholder="Enter Short Description"
-                class="form-control">{{ old('short_description') }}</textarea>
+                class="form-control">{{ $product->short_description ?? '' }}</textarea>
         </div>
 
         <div class="row">
@@ -36,7 +36,7 @@
             <div class="mb-3 col-md-6">
                 <label class="form-label-title col-sm-4 mb-0">Expiry Date</label>
                 <input type="date" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date') }}"
-                    class="form-control">
+                    class="form-control" value="{{ $product->expiry_date ?? '' }}">
             </div>
         </div>
     </div>
