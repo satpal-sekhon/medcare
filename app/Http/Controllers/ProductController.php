@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Disease;
 use App\Models\PrimaryCategory;
 use App\Models\Product;
+use App\Models\ProductDisease;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -32,7 +35,8 @@ class ProductController extends Controller
     {
         $primaryCategories = PrimaryCategory::all();
         $brands = Brand::all();
-        return view('admin.products.create', compact('primaryCategories', 'brands'));
+        $diseases = Disease::all();
+        return view('admin.products.create', compact('primaryCategories', 'brands', 'diseases'));
     }
 
     /**
@@ -40,7 +44,51 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->store('images/product-thumbnails', 'public');
+        }
+
+        $product = Product::create([
+            'primary_category_id' => $request->input('primary_category'),
+            'category_id' => $request->input('category'),
+            'brand_id' => $request->input('category'),
+            'name' => $request->input('name'),
+            'thumbnail' => $thumbnailPath,
+            'composition' => $request->input('composition'),
+            'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
+            'stock_status' => $request->input('stock_status'),
+            'customer_price' => $request->input('customer_price'),
+            'vendor_price' => $request->input('vendor_price'),
+            'mrp' => $request->input('mrp'),
+            'expiry_date' => $request->input('expiry_date'),
+            'short_description' => $request->input('short_description'),
+            'ingredients' => $request->input('ingredients'),
+            'description' => $request->input('description'),
+        ]);
+
+        if($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images/products', 'public');
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'path' => $path
+                ]);
+            }
+        }
+
+        foreach($request->input('diseases') as $disease){
+            ProductDisease::create([
+                'product_id' => $product->id,
+                'disease_id' => $disease
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product created successfully!'
+        ], 200);
     }
 
     /**

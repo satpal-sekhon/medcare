@@ -26,15 +26,29 @@
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label class="form-label-title col-sm-4 mb-0">Select Diseases</label>
-                <select name="diseases" id="diseases" class="form-control">
-                    <option value="" selected disabled>Select Diseases</option>
+                <select name="diseases[]" id="diseases" class="form-control" multiple>
+                    @foreach ($diseases as $disease)
+                    <option value="{{ $disease->id }}">{{ $disease->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
             <div class="mb-3 col-md-6">
                 <label class="form-label-title col-sm-4 mb-0">Expiry Date</label>
-                <input type="text" name="expiry_date" placeholder="Expiry Date" value="{{ old('name') }}" class="form-control">
+                <input type="date" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date') }}"
+                    class="form-control">
             </div>
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    $(function(){
+        $('#diseases').chosen({
+            width: '100%',
+            placeholder_text_multiple: 'Select Diseases'
+        });
+    })
+</script>
+@endpush

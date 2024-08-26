@@ -34,19 +34,19 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="priceCustomer${rowCount}">Price for Customer</label>
-                        <input type="text" name="variants[${rowCount}][price_customer]" id="priceCustomer${rowCount}" class="form-control" placeholder="Enter amount">
+                        <input type="number" name="variants[${rowCount}][price_customer]" id="priceCustomer${rowCount}" class="form-control" placeholder="Enter amount">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="priceVendor${rowCount}">Price for Vendor</label>
-                        <input type="text" name="variants[${rowCount}][price_vendor]" id="priceVendor${rowCount}" class="form-control" placeholder="Enter amount">
+                        <input type="number" name="variants[${rowCount}][price_vendor]" id="priceVendor${rowCount}" class="form-control" placeholder="Enter amount">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="mrp${rowCount}">MRP</label>
-                        <input type="text" name="variants[${rowCount}][mrp]" id="mrp${rowCount}" class="form-control" placeholder="Enter MRP">
+                        <input type="number" name="variants[${rowCount}][mrp]" id="mrp${rowCount}" class="form-control" placeholder="Enter MRP">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="expiryDate${rowCount}">Expiry Date</label>
-                        <input type="text" name="variants[${rowCount}][expiry_date]" id="expiryDate${rowCount}" class="form-control" placeholder="Enter expiry date">
+                        <input type="date" name="variants[${rowCount}][expiry_date]" id="expiryDate${rowCount}" class="form-control" placeholder="Enter expiry date">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title">&nbsp;</label>

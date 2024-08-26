@@ -9,7 +9,7 @@
                 <div class="mb-3">
                     <label class="form-label-title">Price For Customer</label>
                     <div class="form-group">
-                        <input type="text" name="customer_price" class="form-control" placeholder="Enter amount">
+                        <input type="number" name="customer_price" class="form-control" placeholder="Enter amount">
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <div class="mb-2">
                     <label class="form-label-title">Price For Vendor</label>
                     <div class="form-group">
-                        <input type="text" name="vendor_price" class="form-control" placeholder="Enter amount">
+                        <input type="number" name="vendor_price" class="form-control" placeholder="Enter amount">
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="mb-2">
                     <label class="form-label-title">MRP</label>
                     <div class="form-group">
-                        <input type="text" name="mrp" class="form-control" placeholder="Enter amount">
+                        <input type="number" name="mrp" class="form-control" placeholder="Enter amount">
                     </div>
                 </div>
             </div>

@@ -19,6 +19,10 @@
     $(function(){
         ClassicEditor
         .create(document.querySelector('#editor'))
+        .then(editor => {
+            // Ensure CKEditor instance is available
+            window.editorInstance = editor;
+        })
         .catch(error => {
             console.error(error);
         });
@@ -30,5 +34,14 @@
 @if($hasPlugin('jQueryValidate'))
 @push('scripts')
 <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+@endpush
+@endif
+
+@if($hasPlugin('select2'))
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
+@endpush
+@push('scripts')
+<script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
 @endpush
 @endif

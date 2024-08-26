@@ -1,25 +1,21 @@
 @push('scripts')
 <script>
     $(function(){
-        
-        // Add a custom method to get CKEditor data
+        // Add custom validation method for Chosen
         $.validator.addMethod("ckeditorRequired", function(value, element) {
-            // Get CKEditor instance
-            var editor = CKEDITOR.instances[element.id];
-            // Check if the CKEditor instance is empty
-            return editor.getData().trim() !== '';
+            // Ensure CKEditor instance is available
+            if (window.editorInstance) {
+                var editor = window.editorInstance;
+                return editor.getData().trim() !== '';
+            }
+            return false;
         }, "This field is required.");
+
 
         $('#productForm').validate({
             rules: {
                 primary_category: "required",
-                category: {
-                    required: {
-                        depends: function(element) {
-                            return $.trim($('[name="primary_category"]').val()).length > 0;
-                        }
-                    }
-                },
+                category: "required",
                 brand: "required",
                 name: "required",
                 mrp: "required",
@@ -27,7 +23,7 @@
                 composition: "required",
                 ingredients: "required",
                 short_description: "required",
-                diseases: "required",
+                "diseases[]": "required",
                 customer_price: "required",
                 vendor_price: "required",
                 description: {
@@ -49,13 +45,14 @@
             },
             unhighlight: function(element) {
                 $(element).removeClass('is-invalid');
+
+                // Find the error container and remove it if the error text is empty
+                var errorContainer = $(element).siblings('.invalid-feedback');
+                if (errorContainer.length > 0 && !$(element).hasClass('is-invalid')) {
+                    errorContainer.remove();
+                }
             },
             submitHandler: function(form) {
-                // Ensure CKEditor data is updated in hidden textarea
-                for (var instance in CKEDITOR.instances) {
-                    CKEDITOR.instances[instance].updateElement();
-                }
-                
                 let formData = new FormData(form);
 
                 $.ajax({
@@ -65,7 +62,23 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        console.log('response', response);
+                        if(response.success){
+                            Swal.fire(
+                                'Success!',
+                                `${response.message}`,
+                                'success'
+                            );
+
+                            setTimeout(() => {
+                                window.location="{{ route('admin.products.index') }}";
+                            }, 2000);
+                        } else {
+                            Swal.fire(
+                                'Oops!',
+                                'Something went wrong...',
+                                'error'
+                            );
+                        }
                     },
                     error: function(xhr, status, error) {
                        console.error('error', error);
