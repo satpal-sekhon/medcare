@@ -1,6 +1,15 @@
 @push('scripts')
 <script>
     $(function(){
+        
+        // Add a custom method to get CKEditor data
+        $.validator.addMethod("ckeditorRequired", function(value, element) {
+            // Get CKEditor instance
+            var editor = CKEDITOR.instances[element.id];
+            // Check if the CKEditor instance is empty
+            return editor.getData().trim() !== '';
+        }, "This field is required.");
+
         $('#productForm').validate({
             rules: {
                 primary_category: "required",
@@ -21,6 +30,9 @@
                 diseases: "required",
                 customer_price: "required",
                 vendor_price: "required",
+                description: {
+                    ckeditorRequired: true
+                },
             },
             errorPlacement: function(error, element) {
                 // Create a new div with the class invalid-feedback if it doesn't exist
@@ -39,6 +51,11 @@
                 $(element).removeClass('is-invalid');
             },
             submitHandler: function(form) {
+                // Ensure CKEditor data is updated in hidden textarea
+                for (var instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
+                
                 let formData = new FormData(form);
 
                 $.ajax({

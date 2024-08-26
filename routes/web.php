@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -60,6 +61,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::resource('brands', BrandController::class);
     Route::get('/brands', [BrandController::class, 'admin_brands_index'])->name('admin.brands.index');
     Route::post('/brands/get', [BrandController::class, 'get'])->name('brands.get');
+        
+    // Diseases routes
+    Route::resource('diseases', DiseaseController::class);
+    Route::get('/diseases', [DiseaseController::class, 'admin_diseases_index'])->name('admin.diseases.index');
+    Route::post('/diseases/get', [DiseaseController::class, 'get'])->name('diseases.get');
 
     // Products routes
     Route::resource('products', ProductController::class);

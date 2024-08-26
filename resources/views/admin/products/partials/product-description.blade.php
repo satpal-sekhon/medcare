@@ -5,7 +5,7 @@
         </div>
 
         <div class="mb-3">
-            <textarea id="editor"></textarea>
+            <textarea id="editor" name="description"></textarea>
         </div>
     </div>
 </div>

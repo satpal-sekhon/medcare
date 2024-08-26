@@ -68,6 +68,21 @@
                         </ul>
                     </li>
 
+                    <li class="sidebar-list">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-store-3-line"></i>
+                            <span>Diseases</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('admin.diseases.index') }}">Diseases</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('diseases.create') }}">Add New Disease</a>
+                            </li>
+                        </ul>
+                    </li>
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
