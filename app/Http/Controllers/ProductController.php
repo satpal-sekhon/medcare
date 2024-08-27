@@ -10,6 +10,7 @@ use App\Models\ProductDisease;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -54,7 +55,7 @@ class ProductController extends Controller
         $product = Product::create([
             'primary_category_id' => $request->input('primary_category'),
             'category_id' => $request->input('category'),
-            'brand_id' => $request->input('category'),
+            'brand_id' => $request->input('brand'),
             'name' => $request->input('name'),
             'thumbnail' => $thumbnailPath,
             'composition' => $request->input('composition'),
@@ -173,7 +174,93 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $thumbnailPath = $product->thumbnail;
+        if ($request->hasFile('thumbnail')) {
+            if ($thumbnailPath) {
+                Storage::disk('public')->delete($thumbnailPath);
+            }
+            $thumbnailPath = $request->file('thumbnail')->store('images/product-thumbnails', 'public');
+        }
+
+        // Update product attributes
+        $product->update([
+            'primary_category_id' => $request->input('primary_category'),
+            'category_id' => $request->input('category'),
+            'brand_id' => $request->input('brand'),
+            'name' => $request->input('name'),
+            'thumbnail' => $thumbnailPath,
+            'composition' => $request->input('composition'),
+            'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
+            'stock_status' => $request->input('stock_status'),
+            'customer_price' => $request->input('customer_price'),
+            'vendor_price' => $request->input('vendor_price'),
+            'mrp' => $request->input('mrp'),
+            'expiry_date' => $request->input('expiry_date'),
+            'short_description' => $request->input('short_description'),
+            'ingredients' => $request->input('ingredients'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Deleted product images
+        if($request->input('deleted_images')){
+            $deleted_images = explode(',', $request->input('deleted_images'));
+            foreach($deleted_images as $deleted_image){
+                $product_image = ProductImage::find($deleted_image);
+                if($product_image){
+                    if ($product_image->path && Storage::disk('public')->exists($product_image->path)) {
+                        Storage::disk('public')->delete($product_image->path);
+                    }
+                    $product_image->delete();
+                }
+            }
+        }
+
+        if ($request->hasFile('images')) {
+            // Optionally delete existing images
+            //ProductImage::where('product_id', $product->id)->delete();
+
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images/products', 'public');
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'path' => $path
+                ]);
+            }
+        }
+
+        // Handle variants
+        $variants = $request->input('variants');
+        if ($variants) {
+            // Optionally delete existing variants
+            //ProductVariant::where('product_id', $product->id)->delete();
+
+            foreach ($variants as $variant) {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'name' => $variant['variant_name'],
+                    'customer_price' => $variant['price_customer'],
+                    'vendor_price' => $variant['price_vendor'],
+                    'mrp' => $variant['mrp'],
+                    'expiry_date' => $variant['expiry_date'],
+                ]);
+            }
+        }
+
+        // Handle diseases
+        ProductDisease::where('product_id', $product->id)->delete();
+
+        foreach($request->input('diseases') as $disease){
+            ProductDisease::create([
+                'product_id' => $product->id,
+                'disease_id' => $disease
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product updated successfully!'
+        ], 200);
     }
 
     /**

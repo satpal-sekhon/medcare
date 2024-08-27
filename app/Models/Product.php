@@ -15,7 +15,17 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
-    public function productImages()
+    public function diseases()
+    {
+        return $this->hasMany(ProductDisease::class);
+    }
+
+    public function diseaseIds()
+    {
+        return $this->diseases->pluck('disease_id')->toArray();
+    }
+
+    public function images()
     {
         return $this->hasMany(ProductImage::class);
     }

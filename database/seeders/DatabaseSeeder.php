@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             DiseaseSeeder::class,
+            BrandSeeder::class
         ]);
     }
 }

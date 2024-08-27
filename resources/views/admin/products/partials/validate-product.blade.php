@@ -11,6 +11,13 @@
                 return false;
             }, "This field is required.");
 
+            let deletedProductImages = [];
+            $('[data-image-id]').click(function(){
+                $(this).parents('.preview-container').remove();
+                let image_id = $(this).attr('data-image-id');
+                deletedProductImages.push(image_id)
+            })
+
 
             $('#productForm').validate({
                 rules: {
@@ -60,6 +67,7 @@
                 },
                 submitHandler: function(form) {
                     let formData = new FormData(form);
+                    formData.append('deleted_images', deletedProductImages);
 
                     $.ajax({
                         url: $(form).attr('action'),
@@ -75,10 +83,10 @@
                                     'success'
                                 );
 
-                                setTimeout(() => {
+                                /* setTimeout(() => {
                                     window.location =
                                         "{{ route('admin.products.index') }}";
-                                }, 2000);
+                                }, 2000); */
                             } else {
                                 Swal.fire(
                                     'Oops!',

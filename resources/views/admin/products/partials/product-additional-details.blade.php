@@ -28,7 +28,7 @@
                 <label class="form-label-title col-sm-4 mb-0">Select Diseases</label>
                 <select name="diseases[]" id="diseases" class="form-control" multiple>
                     @foreach ($diseases as $disease)
-                    <option value="{{ $disease->id }}">{{ $disease->name }}</option>
+                    <option value="{{ $disease->id }}" @selected(in_array($disease->id, ($product ? $product->diseaseIds() : [])))>{{ $disease->name }}</option>
                     @endforeach
                 </select>
             </div>
