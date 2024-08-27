@@ -216,9 +216,6 @@ class ProductController extends Controller
         }
 
         if ($request->hasFile('images')) {
-            // Optionally delete existing images
-            //ProductImage::where('product_id', $product->id)->delete();
-
             foreach ($request->file('images') as $image) {
                 $path = $image->store('images/products', 'public');
 
@@ -231,10 +228,10 @@ class ProductController extends Controller
 
         // Handle variants
         $variants = $request->input('variants');
-        if ($variants) {
-            // Optionally delete existing variants
-            //ProductVariant::where('product_id', $product->id)->delete();
+        
+        ProductVariant::where('product_id', $product->id)->delete();
 
+        if ($variants) {
             foreach ($variants as $variant) {
                 ProductVariant::create([
                     'product_id' => $product->id,
