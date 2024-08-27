@@ -41,8 +41,8 @@
             <div class="mb-3 col-md-6">
                 <label class="form-label-title mb-0">Stock Status</label>
                 <select name="stock_status" id="stock_status" class="form-control">
-                    <option value="In Stock">In Stock</option>
-                    <option value="Out of Stock">Out of Stock</option>
+                    <option value="In Stock" @selected(($product->stock_status ?? '') == 'In Stock')>In Stock</option>
+                    <option value="Out of Stock" @selected(($product->stock_status ?? '') == 'Out of Stock')>Out of Stock</option>
                 </select>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="d-flex gap-4 align-items-center">
             <label class="form-label-title">Is prescription required</label>
             <label class="switch">
-                <input type="checkbox" name="is_prescription_required" value="1"><span class="switch-state"></span>
+                <input type="checkbox" name="is_prescription_required" value="1" @checked(($product->is_prescription_required ?? 0)==1)><span class="switch-state"></span>
             </label>
         </div>
     </div>

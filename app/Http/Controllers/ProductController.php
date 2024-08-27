@@ -115,7 +115,7 @@ class ProductController extends Controller
 
         // Create the initial query with necessary joins and selects
         $query = Product::query()
-            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'brands.name as brand_name')
+            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_status', 'brands.name as brand_name')
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id');
 
         // Apply search filter if present
@@ -175,7 +175,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $thumbnailPath = $product->thumbnail;
-        if ($request->hasFile('thumbnail')) {
+        if ($request->hasFile('thumbnail') && Storage::disk('public')->exists($thumbnailPath)) {
             if ($thumbnailPath) {
                 Storage::disk('public')->delete($thumbnailPath);
             }
@@ -265,6 +265,21 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if ($product->thumbnail && Storage::disk('public')->exists($product->thumbnail)) {
+            Storage::disk('public')->delete($product->thumbnail);
+        }
+
+        foreach($product->images as $product_image){
+            if ($product_image && Storage::disk('public')->exists($product_image)) {
+                Storage::disk('public')->delete($product_image);
+            }
+        }
+
+        $product->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product deleted successfully.'
+        ]);
     }
 }

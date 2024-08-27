@@ -24,6 +24,7 @@
                                         <th>Product Name</th>
                                         <th>Brand</th>
                                         <th>Price</th>
+                                        <th>Stock StatusX</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -83,6 +84,10 @@
                             }
                         },
                         {
+                            data: 'stock_status',
+                            name: 'stock_status'
+                        },
+                        {
                             data: null,
                             name: 'actions',
                             orderable: false,
@@ -93,11 +98,11 @@
 
                                 return `
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <a href="${viewUrl}">
                                             <i class="ri-eye-line"></i>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="${editUrl}">
                                             <i class="ri-pencil-line"></i>
