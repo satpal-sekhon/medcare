@@ -105,7 +105,6 @@
             // Manually apply validation rules for existing variant rows
             $('#variantsContainer .variant-row').each(function() {
                 const $row = $(this);
-                console.log('__',$row)
                 const index = $row.attr('id').match(/\d+$/)[0]; // Extract the row number
 
                 $('#productForm').validate().settings.rules[`variants[${index}][variant_name]`] =

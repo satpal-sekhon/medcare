@@ -8,7 +8,7 @@
         <div id="variantsContainer">
             @if($product)
                 @foreach ($product->variants as $key => $variant)
-                    <div class="row mb-3 variant-row">
+                    <div class="row mb-3 variant-row" id="{{$key}}">
                         <div class="col-md-4 mb-3">
                             <label class="form-label-title" for="variantName{{$key}}">Variant Name</label>
                             <input type="text" name="variants[{{$key}}][variant_name]" id="variantName{{$key}}"
