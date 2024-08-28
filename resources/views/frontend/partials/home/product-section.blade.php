@@ -1,15 +1,3 @@
-<div class="title title-flex">
-    <div>
-        <h2>Top Save Today</h2>
-        <span class="title-leaf">
-            <svg class="icon-width">
-                <use xlink:href="/assets/svg/leaf.svg#leaf"></use>
-            </svg>
-        </span>
-        <p>Don't miss this opportunity at a special discount just for this week.</p>
-    </div>
-</div>
-
 <div class="section-b-space">
     <div class="product-border border-row overflow-hidden">
         <div class="product-box-slider no-arrow">

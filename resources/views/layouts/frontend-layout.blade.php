@@ -687,20 +687,8 @@
                                     </div>
                                     <div class="offcanvas-body">
                                         <ul class="navbar-nav">
-                                            <li class="nav-item dropdown dropdown-mega">
-                                                <a class="nav-link dropdown-toggle ps-xl-2 ps-0"
-                                                    href="javascript:void(0)" data-bs-toggle="dropdown">MEDICINES +</a>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        <a class="dropdown-item" href="#">Ayurvedic</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="#">Aleopathy</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="#">Homeopathy</a>
-                                                    </li>
-                                                </ul>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">Search Medicine</a>
                                             </li>
 
                                             <li class="nav-item">
@@ -721,7 +709,7 @@
 
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                                    data-bs-toggle="dropdown">COMPANY +</a>
+                                                    data-bs-toggle="dropdown">Company +</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a class="dropdown-item" href="#">About Us</a>
@@ -837,7 +825,7 @@
                                 </div>
 
                                 <div class="service-detail">
-                                    <h5>Every Fresh Products</h5>
+                                    <h5>Well Packed Delivery</h5>
                                 </div>
                             </div>
 
@@ -847,7 +835,7 @@
                                 </div>
 
                                 <div class="service-detail">
-                                    <h5>Free Delivery For Order Over $50</h5>
+                                    <h5>Free Delivery For Order Over ₹50</h5>
                                 </div>
                             </div>
 
