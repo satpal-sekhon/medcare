@@ -234,8 +234,8 @@
 
                                         <div class="onhover-div onhover-div-login">
                                             <ul class="user-box-name">
+                                                @guest
                                                 <li class="product-box-contain">
-                                                    <i></i>
                                                     <a href="{{ route('login') }}">Log In</a>
                                                 </li>
 
@@ -246,6 +246,13 @@
                                                 <li class="product-box-contain">
                                                     <a href="{{ route('forgot-password') }}">Forgot Password</a>
                                                 </li>
+                                                @endguest
+
+                                                @auth
+                                                <li class="product-box-contain">
+                                                    <a href="{{ route('logout') }}">Logout</a>
+                                                </li>
+                                                @endauth
                                             </ul>
                                         </div>
                                     </li>
@@ -726,7 +733,8 @@
                                                         <a class="dropdown-item" href="#">Promotions</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="{{ route('contact-us') }}">Contact Us</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('contact-us') }}">Contact Us</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -737,10 +745,10 @@
                         </div>
 
                         <div class="header-nav-right">
-                            <a href="#"><button class="btn deal-button" >
-                                <i data-feather="zap"></i>
-                                <span>Quick Order</span>
-                            </button></a>
+                            <a href="#"><button class="btn deal-button">
+                                    <i data-feather="zap"></i>
+                                    <span>Quick Order</span>
+                                </button></a>
                         </div>
                     </div>
                 </div>
@@ -878,7 +886,8 @@
                             </div>
 
                             <div class="footer-logo-contain">
-                                <p>Medical Life is an Medicine Ecommerce website we deliver Medicine in Retail & Wholesale price..</p>
+                                <p>Medical Life is an Medicine Ecommerce website we deliver Medicine in Retail &
+                                    Wholesale price..</p>
 
                                 <ul class="address">
                                     <li>
@@ -1066,7 +1075,7 @@
     <script src="{{ asset('assets/js/bootstrap/popper.min.js') }}"></script>
 
     <!-- feather icon js-->
-    <script src="{{ asset('assets/js/feather/feather.min.js') }}"5></script>
+    <script src="{{ asset('assets/js/feather/feather.min.js') }}" 5></script>
     <script src="{{ asset('assets/js/feather/feather-icon.js') }}"></script>
 
     <!-- Lazyload Js -->

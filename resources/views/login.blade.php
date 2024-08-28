@@ -34,7 +34,7 @@
                                         <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}">
                                         <label for="email">Email Address</label>
                                         @if ($errors->has('email'))
-                                            <div class="error">{{ $errors->first('email') }}</div>
+                                            <span class="invalid-feedback d-block">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                             placeholder="Password">
                                         <label for="password">Password</label>
                                         @if ($errors->has('password'))
-                                            <div class="error">{{ $errors->first('password') }}</div>
+                                            <span class="invalid-feedback d-block">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
                                 </div>
