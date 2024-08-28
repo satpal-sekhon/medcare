@@ -99,59 +99,78 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-user-3-line"></i>
-                            <span>Users</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="#">All users</a>
-                            </li>
-                            <li>
-                                <a href="#">Add new user</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <i class="ri-price-tag-3-line"></i>
-                            <span>Manage Roles</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <i class="ri-archive-line"></i>
-                            <span>Orders</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-list">
-                        <a class="linear-icon-link sidebar-link sidebar-title" href="#">
-                            <i class="ri-price-tag-3-line"></i>
-                            <span>Coupons</span>
-                        </a>
-                    </li>
-
+                    
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-settings-line"></i>
-                            <span>Settings</span>
+                            <i class="ri-group-line"></i>
+                            <span>User Accounts</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="#">Profile Setting</a>
+                                <a href="#">New User</a>
+                            </li>
+                            <li>
+                                <a href="#">Ban User</a>
                             </li>
                         </ul>
                     </li>
-
+                    
+                    <li class="sidebar-list">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-file-user-line"></i>
+                            <span>Vendor</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="#">New Vendor</a>
+                            </li>
+                            <li>
+                                <a href="#">New Registration</a>
+                            </li>
+                            <li>
+                                <a href="#">App Vendor</a>
+                            </li>
+                            <li>
+                                <a href="#">Approve Vendor</a>
+                            </li>
+                            <li>
+                                <a href="#">Ban Vendor</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <i class="ri-file-chart-line"></i>
-                            <span>Reports</span>
+                            <i class="ri-survey-line"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <i class="ri-list-unordered"></i>
+                            <span>Orders Section</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <i class="ri-nurse-line"></i>
+                            <span>Doctors</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <i class="ri-store-2-line"></i>
+                            <span>Pharmacy Store</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                            <i class="ri-hospital-line"></i>
+                            <span>Lab Package</span>
                         </a>
                     </li>
                 </ul>
