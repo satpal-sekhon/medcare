@@ -1,3 +1,23 @@
-header{
+header {
     border-bottom: 2px solid #0da487;
+}
+
+body.admin-login {
+    background: #0da487;
+}
+
+.admin-login .log-in-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.admin-login .log-in-box {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

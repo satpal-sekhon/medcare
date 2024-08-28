@@ -13,6 +13,7 @@ use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,7 +38,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::prefix('/admin')->middleware('auth')->group(function () {
+Route::get('/admin/login', [AuthController::class, 'admin_login'])->name('admin.login');
+Route::get('/admin/logout', [AuthController::class, 'admin_logout'])->name('admin.logout');
+
+Route::prefix('/admin')->middleware('admin')->group(function () {
     // Dashboard route
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');
       

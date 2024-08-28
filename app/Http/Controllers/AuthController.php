@@ -21,6 +21,20 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function admin_login(){
+        if (Auth::check()) {
+            $user = Auth::user();
+            
+            if ($user->hasRole('Customer')) {
+                return redirect()->route('my-account');
+            } else {
+                return redirect()->route('admin-dashboard');
+            }
+        }
+
+        return view('admin.login');
+    }
+
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -44,6 +58,13 @@ class AuthController extends Controller
         return back()->withErrors([
             'message' => 'Invalid login credentials',
         ]);
+    }
+
+    public function admin_logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
     }
 
     public function logout(Request $request){

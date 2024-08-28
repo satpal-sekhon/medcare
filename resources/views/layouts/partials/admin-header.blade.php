@@ -80,25 +80,7 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
-                            <a href="#">
-                                <i data-feather="users"></i>
-                                <span>Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="archive"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i data-feather="settings"></i>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            <a data-bs-toggle="modal" data-bs-target="#logoutModal"
                                 href="javascript:void(0)">
                                 <i data-feather="log-out"></i>
                                 <span>Log out</span>
