@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiseaseController;
+use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
@@ -29,6 +30,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.index');
 
 Route::resources([
     '/wishlist' => WishlistController::class,

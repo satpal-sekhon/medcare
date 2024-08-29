@@ -418,7 +418,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#">Pharmacy</a>
+                                                <a class="nav-link" href="{{ route('pharmacy.index') }}">Pharmacy</a>
                                             </li>
 
                                             <li class="nav-item">
