@@ -170,13 +170,13 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="#" class="drop-image">
-                                                                <img src="/assets/images/vegetable/product/1.png"
+                                                                <img src="/assets/images/product/1.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
                                                             <div class="drop-contain">
                                                                 <a href="#">
-                                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
+                                                                    <h5>Product 1 Name</h5>
                                                                 </a>
                                                                 <h6><span>1 x</span> $80.58</h6>
                                                                 <button class="close-button close_button">
@@ -189,14 +189,13 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="#" class="drop-image">
-                                                                <img src="/assets/images/vegetable/product/2.png"
+                                                                <img src="/assets/images/product/2.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
                                                             <div class="drop-contain">
                                                                 <a href="#">
-                                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g
-                                                                    </h5>
+                                                                    <h5>Product 2 Name</h5>
                                                                 </a>
                                                                 <h6><span>1 x</span> $25.68</h6>
                                                                 <button class="close-button close_button">
@@ -899,22 +898,22 @@
                         <div class="footer-contain">
                             <ul>
                                 <li>
-                                    <a href="#" class="text-content">Vegetables & Fruit</a>
+                                    <a href="#" class="text-content">Medicines</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-content">Beverages</a>
+                                    <a href="#" class="text-content">Cosmetic</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-content">Meats & Seafood</a>
+                                    <a href="#" class="text-content">Suppliments</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-content">Frozen Foods</a>
+                                    <a href="#" class="text-content">Surgical Items</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-content">Biscuits & Snacks</a>
+                                    <a href="#" class="text-content">Vitamins</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-content">Grocery & Staples</a>
+                                    <a href="#" class="text-content">Baby Products</a>
                                 </li>
                             </ul>
                         </div>
@@ -997,7 +996,7 @@
                                         <i data-feather="mail"></i>
                                         <div class="contact-number">
                                             <h6 class="text-content">Email Address :</h6>
-                                            <h5>fastkart@hotmail.com</h5>
+                                            <h5>Mediacllife@hotmail.com</h5>
                                         </div>
                                     </div>
                                 </li>

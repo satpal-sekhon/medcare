@@ -729,7 +729,7 @@
                         <div class="product-box">
                             <div class="product-image">
                                 <a href="#">
-                                    <img src="/assets/images/product/9.png"
+                                    <img src="/assets/images/product/7.png"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
                                 <ul class="product-option">
@@ -816,7 +816,7 @@
                         <div class="product-box">
                             <div class="product-image">
                                 <a href="#">
-                                    <img src="/assets/images/product/10.png"
+                                    <img src="/assets/images/product/5.png"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
                                 <ul class="product-option">
