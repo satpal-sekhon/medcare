@@ -14,7 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.brands');
     }
 
     public function admin_brands_index(){

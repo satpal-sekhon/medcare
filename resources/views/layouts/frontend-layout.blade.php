@@ -691,7 +691,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('products.index') }}">Brands</a>
+                                                <a class="nav-link" href="{{ route('brands.index') }}">Brands</a>
                                             </li>
 
                                             <li class="nav-item">

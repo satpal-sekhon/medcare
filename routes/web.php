@@ -27,9 +27,10 @@ Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 
 Route::resources([
-    '/products' => ProductController::class,
     '/wishlist' => WishlistController::class,
 ]);
 
