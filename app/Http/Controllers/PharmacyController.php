@@ -15,6 +15,10 @@ class PharmacyController extends Controller
         return view('frontend.pharmacy');
     }
 
+    public function lab_test(){
+        return view('frontend.lab-test');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

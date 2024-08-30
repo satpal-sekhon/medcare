@@ -404,7 +404,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#">Lab Test</a>
+                                                <a class="nav-link" href="{{ route('lab-test.index') }}">Lab Test</a>
                                             </li>
 
                                             <li class="nav-item">
