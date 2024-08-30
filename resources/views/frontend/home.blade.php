@@ -162,7 +162,7 @@
     <div class="container-fluid-lg">
         <div class="row g-sm-4 g-3">
             <div class="col-xxl-10 col-xl-10">
-                @include('frontend.partials.home.product-section')
+                @include('frontend.partials.home.products-second-section')
             </div>
             <div class="col-xxl-2 col-xl-2 reto">
                 <img src="{{ asset('assets/images/banners/vertical-3.png') }}" class="img-fluid social-image blur-up w-100 lazyloaded" alt="">

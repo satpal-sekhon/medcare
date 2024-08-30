@@ -1,6 +1,6 @@
 <div class="section-b-space">
     <div class="product-border border-row overflow-hidden">
-        <div class="product-box-slider no-arrow">
+        <div class="product-box-2-slider no-arrow">
             <div>
                 <div class="row m-0">
                     <div class="col-12 px-0">
@@ -998,7 +998,7 @@
 @push('scripts')
     <script>
         $(function(){
-            $('.product-box-slider').slick({
+            $('.product-box-2-slider').slick({
                 infinite: true,
                 arrows: true,
                 slidesToShow: 5,

@@ -38,16 +38,6 @@
 
 <body class="bg-effect">
 
-    <!-- Loader Start -->
-    <div class="fullpage-loader">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <!-- Loader End -->
 
     <!-- Header Start -->
     <header class="pb-0">
@@ -396,7 +386,7 @@
                         </div>
 
                         <div class="header-nav-middle">
-                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky text-uppercase">
                                 <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
                                     <div class="offcanvas-header navbar-shadow">
                                         <h5>Menu</h5>
@@ -421,8 +411,9 @@
                                                 <a class="nav-link" href="{{ route('pharmacy.index') }}">Pharmacy</a>
                                             </li>
 
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#">Doctors</a>
+                                            <li class="nav-item dropdown new-nav-item">
+                                                <label class="new-dropdown">New</label>
+                                                <a class="nav-link" href="{{ route('doctors.index') }}">Doctors</a>
                                             </li>
 
                                             <li class="nav-item dropdown">
