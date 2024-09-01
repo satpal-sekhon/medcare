@@ -1,5 +1,5 @@
 <div class="section-b-space">
-    <div class="product-border border-row overflow-hidden render-product-component">
+    <div class="product-border border-row overflow-hidden">
         <div class="product-box-slider no-arrow">
             <div class="">
                 <div class="row m-0">
@@ -168,8 +168,8 @@
 
                     <div class="col-12 px-0">
                         <product-item :product='{{ json_encode([
-                            "id" => 12,
-                            "name" => "Product 12",
+                            "id" => 6,
+                            "name" => "Product 6",
                             "image" => "/assets/images/product/1.png",
                             "price" => "26.69",
                             "originalPrice" => "28.56",

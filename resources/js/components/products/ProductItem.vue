@@ -41,7 +41,7 @@
                             <i class="fa-solid fa-plus"></i>
                         </span>
                     </button>
-                    <div :class="['cart_qty qty-box', { 'open': quantity > 0 }]">
+                    <div :class="['cart_qty qty-box mw-100', { 'open': quantity > 0 }]">
                         <div class="input-group">
                             <button type="button" class="qty-left-minus" data-type="minus" data-field="" @click="changeQuantity(-1)">
                                 <i class="fa fa-minus"></i>

@@ -11,4 +11,4 @@ app.component('product-list', ProductList);
 app.component('product-item', ProductItem);
 
 // Mount Vue instance to a DOM element
-app.mount('.render-product-component');
+app.mount('#vue-components');
