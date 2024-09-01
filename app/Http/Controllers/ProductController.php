@@ -95,11 +95,13 @@ class ProductController extends Controller
             }
         }
 
-        foreach($request->input('diseases') as $disease){
-            ProductDisease::create([
-                'product_id' => $product->id,
-                'disease_id' => $disease
-            ]);
+        if($request->input('diseases')){
+            foreach($request->input('diseases') as $disease){
+                ProductDisease::create([
+                    'product_id' => $product->id,
+                    'disease_id' => $disease
+                ]);
+            }
         }
 
         return response()->json([
@@ -251,11 +253,13 @@ class ProductController extends Controller
         // Handle diseases
         ProductDisease::where('product_id', $product->id)->delete();
 
-        foreach($request->input('diseases') as $disease){
-            ProductDisease::create([
-                'product_id' => $product->id,
-                'disease_id' => $disease
-            ]);
+        if($request->input('diseases')){
+            foreach($request->input('diseases') as $disease){
+                ProductDisease::create([
+                    'product_id' => $product->id,
+                    'disease_id' => $disease
+                ]);
+            }
         }
 
         return response()->json([
