@@ -35,19 +35,19 @@
                     <h6 class="theme-color">In Stock</h6>
                 </div>
                 <div class="add-to-cart-box">
-                    <button class="btn btn-add-cart addcart-button">
+                    <button class="btn btn-add-cart addcart-button" @click="changeQuantity(1)">
                         Add
                         <span class="add-icon">
                             <i class="fa-solid fa-plus"></i>
                         </span>
                     </button>
-                    <div class="cart_qty qty-box">
+                    <div :class="['cart_qty qty-box', { 'open': quantity > 0 }]">
                         <div class="input-group">
-                            <button type="button" class="qty-left-minus" data-type="minus" data-field="">
+                            <button type="button" class="qty-left-minus" data-type="minus" data-field="" @click="changeQuantity(-1)">
                                 <i class="fa fa-minus"></i>
                             </button>
-                            <input class="form-control input-number qty-input" type="text" name="quantity" value="0" />
-                            <button type="button" class="qty-right-plus" data-type="plus" data-field="">
+                            <input class="form-control input-number qty-input" type="text" name="quantity" :value="quantity" />
+                            <button type="button" class="qty-right-plus" data-type="plus" data-field="" @click="changeQuantity(1)">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
@@ -65,6 +65,19 @@ export default {
             type: Object,
             required: true,
         },
+    },
+    data() {
+        return {
+            quantity: 0,
+        };
+    },
+    methods: {
+        changeQuantity(amount) {
+            const newQuantity = this.quantity + amount;
+            if (newQuantity >= 0) {
+                this.quantity = newQuantity;
+            }
+        }
     },
     mounted() {
         feather.replace();
