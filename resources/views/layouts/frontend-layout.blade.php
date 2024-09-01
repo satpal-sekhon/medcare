@@ -34,11 +34,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 
     @stack('styles')
+
+    @vite('resources/js/app.js')
 </head>
 
 <body class="bg-effect">
-
-
     <!-- Header Start -->
     <header class="pb-0">
         <div class="header-top">
