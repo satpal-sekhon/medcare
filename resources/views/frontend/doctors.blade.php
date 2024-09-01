@@ -148,7 +148,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="right-sidebar-box" style="padding: 20px;">
+                <div class="right-sidebar-box">
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-md-4 mb-3 custom-form">

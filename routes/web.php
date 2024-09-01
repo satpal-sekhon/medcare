@@ -10,6 +10,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
@@ -35,6 +37,9 @@ Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.in
 Route::get('/lab-test', [PharmacyController::class, 'lab_test'])->name('lab-test.index');
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
 Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->name('search-medicines');
+Route::get('/quick-order', [OrderController::class, 'quickOrder'])->name('quick-order');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 
 Route::resources([
     '/wishlist' => WishlistController::class,

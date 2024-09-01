@@ -139,8 +139,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <button class="btn theme-bg-color text-white mt-sm-4 mt-3 fw-bold"
-                                onclick="location.href = 'shop-left-sidebar.html';">Read More</button>
+                            <button class="btn theme-bg-color text-white mt-sm-4 mt-3 fw-bold">Read More</button>
                         </div>
                     </div>
                 </div>

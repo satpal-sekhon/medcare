@@ -421,13 +421,10 @@
                                                     data-bs-toggle="dropdown">Company +</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a class="dropdown-item" href="#">About Us</a>
+                                                        <a class="dropdown-item" href="{{ route('about') }}">About Us</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="#">FAQs</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="#">Promotions</a>
+                                                        <a class="dropdown-item" href="{{ route('faq') }}">FAQs</a>
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
@@ -442,10 +439,12 @@
                         </div>
 
                         <div class="header-nav-right">
-                            <a href="#"><button class="btn deal-button">
+                            <a href="{{ route('quick-order') }}">
+                                <button class="btn deal-button">
                                     <i data-feather="zap"></i>
                                     <span>Quick Order</span>
-                                </button></a>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
