@@ -34,6 +34,7 @@ Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.index');
 Route::get('/lab-test', [PharmacyController::class, 'lab_test'])->name('lab-test.index');
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
+Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->name('search-medicines');
 
 Route::resources([
     '/wishlist' => WishlistController::class,

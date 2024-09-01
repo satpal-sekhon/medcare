@@ -396,7 +396,7 @@
                                     <div class="offcanvas-body">
                                         <ul class="navbar-nav">
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#">Search Medicine</a>
+                                                <a class="nav-link" href="{{ route('search-medicines') }}">Search Medicine</a>
                                             </li>
 
                                             <li class="nav-item">

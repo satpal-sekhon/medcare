@@ -150,6 +150,10 @@ class ProductController extends Controller
         ]);
     }
 
+    public function searchMedicines(){
+        return view('frontend.search-medicines');
+    }
+
     /**
      * Display the specified resource.
      */

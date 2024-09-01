@@ -13,7 +13,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -22,34 +22,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">Pfizer</h5>
+                                        <h4 class="text-center">Pfizer</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +33,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -68,34 +42,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">Novartis</h5>
+                                        <h4 class="text-center">Novartis</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +54,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -115,34 +63,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">Sanofi</h5>
+                                        <h4 class="text-center">Sanofi</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +75,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -162,34 +84,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">GlaxoSmithKline</h5>
+                                        <h4 class="text-center">GlaxoSmithKline</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +96,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -209,34 +105,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">Johnson & Johnson</h5>
+                                        <h4 class="text-center">Johnson & Johnson</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +117,7 @@
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default-product.png') }}"
+                                        <img src="{{ asset('assets/images/default/brand.png') }}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                 </div>
@@ -256,34 +126,8 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="name">Merck & Co.</h5>
+                                        <h4 class="text-center">Merck & Co.</h4>
                                     </a>
-                                    <div class="product-rating mt-2">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
-                                        </ul>
-                                        <span>(4.0)</span>
-                                    </div>
-                                    <div class="bg-white mt-3">
-                                        <a href="#" class="btn theme-bg-color text-white btn-sm rounded-pill">
-                                            <i class="fa fa-eye me-2"></i>
-                                            <span>View Products</span>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
