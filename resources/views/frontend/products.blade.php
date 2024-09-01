@@ -497,7 +497,7 @@
                     </div>
                 </div>
 
-                <div id="products-list">
+                <div class="render-product-component">
                     <product-list></product-list>
                 </div>
 
