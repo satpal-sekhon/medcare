@@ -153,60 +153,7 @@
                                                     </span>
                                                 </button>
 
-                                                <div class="onhover-div">
-                                                    <ul class="cart-list">
-                                                        <li class="product-box-contain">
-                                                            <div class="drop-cart">
-                                                                <a href="#" class="drop-image">
-                                                                    <img src="/assets/images/product/1.png"
-                                                                        class="blur-up lazyload mh-100px" alt="">
-                                                                </a>
-
-                                                                <div class="drop-contain">
-                                                                    <a href="#">
-                                                                        <h5>Product 1 Name</h5>
-                                                                    </a>
-                                                                    <h6><span>1 x</span> $80.58</h6>
-                                                                    <button class="close-button close_button">
-                                                                        <i class="fa-solid fa-xmark"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-
-                                                        <li class="product-box-contain">
-                                                            <div class="drop-cart">
-                                                                <a href="#" class="drop-image">
-                                                                    <img src="/assets/images/product/2.png"
-                                                                        class="blur-up lazyload mh-100px" alt="">
-                                                                </a>
-
-                                                                <div class="drop-contain">
-                                                                    <a href="#">
-                                                                        <h5>Product 2 Name</h5>
-                                                                    </a>
-                                                                    <h6><span>1 x</span> $25.68</h6>
-                                                                    <button class="close-button close_button">
-                                                                        <i class="fa-solid fa-xmark"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="price-box">
-                                                        <h5>Total :</h5>
-                                                        <h4 class="theme-color fw-bold">$106.58</h4>
-                                                    </div>
-
-                                                    <div class="button-group">
-                                                        <a href="{{ route('cart') }}"
-                                                            class="btn btn-sm cart-button">View
-                                                            Cart</a>
-                                                        <a href="{{ route('checkout') }}" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
-                                                    </div>
-                                                </div>
+                                                <mini-cart></mini-cart>
                                             </div>
                                         </li>
                                         <li class="right-side onhover-dropdown">
