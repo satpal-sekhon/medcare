@@ -497,7 +497,8 @@
                     </div>
                 </div>
 
-                <div id="products-card-list">
+                <div id="products-list">
+                    <product-list></product-list>
                 </div>
 
                 <nav class="custom-pagination">
