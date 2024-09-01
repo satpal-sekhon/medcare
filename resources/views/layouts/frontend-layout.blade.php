@@ -153,7 +153,7 @@
                                                         <div class="drop-cart">
                                                             <a href="#" class="drop-image">
                                                                 <img src="/assets/images/product/1.png"
-                                                                    class="blur-up lazyload" alt="">
+                                                                    class="blur-up lazyload mh-100px" alt="">
                                                             </a>
 
                                                             <div class="drop-contain">
@@ -172,7 +172,7 @@
                                                         <div class="drop-cart">
                                                             <a href="#" class="drop-image">
                                                                 <img src="/assets/images/product/2.png"
-                                                                    class="blur-up lazyload" alt="">
+                                                                    class="blur-up lazyload mh-100px" alt="">
                                                             </a>
 
                                                             <div class="drop-contain">
