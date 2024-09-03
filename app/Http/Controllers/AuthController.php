@@ -28,19 +28,21 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'phone_number' => 'required|numeric|digits:10',
+            'phone_number' => 'required|digits:10',
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|string|min:6|same:password',
             'terms' => 'required|in:accepted', // Ensure terms checkbox is checked
         ]);
 
         // Save the user
-        User::create([
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
+            'phone_number' => preg_replace('/\D/', '', $request->input('phone_number')),
             'password' => Hash::make($request->input('password')),
         ]);
+        // Assign role to user
+        $user->assignRole('Customer');
 
         // Redirect or return a success response
         return redirect()->route('login')->with('success', 'Account created successfully!');
