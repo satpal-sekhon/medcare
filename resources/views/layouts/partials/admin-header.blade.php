@@ -69,7 +69,7 @@
                 </li> --}}
                 <li class="profile-nav onhover-dropdown pe-0 me-0">
                     <div class="media profile-media">
-                        <img class="user-profile rounded-circle" src="{{ asset('assets/images/user-default.jpg') }}" alt="">
+                        <img class="user-profile rounded-circle" src="{{ asset('assets/images/default/user.jpg') }}" alt="">
                         <div class="user-name-hide media-body">
                             <span>{{ Auth()->user()->name }}</span>
                             <p class="mb-0 font-roboto">

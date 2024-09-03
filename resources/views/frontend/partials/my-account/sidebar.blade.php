@@ -6,13 +6,13 @@
     </div>
     <div class="profile-box">
         <div class="cover-image">
-            <img src="../assets/images/inner-page/cover-img.jpg" class="img-fluid blur-up lazyload" alt="">
+            <img src="{{ asset('assets/images/page/cover-img.jpg') }}" class="img-fluid blur-up lazyload" alt="">
         </div>
 
         <div class="profile-contain">
             <div class="profile-image">
                 <div class="position-relative">
-                    <img src="../assets/images/inner-page/user/1.jpg" class="blur-up lazyload update_img" alt="">
+                    <img src="{{ asset('assets/images/default/user.jpg') }}" class="blur-up lazyload update_img" alt="">
                     <div class="cover-icon">
                         <i class="fa-solid fa-pen">
                             <input type="file" onchange="readURL(this,0)">
@@ -22,8 +22,8 @@
             </div>
 
             <div class="profile-name">
-                <h3>Vicki E. Pope</h3>
-                <h6 class="text-content">vicki.pope@gmail.com</h6>
+                <h3>{{ auth()->user()->name }}</h3>
+                <h6 class="text-content">{{ auth()->user()->email }}</h6>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
         <h2>My Dashboard</h2>
         <span class="title-leaf">
             <svg class="icon-width bg-gray">
-                <use xlink:href="../assets/svg/leaf.svg#leaf"></use>
+                <use xlink:href="{{ asset('assets/svg/leaf.svg#leaf') }}"></use>
             </svg>
         </span>
     </div>
@@ -19,8 +19,8 @@
         <div class="row g-sm-4 g-3">
             <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
                 <div class="total-contain">
-                    <img src="../assets/images/svg/order.svg" class="img-1 blur-up lazyload" alt="">
-                    <img src="../assets/images/svg/order.svg" class="blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/order.svg') }}" class="img-1 blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/order.svg') }}" class="blur-up lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Order</h5>
                         <h3>3658</h3>
@@ -30,8 +30,8 @@
 
             <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
                 <div class="total-contain">
-                    <img src="../assets/images/svg/pending.svg" class="img-1 blur-up lazyload" alt="">
-                    <img src="../assets/images/svg/pending.svg" class="blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/pending.svg') }}" class="img-1 blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/pending.svg') }}" class="blur-up lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Pending Order</h5>
                         <h3>254</h3>
@@ -41,8 +41,8 @@
 
             <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
                 <div class="total-contain">
-                    <img src="../assets/images/svg/wishlist.svg" class="img-1 blur-up lazyload" alt="">
-                    <img src="../assets/images/svg/wishlist.svg" class="blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/wishlist.svg') }}" class="img-1 blur-up lazyload" alt="">
+                    <img src="{{ asset('assets/svg/wishlist.svg') }}" class="blur-up lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Wishlist</h5>
                         <h3>32158</h3>
@@ -57,27 +57,16 @@
     </div>
 
     <div class="row g-4">
-        <div class="col-xxl-6">
+        <div class="col-xxl-12">
             <div class="dashboard-content-title">
                 <h4>Contact Information <a href="javascript:void(0)" data-bs-toggle="modal"
                         data-bs-target="#editProfile">Edit</a>
                 </h4>
             </div>
             <div class="dashboard-detail">
-                <h6 class="text-content">MARK JECNO</h6>
-                <h6 class="text-content">vicki.pope@gmail.com</h6>
+                <h6 class="text-content">{{ auth()->user()->name }}</h6>
+                <h6 class="text-content">{{ auth()->user()->email }}</h6>
                 <a href="javascript:void(0)">Change Password</a>
-            </div>
-        </div>
-
-        <div class="col-xxl-6">
-            <div class="dashboard-content-title">
-                <h4>Newsletters <a href="javascript:void(0)" data-bs-toggle="modal"
-                        data-bs-target="#editProfile">Edit</a></h4>
-            </div>
-            <div class="dashboard-detail">
-                <h6 class="text-content">You are currently not subscribed to any
-                    newsletter</h6>
             </div>
         </div>
 

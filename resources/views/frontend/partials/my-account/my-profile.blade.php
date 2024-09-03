@@ -14,7 +14,7 @@
         </div>
         <div class="profile-name-detail">
             <div class="d-sm-flex align-items-center d-block">
-                <h3>Vicki E. Pope</h3>
+                <h3>{{ auth()->user()->name }}</h3>
                 <div class="product-rating profile-rating">
                     <ul class="rating">
                         <li>
