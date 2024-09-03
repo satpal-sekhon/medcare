@@ -185,6 +185,9 @@
 
                                                     @auth
                                                     <li class="product-box-contain">
+                                                        <a href="{{ route('my-account') }}">My Account</a>
+                                                    </li>
+                                                    <li class="product-box-contain">
                                                         <a href="{{ route('logout') }}">Logout</a>
                                                     </li>
                                                     @endauth

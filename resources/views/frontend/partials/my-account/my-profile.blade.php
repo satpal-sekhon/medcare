@@ -15,25 +15,6 @@
         <div class="profile-name-detail">
             <div class="d-sm-flex align-items-center d-block">
                 <h3>{{ auth()->user()->name }}</h3>
-                <div class="product-rating profile-rating">
-                    <ul class="rating">
-                        <li>
-                            <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                            <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                            <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                            <i data-feather="star"></i>
-                        </li>
-                        <li>
-                            <i data-feather="star"></i>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editProfile">Edit</a>
@@ -41,33 +22,22 @@
 
         <div class="location-profile">
             <ul>
+                @if(auth()->user()->address)
                 <li>
                     <div class="location-box">
                         <i data-feather="map-pin"></i>
-                        <h6>Downers Grove, IL</h6>
+                        <h6>{{ auth()->user()->address }}</h6>
                     </div>
                 </li>
+                @endif
 
                 <li>
                     <div class="location-box">
                         <i data-feather="mail"></i>
-                        <h6>vicki.pope@gmail.com</h6>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="location-box">
-                        <i data-feather="check-square"></i>
-                        <h6>Licensed for 2 years</h6>
+                        <h6>{{ auth()->user()->name }}</h6>
                     </div>
                 </li>
             </ul>
-        </div>
-
-        <div class="profile-description">
-            <p>Residences can be classified by and how they are connected to
-                neighbouring residences and land. Different types of housing tenure can
-                be used for the same physical type.</p>
         </div>
     </div>
 
@@ -92,14 +62,15 @@
                             <tr>
                                 <td>Phone Number :</td>
                                 <td>
-                                    <a href="javascript:void(0)"> +91 846 - 547 -
-                                        210</a>
+                                    <a href="javascript:void(0)">{{ auth()->user()->phone_number }}</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Address :</td>
-                                <td>549 Sulphur Springs Road, Downers, IL</td>
-                            </tr>
+                            @if(auth()->user()->address)
+                                <tr>
+                                    <td>Address :</td>
+                                    <td>{{ auth()->user()->address }}</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -114,15 +85,19 @@
                             <tr>
                                 <td>Email :</td>
                                 <td>
-                                    <a href="javascript:void(0)">vicki.pope@gmail.com
-                                        <span data-bs-toggle="modal" data-bs-target="#editProfile">Edit</span></a>
+                                    <a href="javascript:void(0)">
+                                        {{ auth()->user()->email }}
+                                        <span data-bs-toggle="modal" data-bs-target="#editProfile">Edit</span>
+                                    </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Password :</td>
                                 <td>
-                                    <a href="javascript:void(0)">●●●●●●
-                                        <span data-bs-toggle="modal" data-bs-target="#editProfile">Edit</span></a>
+                                    <a href="javascript:void(0)">
+                                        ●●●●●●
+                                        <span data-bs-toggle="modal" data-bs-target="#editProfile">Edit</span>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

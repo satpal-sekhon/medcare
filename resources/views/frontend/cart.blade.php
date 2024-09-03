@@ -14,29 +14,28 @@
                                     <td class="product-detail">
                                         <div class="product border-0">
                                             <a href="#" class="product-image">
-                                                <img src="../assets/images/vegetable/product/1.png"
+                                                <img src="{{ asset('assets/images/product/1.png') }}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="#">Bell pepper</a>
+                                                        <a href="#">Product 3 name</a>
                                                     </li>
 
-                                                    <li class="text-content"><span class="text-title">Sold
-                                                            By:</span> Fresho</li>
+                                                    <li class="text-content"><span class="text-title">Sold By:</span> Fresho</li>
 
-                                                    <li class="text-content"><span class="text-title">Quantity</span> -
-                                                        500 g</li>
+                                                    <li class="text-content">
+                                                        <span class="text-title">Quantity</span> - 500 g</li>
 
                                                     <li>
                                                         <h5 class="text-content d-inline-block">Price :</h5>
-                                                        <span>$35.10</span>
-                                                        <span class="text-content">$45.68</span>
+                                                        <span>₹35.10</span>
+                                                        <span class="text-content">₹45.68</span>
                                                     </li>
 
                                                     <li>
-                                                        <h5 class="saving theme-color">Saving : $20.68</h5>
+                                                        <h5 class="saving theme-color">Saving : ₹20.68</h5>
                                                     </li>
 
                                                     <li class="quantity-price-box">
@@ -57,7 +56,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <h5>Total: $35.10</h5>
+                                                        <h5>Total: ₹35.10</h5>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -66,8 +65,8 @@
 
                                     <td class="price">
                                         <h4 class="table-title text-content">Price</h4>
-                                        <h5>$35.10 <del class="text-content">$45.68</del></h5>
-                                        <h6 class="theme-color">You Save : $20.68</h6>
+                                        <h5>₹35.10 <del class="text-content">₹45.68</del></h5>
+                                        <h6 class="theme-color">You Save : ₹20.68</h6>
                                     </td>
 
                                     <td class="quantity">
@@ -92,7 +91,7 @@
 
                                     <td class="subtotal">
                                         <h4 class="table-title text-content">Total</h4>
-                                        <h5>$35.10</h5>
+                                        <h5>₹35.10</h5>
                                     </td>
 
                                     <td class="save-remove">
@@ -106,30 +105,29 @@
                                     <td class="product-detail">
                                         <div class="product border-0">
                                             <a href="#" class="product-image">
-                                                <img src="../assets/images/vegetable/product/2.png"
+                                                <img src="{{ asset('assets/images/product/2.png') }}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="#">Eggplant</a>
+                                                        <a href="#">Product 2 name</a>
                                                     </li>
 
-                                                    <li class="text-content"><span class="text-title">Sold
-                                                            By:</span> Nesto
+                                                    <li class="text-content">
+                                                        <span class="text-title">Sold By:</span> Nesto
                                                     </li>
 
-                                                    <li class="text-content"><span class="text-title">Quantity</span> -
-                                                        250 g</li>
-
+                                                    <li class="text-content">
+                                                        <span class="text-title">Quantity</span> - 250 g</li>
                                                     <li>
                                                         <h5 class="text-content d-inline-block">Price :</h5>
-                                                        <span>$35.10</span>
-                                                        <span class="text-content">$45.68</span>
+                                                        <span>₹35.10</span>
+                                                        <span class="text-content">₹45.68</span>
                                                     </li>
 
                                                     <li>
-                                                        <h5 class="saving theme-color">Saving : $20.68</h5>
+                                                        <h5 class="saving theme-color">Saving : ₹20.68</h5>
                                                     </li>
 
                                                     <li class="quantity">
@@ -152,7 +150,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <h5>Total: $52.95</h5>
+                                                        <h5>Total: ₹52.95</h5>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -161,8 +159,8 @@
 
                                     <td class="price">
                                         <h4 class="table-title text-content">Price</h4>
-                                        <h5>$52.95 <del class="text-content">$68.49</del></h5>
-                                        <h6 class="theme-color">You Save : $15.14</h6>
+                                        <h5>₹52.95 <del class="text-content">₹68.49</del></h5>
+                                        <h6 class="theme-color">You Save : ₹15.14</h6>
                                     </td>
 
                                     <td class="quantity">
@@ -187,7 +185,7 @@
 
                                     <td class="subtotal">
                                         <h4 class="table-title text-content">Total</h4>
-                                        <h5>$52.95</h5>
+                                        <h5>₹52.95</h5>
                                     </td>
 
                                     <td class="save-remove">
@@ -201,29 +199,30 @@
                                     <td class="product-detail">
                                         <div class="product border-0">
                                             <a href="#" class="product-image">
-                                                <img src="../assets/images/vegetable/product/3.png"
+                                                <img src="{{ asset('assets/images/product/3.png') }}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
                                             <div class="product-detail">
                                                 <ul>
                                                     <li class="name">
-                                                        <a href="#">Onion</a>
+                                                        <a href="#">Product 3 name</a>
                                                     </li>
 
-                                                    <li class="text-content"><span class="text-title">Sold By:</span> Basket</li>
+                                                    <li class="text-content"><span class="text-title">Sold By:</span> Fresho</li>
 
                                                     <li class="text-content">
                                                         <span class="text-title">Quantity</span> - 750 g
                                                     </li>
 
+
                                                     <li>
                                                         <h5 class="text-content d-inline-block">Price :</h5>
-                                                        <span>$35.10</span>
-                                                        <span class="text-content">$45.68</span>
+                                                        <span>₹35.10</span>
+                                                        <span class="text-content">₹45.68</span>
                                                     </li>
 
                                                     <li>
-                                                        <h5 class="saving theme-color">Saving : $20.68</h5>
+                                                        <h5 class="saving theme-color">Saving : ₹20.68</h5>
                                                     </li>
 
                                                     <li class="quantity">
@@ -246,7 +245,7 @@
                                                     </li>
 
                                                     <li>
-                                                        <h5>Total: $67.36</h5>
+                                                        <h5>Total: ₹67.36</h5>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -255,8 +254,8 @@
 
                                     <td class="price">
                                         <h4 class="table-title text-content">Price</h4>
-                                        <h5>$67.36 <del class="text-content">$96.58</del></h5>
-                                        <h6 class="theme-color">You Save : $29.22</h6>
+                                        <h5>₹67.36 <del class="text-content">₹96.58</del></h5>
+                                        <h6 class="theme-color">You Save : ₹29.22</h6>
                                     </td>
 
                                     <td class="quantity">
@@ -281,7 +280,7 @@
 
                                     <td class="subtotal">
                                         <h4 class="table-title text-content">Total</h4>
-                                        <h5>$67.36</h5>
+                                        <h5>₹67.36</h5>
                                     </td>
 
                                     <td class="save-remove">
@@ -314,7 +313,7 @@
                         <ul>
                             <li>
                                 <h4>Subtotal</h4>
-                                <h4 class="price">$125.65</h4>
+                                <h4 class="price">₹125.65</h4>
                             </li>
 
                             <li>
@@ -324,15 +323,15 @@
 
                             <li class="align-items-start">
                                 <h4>Shipping</h4>
-                                <h4 class="price text-end">$6.90</h4>
+                                <h4 class="price text-end">₹6.90</h4>
                             </li>
                         </ul>
                     </div>
 
                     <ul class="summery-total">
                         <li class="list-total border-top-0">
-                            <h4>Total (USD)</h4>
-                            <h4 class="price theme-color">$132.58</h4>
+                            <h4>Total (INR)</h4>
+                            <h4 class="price theme-color">₹132.58</h4>
                         </li>
                     </ul>
 
