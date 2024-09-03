@@ -26,6 +26,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/signup', [AuthController::class, 'signup'])->name('sign-up');
+Route::post('/create-account', [AuthController::class, 'create_account'])->name('create-account');
 Route::get('/verify-email', [AuthController::class, 'verify_email'])->name('verify-email');
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
