@@ -42,11 +42,7 @@
             <div class="row">
                 <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
 
-                    @if ($errors->has('message'))
-                    <div class="alert alert-danger">
-                        {{ $errors->first('message') }}
-                    </div>
-                    @endif
+                    <x-error-message :message="$errors->first('message')" />
 
                     <div class="log-in-title">
                         <h1 class="text-center text-white mb-4" style="font-size: 40px;">Hello Admin 😊</h1>
