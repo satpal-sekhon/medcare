@@ -30,6 +30,7 @@
                                         <th>User Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>Status</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -76,6 +77,29 @@
                         {
                             data: 'phone_number',
                             name: 'phone_number'
+                        },
+                        {
+                            data: null,
+                            name: 'status',
+                            render: function(data, type, row, meta) {
+                                let badgeClass = '';
+
+                                switch (row.status) {
+                                    case 'Active':
+                                        badgeClass = 'badge bg-success';
+                                        break;
+                                    case 'Inactive':
+                                        badgeClass = 'badge bg-warning';
+                                        break;
+                                    case 'Suspended':
+                                        badgeClass = 'badge bg-danger';
+                                        break;
+                                    default:
+                                        badgeClass = 'badge bg-light';
+                                }
+
+                                return `<span class="${badgeClass}">${row.status}</span>`;
+                            }
                         },
                         {
                             data: null,

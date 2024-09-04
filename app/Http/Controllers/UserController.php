@@ -65,7 +65,7 @@ class UserController extends Controller
 
     public function get(Request $request)
     {
-        $columns = ['name', 'email', 'phone_number'];
+        $columns = ['name', 'email', 'phone_number', 'status'];
 
         $query = User::query();
 
@@ -155,6 +155,7 @@ class UserController extends Controller
             ],
             'state' => 'nullable|string|max:50',
             'password' => 'nullable|string|min:6|confirmed',
+            'status' => 'required',
         ]);
 
         $data = [
@@ -165,6 +166,7 @@ class UserController extends Controller
             'city' => $request->input('city'),
             'pincode' => $request->input('pincode'),
             'state' => $request->input('state'),
+            'status' => $request->input('status'),
         ];
 
         // Only add the password to the update data if it is provided

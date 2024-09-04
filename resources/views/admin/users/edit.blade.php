@@ -16,16 +16,18 @@
 
                             <input type="hidden" name="role" value="Customer">
 
-                            <div class="mb-3">
-                                <label class="form-label-title mb-0">User Name</label>
-                                <input type="text" name="name" placeholder="User Name" value="{{ old('name', $user->name) }}"
-                                    @class(['form-control', 'is-invalid' => $errors->first('name')])>
-                                @if ($errors->has('name'))
-                                    <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
-                                @endif
-                            </div>
-
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label-title mb-0">User Name</label>
+                                        <input type="text" name="name" placeholder="User Name" value="{{ old('name', $user->name) }}"
+                                            @class(['form-control', 'is-invalid' => $errors->first('name')])>
+                                        @if ($errors->has('name'))
+                                            <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label-title mb-0">Email Address</label>
@@ -46,9 +48,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
+                           
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label-title mb-0">Address</label>
@@ -69,9 +69,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
+                            
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label-title mb-0">Pincode</label>
@@ -96,9 +94,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
+                           
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label-title mb-0">Enter Password</label>
@@ -111,11 +107,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="form-label-title mb-0">Confirm Password</label>
-                                        <input type="password" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password_confirmation') }}"
-                                            @class(['form-control', 'is-invalid' => $errors->first('password_confirmation')])>
-                                        @if ($errors->has('password_confirmation'))
-                                            <div class="invalid-feedback d-block`">{{ $errors->first('password_confirmation') }}</div>
+                                        <label class="form-label-title mb-0">Status</label>
+                                        <select name="status" @class(['form-control', 'is-invalid' => $errors->first('status')])>
+                                            <option value="Active" @selected(old('status', $user->status) == 'Active')>Active</option>
+                                            <option value="Inactive" @selected(old('status', $user->status) == 'Inactive')>Inactive</option>
+                                            <option value="Suspended" @selected(old('status', $user->status) == 'Suspended')>Suspended</option>
+                                        </select>
+                                        @if ($errors->has('status'))
+                                            <div class="invalid-feedback d-block`">{{ $errors->first('status') }}</div>
                                         @endif
                                     </div>
                                 </div>

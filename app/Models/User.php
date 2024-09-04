@@ -27,6 +27,7 @@ class User extends Authenticatable
         'state',
         'profile_pic',
         'password',
+        'status'
     ];
 
     /**
