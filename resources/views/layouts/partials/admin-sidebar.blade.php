@@ -138,6 +138,13 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.coupons.index') }}">
+                            <i class="ri-store-3-line"></i>
+                            <span>Coupon/Offers</span>
+                        </a>
+                    </li>
                     
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
