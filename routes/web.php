@@ -17,6 +17,7 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,4 +94,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('coupons', CouponController::class);
     Route::get('/coupons', [CouponController::class, 'admin_index'])->name('admin.coupons.index');
     Route::post('/coupons/get', [CouponController::class, 'get'])->name('coupons.get');
+
+    // Coupons routes
+    Route::resource('users', UserController::class);
+    Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
+    Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
 });

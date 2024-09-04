@@ -26,12 +26,12 @@ class AuthController extends Controller
     public function create_account(Request $request){
         // Validate the form data
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'name' => 'required|string|max:50',
+            'email' => 'required|email|max:100|unique:users,email',
             'phone_number' => 'required|digits:10',
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|string|min:6|same:password',
-            'terms' => 'required|in:accepted', // Ensure terms checkbox is checked
+            'terms' => 'required|in:accepted',
         ]);
 
         // Save the user
@@ -46,7 +46,6 @@ class AuthController extends Controller
 
         // Redirect or return a success response
         return redirect()->route('login')->with('success', 'Account created successfully!');
-
     }
 
     public function admin_login(){
