@@ -30,31 +30,31 @@
 
     <ul class="nav nav-pills user-nav-pills">
         <li class="nav-item">
-            <a href="{{ route('my-account') }}" class="nav-link active">
+            <a href="{{ route('my-account') }}" @class(["nav-link", 'active' => request()->routeIs('my-account')])>
                 <i data-feather="home"></i>
                 DashBoard
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('my-account.orders') }}" class="nav-link">
+            <a href="{{ route('my-account.orders') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.orders')])>
                 <i data-feather="shopping-bag"></i>
                 Orders
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('my-account.wishlist') }}" class="nav-link">
+            <a href="{{ route('my-account.wishlist') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.wishlist')])>
                 <i data-feather="heart"></i>
                 Wishlist
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('my-account.addresses') }}" class="nav-link">
+            <a href="{{ route('my-account.addresses') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.addresses')])>
                 <i data-feather="map-pin"></i>
                 Address
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('my-account.profile') }}" class="nav-link">
+            <a href="{{ route('my-account.profile') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.profile')])>
                 <i data-feather="user"></i>
                 Profile
             </a>

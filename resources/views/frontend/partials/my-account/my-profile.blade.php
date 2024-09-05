@@ -51,14 +51,14 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td>Gender :</td>
                                 <td>Female</td>
                             </tr>
                             <tr>
                                 <td>Birthday :</td>
                                 <td>21/05/1997</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td>Phone Number :</td>
                                 <td>
