@@ -107,10 +107,10 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="#">New User</a>
+                                <a href="{{ route('admin.users.index') }}">Manage Users</a>
                             </li>
                             <li>
-                                <a href="#">Ban User</a>
+                                <a href="#">Banned Users</a>
                             </li>
                         </ul>
                     </li>
@@ -122,21 +122,25 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="#">New Vendor</a>
+                                <a href="#">Manage Vendors</a>
                             </li>
                             <li>
                                 <a href="#">New Registration</a>
                             </li>
                             <li>
-                                <a href="#">App Vendor</a>
-                            </li>
-                            <li>
                                 <a href="#">Approve Vendor</a>
                             </li>
                             <li>
-                                <a href="#">Ban Vendor</a>
+                                <a href="#">Banned Vendors</a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.coupons.index') }}">
+                            <i class="ri-coupon-line"></i>
+                            <span>Coupon/Offers</span>
+                        </a>
                     </li>
                     
                     <li class="sidebar-list">
@@ -163,14 +167,14 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <i class="ri-store-2-line"></i>
-                            <span>Pharmacy Store</span>
+                            <span>Pharmacy Stores</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <i class="ri-hospital-line"></i>
-                            <span>Lab Package</span>
+                            <span>Lab Packages</span>
                         </a>
                     </li>
                 </ul>

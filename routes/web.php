@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DoctorController;
@@ -16,8 +17,8 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -94,4 +95,14 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('products', ProductController::class);
     Route::get('/products', [ProductController::class, 'admin_index'])->name('admin.products.index');
     Route::post('/products/get', [ProductController::class, 'get'])->name('products.get');
+
+    // Coupons routes
+    Route::resource('coupons', CouponController::class);
+    Route::get('/coupons', [CouponController::class, 'admin_index'])->name('admin.coupons.index');
+    Route::post('/coupons/get', [CouponController::class, 'get'])->name('coupons.get');
+
+    // Coupons routes
+    Route::resource('users', UserController::class);
+    Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
+    Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
 });
