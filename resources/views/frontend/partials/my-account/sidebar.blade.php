@@ -28,29 +28,36 @@
         </div>
     </div>
 
-    <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
-                data-bs-target="#pills-dashboard" type="button"><i data-feather="home"></i>
-                DashBoard</button>
+    <ul class="nav nav-pills user-nav-pills">
+        <li class="nav-item">
+            <a href="{{ route('my-account') }}" class="nav-link active">
+                <i data-feather="home"></i>
+                DashBoard
+            </a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill" data-bs-target="#pills-order"
-                type="button"><i data-feather="shopping-bag"></i>Order</button>
+        <li class="nav-item">
+            <a href="{{ route('my-account.orders') }}" class="nav-link">
+                <i data-feather="shopping-bag"></i>
+                Orders
+            </a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-wishlist-tab" data-bs-toggle="pill" data-bs-target="#pills-wishlist"
-                type="button"><i data-feather="heart"></i>
-                Wishlist</button>
+        <li class="nav-item">
+            <a href="{{ route('my-account.wishlist') }}" class="nav-link">
+                <i data-feather="heart"></i>
+                Wishlist
+            </a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill" data-bs-target="#pills-address"
-                type="button" role="tab"><i data-feather="map-pin"></i>Address</button>
+        <li class="nav-item">
+            <a href="{{ route('my-account.addresses') }}" class="nav-link">
+                <i data-feather="map-pin"></i>
+                Address
+            </a>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                type="button" role="tab"><i data-feather="user"></i>
-                Profile</button>
+        <li class="nav-item">
+            <a href="{{ route('my-account.profile') }}" class="nav-link">
+                <i data-feather="user"></i>
+                Profile
+            </a>
         </li>
     </ul>
 </div>

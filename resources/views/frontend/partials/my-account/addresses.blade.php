@@ -118,3 +118,54 @@
 
     </div>
 </div>
+
+
+<div class="modal fade theme-modal" id="add-address" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a new address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-4 theme-form-floating">
+                    <input type="text" class="form-control" id="addressName" placeholder="Enter First Name">
+                    <label for="addressName">Name</label>
+                </div>
+
+                <div class="form-floating mb-4 theme-form-floating">
+                    <textarea class="form-control" placeholder="Enter Address" id="address"
+                        style="height: 100px"></textarea>
+                    <label for="address">Enter Address</label>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="text" class="form-control" id="pin" placeholder="Enter Pin Code">
+                            <label for="pin">City</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="text" class="form-control" id="pin" placeholder="Enter Pin Code">
+                            <label for="pin">State</label>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="form-floating mb-4 theme-form-floating">
+                    <input type="text" class="form-control" id="pin" placeholder="Enter Pin Code">
+                    <label for="pin">Pin Code</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
