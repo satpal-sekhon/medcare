@@ -24,7 +24,10 @@
                     primary_category: "required",
                     category: "required",
                     brand: "required",
-                    name: "required",
+                    name: {
+                        required: true,
+                        maxlength: 100
+                    },
                     mrp: "required",
                     thumbnail: {
                         required: {

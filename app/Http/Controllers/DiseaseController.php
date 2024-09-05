@@ -36,7 +36,7 @@ class DiseaseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:diseases',
+            'name' => 'required|string|max:100|unique:diseases',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
@@ -111,7 +111,7 @@ class DiseaseController extends Controller
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:100',
                 Rule::unique('primary_categories')->ignore($disease->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',

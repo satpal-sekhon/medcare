@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('address');
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('pincode')->nullable();
+            $table->string('address', 255);
+            $table->string('city', 75)->nullable();
+            $table->string('state', 75)->nullable();
+            $table->string('pincode', 6)->nullable();
             $table->boolean('is_default')->default(false);
             $table->enum('address_type', ['shipping', 'billing'])->default('shipping');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            // Adding index on user_id
+            $table->index('user_id');
         });
     }
 

@@ -39,7 +39,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'primary_category' => 'required',
-            'name' => 'required|string|max:255|unique:categories',
+            'name' => 'required|string|max:100|unique:categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
@@ -134,7 +134,7 @@ class CategoryController extends Controller
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:100',
                 Rule::unique('categories')->ignore($category->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',

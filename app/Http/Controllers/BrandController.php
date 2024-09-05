@@ -35,7 +35,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:brands',
+            'name' => 'required|string|max:100|unique:brands',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
@@ -111,7 +111,7 @@ class BrandController extends Controller
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:100',
                 Rule::unique('brands')->ignore($brand->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',

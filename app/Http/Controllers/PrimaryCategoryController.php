@@ -36,7 +36,7 @@ class PrimaryCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:primary_categories',
+            'name' => 'required|string|max:100|unique:primary_categories',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
@@ -111,7 +111,7 @@ class PrimaryCategoryController extends Controller
             'name' => [
                 'required',
                 'string',
-                'max:255',
+                'max:100',
                 Rule::unique('primary_categories')->ignore($primaryCategory->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',

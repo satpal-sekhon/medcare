@@ -22,27 +22,5 @@
             <textarea name="short_description" placeholder="Enter Short Description"
                 class="form-control">{{ $product->short_description ?? '' }}</textarea>
         </div>
-
-        <div class="row">
-            <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Select Diseases</label>
-                <select name="diseases[]" id="diseases" class="form-control" multiple>
-                    @foreach ($diseases as $disease)
-                    <option value="{{ $disease->id }}" @selected(in_array($disease->id, ($product ? $product->diseaseIds() : [])))>{{ $disease->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
     </div>
 </div>
-
-@push('scripts')
-<script>
-    $(function(){
-        $('#diseases').chosen({
-            width: '100%',
-            placeholder_text_multiple: 'Select Diseases'
-        });
-    })
-</script>
-@endpush

@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('primary_category_id');
-            $table->string('name');
+            $table->string('name', 100);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->string('flag')->nullable();
             $table->timestamps();
 
             $table->foreign('primary_category_id')->references('id')->on('primary_categories')->onDelete('cascade');
+
+            // Adding index on primary_category_id
+            $table->index('primary_category_id');
         });
     }
 

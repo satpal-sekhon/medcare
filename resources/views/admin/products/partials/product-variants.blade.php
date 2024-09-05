@@ -12,7 +12,7 @@
                         <div class="col-md-4 mb-3">
                             <label class="form-label-title" for="variantName{{$key}}">Variant Name</label>
                             <input type="text" name="variants[{{$key}}][variant_name]" id="variantName{{$key}}"
-                                class="form-control" placeholder="Enter variant name" value="{{ $variant->name }}">
+                                class="form-control" placeholder="Enter variant name" maxlength="100" value="{{ $variant->name }}">
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label-title" for="priceCustomer{{$key}}">Price for Customer</label>

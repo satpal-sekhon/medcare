@@ -39,6 +39,15 @@
             </div>
 
             <div class="mb-3 col-md-6">
+                <label class="form-label-title col-sm-4 mb-0">Select Diseases</label>
+                <select name="diseases[]" id="diseases" class="form-control" multiple>
+                    @foreach ($diseases as $disease)
+                        <option value="{{ $disease->id }}" @selected(in_array($disease->id, ($product ? $product->diseaseIds() : [])))>{{ $disease->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3 col-md-6">
                 <label class="form-label-title mb-0">Stock Status</label>
                 <select name="stock_status" id="stock_status" class="form-control">
                     <option value="In Stock" @selected(($product->stock_status ?? '') == 'In Stock')>In Stock</option>
@@ -49,7 +58,7 @@
 
         <div class="mb-3">
             <label class="form-label-title mb-0">Product Name</label>
-            <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control">
+            <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
         </div>
 
         <div class="d-flex gap-4 align-items-center">
@@ -60,3 +69,14 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    $(function(){
+        $('#diseases').chosen({
+            width: '100%',
+            placeholder_text_multiple: 'Select Diseases'
+        });
+    })
+</script>
+@endpush

@@ -19,6 +19,10 @@ return new class extends Migration
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('disease_id')->references('id')->on('diseases')->onDelete('cascade');
+
+            // Adding indexes
+            $table->index('product_id');
+            $table->index('disease_id');
         });
     }
 

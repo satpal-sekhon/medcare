@@ -16,7 +16,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label-title mb-0">Brand Name</label>
-                                <input type="text" name="name" placeholder="Category Name"
+                                <input type="text" name="name" placeholder="Category Name" maxlength="100"
                                     value="{{ old('name', $brand->name) }}" @class(['form-control', 'is-invalid' => $errors->first('name')])>
                                 @if ($errors->has('name'))
                                     <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>

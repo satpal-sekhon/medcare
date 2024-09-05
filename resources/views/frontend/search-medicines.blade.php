@@ -201,7 +201,7 @@
     /* Medicine list */
     .medicine-list {
         display: none;
-        text-align: center;
+        /* text-align: center; */
         margin: 20px;
     }
 

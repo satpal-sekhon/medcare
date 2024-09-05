@@ -16,7 +16,7 @@
                             <div class="mb-2">
                                 <label class="form-label-title mb-0">Coupon Code</label>
                                 <input type="text" name="code" placeholder="Coupon Code" value="{{ old('code',  $coupon->code) }}"
-                                    @class(['form-control', 'is-invalid' => $errors->first('code')])>
+                                    @class(['form-control', 'is-invalid' => $errors->first('code')]) maxlength="50">
                                 @if ($errors->has('code'))
                                     <div class="invalid-feedback d-block`">{{ $errors->first('code') }}</div>
                                 @endif

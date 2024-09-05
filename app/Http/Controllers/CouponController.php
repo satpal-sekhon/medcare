@@ -34,7 +34,7 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|max:255|unique:coupons,code',
+            'code' => 'required|string|max:50|unique:coupons,code',
             'discount_amount' => 'required|numeric|min:0',
             'discount_type' => 'required|in:amount,percentage',
             'start_date' => 'nullable|date|after_or_equal:today',
@@ -107,7 +107,7 @@ class CouponController extends Controller
     {
         $request->validate([
             'code' => [
-                'required', 'string', 'max:255',
+                'required', 'string', 'max:50',
                 Rule::unique('coupons')->ignore($coupon->id)
             ],
             'discount_amount' => 'required|numeric|min:0',
