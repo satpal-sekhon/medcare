@@ -18,7 +18,7 @@ class AdminAuth
     {
 
         // Check if the user is authenticated and is an admin
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->hasRole('Admin')) {
             return $next($request);
         }
 
