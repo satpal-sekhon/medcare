@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -19,7 +21,8 @@ class AccountController extends Controller
     }
 
     public function addresses(){
-        return view('frontend.my-account.addresses');
+        $addresses = Address::where('user_id', Auth::id())->get();
+        return view('frontend.my-account.addresses', compact('addresses'));
     }
 
     public function profile(){
