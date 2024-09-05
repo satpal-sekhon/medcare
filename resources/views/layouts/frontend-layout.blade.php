@@ -352,9 +352,17 @@
                                         </div>
                                         <div class="offcanvas-body">
                                             <ul class="navbar-nav">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('search-medicines') }}">Search
-                                                        Medicine</a>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                                        data-bs-toggle="dropdown">Search Medicine</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{ route('search-medicines') }}">Search Medicine By Generic</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{ route('products.index') }}">All Products</a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
 
                                                 <li class="nav-item">

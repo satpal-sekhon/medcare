@@ -11,7 +11,8 @@
                         <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
                             <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                 <a href="#" class="d-block">
-                                    <img src="{{ asset('assets/images/default/lab.png') }}" class="img-fluid blur-up lazyload rounded" alt="Blood Test">
+                                    <img src="{{ asset('assets/images/default/lab.png') }}"
+                                        class="img-fluid blur-up lazyload rounded" alt="Blood Test">
                                 </a>
                             </div>
                             <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
@@ -27,12 +28,13 @@
                                         </ul>
                                     </div>
                                 </div>
-                
+
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal"
+                                        class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-shopping-cart me-2"></i>
                                         Book Package
-                                    </a>
+                                    </button>
                                     <a href="#" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-info-circle me-2"></i>
                                         Show Details
@@ -45,7 +47,8 @@
                         <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
                             <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                 <a href="#" class="d-block">
-                                    <img src="{{ asset('assets/images/default/lab.png') }}" class="img-fluid blur-up lazyload rounded" alt="Blood Test">
+                                    <img src="{{ asset('assets/images/default/lab.png') }}"
+                                        class="img-fluid blur-up lazyload rounded" alt="Blood Test">
                                 </a>
                             </div>
                             <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
@@ -61,13 +64,14 @@
                                         </ul>
                                     </div>
                                 </div>
-                
-                
+
+
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal"
+                                        class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-shopping-cart me-2"></i>
                                         Book Package
-                                    </a>
+                                    </button>
                                     <a href="#" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-info-circle me-2"></i>
                                         Show Details
@@ -80,7 +84,8 @@
                         <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
                             <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                 <a href="#" class="d-block">
-                                    <img src="{{ asset('assets/images/default/lab.png') }}" class="img-fluid blur-up lazyload rounded" alt="Blood Test">
+                                    <img src="{{ asset('assets/images/default/lab.png') }}"
+                                        class="img-fluid blur-up lazyload rounded" alt="Blood Test">
                                 </a>
                             </div>
                             <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
@@ -96,13 +101,14 @@
                                         </ul>
                                     </div>
                                 </div>
-                
-                
+
+
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal"
+                                        class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-shopping-cart me-2"></i>
                                         Book Package
-                                    </a>
+                                    </button>
                                     <a href="#" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-info-circle me-2"></i>
                                         Show Details
@@ -115,7 +121,8 @@
                         <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
                             <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                 <a href="#" class="d-block">
-                                    <img src="{{ asset('assets/images/default/lab.png') }}" class="img-fluid blur-up lazyload rounded" alt="Blood Test">
+                                    <img src="{{ asset('assets/images/default/lab.png') }}"
+                                        class="img-fluid blur-up lazyload rounded" alt="Blood Test">
                                 </a>
                             </div>
                             <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
@@ -131,13 +138,14 @@
                                         </ul>
                                     </div>
                                 </div>
-                
-                
+
+
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal"
+                                        class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-shopping-cart me-2"></i>
                                         Book Package
-                                    </a>
+                                    </button>
                                     <a href="#" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                         <i class="fa fa-info-circle me-2"></i>
                                         Show Details
@@ -147,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
                 <nav class="custom-pagination">
                     <ul class="pagination justify-content-center">
@@ -176,4 +184,45 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Book Package</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Buttons for guest and account creation -->
+                <div class="d-flex justify-content-between mb-3">
+                    <button type="button" class="btn btn-theme-outline">Continue as Guest</button>
+                    <button type="button" class="btn btn-theme-outline">Create an Account</button>
+                </div>
+                
+                <form id="bookingForm">
+                    <div class="mb-3">
+                        <label for="yourName" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="yourName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phoneNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="instructions" class="form-label">Any Instructions</label>
+                        <textarea class="form-control" id="instructions" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="bookingForm" class="btn btn theme-bg-color text-white">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

@@ -48,24 +48,34 @@
             </div>
 
             <div class="mb-3 col-md-6">
-                <label class="form-label-title mb-0">Stock Status</label>
-                <select name="stock_status" id="stock_status" class="form-control">
-                    <option value="In Stock" @selected(($product->stock_status ?? '') == 'In Stock')>In Stock</option>
-                    <option value="Out of Stock" @selected(($product->stock_status ?? '') == 'Out of Stock')>Out of Stock</option>
+                <label for="stock_type" class="form-label-title mb-0">Stock Type</label>
+                <select name="stock_type" id="stock_type" class="form-control">
+                    <option value="" selected disabled>Select Stock Type</option>
+                    <option value="With Stock" @selected(($product->stock_type ?? '') == 'With Stock')>With Stock</option>
+                    <option value="Without Stock" @selected(($product->stock_type ?? '') == 'Without Stock')>Without Stock</option>
                 </select>
+            </div>
+
+            <div class="mb-3 col-md-6">
+                <label class="form-label-title mb-0">Product Name</label>
+                <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
             </div>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label-title mb-0">Product Name</label>
-            <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
-        </div>
 
-        <div class="d-flex gap-4 align-items-center">
-            <label class="form-label-title">Is prescription required</label>
-            <label class="switch">
-                <input type="checkbox" name="is_prescription_required" value="1" @checked(($product->is_prescription_required ?? 0)==1)><span class="switch-state"></span>
-            </label>
+        <div class="row">
+            <div class="d-flex gap-4 align-items-center col-md-6">
+                <label class="form-label-title">Is prescription required</label>
+                <label class="switch">
+                    <input type="checkbox" name="is_prescription_required" value="1" @checked(($product->is_prescription_required ?? 0)==1)><span class="switch-state"></span>
+                </label>
+            </div>
+            <div class="d-flex gap-4 align-items-center col-md-6">
+                <label class="form-label-title">Show On Homepage</label>
+                <label class="switch">
+                    <input type="checkbox" name="show_on_homepage" value="1" @checked(($product->show_on_homepage ?? 0)==1)><span class="switch-state"></span>
+                </label>
+            </div>        
         </div>
     </div>
 </div>

@@ -18,6 +18,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+            // Adding index to the product_id for better performance
+            $table->index('product_id');
         });
     }
 

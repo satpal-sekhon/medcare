@@ -24,6 +24,7 @@
                     primary_category: "required",
                     category: "required",
                     brand: "required",
+                    stock_type: "required",
                     name: {
                         required: true,
                         maxlength: 100
