@@ -1,6 +1,14 @@
 @push('scripts')
     <script>
         $(function() {
+            $('[name="stock_type"]').change(function(){
+                if($(this).val()=='With Stock'){
+                    $('.product-stock-quantity').removeClass('d-none');
+                } else {
+                    $('.product-stock-quantity').addClass('d-none')
+                }
+            })
+
             // Add custom validation method for Chosen
             $.validator.addMethod("ckeditorRequired", function(value, element) {
                 // Ensure CKEditor instance is available
@@ -28,6 +36,23 @@
                     name: {
                         required: true,
                         maxlength: 100
+                    },
+                    product_type: "required",
+                    stock_quantity_for_customer: {
+                        required: {
+                            depends: function(element) {
+                                return $('[name="stock_type"]').val() === 'With Stock'
+                            }
+                        },
+                        number: true
+                    },
+                    stock_quantity_for_vendor: {
+                        required: {
+                            depends: function(element) {
+                                return $('[name="stock_type"]').val() === 'With Stock'
+                            }
+                        },
+                        number: true
                     },
                     mrp: "required",
                     thumbnail: {

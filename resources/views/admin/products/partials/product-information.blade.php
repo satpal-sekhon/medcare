@@ -60,6 +60,25 @@
                 <label class="form-label-title mb-0">Product Name</label>
                 <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
             </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="product_type" class="form-label-title mb-0">Product Type</label>
+                <select name="product_type" id="product_type" class="form-control">
+                    <option value="">Select Product Type</option>
+                    <option value="General" @selected(($product->product_type ?? '') == 'General')>General Product</option>
+                    <option value="Generic" @selected(($product->product_type ?? '') == 'Generic')>Generic Medicine</option>
+                </select>
+            </div>
+
+            <div class="mb-3 col-md-6">
+                <label for="flag" class="form-label-title mb-0">Select Flag</label>
+                <select name="flag" id="flag" class="form-control">
+                    <option value="">Select Flag</option>
+                    <option value="Trending" @selected(($product->flag ?? '') == 'Trending')>Trending</option>
+                    <option value="On Sale" @selected(($product->flag ?? '') == 'On Sale')>On Sale</option>
+                    <option value="Casual" @selected(($product->flag ?? '') == 'Casual')>Casual</option>
+                </select>
+            </div>
         </div>
 
 

@@ -60,10 +60,15 @@ class ProductController extends Controller
             'thumbnail' => $thumbnailPath,
             'composition' => $request->input('composition'),
             'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
-            'stock_status' => $request->input('stock_status'),
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
+            'stock_type' => $request->input('stock_type'),
+            'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
+            'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
             'customer_price' => $request->input('customer_price'),
             'vendor_price' => $request->input('vendor_price'),
             'mrp' => $request->input('mrp'),
+            'flag' => $request->input('flag'),
+            'product_type' => $request->input('product_type'),
             'expiry_date' => $request->input('expiry_date'),
             'short_description' => $request->input('short_description'),
             'ingredients' => $request->input('ingredients'),
@@ -90,6 +95,8 @@ class ProductController extends Controller
                     'customer_price' => $variant['price_customer'],
                     'vendor_price' => $variant['price_vendor'],
                     'mrp' => $variant['mrp'],
+                    'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
+                    'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
                     'expiry_date' => $variant['expiry_date'],
                 ]);
             }
@@ -117,7 +124,7 @@ class ProductController extends Controller
 
         // Create the initial query with necessary joins and selects
         $query = Product::query()
-            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_status', 'brands.name as brand_name')
+            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_type', 'products.stock_quantity_for_customer', 'products.stock_quantity_for_vendor', 'brands.name as brand_name')
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id');
 
         // Apply search filter if present
@@ -194,13 +201,18 @@ class ProductController extends Controller
             'category_id' => $request->input('category'),
             'brand_id' => $request->input('brand'),
             'name' => $request->input('name'),
+            'product_type' => $request->input('product_type'),
             'thumbnail' => $thumbnailPath,
             'composition' => $request->input('composition'),
             'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
-            'stock_status' => $request->input('stock_status'),
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
+            'stock_type' => $request->input('stock_type'),
+            'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
+            'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
             'customer_price' => $request->input('customer_price'),
             'vendor_price' => $request->input('vendor_price'),
             'mrp' => $request->input('mrp'),
+            'flag' => $request->input('flag'),
             'expiry_date' => $request->input('expiry_date'),
             'short_description' => $request->input('short_description'),
             'ingredients' => $request->input('ingredients'),
@@ -244,6 +256,8 @@ class ProductController extends Controller
                     'name' => $variant['variant_name'],
                     'customer_price' => $variant['price_customer'],
                     'vendor_price' => $variant['price_vendor'],
+                    'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
+                    'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
                     'mrp' => $variant['mrp'],
                     'expiry_date' => $variant['expiry_date'],
                 ]);

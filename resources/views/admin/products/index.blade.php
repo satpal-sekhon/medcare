@@ -24,7 +24,7 @@
                                         <th>Product Name</th>
                                         <th>Brand</th>
                                         <th>Price</th>
-                                        <th>Stock StatusX</th>
+                                        <th>Stock Status</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -84,8 +84,64 @@
                             }
                         },
                         {
-                            data: 'stock_status',
-                            name: 'stock_status'
+                            data: null,
+                            name: 'stock_status',
+                            render: function(data, type, row){
+                                let customerBadgeClass = '';
+                                let customerBadgeText = '';
+
+                                let vendorBadgeClass = '';
+                                let vendorBadgeText = '';
+
+                                // Determine customer stock badge
+                                if (row.stock_type === 'Without Stock') {
+                                    customerBadgeClass = 'badge-success';
+                                    customerBadgeText = 'In Stock';
+                                } else if (row.stock_type === 'With Stock') {
+                                    if (row.stock_quantity_for_customer > 50) {
+                                        customerBadgeClass = 'badge-success';
+                                        customerBadgeText = 'In Stock';
+                                    } else if (row.stock_quantity_for_customer <= 50 && row.stock_quantity_for_customer > 10) {
+                                        customerBadgeClass = 'badge-warning';
+                                        customerBadgeText = 'Limited Stock';
+                                    } else if (row.stock_quantity_for_customer <= 10) {
+                                        customerBadgeClass = 'badge-danger';
+                                        customerBadgeText = 'Low Stock';
+                                    }
+                                } else {
+                                    customerBadgeClass = 'badge-secondary';
+                                    customerBadgeText = 'Out of Stock';
+                                }
+
+                                // Determine vendor stock badge
+                                if (row.stock_type === 'Without Stock') {
+                                    vendorBadgeClass = 'badge-success';
+                                    vendorBadgeText = 'In Stock';
+                                } else if (row.stock_type === 'With Stock') {
+                                    if (row.stock_quantity_for_vendor > 50) {
+                                        vendorBadgeClass = 'badge-success';
+                                        vendorBadgeText = 'In Stock';
+                                    } else if (row.stock_quantity_for_vendor <= 50 && row.stock_quantity_for_vendor > 10) {
+                                        vendorBadgeClass = 'badge-warning';
+                                        vendorBadgeText = 'Limited Stock';
+                                    } else if (row.stock_quantity_for_vendor <= 10) {
+                                        vendorBadgeClass = 'badge-danger';
+                                        vendorBadgeText = 'Low Stock';
+                                    }
+                                } else {
+                                    vendorBadgeClass = 'badge-secondary';
+                                    vendorBadgeText = 'Out of Stock';
+                                }
+
+                                // Return both badges
+                                return `
+                                    <div>
+                                        <span class="badge ${customerBadgeClass}">Customer: ${customerBadgeText}</span>
+                                    </div>
+                                    <div>
+                                        <span class="badge ${vendorBadgeClass}">Vendor: ${vendorBadgeText}</span>
+                                    </div>`;
+                            }
                         },
                         {
                             data: null,

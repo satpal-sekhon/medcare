@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('name', 100);
             $table->date('expiry_date')->nullable();
-            $table->integer('stock_quantity_for_user')->default(0);
+            $table->integer('stock_quantity_for_customer')->default(0);
             $table->integer('stock_quantity_for_vendor')->default(0);
             $table->decimal('customer_price', 8, 2)->default(0.00);
             $table->decimal('vendor_price', 8, 2)->default(0.00);

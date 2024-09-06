@@ -29,9 +29,24 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="mb-3 col-md-4 product-stock-quantity d-none">
+                <div class="mb-2">
+                    <label class="form-label-title">Stock Quantity for Customer</label>
+                    <div class="form-group">
+                        <input type="number" name="stock_quantity_for_customer" class="form-control" placeholder="Enter Stock Quantity" value="{{ $product->stock_quantity_for_customer ?? '' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-4 product-stock-quantity d-none">
+                <div class="mb-2">
+                    <label class="form-label-title">Stock Quantity for Vendor</label>
+                    <div class="form-group">
+                        <input type="number" name="stock_quantity_for_vendor" class="form-control" placeholder="Enter Stock Quantity" value="{{ $product->stock_quantity_for_vendor ?? '' }}">
+                    </div>
+                </div>
+            </div>
             <div class="mb-3 col-md-4">
-                <label class="form-label-title col-sm-4 mb-0">Expiry Date</label>
+                <label class="form-label-title col-sm-4 mb-2">Expiry Date</label>
                 <input type="date" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date') }}"
                     class="form-control" value="{{ $product->expiry_date ?? '' }}">
             </div>
