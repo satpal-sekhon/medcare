@@ -54,6 +54,10 @@
                         },
                         number: true
                     },
+                    unit: {
+                        required: true,
+                        maxlength: 100
+                    },
                     mrp: "required",
                     thumbnail: {
                         required: {

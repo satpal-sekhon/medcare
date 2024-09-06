@@ -69,7 +69,7 @@
                             <div class="mb-3 d-flex align-items-center gap-4">
                                 <label class="form-label-title">Show On Homepage</label>
                                 <label class="switch">
-                                    <input type="checkbox" name="flag" value="SHOW_ON_HOMEPAGE" @checked($category->flag == 'SHOW_ON_HOMEPAGE')>
+                                    <input type="checkbox" name="show_on_homepage" value="1" @checked($category->show_on_homepage)>
                                     <span class="switch-state"></span>
                                 </label>
                             </div>

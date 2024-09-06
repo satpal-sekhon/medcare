@@ -50,7 +50,7 @@ class PrimaryCategoryController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'image' => $imagePath,
-            'flag' => $request->input('flag')
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
@@ -58,7 +58,7 @@ class PrimaryCategoryController extends Controller
 
     public function get(Request $request)
     {
-        $columns = ['name', 'image'];
+        $columns = ['id', 'name', 'image'];
 
         $query = PrimaryCategory::query();
 
@@ -132,7 +132,7 @@ class PrimaryCategoryController extends Controller
             'name' => $request->input('name'),
             'image' => $imagePath,
             'description' => $request->input('description'),
-            'flag' => $request->input('flag')
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
         return redirect()->route('admin.primary-categories.index')->with('success', 'Primary Category updated successfully!');

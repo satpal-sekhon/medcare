@@ -49,7 +49,7 @@ class BrandController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'image' => $imagePath,
-            'flag' => $request->input('flag')
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
         return redirect()->route('admin.brands.index')->with('success', 'Brand saved successfully!');
@@ -57,7 +57,7 @@ class BrandController extends Controller
 
     public function get(Request $request)
     {
-        $columns = ['name', 'image'];
+        $columns = ['id', 'name', 'image'];
 
         $query = Brand::query();
 
@@ -132,7 +132,7 @@ class BrandController extends Controller
             'name' => $request->input('name'),
             'image' => $imagePath,
             'description' => $request->input('description'),
-            'flag' => $request->input('flag')
+            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
         return redirect()->route('admin.brands.index')->with('success', 'Brand updated successfully!');

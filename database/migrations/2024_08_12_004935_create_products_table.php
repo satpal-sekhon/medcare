@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id');
             $table->string('name', 100);
+            $table->string('unit', 100)->nullable();
             $table->enum('product_type', ['General', 'Generic'])->default('General');
             $table->text('thumbnail')->nullable();
             $table->text('composition')->nullable();

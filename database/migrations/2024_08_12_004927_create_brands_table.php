@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->string('flag')->nullable();
+            $table->boolean('show_on_homepage')->default(false);
             $table->timestamps();
         });
     }

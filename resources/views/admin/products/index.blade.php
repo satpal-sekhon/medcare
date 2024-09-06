@@ -20,6 +20,7 @@
                             <table class="table w-100 theme-table table-product" id="table_id">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Product Image</th>
                                         <th>Product Name</th>
                                         <th>Brand</th>
@@ -54,6 +55,13 @@
                         }
                     },
                     columns: [
+                        {
+                            data: null,
+                            name: 'id',
+                            render: function(data, type, row, meta) {
+                                return meta.row + 1;
+                            }
+                        },
                         {
                             data: 'thumbnail',
                             name: 'thumbnail',
@@ -173,7 +181,8 @@
                             `;
                             }
                         }
-                    ]
+                    ],
+                    order: [[0, 'desc']]
                 });
             });
         </script>
