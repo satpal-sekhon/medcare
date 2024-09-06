@@ -56,7 +56,7 @@
                                     @endif
 
                                     @if ($subCategory->image)
-                                        <img src="{{ asset('storage/' . $subCategory->image) }}" alt="" style="width: 100px; height: auto;">
+                                        <img src="{{ asset($subCategory->image) }}" alt="" style="width: 100px; height: auto;">
                                     @endif
                                 </div>
                             </div>

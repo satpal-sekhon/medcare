@@ -30,6 +30,14 @@
                     <input type="number" name="variants[{{$key}}][mrp]" id="mrp{{$key}}" class="form-control"
                         placeholder="Enter MRP" value="{{ $variant->mrp }}">
                 </div>
+                <div class="col-md-4 mb-3">
+                    <div class="mb-2">
+                        <label class="form-label-title">Product Weight (in KG)</label>
+                        <div class="form-group">
+                            <input type="number" name="weight" class="form-control" placeholder="Weight" value="{{ $product->weight ?? '' }}" step="0.01">
+                        </div>
+                    </div>
+                </div>
                 <div @class(["col-md-4 mb-3 product-stock-quantity", "d-none" => $product->stock_type != 'With Stock'])>
                     <label class="form-label-title" for="stock_quantity_for_customer{{$key}}">Stock Quantity for Customer</label>
                     <input type="number" name="variants[{{$key}}][stock_quantity_for_customer]" id="stock_quantity_for_customer{{$key}}" class="form-control" placeholder="Enter Quantity" value="{{ $variant->stock_quantity_for_customer }}">
@@ -96,6 +104,10 @@
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="mrp${rowCount}">MRP</label>
                         <input type="number" name="variants[${rowCount}][mrp]" id="mrp${rowCount}" class="form-control" placeholder="Enter MRP">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label-title" for="weight${rowCount}">Product Weight (in KG)</label>
+                        <input type="number" name="variants[${rowCount}][weight]" id="weight${rowCount}" class="form-control" placeholder="Weight" step="0.01">
                     </div>
                     <div class="col-md-4 mb-3 product-stock-quantity ${productStockQuantityAdditionalClass}">
                         <label class="form-label-title" for="stock_quantity_for_customer${rowCount}">Stock Quantity for Customer</label>

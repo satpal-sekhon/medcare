@@ -11,7 +11,7 @@
                 <div id="thumbnailPreview" class="image-preview row">
                     @if ($product->thumbnail ?? '')
                         <div class="preview-container col-md-3 mt-2">
-                            <img src="{{ asset('storage/'.$product->thumbnail) }}" class="preview-img">
+                            <img src="{{ asset($product->thumbnail) }}" class="preview-img">
                         </div>
                     @endif
                 </div>
@@ -26,7 +26,7 @@
                     @if ($product->thumbnail ?? '')
                         @foreach($product->images as $image)
                         <div class="preview-container col-md-3 mt-2">
-                            <img src="{{ asset('storage/'.$image->path) }}" class="preview-img">
+                            <img src="{{ asset($image->path) }}" class="preview-img">
                             <button type="button" class="btn btn-secondary btn-sm px-2 rounded-pill" data-image-id="{{ $image->id }}"><i class="fa fa-trash"></i></button>
                         </div>
                         @endforeach

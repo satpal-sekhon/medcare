@@ -33,7 +33,7 @@
                                     @endif
 
                                     @if ($primaryCategory->image)
-                                        <img src="{{ asset('storage/' . $primaryCategory->image) }}" alt=""
+                                        <img src="{{ asset($primaryCategory->image) }}" alt=""
                                             style="width: 100px; height: auto;">
                                     @endif
                                 </div>

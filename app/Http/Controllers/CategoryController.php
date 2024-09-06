@@ -46,7 +46,11 @@ class CategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/categories', 'public');
+            $base_image_path = 'uploads/categories/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         Category::create([
@@ -144,11 +148,15 @@ class CategoryController extends Controller
         $imagePath = $category->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-                Storage::disk('public')->delete($imagePath);
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
             }
 
-            $imagePath = $request->file('image')->store('images/categories', 'public');
+            $base_image_path = 'uploads/categories/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         $category->update([
@@ -169,8 +177,8 @@ class CategoryController extends Controller
     {
         $imagePath = $category->image;
 
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
         }
 
         $category->delete();

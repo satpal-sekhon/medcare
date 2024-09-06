@@ -30,6 +30,7 @@ return new class extends Migration
             $table->decimal('customer_price', 8, 2)->default(0.00);
             $table->decimal('vendor_price', 8, 2)->default(0.00);
             $table->decimal('mrp', 8, 2)->default(0.00);
+            $table->decimal('weight', 8, 2)->default(0.00);
             $table->date('expiry_date')->nullable();
             $table->text('short_description')->nullable();
             $table->text('ingredients')->nullable();

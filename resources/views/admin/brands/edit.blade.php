@@ -32,7 +32,7 @@
                                     @endif
 
                                     @if ($brand->image)
-                                        <img src="{{ asset('storage/' . $brand->image) }}" alt=""
+                                        <img src="{{ asset($brand->image) }}" alt=""
                                             style="width: 100px; height: auto;">
                                     @endif
                                 </div>

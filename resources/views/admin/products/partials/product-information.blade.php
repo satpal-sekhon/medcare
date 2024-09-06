@@ -72,7 +72,7 @@
 
             <div class="mb-3 col-md-4">
                 <label class="form-label-title mb-0">Enter Unit</label>
-                <input type="text" name="unit" placeholder="Product Unit" value="{{ $product->unit ?? '' }}" class="form-control" maxlength="100">
+                <input type="text" name="unit" placeholder="Unit" value="{{ $product->unit ?? '' }}" class="form-control" maxlength="100">
             </div>
 
             <div class="mb-3 col-md-4">
@@ -88,13 +88,13 @@
 
 
         <div class="row">
-            <div class="d-flex gap-4 align-items-center col-md-4">
+            <div class="d-flex gap-4 align-items-center col-md-6">
                 <label class="form-label-title">Is prescription required</label>
                 <label class="switch">
                     <input type="checkbox" name="is_prescription_required" value="1" @checked(($product->is_prescription_required ?? 0)==1)><span class="switch-state"></span>
                 </label>
             </div>
-            <div class="d-flex gap-4 align-items-center col-md-4">
+            <div class="d-flex gap-4 align-items-center col-md-6">
                 <label class="form-label-title">Show On Homepage</label>
                 <label class="switch">
                     <input type="checkbox" name="show_on_homepage" value="1" @checked(($product->show_on_homepage ?? 0))><span class="switch-state"></span>
