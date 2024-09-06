@@ -43,7 +43,11 @@ class DiseaseController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/diseases', 'public');
+            $base_image_path = 'uploads/diseases/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         Disease::create([
@@ -112,7 +116,7 @@ class DiseaseController extends Controller
                 'required',
                 'string',
                 'max:100',
-                Rule::unique('primary_categories')->ignore($disease->id)
+                Rule::unique('diseases')->ignore($disease->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
@@ -121,11 +125,15 @@ class DiseaseController extends Controller
         $imagePath = $disease->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-                Storage::disk('public')->delete($imagePath);
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
             }
 
-            $imagePath = $request->file('image')->store('images/diseases', 'public');
+            $base_image_path = 'uploads/diseases/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         $disease->update([
@@ -145,8 +153,8 @@ class DiseaseController extends Controller
     {
         $imagePath = $disease->image;
 
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
         }
 
         $disease->delete();

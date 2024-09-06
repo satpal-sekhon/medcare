@@ -78,7 +78,7 @@
                             orderable: false,
                             render: function(data, type, row) {
                                 let defaultImagePath = 'assets/images/default/category.jpg';
-                                let imageUrl = data ? 'storage/' + data : defaultImagePath;
+                                let imageUrl = data ? data : defaultImagePath;
 
                                 return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image">`;
                             }

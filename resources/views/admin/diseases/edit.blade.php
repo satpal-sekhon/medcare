@@ -33,7 +33,7 @@
                                     @endif
 
                                     @if ($disease->image)
-                                        <img src="{{ asset('storage/' . $disease->image) }}" alt=""
+                                        <img src="{{ asset($disease->image) }}" alt=""
                                             style="width: 100px; height: auto;">
                                     @endif
                                 </div>

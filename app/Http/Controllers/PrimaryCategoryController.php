@@ -43,7 +43,11 @@ class PrimaryCategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/primary-categories', 'public');
+            $base_image_path = 'uploads/primary-categories/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         PrimaryCategory::create([
@@ -121,11 +125,15 @@ class PrimaryCategoryController extends Controller
         $imagePath = $primaryCategory->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-                Storage::disk('public')->delete($imagePath);
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
             }
 
-            $imagePath = $request->file('image')->store('images/primary-categories', 'public');
+            $base_image_path = 'uploads/primary-categories/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         $primaryCategory->update([
@@ -145,8 +153,8 @@ class PrimaryCategoryController extends Controller
     {
         $imagePath = $primaryCategory->image;
 
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
         }
 
         $primaryCategory->delete();

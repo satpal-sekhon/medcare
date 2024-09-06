@@ -190,9 +190,10 @@ class ProductController extends Controller
     {
         $thumbnailPath = $product->thumbnail;
         if ($request->hasFile('thumbnail') && Storage::disk('public')->exists($thumbnailPath)) {
-            if ($thumbnailPath) {
-                Storage::disk('public')->delete($thumbnailPath);
+            if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
+                unlink(public_path($thumbnailPath));
             }
+
             $thumbnailPath = $request->file('thumbnail')->store('images/product-thumbnails', 'public');
         }
 
@@ -228,6 +229,10 @@ class ProductController extends Controller
             foreach($deleted_images as $deleted_image){
                 $product_image = ProductImage::find($deleted_image);
                 if($product_image){
+                    if ($product_image->path && file_exists(public_path($product_image->path))) {
+                        unlink(public_path($product_image->path));
+                    }
+
                     if ($product_image->path && Storage::disk('public')->exists($product_image->path)) {
                         Storage::disk('public')->delete($product_image->path);
                     }
@@ -291,13 +296,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->thumbnail && Storage::disk('public')->exists($product->thumbnail)) {
-            Storage::disk('public')->delete($product->thumbnail);
+        if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
+            unlink(public_path($product->thumbnail));
         }
 
         foreach($product->images as $product_image){
-            if ($product_image && Storage::disk('public')->exists($product_image)) {
-                Storage::disk('public')->delete($product_image);
+            if ($product_image && file_exists(public_path($product_image))) {
+                unlink(public_path($product_image));
             }
         }
 

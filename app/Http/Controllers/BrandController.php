@@ -42,7 +42,11 @@ class BrandController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/brands', 'public');
+            $base_image_path = 'uploads/brands/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         Brand::create([
@@ -121,11 +125,15 @@ class BrandController extends Controller
         $imagePath = $brand->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-                Storage::disk('public')->delete($imagePath);
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
             }
 
-            $imagePath = $request->file('image')->store('images/brands', 'public');
+            $base_image_path = 'uploads/brands/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
         }
 
         $brand->update([
@@ -145,8 +153,8 @@ class BrandController extends Controller
     {
         $imagePath = $brand->image;
 
-        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
-            Storage::disk('public')->delete($imagePath);
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
         }
 
         $brand->delete();
