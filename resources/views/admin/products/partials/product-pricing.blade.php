@@ -29,6 +29,14 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-3 col-md-4">
+                <div class="mb-2">
+                    <label class="form-label-title">Product Weight (in KG)</label>
+                    <div class="form-group">
+                        <input type="number" name="weight" class="form-control" placeholder="Weight" value="{{ $product->weight ?? '' }}" step="0.01">
+                    </div>
+                </div>
+            </div>
             <div class="mb-3 col-md-4 product-stock-quantity d-none">
                 <div class="mb-2">
                     <label class="form-label-title">Stock Quantity for Customer</label>
@@ -46,7 +54,7 @@
                 </div>
             </div>
             <div class="mb-3 col-md-4">
-                <label class="form-label-title col-sm-4 mb-2">Expiry Date</label>
+                <label class="form-label-title mb-2">Expiry Date</label>
                 <input type="date" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date') }}"
                     class="form-control" value="{{ $product->expiry_date ?? '' }}">
             </div>

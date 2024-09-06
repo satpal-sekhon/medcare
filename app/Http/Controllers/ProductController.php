@@ -214,6 +214,7 @@ class ProductController extends Controller
             'customer_price' => $request->input('customer_price'),
             'vendor_price' => $request->input('vendor_price'),
             'mrp' => $request->input('mrp'),
+            'weight' => $request->input('weight') ?? 0,
             'flag' => $request->input('flag'),
             'expiry_date' => $request->input('expiry_date'),
             'short_description' => $request->input('short_description'),
@@ -261,6 +262,7 @@ class ProductController extends Controller
                     'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
                     'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
                     'mrp' => $variant['mrp'],
+                    'weight' => $variant['weight'] ?? 0,
                     'expiry_date' => $variant['expiry_date'],
                 ]);
             }
