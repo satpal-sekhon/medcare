@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Mail\VerifyOtp;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -149,27 +152,30 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-        if ($user){
-            $otp = rand(100000, 999999);
+
+        if ($user) {
+            // Generate a password reset token
+            $token = Str::random(60);
+
+            // Store the token in the password_resets table
+            DB::table('password_reset_tokens')->updateOrInsert(
+                ['email' => $request->email],
+                ['token' => Hash::make($token), 'created_at' => now()]
+            );
+
             $data = [
-                'otp' => $otp,
-                'name' => $user->name,
+                'token' => $token,
                 'email' => $request->email
             ];
 
             try {
-                // Attempt to send OTP email
-                Mail::to($request->email)->send(new VerifyOtp($data));
-                
-                // Update user OTP after sending email
-                $user->update([
-                    'otp' => $otp
-                ]);
-    
+                // Attempt to send the password reset email
+                Mail::to($request->email)->send(new ResetPasswordMail($data));
+
                 // Store email in session
                 $request->session()->put('reset_email', $request->email);
-    
-                return redirect()->route('verify-email');
+
+                return redirect()->route('forgot-password')->with('success', 'Password reset link sent to your email.');
             } catch (\Exception $e) {    
                 // Redirect back with an error message
                 return redirect()->route('forgot-password')->with('error', 'Failed to send email. Please try again later.');
@@ -178,6 +184,7 @@ class AuthController extends Controller
             return redirect()->route('forgot-password')->with('error', 'User not found');
         }
     }
+
 
     public function verify_email()
     {
@@ -206,7 +213,7 @@ class AuthController extends Controller
         }
     }
 
-    public function changePassword()
+    public function reset_password()
     {
         $email = session('reset_email');
 

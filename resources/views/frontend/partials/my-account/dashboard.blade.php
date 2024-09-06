@@ -9,7 +9,7 @@
     </div>
 
     <div class="dashboard-user-name">
-        <h6 class="text-content">Hello, <b class="text-title">Satpal Singh Sekhon</b></h6>
+        <h6 class="text-content">Hello, <b class="text-title">{{ auth()->user()->name }}</b></h6>
         <p class="text-content">From your My Account Dashboard you have the ability to
             view a snapshot of your recent account activity and update your account
             information. Select a link below to view or edit information.</p>

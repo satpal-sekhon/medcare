@@ -31,6 +31,6 @@ class VerifyOtp extends Mailable
      */
     public function build()
     {
-        return $this->view('email.verification');
+        return $this->view('emails.verification');
     }
 }

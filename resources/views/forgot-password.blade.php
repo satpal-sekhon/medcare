@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="input-box">
-                            <form class="row g-4" id="forgot-password-form" action="{{ route('send-otp') }}" method="post">
+                            <form class="row g-4" id="forgot-password-form" action="{{ route('reset-password-mail') }}" method="post">
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
