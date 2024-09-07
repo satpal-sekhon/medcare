@@ -36,12 +36,11 @@
                                     </div>
 
                                     <div class="d-flex gap-2">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal"
-                                            class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
+                                        <a href="{{ route('lab-package.book', $labPackage->id) }}" class="btn theme-bg-color text-white px-3 py-2 fs-6 shadow-sm">
                                             <i class="fa fa-shopping-cart me-2"></i>
                                             Book Package
-                                        </button>
-                                        <a href="{{ route('lab-package.show', $labPackage) }}" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
+                                    </a>
+                                        <a href="{{ route('lab-package.show', $labPackage->id) }}" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                             <i class="fa fa-info-circle me-2"></i>
                                             View Details
                                         </a>
@@ -96,7 +95,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="bookingForm" class="btn btn theme-bg-color text-white">Submit</button>
+                <button type="submit" form="bookingForm" class="btn theme-bg-color text-white">Submit</button>
             </div>
         </div>
     </div>

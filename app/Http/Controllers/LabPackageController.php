@@ -115,6 +115,11 @@ class LabPackageController extends Controller
         return view('frontend.view-lab-package', compact('labPackage'));
     }
 
+    public function book(LabPackage $labPackage)
+    {
+        return view('frontend.book-lab-package', compact('labPackage'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

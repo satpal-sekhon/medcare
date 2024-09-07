@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="note-box product-package">
-                                <button class="btn btn-md bg-dark cart-button text-white w-100">Book Lab Package</button>
+                                <a href="{{ route('lab-package.book', $labPackage->id) }}" class="btn btn-md bg-dark cart-button text-white w-100">Book Lab Package</a>
                             </div>
                         </div>
                     </div>
