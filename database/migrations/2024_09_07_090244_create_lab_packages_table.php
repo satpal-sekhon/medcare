@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('package_title', 100);
             $table->string('image')->nullable();
+            $table->decimal('amount', 8, 2)->default(0.00);
             $table->text('description')->nullable();
             $table->timestamps();
         });

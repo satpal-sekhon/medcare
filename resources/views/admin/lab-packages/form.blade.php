@@ -54,31 +54,42 @@
         <img src="{{ asset($labPackage->image) }}" alt="" style="width: 100px; height: auto;">
         @endif
     </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label-title mb-0">Description</label>
-        <textarea name="description" placeholder="Enter Description" @class([ 'form-control'
-            , 'is-invalid'=> $errors->first('description')])>{{ old('description', ($labPackage->description ?? '')) }}</textarea>
+<div class="mb-3">
+    <label class="form-label-title mb-0">Amount</label>
+    <input type="number" name="amount" placeholder="Enter amount" value="{{ old('fee', ($labPackage->amount ?? '')) }}"
+        @class(['form-control', 'is-invalid'=> $errors->first('amount')]) step="0.01">
 
-        @if ($errors->has('description'))
-        <span class="invalid-feedback">{{ $errors->first('description') }}</span>
-        @endif
-    </div>
+    @if ($errors->has('amount'))
+    <div class="invalid-feedback d-block`">{{ $errors->first('amount') }}</div>
+    @endif
+</div>
 
-    <div class="mb-3">
-        <button type="submit" class="btn w-100 theme-bg-color text-white">Save</button>
-    </div>
+<div class="mb-3">
+    <label class="form-label-title mb-0">Description</label>
+    <textarea name="description" placeholder="Enter Description" @class([ 'form-control'
+        , 'is-invalid'=> $errors->first('description')])>{{ old('description', ($labPackage->description ?? '')) }}</textarea>
 
-    <x-include-plugins :plugins="['chosen']"></x-include-plugins>
+    @if ($errors->has('description'))
+    <span class="invalid-feedback">{{ $errors->first('description') }}</span>
+    @endif
+</div>
+
+<div class="mb-3">
+    <button type="submit" class="btn w-100 theme-bg-color text-white">Save</button>
+</div>
+
+<x-include-plugins :plugins="['chosen']"></x-include-plugins>
 
 
-    @push('scripts')
-    <script>
-        $(function(){
+@push('scripts')
+<script>
+    $(function(){
         $('#tests').chosen({
             width: '100%',
             placeholder_text_multiple: 'Include tests'
         });
     })
-    </script>
-    @endpush
+</script>
+@endpush

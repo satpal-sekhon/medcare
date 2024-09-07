@@ -55,8 +55,9 @@ class DoctorController extends Controller
             'email' => 'required|string|max:100|unique:doctors',
             'phone_number' => 'required|digits:10|unique:doctors',
             'qualification' => 'required|string|max:100',
-            'experience' => 'nullable|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
+            'experience' => 'required|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'fee' => 'required|numeric|between:0,999999.99',
             //'description' => 'required|string'
         ]);
 
@@ -77,6 +78,7 @@ class DoctorController extends Controller
             'qualification' => $request->input('qualification'),
             'experience' => $request->input('experience'),
             'image' => $imagePath,
+            'fee' => $request->input('fee'),
             'description' => $request->input('description'),
         ]);
 
@@ -156,8 +158,9 @@ class DoctorController extends Controller
                 Rule::unique('doctors')->ignore($doctor->id),
             ],
             'qualification' => 'required|string|max:100',
-            'experience' => 'nullable|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
+            'experience' => 'required|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'fee' => 'required|numeric|between:0,999999.99',
             'description' => 'nullable|string'
         ]);
     
@@ -180,6 +183,7 @@ class DoctorController extends Controller
             'qualification' => $request->input('qualification'),
             'experience' => $request->input('experience'),
             'image' => $imagePath,
+            'fee' => $request->input('fee'),
             'description' => $request->input('description'),
         ]);
     

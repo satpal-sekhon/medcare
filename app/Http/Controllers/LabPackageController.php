@@ -14,18 +14,18 @@ class LabPackageController extends Controller
      */
     public function index()
     {
-        $lab_packages = LabPackage::with('labTests')->paginate(12);
+        $labPackages = LabPackage::with('labTests')->paginate(12);
         
         // Get the current and last page numbers
-        $currentPage = $lab_packages->currentPage();
-        $lastPage = $lab_packages->lastPage();
+        $currentPage = $labPackages->currentPage();
+        $lastPage = $labPackages->lastPage();
         
         // Redirect if the current page exceeds the last page
         if ($currentPage > $lastPage) {
             return redirect()->route('lab-test.index', ['page' => $lastPage]);
         }
 
-        return view('frontend.lab-test', compact('lab_packages'));
+        return view('frontend.lab-test', compact('labPackages'));
     }
 
     public function admin_index(){
@@ -53,6 +53,7 @@ class LabPackageController extends Controller
             'tests.*' => 'integer|exists:lab_tests,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
+            'amount' => 'required|numeric|between:0,999999.99',
         ]);
 
         $imagePath = null;
@@ -68,6 +69,7 @@ class LabPackageController extends Controller
             'name' => $request->input('name'),
             'package_title' => $request->input('package_title'),
             'image' => $imagePath,
+            'amount' => $request->input('amount'),
             'description' => $request->input('description')
         ]);
 
@@ -110,7 +112,7 @@ class LabPackageController extends Controller
      */
     public function show(LabPackage $labPackage)
     {
-        //
+        return view('frontend.view-lab-package', compact('labPackage'));
     }
 
     /**
@@ -133,6 +135,7 @@ class LabPackageController extends Controller
             'tests' => 'required|array',
             'tests.*' => 'integer|exists:lab_tests,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'amount' => 'required|numeric|between:0,999999.99',
             'description' => 'nullable|string',
         ]);
 
@@ -154,6 +157,7 @@ class LabPackageController extends Controller
             'name' => $request->input('name'),
             'package_title' => $request->input('package_title'),
             'image' => $imagePath,
+            'amount' => $request->input('amount'),
             'description' => $request->input('description')
         ]);
 

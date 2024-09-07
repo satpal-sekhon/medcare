@@ -6,28 +6,32 @@
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12 wow fadeInUp">
-                @if($lab_packages->count() > 0)
+                @if($labPackages->count() > 0)
                     <div class="row product-list-section">
-                        @foreach($lab_packages as $lab_package)
+                        @foreach($labPackages as $labPackage)
                         <div class="col-md-6 mb-4">
                             <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
                                 <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                     <a href="#" class="d-block">
-                                        <img src="{{ asset($lab_package->image ?? 'assets/images/default/lab.png') }}"
-                                            class="img-fluid lazyload rounded" alt="{{ $lab_package->name }}">
+                                        <img src="{{ asset($labPackage->image ?? 'assets/images/default/lab.png') }}"
+                                            class="img-fluid lazyload rounded" alt="{{ $labPackage->name }}">
                                     </a>
                                 </div>
                                 <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
                                     <div class="product-detail mb-1">
-                                        <h4 class="name fw-bold fs-4 text-dark">{{ $lab_package->name }}</h4>
-                                        <p class="text-muted mb-2">{{ $lab_package->description }}</p>
+                                        <h4 class="name fw-bold fs-4 text-dark">{{ $labPackage->name }}</h4>
+                                        <p class="text-muted mb-2">{{ $labPackage->description }}</p>
                                         <div class="mb-2">
-                                            <strong class="text-great">{{ $lab_package->package_title }}:</strong>
+                                            <strong class="text-great">{{ $labPackage->package_title }}:</strong>
                                             <ul class="list-group-numbered ms-3 mb-0 text-muted">
-                                                @foreach ($lab_package->labTests->take(4) as $lab_test)
-                                                    <li class="d-block">{{ $lab_test->name }}</li>
+                                                @foreach ($labPackage->labTests->take(4) as $labTest)
+                                                    <li class="d-block">{{ $labTest->name }}</li>
                                                 @endforeach
                                             </ul>
+
+                                            @if($labPackage->labTests->count() > 4)
+                                                <a href="{{ route('lab-package.show', $labPackage) }}" class="ms-3 mt-2">View More...</a>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -37,10 +41,10 @@
                                             <i class="fa fa-shopping-cart me-2"></i>
                                             Book Package
                                         </button>
-                                        <button class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
+                                        <a href="{{ route('lab-package.show', $labPackage) }}" class="btn btn-secondary text-white px-3 py-2 fs-6 shadow-sm">
                                             <i class="fa fa-info-circle me-2"></i>
-                                            Show Details
-                                        </button>
+                                            View Details
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +55,7 @@
                     <x-warning-message message="We will launch lab tests shortly!"></x-warning-message>
                 @endif
 
-                {{ $lab_packages->links() }}
+                {{ $labPackages->links() }}
             </div>
         </div>
     </div>

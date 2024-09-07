@@ -14,7 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::paginate(6);
+        $brands = Brand::paginate(16);
 
         // Get the current and last page numbers
         $currentPage = $brands->currentPage();

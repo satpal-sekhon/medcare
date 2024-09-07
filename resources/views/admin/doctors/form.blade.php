@@ -87,6 +87,16 @@
         <div class="invalid-feedback d-block`">{{ $errors->first('experience') }}</div>
         @endif
     </div>
+
+    <div class="col-md-6 mb-2">
+        <label class="form-label-title mb-0">Consultancy Fee</label>
+        <input type="number" name="fee" placeholder="Consultancy Fee" value="{{ old('fee', ($doctor->fee ?? '')) }}"
+            @class(['form-control', 'is-invalid'=> $errors->first('fee')]) step="0.01">
+
+        @if ($errors->has('fee'))
+        <div class="invalid-feedback d-block`">{{ $errors->first('fee') }}</div>
+        @endif
+    </div>
 </div>
 
 <div class="mb-2">
