@@ -13,7 +13,7 @@
             </span>
         </div>
 
-        <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
+        <a href="{{ route('addresses.index') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
             <i data-feather="arrow-left" class="me-2"></i>
             Back to Addresses
         </a>

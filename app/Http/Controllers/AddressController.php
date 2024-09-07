@@ -25,6 +25,11 @@ class AddressController extends Controller
      */
     public function create()
     {
+        $totalAddresses = Address::where('user_id', Auth::id())->count();
+        if($totalAddresses >= 12){
+            return redirect()->route('addresses.index')->with('error', 'You can\'t add more than 12 addresses');
+        }
+
         $states = State::all(); 
         return view('frontend.my-account.addresses.create', compact('states'));
     }

@@ -4,7 +4,11 @@
 @section('my-account')
 <div class="dashboard-address">
     <x-success-message :message="session('success')" />
-    <x-error-message :message="$errors->first('message')" />
+    <x-error-message :message="session('error')" />
+
+    @if($addresses->count() >= 12)
+        <x-warning-message message="You have reached the maximum limit of 12 addresses" />
+    @endif
 
     <div class="title title-flex">
         <div>
@@ -16,10 +20,12 @@
             </span>
         </div>
 
-        <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
-            <i data-feather="plus" class="me-2"></i>
-            Add New Address
-        </a>
+        @if($addresses->count() < 12)
+            <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
+                <i data-feather="plus" class="me-2"></i>
+                Add New Address
+            </a>
+        @endif
     </div>
 
     <div class="row g-sm-4 g-3">
