@@ -36,7 +36,7 @@
                             </div>
                             <div class="send-box pt-4">
                                 <h5>Didn't get the code?
-                                    <a href="javascript:void(0)" class="theme-color fw-bold">Resend It</a>
+                                    <a href="{{ route('resend-verification-email') }}" class="theme-color fw-bold">Resend It</a>
                                 </h5>
                             </div>
 
@@ -48,7 +48,8 @@
         </div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@push('scripts')
 <script>
     $(document).ready(function() {
         $('.otp-field').on('input', function(e) {
@@ -70,4 +71,5 @@
         });
     });
 </script>
+@endpush
 @endsection

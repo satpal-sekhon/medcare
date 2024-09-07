@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -47,7 +48,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('my-account.wishlist');
         Route::get('/orders', [AccountController::class, 'orders'])->name('my-account.orders');
         Route::resources([
-            'addresses' => AccountController::class,
+            '/addresses' => AddressController::class,
         ]);
         Route::get('/addresses', [AccountController::class, 'addresses'])->name('my-account.addresses');
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use App\Mail\VerifyOtp;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\DB;
 
@@ -39,7 +38,15 @@ class AuthController extends Controller
             'terms'        => 'required|in:accepted',
         ]);
 
-        $otp = rand(100000, 999999);
+        try {
+            $user = new User();
+            $otp = $user->sendOtp($request->name, $request->email);
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors([
+                'message' => $e->getMessage(),
+            ]);
+        }
+
         // Save the user
         $user = User::create([
             'name'          => $request->input('name'),
@@ -51,19 +58,42 @@ class AuthController extends Controller
         // Assign role to user
         $user->assignRole('Customer');
 
-        // Send Otp to verify Account
-        $data = [
-            'otp'   => $otp,
-            'name'  => $request->name,
-            'email' => $request->email
-        ];
-
-        Mail::to($request->email)->send(new VerifyOtp($data));
 
         $request->session()->put('reset_email', $request->email);
 
         // Redirect or return a success response
-        return redirect()->route('verify-email')->with('success', 'Please verify your email!');
+        return redirect()->route('verify-email')->with('success', 'Account created successfully! Please check your email to verify your account.');
+    }
+
+    public function resend_verification_email(){
+        try {
+            $email = session('reset_email');
+
+            if (!$email) {
+                return back()->withInput()->withErrors([
+                    'message' => 'No email address found in session.',
+                ]);
+            }
+
+            $user = User::where('email', $email)->first();
+
+            if (!$user) {
+                // Handle the case where no user is found with the email
+                return back()->withInput()->withErrors([
+                    'message' => 'User with the specified email does not exist.',
+                ]);
+            }
+
+            $otp = $user->sendOtp($user->name, $email);
+            $user->otp = $otp;
+            $user->save();
+
+            return redirect()->route('verify-email')->with('success', 'OTP sent successfully.');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors([
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function admin_login(){
@@ -92,17 +122,20 @@ class AuthController extends Controller
 
         // Check if user exists and email is verified
         if (!$user) {
-            return back()->withErrors([
+            return back()->withInput()->withErrors([
                 'message' => 'Invalid login credentials',
             ]);
         } else if(!Hash::check($request->input('password'), $user->password)){
-            return back()->withErrors([
+            return back()->withInput()->withErrors([
                 'message' => 'Invalid login credentials',
             ]);
         } else if(!$user->email_verified_at && !$user->hasRole('Admin')){
-            return back()->withErrors([
-                'message' => 'Email is not verified',
-            ]);
+            // Store email in session in the case if user wants to verify email
+            $request->session()->put('reset_email', $request->email);
+
+            return back()->withInput()->withErrors([
+                'message' => 'Email is not verified. <a href="' . route('resend-verification-email') . '">Click here to verify</a>',
+            ]);            
         } else{
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
@@ -209,7 +242,7 @@ class AuthController extends Controller
             return redirect()->route('login')->with('success', 'Email verified successfully!');
             $request->session()->forget('reset_email');
         } else {
-            return redirect()->back()->with('error', 'This OTP is not valid please enter valid OTP.');
+            return redirect()->back()->with('error', 'Incorrect OTP');
         }
     }
 

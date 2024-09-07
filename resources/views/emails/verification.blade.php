@@ -15,8 +15,7 @@
     </h3>
     <p style="font-size: 15px; color: black; text-align: center;"><strong>One Time Password:</strong> <span style="color: black;">{{ $otp }}</span></p>
     <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: black; font-size: 12px; text-align: center;">
-        @php $date = date('Y'); @endphp
-        © {{ $date }} MEDCARE. All rights reserved.
+        © {{ date('Y') }} HealDeal. All rights reserved.
     </p>
 </body>
 </html>

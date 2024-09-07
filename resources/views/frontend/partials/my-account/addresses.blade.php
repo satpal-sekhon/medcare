@@ -30,20 +30,20 @@
                         <div class="table-responsive address-table">
                             <table class="table">
                                 <tbody>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="2">Rachi Sharma</td>
-                                    </tr>
+                                    </tr> --}}
 
                                     <tr>
                                         <td>Address :</td>
                                         <td>
-                                            <p>Noida, Sector 80, Gautam Budh Nagar, India</p>
+                                            <p>{{ $address->address }}</p>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>Pin Code :</td>
-                                        <td>201309</td>
+                                        <td>{{ $address->pincode }}</td>
                                     </tr>
 
                                     <tr>
@@ -85,7 +85,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <form action="{{ route('addresses.create') }}" id="create-address-form" method="post">
+            <form action="{{ route('addresses.store') }}" id="create-address-form" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-floating mb-4 theme-form-floating">
@@ -102,16 +102,20 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-4 theme-form-floating">
-                                <input type="text" name="city" class="form-control" id="pin"
-                                    placeholder="Enter Pin Code">
+                                <input type="text" name="city" class="form-control" id="city"
+                                    placeholder="Enter City">
                                 <label for="pin">City</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating mb-4 theme-form-floating">
-                                <input type="text" name="state" class="form-control" id="pin"
-                                    placeholder="Enter Pin Code">
-                                <label for="pin">State</label>
+                                <select name="state" class="form-control" id="state">
+                                    <option value="">Select State</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->name }}">{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="state">State</label>
                             </div>
                         </div>
                     </div>
@@ -145,13 +149,16 @@
                         minlength: 2
                     },
                     address: {
-                        required: true
+                        required: true,
+                        maxlength: 255
                     },
                     city: {
-                        required: true
+                        required: true,
+                        maxlength: 75
                     },
                     state: {
-                        required: true
+                        required: true,
+                        maxlength: 75
                     },
                     pincode: {
                         required: true,
@@ -198,19 +205,7 @@
                     }
                 },
                 submitHandler: function(form) {
-                    // Perform AJAX request
-                    $.ajax({
-                        url: $(form).attr('action'),
-                        type: 'POST',
-                        data: $(form).serialize(),
-                        success: function(response) {
-                            $('#create-address-form')[0].reset();
-                        },
-                        error: function(xhr) {
-                            // Handle errors
-                            alert('An error occurred: ' + xhr.responseText);
-                        }
-                    });
+                    form.submit();
                 }
             });
         })

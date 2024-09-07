@@ -10,6 +10,7 @@ Route::get('/signup', [AuthController::class, 'signup'])->name('sign-up');
 Route::post('/create-account', [AuthController::class, 'create_account'])->name('create-account');
 
 Route::get('/verify-email', [AuthController::class, 'verify_email'])->name('verify-email');
+Route::get('/resend-verification-email', [AuthController::class, 'resend_verification_email'])->name('resend-verification-email');
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp');
 
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');

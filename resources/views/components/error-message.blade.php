@@ -1,5 +1,5 @@
 @if ($message)
 <div class="alert alert-danger">
-    {{ $message }}
+    {!! $message !!}
 </div>
 @endif

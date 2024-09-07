@@ -17,6 +17,8 @@
                         <h4>Create New Account</h4>
                     </div>
 
+                    <x-error-message :message="$errors->first('message')" />
+
                     <div class="input-box">
                         <form class="row g-4" method="POST" action="{{ route('create-account') }}">
                             @csrf

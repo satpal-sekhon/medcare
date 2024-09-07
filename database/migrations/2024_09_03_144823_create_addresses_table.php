@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('state', 75)->nullable();
             $table->string('pincode', 6)->nullable();
             $table->boolean('is_default')->default(false);
-            $table->enum('address_type', ['shipping', 'billing'])->default('shipping');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
