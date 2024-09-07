@@ -48,7 +48,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('my-account.addresses') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.addresses')])>
+            <a href="{{ route('addresses.index') }}" @class(["nav-link", 'active' => request()->routeIs('addresses.index')])>
                 <i data-feather="map-pin"></i>
                 Address
             </a>

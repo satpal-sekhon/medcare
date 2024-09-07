@@ -3,145 +3,82 @@
 
 @section('my-account')
 <div class="dashboard-address">
-    <div class="dashboard-address">
-        <div class="title title-flex">
-            <div>
-                <h2>My Address Book</h2>
-                <span class="title-leaf">
-                    <svg class="icon-width bg-gray">
-                        <use xlink:href="{{ asset('assets/svg/leaf.svg#leaf') }}"></use>
-                    </svg>
-                </span>
-            </div>
-    
-            <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
-                <i data-feather="plus" class="me-2"></i>
-                Add New Address
-            </a>
+    <x-success-message :message="session('success')" />
+    <x-error-message :message="$errors->first('message')" />
+
+    <div class="title title-flex">
+        <div>
+            <h2>My Address Book</h2>
+            <span class="title-leaf">
+                <svg class="icon-width bg-gray">
+                    <use xlink:href="{{ asset('assets/svg/leaf.svg#leaf') }}"></use>
+                </svg>
+            </span>
         </div>
-    
-        <div class="row g-sm-4 g-3">
-            @forelse ($addresses as $address)
-                <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6">
-                    <div class="address-box">
-                        <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jack" id="flexRadioDefault2"
-                                    checked>
-                            </div>
-    
-                            <div class="label">
-                                <label>Home</label>
-                            </div>
-    
-                            <div class="table-responsive address-table">
-                                <table class="table">
-                                    <tbody>
-                                        {{-- <tr>
-                                            <td colspan="2">Rachi Sharma</td>
-                                        </tr> --}}
-    
-                                        <tr>
-                                            <td>Address :</td>
-                                            <td>
-                                                <p>{{ $address->address }}</p>
-                                            </td>
-                                        </tr>
-    
-                                        <tr>
-                                            <td>Pin Code :</td>
-                                            <td>{{ $address->pincode }}</td>
-                                        </tr>
-    
-                                        <tr>
-                                            <td>Phone :</td>
-                                            <td>+91874523698</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-    
-                        <div class="button-group">
-                            <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
-                                data-bs-target="#editProfile">
-                                <i data-feather="edit"></i>
-                                Edit
-                            </button>
-                            <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
-                                data-bs-target="#removeProfile">
-                                <i data-feather="trash-2"></i>
-                                Remove
-                            </button>
-                        </div>
+
+        <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
+            <i data-feather="plus" class="me-2"></i>
+            Add New Address
+        </a>
+    </div>
+
+    <div class="row g-sm-4 g-3">
+        @forelse ($addresses as $address)
+        <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6">
+            <div class="address-box">
+                <div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" disabled @checked($address->is_default)>
+                    </div>
+
+                    <div class="label">
+                        <label>{{ $address->address_type }}</label>
+                    </div>
+
+                    <div class="table-responsive address-table">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">{{ $address->name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Address :</td>
+                                    <td>
+                                        <p>{{ $address->address_line_1 }}</p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Pin Code :</td>
+                                    <td>{{ $address->pincode }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Phone :</td>
+                                    <td>{{ $address->phone_number }}
+                                    <td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            @empty
-                <h3 class="text-center">No addresses found.</h3>
-            @endforelse
-        </div>
-    </div>
-    
-    
-    <div class="modal fade theme-modal" id="add-address" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add a new address</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                        <i class="fa-solid fa-xmark"></i>
+
+                <div class="button-group">
+                    <a href="{{ route('addresses.edit', $address->id) }}" class="btn btn-sm add-button w-100">
+                        <i data-feather="edit"></i>
+                        Edit
+                    </a>
+                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal" data-bs-target="#removeProfile">
+                        <i data-feather="trash-2"></i>
+                        Remove
                     </button>
                 </div>
-                <form action="{{ route('addresses.store') }}" id="create-address-form" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-floating mb-4 theme-form-floating">
-                            <input type="text" name="name" class="form-control" id="addressName"
-                                placeholder="Enter First Name">
-                            <label for="addressName">Name</label>
-                        </div>
-    
-                        <div class="form-floating mb-4 theme-form-floating">
-                            <textarea class="form-control" name="address" placeholder="Enter Address" id="address" style="height: 100px"></textarea>
-                            <label for="address">Enter Address</label>
-                        </div>
-    
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-4 theme-form-floating">
-                                    <input type="text" name="city" class="form-control" id="city"
-                                        placeholder="Enter City">
-                                    <label for="pin">City</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating mb-4 theme-form-floating">
-                                    <select name="state" class="form-control" id="state">
-                                        <option value="">Select State</option>
-                                        @foreach ($states as $state)
-                                            <option value="{{ $state->name }}">{{ $state->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="state">State</label>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="form-floating mb-4 theme-form-floating">
-                            <input type="text" name="pincode" class="form-control" id="pin"
-                                placeholder="Enter Pin Code">
-                            <label for="pin">Pin Code</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-md" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn theme-bg-color btn-md text-white">
-                            Save changes
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>    
+        @empty
+        <h3 class="text-center">No addresses found.</h3>
+        @endforelse
+    </div>
 </div>
 @endsection

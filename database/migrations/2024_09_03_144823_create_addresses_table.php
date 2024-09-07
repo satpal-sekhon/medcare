@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name', 25);
-            $table->string('phone', 12);
-            $table->string('address_line1', 150);
-            $table->string('address_line2', 150)->nullable();
+            $table->string('phone_number', 12);
+            $table->string('address_line_1', 150);
+            $table->string('address_line_2', 150)->nullable();
             $table->string('city', 75);
             $table->string('state', 75);
             $table->string('pincode', 6);
