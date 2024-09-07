@@ -4,7 +4,9 @@
 
 @include('frontend.partials.home.header-section')
 
+@if($diseases->count() > 0)
 @include('frontend.partials.home.diseases-section')
+@endif
 
 @include('frontend.partials.home.banner-section')
 
@@ -71,8 +73,11 @@
             </div>
 
             <div class="col-xxl-9 col-xl-8">
-
-                @include('frontend.partials.home.product-section')
+                @if($homepage_products->count())
+                    @include('frontend.partials.home.product-section')
+                @else
+                <x-warning-message message="We will launch products soon!"></x-warning-message>
+                @endif
 
                 <div class="section-b-space">
                     <div class="row g-md-4 g-3">
@@ -98,7 +103,9 @@
     </div>
 </section>
 
-@include('frontend.partials.home.shop-by-category')
+@if($categories->count() > 0)
+    @include('frontend.partials.home.shop-by-category')
+@endif
 
 <img src="{{asset('assets/images/banners/horizontal-2.jpg') }}" class="blur-up lazyload mw-100" alt="">
 
@@ -170,7 +177,9 @@
     </div>
 </section>
 
-@include('frontend.partials.home.shop-by-brands')
+@if($brands->count() > 0)
+    @include('frontend.partials.home.shop-by-brands')
+@endif
 
 <img src="{{asset('assets/images/banners/horizontal-3.png') }}" class="blur-up lazyload mw-100" alt="">
 

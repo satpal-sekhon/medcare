@@ -4,16 +4,11 @@
     </div>
 
     <div class="shop-by-categories-slider overflow-hidden">
-        <div><img src="assets/images/categories/1.png" alt="Image 1" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/2.png" alt="Image 2" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/3.png" alt="Image 3" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/4.png" alt="Image 4" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/5.png" alt="Image 5" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/6.png" alt="Image 6" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/7.png" alt="Image 7" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/8.png" alt="Image 8" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/9.png" alt="Image 9" class="img-fluid p-2"></div>
-        <div><img src="assets/images/categories/10.png" alt="Image 10" class="img-fluid p-2"></div>
+        @foreach ($categories as $category)
+            <div>
+                <img src="{{ asset($category->image ?? 'assets/images/default/category.jpg') }}" alt="{{ $category->name }}" class="img-fluid p-2">
+            </div>
+        @endforeach
     </div>
 </div>
 
