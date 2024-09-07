@@ -19,7 +19,7 @@
     @endif
 </div>
 
-<div class="mb-3 col-md-6">
+<div class="mb-3">
     <label class="form-label-title col-sm-4 mb-0" for="tests">Include Tests</label>
     <select name="tests[]" id="tests" multiple @class(['form-control', 'is-invalid'=> $errors->first('tests')])>
         @foreach ($labTests as $labTest)

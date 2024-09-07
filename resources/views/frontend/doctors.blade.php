@@ -8,15 +8,18 @@
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12 wow fadeInUp">
+                @if ($doctors->count() > 0)
                 <div
                     class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
+
+                    @foreach ($doctors as $doctor)
                     <div>
                         <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
                             <div class="product-header">
                                 <div class="mb-3">
                                     <a href="#">
-                                        <img src="{{ asset('assets/images/default/doctor.png') }}"
-                                            class="img-fluid blur-up lazyload" alt="">
+                                        <img src="{{ asset($doctor->image ?? 'assets/images/default/doctor.png') }}"
+                                            class="img-fluid lazyload" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -24,117 +27,27 @@
                             <div class="product-footer">
                                 <div class="product-detail">
                                     <a href="#">
-                                        <h5 class="fw-bold">Dr. Amit Trivedi (MBBS. MD)</h5>
+                                        <h5 class="fw-bold">{{ $doctor->name }} ({{ $doctor->qualification }})</h5>
                                     </a>
                                     <p class="mt-1"><i class="fa-solid fa-certificate text-info"></i> Medical ID Verified</p>
 					
-                                    <p>General Physian | 7+ Year of Experinece</p>
+                                    <p>
+                                        {{ $doctor->doctorType->name ?? 'Not specified' }} 
+                                        @if($doctor->experience)| {{ $doctor->experience }}+ Year of Experinece @endif
+                                    </p>
                                     
                                     <button class="btn btn-animation w-100" type="submit">Consult Doctor</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="product-header">
-                                <div class="mb-3">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/images/default/doctor.png') }}"
-                                            class="img-fluid blur-up lazyload" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="product-footer">
-                                <div class="product-detail">
-                                    <a href="#">
-                                        <h5 class="fw-bold">Dr. Amit Trivedi (MBBS. MD)</h5>
-                                    </a>
-                                    <p class="mt-1"><i class="fa-solid fa-certificate text-info"></i> Medical ID Verified</p>
-					
-                                    <p>General Physian | 7+ Year of Experinece</p>
-                                    
-                                    <button class="btn btn-animation w-100" type="submit">Consult Doctor</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="product-header">
-                                <div class="mb-3">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/images/default/doctor.png') }}"
-                                            class="img-fluid blur-up lazyload" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="product-footer">
-                                <div class="product-detail">
-                                    <a href="#">
-                                        <h5 class="fw-bold">Dr. Amit Trivedi (MBBS. MD)</h5>
-                                    </a>
-                                    <p class="mt-1"><i class="fa-solid fa-certificate text-info"></i> Medical ID Verified</p>
-					
-                                    <p>General Physian | 7+ Year of Experinece</p>
-                                    
-                                    <button class="btn btn-animation w-100" type="submit">Consult Doctor</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="product-header">
-                                <div class="mb-3">
-                                    <a href="#">
-                                        <img src="{{ asset('assets/images/default/doctor.png') }}"
-                                            class="img-fluid blur-up lazyload" alt="">
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="product-footer">
-                                <div class="product-detail">
-                                    <a href="#">
-                                        <h5 class="fw-bold">Dr. Amit Trivedi (MBBS. MD)</h5>
-                                    </a>
-                                    <p class="mt-1"><i class="fa-solid fa-certificate text-info"></i> Medical ID Verified</p>
-					
-                                    <p>General Physian | 7+ Year of Experinece</p>
-                                    
-                                    <button class="btn btn-animation w-100" type="submit">Consult Doctor</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+            @else 
+                <x-warning-message message="We will add doctors shortly!"></x-warning-message>
+            @endif
 
-                <nav class="custom-pagination">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                                <i class="fa-solid fa-angles-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0)">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">
-                                <i class="fa-solid fa-angles-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                {{ $doctors->links() }}
             </div>
         </div>
     </div>
@@ -187,10 +100,9 @@
                                     <i style="padding: 15px;" class="fa-solid fa-chevron-down"></i>
                                     <select class="form-control" id="doctor_type" name="doctor_type">
                                         <option value="" selected>Select Doctor Type</option>
-                                        <option value="Gynecologist">Gynecologist</option>
-                                        <option value="General Physician">General Physician</option>
-                                        <option value="Radiologist">Radiologist</option>
-                                        <option value="Oncologist">Oncologist</option>
+                                        @foreach ($doctorTypes as $doctorType)
+                                            <option value="{{ $doctorType->id }}">{{ $doctorType->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

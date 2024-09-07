@@ -14,7 +14,20 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        return view('frontend.doctors');
+        $doctors = Doctor::with('doctorType')->paginate(16);
+
+        // Get the current and last page numbers
+        $currentPage = $doctors->currentPage();
+        $lastPage = $doctors->lastPage();
+        
+        // Redirect if the current page exceeds the last page
+        if ($currentPage > $lastPage) {
+            return redirect()->route('doctors.index', ['page' => $lastPage]);
+        }
+
+        $doctorTypes = DoctorType::select('id', 'name')->get();
+
+        return view('frontend.doctors', compact('doctors', 'doctorTypes'));
     }
 
     public function admin_index()
