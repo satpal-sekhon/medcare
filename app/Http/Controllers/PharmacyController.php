@@ -15,10 +15,6 @@ class PharmacyController extends Controller
         return view('frontend.pharmacy');
     }
 
-    public function lab_test(){
-        return view('frontend.lab-test');
-    }
-
     public function admin_index(){
         return view('admin.doctors.index');
     }

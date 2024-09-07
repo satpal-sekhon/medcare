@@ -14,7 +14,18 @@ class LabPackageController extends Controller
      */
     public function index()
     {
-        //
+        $lab_packages = LabPackage::with('labTests')->paginate(12);
+        
+        // Get the current and last page numbers
+        $currentPage = $lab_packages->currentPage();
+        $lastPage = $lab_packages->lastPage();
+        
+        // Redirect if the current page exceeds the last page
+        if ($currentPage > $lastPage) {
+            return redirect()->route('lab-test.index', ['page' => $lastPage]);
+        }
+
+        return view('frontend.lab-test', compact('lab_packages'));
     }
 
     public function admin_index(){

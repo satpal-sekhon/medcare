@@ -14,7 +14,18 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('frontend.brands');
+        $brands = Brand::paginate(6);
+
+        // Get the current and last page numbers
+        $currentPage = $brands->currentPage();
+        $lastPage = $brands->lastPage();
+        
+        // Redirect if the current page exceeds the last page
+        if ($currentPage > $lastPage) {
+            return redirect()->route('brands.index', ['page' => $lastPage]);
+        }
+        
+        return view('frontend.brands', compact('brands'));
     }
 
     public function admin_brands_index(){

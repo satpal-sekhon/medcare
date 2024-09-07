@@ -88,7 +88,7 @@
                                 </button>
                                 <a href="{{ route('home') }}" class="web-logo nav-logo">
                                     <img src="{{ asset('assets/images/logo/1.png') }}"
-                                        class="img-fluid blur-up lazyload" alt="">
+                                        class="img-fluid lazyload" alt="">
                                 </a>
 
                                 <div class="middle-box">
