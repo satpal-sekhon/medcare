@@ -69,7 +69,8 @@
                         <i data-feather="edit"></i>
                         Edit
                     </a>
-                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal" data-bs-target="#removeProfile">
+                    <button class="btn btn-sm add-button w-100" data-route="{{ route('addresses.destroy', $address->id) }}"
+                        data-bs-toggle="modal" data-bs-target="#removeAddress">
                         <i data-feather="trash-2"></i>
                         Remove
                     </button>
@@ -81,4 +82,42 @@
         @endforelse
     </div>
 </div>
+
+{{-- Delete Address Confirmation --}}
+<div class="modal fade theme-modal remove-profile" id="removeAddress" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="remove-box">
+                    <p>Your address can't be recover once you deleted!</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                <form id="deleteAddressForm" action="#" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn theme-bg-color btn-md fw-bold text-light">Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+    $(function() {
+        $('[data-bs-target="#removeAddress"]').on('click', function() {
+            var action = $(this).data('route');
+            $('#deleteAddressForm').attr('action', action);
+        });
+    });
+</script>
+@endpush
 @endsection

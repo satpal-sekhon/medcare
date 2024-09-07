@@ -19,6 +19,7 @@
         </a>
     </div>
     <form action="{{ route('addresses.store') }}" method="post">
+        @csrf
         @include('frontend.partials.my-account.address-form')
     </form>
 </div>

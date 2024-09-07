@@ -175,6 +175,27 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        // Check if the address belongs to the authenticated user
+        if ($address->user_id !== Auth::id()) {
+            return redirect()->route('addresses.index')->with('error', 'You are not authorized to delete this address');
+        }
+
+        // If the address to be deleted is the default address, update another address to be the default
+        if ($address->is_default) {
+            // Find another address to set as default
+            $newDefaultAddress = Address::where('user_id', $address->user_id)
+                ->where('id', '<>', $address->id)
+                ->first();
+
+            // Set the new default address if it exists
+            if ($newDefaultAddress) {
+                $newDefaultAddress->update(['is_default' => true]);
+            }
+        }
+
+        // Delete the address
+        $address->delete();
+
+        return redirect()->route('addresses.index')->with('success', 'Address deleted successfully!');
     }
 }
