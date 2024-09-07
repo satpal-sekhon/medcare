@@ -4,13 +4,15 @@
             <h2>My Address Book</h2>
             <span class="title-leaf">
                 <svg class="icon-width bg-gray">
-                    <use xlink:href="../assets/svg/leaf.svg#leaf"></use>
+                    <use xlink:href="{{ asset('assets/svg/leaf.svg#leaf') }}"></use>
                 </svg>
             </span>
         </div>
 
-        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3" data-bs-toggle="modal"
-            data-bs-target="#add-address"><i data-feather="plus" class="me-2"></i> Add New Address</button>
+        <a href="{{ route('addresses.create') }}" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
+            <i data-feather="plus" class="me-2"></i>
+            Add New Address
+        </a>
     </div>
 
     <div class="row g-sm-4 g-3">
