@@ -14,10 +14,16 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('address', 255);
-            $table->string('city', 75)->nullable();
-            $table->string('state', 75)->nullable();
-            $table->string('pincode', 6)->nullable();
+            $table->string('name', 25);
+            $table->string('phone', 12);
+            $table->string('address_line1', 150);
+            $table->string('address_line2', 150)->nullable();
+            $table->string('city', 75);
+            $table->string('state', 75);
+            $table->string('pincode', 6);
+            $table->string('address_type', 25)->nullable();
+            $table->string('company_name', 75)->nullable();
+            $table->string('instructions', 255)->nullable();
             $table->boolean('is_default')->default(false);
             $table->timestamps();
 

@@ -24,7 +24,7 @@ class AccountController extends Controller
     public function addresses(){
         $addresses = Address::where('user_id', Auth::id())->get();
         $states = State::select('name')->get();
-        return view('frontend.my-account.addresses', compact('addresses', 'states'));
+        return view('frontend.my-account.addresses.index', compact('addresses', 'states'));
     }
 
     public function profile(){

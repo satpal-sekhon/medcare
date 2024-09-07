@@ -44,14 +44,14 @@ Route::resources([
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/my-account')->group(function () {
-        Route::get('/', [AccountController::class, 'user_account'])->name('my-account');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('my-account.wishlist');
-        Route::get('/orders', [AccountController::class, 'orders'])->name('my-account.orders');
         Route::resources([
             '/addresses' => AddressController::class,
         ]);
-        Route::get('/addresses', [AccountController::class, 'addresses'])->name('my-account.addresses');
 
+        Route::get('/', [AccountController::class, 'user_account'])->name('my-account');
+        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('my-account.wishlist');
+        Route::get('/orders', [AccountController::class, 'orders'])->name('my-account.orders');
+        Route::get('/addresses', [AccountController::class, 'addresses'])->name('my-account.addresses');
         Route::get('/profile', [AccountController::class, 'profile'])->name('my-account.profile');
     });
 });

@@ -6,13 +6,13 @@
     </div>
     <div class="profile-box">
         <div class="cover-image">
-            <img src="{{ asset('assets/images/page/cover-img.jpg') }}" class="img-fluid blur-up lazyload" alt="">
+            <img src="{{ asset('assets/images/page/cover-img.jpg') }}" class="img-fluid lazyload" alt="">
         </div>
 
         <div class="profile-contain">
             <div class="profile-image">
                 <div class="position-relative">
-                    <img src="{{ asset('assets/images/default/user.jpg') }}" class="blur-up lazyload update_img" alt="">
+                    <img src="{{ asset('assets/images/default/user.jpg') }}" class="lazyload update_img" alt="">
                     <div class="cover-icon">
                         <i class="fa-solid fa-pen">
                             <input type="file" onchange="readURL(this,0)">

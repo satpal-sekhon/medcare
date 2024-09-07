@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,8 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::all(); 
+        return view('frontend.my-account.addresses.create', compact('states'));
     }
 
     /**
