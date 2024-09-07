@@ -105,4 +105,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('doctor-types', DoctorTypeController::class);
     Route::get('/doctor-types', [DoctorTypeController::class, 'admin_index'])->name('admin.doctor-types.index');
     Route::post('/doctor-types/get', [DoctorTypeController::class, 'get'])->name('doctor-types.get');
+
+    // Doctors routes
+    Route::resource('doctors', DoctorController::class);
+    Route::get('/doctors', [DoctorController::class, 'admin_index'])->name('admin.doctors.index');
+    Route::post('/doctors/get', [DoctorController::class, 'get'])->name('doctors.get');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\DoctorType;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -15,12 +16,18 @@ class DoctorController extends Controller
         return view('frontend.doctors');
     }
 
+    public function admin_index()
+    {
+        return view('admin.doctors.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $doctorTypes = DoctorType::all();
+        return view('admin.doctors.create', compact('doctorTypes'));
     }
 
     /**
@@ -44,7 +51,8 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        $doctorTypes = DoctorType::all();
+        return view('admin.doctors.edit', compact('doctor', 'doctorTypes'));
     }
 
     /**

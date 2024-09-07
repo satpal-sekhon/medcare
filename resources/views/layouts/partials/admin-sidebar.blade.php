@@ -167,7 +167,7 @@
                                 <a href="{{ route('admin.doctor-types.index') }}">Doctor Types</a>
                             </li>
                             <li>
-                                <a href="#">Manage Doctors</a>
+                                <a href="{{ route('admin.doctors.index') }}">Manage Doctors</a>
                             </li>
                         </ul>
                     </li>
