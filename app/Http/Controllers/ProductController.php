@@ -10,7 +10,6 @@ use App\Models\ProductDisease;
 use App\Models\ProductImage;
 use App\Models\ProductVariant;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -189,7 +188,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $thumbnailPath = $product->thumbnail;
-        if ($request->hasFile('thumbnail') && Storage::disk('public')->exists($thumbnailPath)) {
+        if ($request->hasFile('thumbnail')) {
             if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
                 unlink(public_path($thumbnailPath));
             }
@@ -226,16 +225,15 @@ class ProductController extends Controller
         // Deleted product images
         if($request->input('deleted_images')){
             $deleted_images = explode(',', $request->input('deleted_images'));
+
             foreach($deleted_images as $deleted_image){
                 $product_image = ProductImage::find($deleted_image);
+                
                 if($product_image){
                     if ($product_image->path && file_exists(public_path($product_image->path))) {
                         unlink(public_path($product_image->path));
                     }
 
-                    if ($product_image->path && Storage::disk('public')->exists($product_image->path)) {
-                        Storage::disk('public')->delete($product_image->path);
-                    }
                     $product_image->delete();
                 }
             }

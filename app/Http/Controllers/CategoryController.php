@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\PrimaryCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {

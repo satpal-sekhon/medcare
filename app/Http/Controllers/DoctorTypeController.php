@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PrimaryCategory;
+use App\Models\DoctorType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class PrimaryCategoryController extends Controller
+class DoctorTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class PrimaryCategoryController extends Controller
         //
     }
 
-    public function admin_primary_categories_index()
+    public function admin_index()
     {
-        return view('admin.primary-categories.index');
+        return view('admin.doctor-types.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PrimaryCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.primary-categories.create');
+        return view('admin.doctor-types.create');
     }
 
     /**
@@ -35,35 +35,34 @@ class PrimaryCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100|unique:primary_categories',
+            'name' => 'required|string|max:75|unique:doctor_types',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $base_image_path = 'uploads/primary-categories/';
+            $base_image_path = 'uploads/doctor-types/';
             $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path($base_image_path), $filename);
                     
             $imagePath = $base_image_path.$filename;
         }
 
-        PrimaryCategory::create([
+        DoctorType::create([
             'name' => $request->input('name'),
-            'description' => $request->input('description'),
             'image' => $imagePath,
-            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
+            'description' => $request->input('description')
         ]);
 
-        return redirect()->route('admin.primary-categories.index')->with('success', 'Primary category saved successfully!');
+        return redirect()->route('admin.doctor-types.index')->with('success', 'Doctor type added successfully!');
     }
 
     public function get(Request $request)
     {
         $columns = ['id', 'name', 'image'];
 
-        $query = PrimaryCategory::query();
+        $query = DoctorType::query();
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -92,7 +91,7 @@ class PrimaryCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PrimaryCategory $primaryCategory)
+    public function show(DoctorType $doctorType)
     {
         //
     }
@@ -100,67 +99,66 @@ class PrimaryCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PrimaryCategory $primaryCategory)
+    public function edit(DoctorType $doctorType)
     {
-        return view('admin.primary-categories.edit', compact('primaryCategory'));
+        return view('admin.doctor-types.edit', compact('doctorType'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PrimaryCategory $primaryCategory)
+    public function update(Request $request, DoctorType $doctorType)
     {
         $request->validate([
             'name' => [
                 'required',
                 'string',
                 'max:100',
-                Rule::unique('primary_categories')->ignore($primaryCategory->id)
+                Rule::unique('primary_categories')->ignore($doctorType->id)
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
 
-        $imagePath = $primaryCategory->image;
+        $imagePath = $doctorType->image;
 
         if ($request->hasFile('image')) {
             if ($imagePath && file_exists(public_path($imagePath))) {
                 unlink(public_path($imagePath));
             }
 
-            $base_image_path = 'uploads/primary-categories/';
+            $base_image_path = 'uploads/doctor-types/';
             $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path($base_image_path), $filename);
                     
             $imagePath = $base_image_path.$filename;
         }
 
-        $primaryCategory->update([
+        $doctorType->update([
             'name' => $request->input('name'),
             'image' => $imagePath,
-            'description' => $request->input('description'),
-            'show_on_homepage' => $request->input('show_on_homepage') ?? 0
+            'description' => $request->input('description')
         ]);
 
-        return redirect()->route('admin.primary-categories.index')->with('success', 'Primary Category updated successfully!');
+        return redirect()->route('admin.doctor-types.index')->with('success', 'Doctor type updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PrimaryCategory $primaryCategory)
+    public function destroy(DoctorType $doctorType)
     {
-        $imagePath = $primaryCategory->image;
+        $imagePath = $doctorType->image;
 
         if ($imagePath && file_exists(public_path($imagePath))) {
             unlink(public_path($imagePath));
         }
 
-        $primaryCategory->delete();
+        $doctorType->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Primary category deleted successfully.'
+            'message' => 'Doctor type deleted successfully.'
         ]);
     }
 }

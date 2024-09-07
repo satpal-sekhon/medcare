@@ -158,12 +158,20 @@
                     </li>
                     
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-nurse-line"></i>
                             <span>Doctors</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('admin.doctor-types.index') }}">Doctor Types</a>
+                            </li>
+                            <li>
+                                <a href="#">Manage Doctors</a>
+                            </li>
+                        </ul>
                     </li>
-                    
+
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <i class="ri-store-2-line"></i>

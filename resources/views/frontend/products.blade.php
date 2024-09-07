@@ -12,7 +12,7 @@
                             <h3><i class="fa-solid fa-arrow-left"></i> Back</h3>
                         </div>
 
-                        <div class="filter-category">
+                        {{-- <div class="filter-category">
                             <div class="filter-title">
                                 <h2>Filters</h2>
                                 <a href="javascript:void(0)">Clear All</a>
@@ -34,7 +34,7 @@
                                     <a href="javascript:void(0)">Meat</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
 
                         <div class="accordion custom-accordion" id="accordionExample">
                             <div class="accordion-item">
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
 
-                            <div class="accordion-item">
+                            {{-- <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingSix">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseSix">
@@ -351,7 +351,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingFour">

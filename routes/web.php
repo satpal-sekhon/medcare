@@ -11,6 +11,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorTypeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
@@ -99,4 +100,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
     Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
+
+    // Doctor types routes
+    Route::resource('doctor-types', DoctorTypeController::class);
+    Route::get('/doctor-types', [DoctorTypeController::class, 'admin_index'])->name('admin.doctor-types.index');
+    Route::post('/doctor-types/get', [DoctorTypeController::class, 'get'])->name('doctor-types.get');
 });
