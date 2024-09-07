@@ -50,7 +50,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('brands.get') }}",
+                        url: "{{ route('lab-packages.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -72,10 +72,10 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/brand.png';
+                                let defaultImagePath = 'assets/images/default/lab.png';
                                 let imageUrl = data ? data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Brand Image" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Lab Package" class="dt-image">`;
                             }
                         },
                         {

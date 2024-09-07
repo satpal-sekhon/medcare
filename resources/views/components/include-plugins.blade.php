@@ -37,7 +37,7 @@
 @endpush
 @endif
 
-@if($hasPlugin('select2'))
+@if($hasPlugin('chosen'))
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
 @endpush
@@ -47,9 +47,6 @@
 @endif
 
 @if($hasPlugin('slickSlider'))
-@push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/chosen.min.css') }}" />
-@endpush
 @push('scripts')
 <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
 <script src="{{ asset('assets/js/slick/slick-animation.min.js') }}"></script>

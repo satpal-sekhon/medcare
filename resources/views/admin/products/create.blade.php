@@ -30,7 +30,7 @@
 </div>
 
 
-<x-include-plugins :plugins="['ckEditor', 'jQueryValidate', 'select2']"></x-include-plugins>
+<x-include-plugins :plugins="['ckEditor', 'jQueryValidate', 'chosen']"></x-include-plugins>
 
 @include('admin.products.partials.validate-product')
 

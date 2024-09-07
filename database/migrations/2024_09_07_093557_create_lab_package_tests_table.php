@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('lab_package_tests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('package_id');
-            $table->unsignedBigInteger('test_id');
+            $table->unsignedBigInteger('lab_package_id');
+            $table->unsignedBigInteger('lab_test_id');
             $table->timestamps();
 
-            $table->foreign('package_id')->references('id')->on('lab_packages')->onDelete('cascade');
-            $table->foreign('test_id')->references('id')->on('lab_tests')->onDelete('cascade');
+            $table->foreign('lab_package_id')->references('id')->on('lab_packages')->onDelete('cascade');
+            $table->foreign('lab_test_id')->references('id')->on('lab_tests')->onDelete('cascade');
 
             // Adding indexes
-            $table->index('package_id');
-            $table->index('test_id');
+            $table->index('lab_package_id');
+            $table->index('lab_test_id');
         });
     }
 

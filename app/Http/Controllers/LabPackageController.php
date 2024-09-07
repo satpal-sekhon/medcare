@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\LabPackage;
+use App\Models\LabTest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LabPackageController extends Controller
 {
@@ -24,7 +26,8 @@ class LabPackageController extends Controller
      */
     public function create()
     {
-        return view('admin.lab-packages.create');
+        $labTests = LabTest::all();
+        return view('admin.lab-packages.create', compact('labTests'));
     }
 
     /**
@@ -32,7 +35,63 @@ class LabPackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'package_title' => 'required|string|max:100',
+            'tests' => 'required|array',
+            'tests.*' => 'integer|exists:lab_tests,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $base_image_path = 'uploads/lab-packages/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
+        }
+
+        $labPackage = LabPackage::create([
+            'name' => $request->input('name'),
+            'package_title' => $request->input('package_title'),
+            'image' => $imagePath,
+            'description' => $request->input('description')
+        ]);
+
+        $labPackage->labTests()->sync($request->input('tests'));
+
+        return redirect()->route('admin.lab-packages.index')->with('success', 'Lab package added successfully!');
+    }
+
+    public function get(Request $request){
+        $columns = ['id', 'name', 'image'];
+
+        $query = LabPackage::query();
+
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count();
+
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
     }
 
     /**
@@ -48,7 +107,8 @@ class LabPackageController extends Controller
      */
     public function edit(LabPackage $labPackage)
     {
-        return view('admin.lab-packages.edit', compact('labPackage'));
+        $labTests = LabTest::all();
+        return view('admin.lab-packages.edit', compact('labPackage', 'labTests'));
     }
 
     /**
@@ -56,7 +116,39 @@ class LabPackageController extends Controller
      */
     public function update(Request $request, LabPackage $labPackage)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'package_title' => 'required|string|max:100',
+            'tests' => 'required|array',
+            'tests.*' => 'integer|exists:lab_tests,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string',
+        ]);
+
+        $imagePath = $labPackage->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
+            }
+
+            $base_image_path = 'uploads/lab-packages/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
+        }
+
+        $labPackage->update([
+            'name' => $request->input('name'),
+            'package_title' => $request->input('package_title'),
+            'image' => $imagePath,
+            'description' => $request->input('description')
+        ]);
+
+        $labPackage->labTests()->sync($request->input('tests'));
+
+        return redirect()->route('admin.lab-packages.index')->with('success', 'Lab package updated successfully!');
     }
 
     /**
@@ -64,6 +156,17 @@ class LabPackageController extends Controller
      */
     public function destroy(LabPackage $labPackage)
     {
-        //
+        $imagePath = $labPackage->image;
+
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
+        }
+
+        $labPackage->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab package deleted successfully.'
+        ]);
     }
 }
