@@ -27,8 +27,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Primary Category</th>
+                                        <th>Doctor Type</th>
                                         <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
                                         <th>Image</th>
                                         <th>Option</th>
                                     </tr>
@@ -51,7 +53,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('categories.get') }}",
+                        url: "{{ route('doctors.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -65,12 +67,20 @@
                             }
                         },
                         {
-                            data: 'primary_category_name',
-                            name: 'primary_category_name'
+                            data: 'doctor_type',
+                            name: 'doctor_type'
                         },
                         {
                             data: 'name',
                             name: 'name'
+                        },
+                        {
+                            data: 'email',
+                            name: 'email'
+                        },
+                        {
+                            data: 'phone_number',
+                            name: 'phone_number'
                         },
                         {
                             data: 'image',

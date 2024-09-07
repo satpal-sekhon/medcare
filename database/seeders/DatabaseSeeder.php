@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             DiseaseSeeder::class,
             BrandSeeder::class,
-            StateSeeder::class
+            StateSeeder::class,
+            LabTestsSeeder::class,
+            DoctorTypeSeeder::class
         ]);
     }
 }
