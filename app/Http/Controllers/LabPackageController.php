@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pharmacy;
+use App\Models\LabPackage;
 use Illuminate\Http\Request;
 
-class PharmacyController extends Controller
+class LabPackageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('frontend.pharmacy');
-    }
-
-    public function lab_test(){
-        return view('frontend.lab-test');
+        //
     }
 
     public function admin_index(){
-        return view('admin.doctors.index');
+        return view('admin.lab-packages.index');
     }
 
     /**
@@ -28,7 +24,7 @@ class PharmacyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.lab-packages.create');
     }
 
     /**
@@ -42,7 +38,7 @@ class PharmacyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pharmacy $pharmacy)
+    public function show(LabPackage $labPackage)
     {
         //
     }
@@ -50,15 +46,15 @@ class PharmacyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pharmacy $pharmacy)
+    public function edit(LabPackage $labPackage)
     {
-        //
+        return view('admin.lab-packages.edit', compact('labPackage'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pharmacy $pharmacy)
+    public function update(Request $request, LabPackage $labPackage)
     {
         //
     }
@@ -66,7 +62,7 @@ class PharmacyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pharmacy $pharmacy)
+    public function destroy(LabPackage $labPackage)
     {
         //
     }

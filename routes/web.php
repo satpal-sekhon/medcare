@@ -13,6 +13,8 @@ use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorTypeController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\LabPackageController;
+use App\Http\Controllers\LabTestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
@@ -110,4 +112,19 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('doctors', DoctorController::class);
     Route::get('/doctors', [DoctorController::class, 'admin_index'])->name('admin.doctors.index');
     Route::post('/doctors/get', [DoctorController::class, 'get'])->name('doctors.get');
+
+    // Pharmacy store routes
+    Route::resource('pharmacy-stores', PharmacyController::class);
+    Route::get('/pharmacy-stores', [PharmacyController::class, 'admin_index'])->name('admin.pharmacy-stores.index');
+    Route::post('/pharmacy-stores/get', [PharmacyController::class, 'get'])->name('pharmacy-stores.get');
+
+    // Lab tests routes
+    Route::resource('lab-tests', LabTestController::class);
+    Route::get('/lab-tests', [LabTestController::class, 'admin_index'])->name('admin.lab-tests.index');
+    Route::post('/lab-tests/get', [LabTestController::class, 'get'])->name('lab-tests.get');
+
+    // Lab packages routes
+    Route::resource('lab-packages', LabPackageController::class);
+    Route::get('/lab-packages', [LabPackageController::class, 'admin_index'])->name('admin.lab-packages.index');
+    Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-packages.get');
 });

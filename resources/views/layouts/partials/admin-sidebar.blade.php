@@ -153,7 +153,7 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="#">
                             <i class="ri-list-unordered"></i>
-                            <span>Orders Section</span>
+                            <span>Orders</span>
                         </a>
                     </li>
                     
@@ -171,19 +171,27 @@
                             </li>
                         </ul>
                     </li>
-
+                    
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.pharmacy-stores.index') }}">
                             <i class="ri-store-2-line"></i>
                             <span>Pharmacy Stores</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <i class="ri-hospital-line"></i>
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-nurse-line"></i>
                             <span>Lab Packages</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('admin.lab-tests.index') }}">Lab Tests</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.lab-packages.index') }}">Lab Packages</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
