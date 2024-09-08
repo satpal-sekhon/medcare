@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             RoleAndPermissionSeeder::class,
             UserSeeder::class,
             //CategorySeeder::class,
-            DiseaseSeeder::class,
-            BrandSeeder::class,
+            //DiseaseSeeder::class,
+            //BrandSeeder::class,
             StateSeeder::class,
             LabTestsSeeder::class,
             DoctorTypeSeeder::class
