@@ -31,7 +31,7 @@
 </div>
 
 
-<x-include-plugins :plugins="['ckEditor', 'jQueryValidate', 'chosen', 'datePicker']"></x-include-plugins>
+<x-include-plugins :plugins="['contentEditor', 'jQueryValidate', 'chosen', 'datePicker']"></x-include-plugins>
 
 @include('admin.products.partials.validate-product')
 

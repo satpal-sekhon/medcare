@@ -196,9 +196,10 @@ class ProductController extends Controller
     {
         $thumbnailPath = $product->thumbnail;
         if ($request->hasFile('thumbnail')) {
-            if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
+            // Do not remove the product thumbnail if the product image needs to be shown after the product has been deleted
+            /* if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
                 unlink(public_path($thumbnailPath));
-            }
+            } */
 
             $base_image_path = 'uploads/product-thumbnails/';
             $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
@@ -308,9 +309,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
+        // Do not remove the product thumbnail if the product image needs to be shown after the product has been deleted
+        /* if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
             unlink(public_path($product->thumbnail));
-        }
+        } */
 
         foreach($product->images as $product_image){
             if ($product_image && file_exists(public_path($product_image))) {

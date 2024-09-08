@@ -72,10 +72,10 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/lab.png';
+                                let defaultImagePath = 'assets/images/default/lab.jpg';
                                 let imageUrl = data ? data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Lab Package" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Lab Package" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
                             }
                         },
                         {

@@ -8,23 +8,19 @@
 @endpush
 @endif
 
-@if($hasPlugin('ckEditor'))
+@if($hasPlugin('contentEditor'))
 @push('styles')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-@endpush
+<link href="{{ asset('assets/css/summernote/summernote-bs4.min.css') }}" rel="stylesheet">
 
+@endpush
 @push('scripts')
-<script src="{{ asset('assets/js/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/js/summernote/summernote-bs4.min.js') }}"></script>
 <script>
     $(function(){
-        ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            // Ensure CKEditor instance is available
-            window.editorInstance = editor;
-        })
-        .catch(error => {
-            console.error(error);
+        $('#editor').summernote({
+            height: 400, // Set editor height
+            minHeight: null, // Set minimum height of editor
+            maxHeight: null, // Set maximum height of editor
         });
     })
 </script>

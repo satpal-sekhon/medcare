@@ -24,3 +24,16 @@
         </div>
     </div>
 </div>
+
+
+@push('scripts')
+<script>
+    $(function(){
+        $('[name="short_description"]').summernote({
+            height: 150, // Set editor height
+            minHeight: null, // Set minimum height of editor
+            maxHeight: null, // Set maximum height of editor
+        });
+    })
+</script>
+@endpush

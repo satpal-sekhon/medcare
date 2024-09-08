@@ -1,5 +1,11 @@
 @push('scripts')
     <script>
+         $.validator.addMethod('summernoteRequired', function(value, element) {
+                console.log('element',element)
+                var editorId = $(element).attr('id');
+                return !$('#' + editorId).summernote('isEmpty');
+            }, 'This field is required.');
+
         $(function() {
             initializeDatepickers();
 
@@ -10,16 +16,9 @@
                     $('.product-stock-quantity').addClass('d-none')
                 }
             })
+            
+           
 
-            // Add custom validation method for Chosen
-            $.validator.addMethod("ckeditorRequired", function(value, element) {
-                // Ensure CKEditor instance is available
-                if (window.editorInstance) {
-                    var editor = window.editorInstance;
-                    return editor.getData().trim() !== '';
-                }
-                return false;
-            }, "This field is required.");
 
             let deletedProductImages = [];
             $('[data-image-id]').click(function(){
@@ -68,14 +67,16 @@
                             }
                         }
                     },
-                    /* composition: "required",
-                    ingredients: "required", */
-                    short_description: "required",
+                    // composition: "required",
+                    // ingredients: "required",
+                    short_description: {
+                        summernoteRequired: true
+                    },
                     "diseases[]": "required",
                     customer_price: "required",
                     vendor_price: "required",
                     description: {
-                        ckeditorRequired: true
+                        summernoteRequired: true
                     },
                 },
                 errorPlacement: function(error, element) {

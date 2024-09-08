@@ -67,10 +67,10 @@
                             name: 'thumbnail',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/product.png';
+                                let defaultImagePath = 'assets/images/default/product.jpg';
                                 let imageUrl = data ? data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Product Image" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Product Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
                             }
                         },
                         {

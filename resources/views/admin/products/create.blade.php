@@ -21,6 +21,8 @@
 
                 @include('admin.products.partials.product-description')
 
+                @include('admin.products.partials.product-specifications')
+
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary w-25">Save Product</button>
                 </div>
@@ -30,7 +32,7 @@
 </div>
 
 
-<x-include-plugins :plugins="['ckEditor', 'jQueryValidate', 'chosen', 'datePicker']"></x-include-plugins>
+<x-include-plugins :plugins="['contentEditor', 'jQueryValidate', 'chosen', 'datePicker']"></x-include-plugins>
 
 @include('admin.products.partials.validate-product')
 
