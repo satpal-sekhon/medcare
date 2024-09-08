@@ -68,7 +68,7 @@ class CategoryController extends Controller
         $columns = ['name', 'image', 'primary_category_name'];
 
         $query = Category::query()
-            ->select('categories.id', 'categories.name', 'categories.image')
+            ->select('categories.id', 'categories.name', 'categories.show_on_homepage', 'categories.image')
             ->leftJoin('primary_categories', 'categories.primary_category_id', '=', 'primary_categories.id')
             ->addSelect('primary_categories.name as primary_category_name');
 

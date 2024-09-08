@@ -29,6 +29,7 @@
                                         <th>#</th>
                                         <th>Primary Category</th>
                                         <th>Name</th>
+                                        <th>Flag</th>
                                         <th>Image</th>
                                         <th>Option</th>
                                     </tr>
@@ -71,6 +72,18 @@
                         {
                             data: 'name',
                             name: 'name'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                if(!row.show_on_homepage){
+                                    return ``;
+                                }
+
+                                return `<span class="badge badge-success">Show On Homepage</span>`;
+                            }
                         },
                         {
                             data: 'image',
