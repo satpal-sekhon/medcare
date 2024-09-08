@@ -70,7 +70,7 @@
                                 let defaultImagePath = 'assets/images/default/product.png';
                                 let imageUrl = data ? data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Product Image" class="dt-image">`;
                             }
                         },
                         {

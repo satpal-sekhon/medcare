@@ -48,7 +48,11 @@ class ProductController extends Controller
     {
         $thumbnailPath = null;
         if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('images/product-thumbnails', 'public');
+            $base_image_path = 'uploads/product-thumbnails/';
+            $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
+            $request->file('thumbnail')->move(public_path($base_image_path), $filename);
+                    
+            $thumbnailPath = $base_image_path.$filename;
         }
 
         $product = Product::create([
@@ -120,7 +124,7 @@ class ProductController extends Controller
     public function get(Request $request)
     {
         // Define the columns to be used for ordering
-        $columns = ['category_name', 'image', 'primary_category_name'];
+        $columns = ['id', 'category_name', 'image', 'primary_category_name'];
 
         // Create the initial query with necessary joins and selects
         $query = Product::query()
@@ -193,7 +197,11 @@ class ProductController extends Controller
                 unlink(public_path($thumbnailPath));
             }
 
-            $thumbnailPath = $request->file('thumbnail')->store('images/product-thumbnails', 'public');
+            $base_image_path = 'uploads/product-thumbnails/';
+            $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
+            $request->file('thumbnail')->move(public_path($base_image_path), $filename);
+                    
+            $thumbnailPath = $base_image_path.$filename;
         }
 
         // Update product attributes
