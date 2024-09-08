@@ -35,11 +35,12 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->text('ingredients')->nullable();
             $table->longtext('description')->nullable();
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
 
-            $table->foreign('primary_category_id')->references('id')->on('primary_categories')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->foreign('primary_category_id')->references('id')->on('primary_categories')->onDelete('set null');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
 
             // Adding indexes
             $table->index('primary_category_id');

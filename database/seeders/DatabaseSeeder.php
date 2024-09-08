@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleAndPermissionSeeder::class,
             UserSeeder::class,
-            //CategorySeeder::class,
-            //DiseaseSeeder::class,
-            //BrandSeeder::class,
+            CategorySeeder::class,
+            DiseaseSeeder::class,
+            BrandSeeder::class,
             StateSeeder::class,
             LabTestsSeeder::class,
             DoctorTypeSeeder::class

@@ -1,6 +1,8 @@
 @push('scripts')
     <script>
         $(function() {
+            initializeDatepickers();
+
             $('[name="stock_type"]').change(function(){
                 if($(this).val()=='With Stock'){
                     $('.product-stock-quantity').removeClass('d-none');
@@ -66,8 +68,8 @@
                             }
                         }
                     },
-                    composition: "required",
-                    ingredients: "required",
+                    /* composition: "required",
+                    ingredients: "required", */
                     short_description: "required",
                     "diseases[]": "required",
                     customer_price: "required",

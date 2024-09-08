@@ -55,13 +55,8 @@
                     <option value="Without Stock" @selected(($product->stock_type ?? '') == 'Without Stock')>Without Stock</option>
                 </select>
             </div>
-
+            
             <div class="mb-3 col-md-6">
-                <label class="form-label-title mb-0">Product Name</label>
-                <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
-            </div>
-
-            <div class="mb-3 col-md-4">
                 <label for="product_type" class="form-label-title mb-0">Product Type</label>
                 <select name="product_type" id="product_type" class="form-control">
                     <option value="">Select Product Type</option>
@@ -70,12 +65,18 @@
                 </select>
             </div>
 
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-12">
+                <label class="form-label-title mb-0">Product Name</label>
+                <input type="text" name="name" placeholder="Product Name" value="{{ $product->name ?? '' }}" class="form-control" maxlength="100">
+            </div>
+
+
+            <div class="mb-3 col-md-6">
                 <label class="form-label-title mb-0">Enter Unit</label>
                 <input type="text" name="unit" placeholder="Unit" value="{{ $product->unit ?? '' }}" class="form-control" maxlength="100">
             </div>
 
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-6">
                 <label for="flag" class="form-label-title mb-0">Select Flag</label>
                 <select name="flag" id="flag" class="form-control">
                     <option value="">Select Flag</option>

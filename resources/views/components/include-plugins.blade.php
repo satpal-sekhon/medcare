@@ -52,3 +52,23 @@
 <script src="{{ asset('assets/js/slick/slick-animation.min.js') }}"></script>
 @endpush
 @endif
+
+@if($hasPlugin('datePicker'))
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/flatpickr/flatpickr.min.css') }}">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('assets/js/flatpickr/flatpickr.min.js') }}"></script>
+<script>
+    function initializeDatepickers() {
+            $('.datepicker').each(function() {
+                flatpickr(this, {
+                    dateFormat: "Y-m-d",
+                    minDate: "today"
+                });
+            });
+        }
+</script>
+@endpush
+@endif

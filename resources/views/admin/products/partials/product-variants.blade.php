@@ -48,8 +48,8 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label-title" for="expiryDate{{$key}}">Expiry Date</label>
-                    <input type="date" name="variants[{{$key}}][expiry_date]" id="expiryDate{{$key}}"
-                        class="form-control" placeholder="Enter expiry date" value="{{ $variant->expiry_date }}">
+                    <input type="text" name="variants[{{$key}}][expiry_date]" id="expiryDate{{$key}}"
+                        class="form-control datepicker" placeholder="Enter expiry date" value="{{ $variant->expiry_date }}">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label-title">&nbsp;</label>
@@ -77,9 +77,8 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-            let rowCount = "{{ $key ?? 0 }}";
-
-            $('#addVariantBtn').click(function() {
+        let rowCount = "{{ $key ?? 0 }}";
+        $('#addVariantBtn').click(function() {
                 let productStockQuantityAdditionalClass = `d-none`;
 
                 if($('[name="stock_type"]').val() == 'With Stock'){
@@ -119,7 +118,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title" for="expiryDate${rowCount}">Expiry Date</label>
-                        <input type="date" name="variants[${rowCount}][expiry_date]" id="expiryDate${rowCount}" class="form-control" placeholder="Enter expiry date">
+                        <input type="text" name="variants[${rowCount}][expiry_date]" id="expiryDate${rowCount}" class="form-control datepicker" placeholder="Enter expiry date">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label-title">&nbsp;</label>
@@ -130,6 +129,7 @@
                 </div>`;
 
                 $('#variantsContainer').append(newRow);
+                initializeDatepickers();
 
                 // Add validation rules for the new fields
                 $('#productForm').validate().settings.rules[`variants[${rowCount}][variant_name]`] = "required";

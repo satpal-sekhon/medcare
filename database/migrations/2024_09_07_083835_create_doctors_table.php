@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('doctor_type_id')->references('id')->on('doctor_types')->onDelete('cascade');
+            $table->foreign('doctor_type_id')->references('id')->on('doctor_types')->onDelete('set null');
 
             // Adding index on primary_category_id
             $table->index('doctor_type_id');
