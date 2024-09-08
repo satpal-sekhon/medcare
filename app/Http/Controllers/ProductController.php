@@ -167,7 +167,7 @@ class ProductController extends Controller
         // Apply search filter if present
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
-            $query->where('categories.name', 'like', "%{$search}%");
+            $query->where('products.name', 'like', "%{$search}%");
         }
 
         // Total records count before filtering
