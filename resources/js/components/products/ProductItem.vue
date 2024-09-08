@@ -7,7 +7,7 @@
                 </a>
                 <ul class="product-option">
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                        <a :href="product.link">
                             <i data-feather="eye"></i>
                         </a>
                     </li>
@@ -24,18 +24,19 @@
                 </a>
                 <h5 class="sold text-content">
                     <span class="theme-color price">₹{{ product.price }}</span>
-                    <del>{{ product.originalPrice }}</del>
+                    <del>₹{{ product.originalPrice }}</del>
                 </h5>
                 <div class="product-rating mt-sm-2 mt-1">
-                    <ul class="rating">
+                    <!-- <ul class="rating">
                         <li v-for="star in product.rating" :key="star">
                             <i data-feather="star" :class="{ 'fill': star <= product.ratingValue }"></i>
                         </li>
-                    </ul>
-                    <h6 class="theme-color">In Stock</h6>
+                    </ul> -->
+                    <h6 class="theme-color" v-if="(product.stock_type==='With Stock' && product.available_quantity > 0) || product.stock_type==='Without Stock'">In Stock</h6>
+                    <h6 class="text-danger" v-else>Out of Stock</h6>
                 </div>
                 <div class="add-to-cart-box">
-                    <button class="btn btn-add-cart addcart-button" @click="changeQuantity(1)">
+                    <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled" @click="changeQuantity(1)">
                         Add
                         <span class="add-icon">
                             <i class="fa-solid fa-plus"></i>
@@ -82,5 +83,12 @@ export default {
     mounted() {
         feather.replace();
     },
+    computed: {
+        isAddToCartDisabled() {
+            return !(this.product.stock_type === 'With Stock' && this.product.available_quantity > 0) &&
+                this.product.stock_type !== 'Without Stock';
+        }
+    }
+
 };
 </script>

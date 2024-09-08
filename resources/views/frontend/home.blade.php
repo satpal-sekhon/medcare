@@ -73,8 +73,8 @@
             </div>
 
             <div class="col-xxl-9 col-xl-8">
-                @if($homepage_products->count())
-                    @include('frontend.partials.home.product-section')
+                @if($homepageProducts->count())
+                    @include('frontend.partials.home.home-products')
                 @else
                 <x-warning-message message="We will launch products soon!"></x-warning-message>
                 @endif

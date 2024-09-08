@@ -14,9 +14,9 @@ class DashboardController extends Controller
         $diseases = Disease::select('id', 'name', 'image')->where('show_on_homepage', true)->limit(10)->get();
         $categories = Category::select('id', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
         $brands = Brand::select('id', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
-        $homepage_products = Product::where('show_on_homepage', true)->limit(8)->get();
+        $homepageProducts = Product::where('show_on_homepage', true)->limit(8)->get();
         
-        return view('frontend.home', compact('diseases', 'categories', 'brands', 'homepage_products'));
+        return view('frontend.home', compact('diseases', 'categories', 'brands', 'homepageProducts'));
     }
 
     public function admin_dashboard(){

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('unit', 100)->nullable();
             $table->enum('product_type', ['General', 'Generic'])->default('General');
-            $table->text('thumbnail')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->text('composition')->nullable();
             $table->boolean('is_prescription_required')->default(false);
             $table->boolean('show_on_homepage')->default(false);
