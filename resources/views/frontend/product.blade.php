@@ -226,8 +226,13 @@
                                                     <h6 class="name">{{ $tendingProduct->name }}</h6>
                                                 </a>
                                                 <span>{{ $tendingProduct->unit }}</span>
-                                                <h6 class="price theme-color">₹{{ $tendingProduct->customer_price }}
-                                                </h6>
+                                                
+                                                <h5 class="sold text-content">
+                                                    <span class="theme-color price">₹{{ $tendingProduct->customer_price }}</span>
+                                                    @if($tendingProduct->mrp > 0)
+                                                        <del class="ms-1">₹{{ $tendingProduct->mrp }}</del>
+                                                    @endif
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>

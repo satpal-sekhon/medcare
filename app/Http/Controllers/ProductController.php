@@ -203,7 +203,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $tendingProducts = Product::where('flag', 'Trending')->where('id', '!=', $product->id)->latest()->limit(6)->get();
+        $tendingProducts = Product::where('flag', 'Trending')->where('status', 'Active')->where('id', '!=', $product->id)->latest()->limit(6)->get();
         return view('frontend.product', compact('product', 'tendingProducts'));
     }
 
