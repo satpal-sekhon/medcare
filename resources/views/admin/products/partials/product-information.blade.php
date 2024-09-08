@@ -71,18 +71,26 @@
             </div>
 
 
-            <div class="mb-3 col-md-6">
+            <div class="mb-3 col-md-4">
                 <label class="form-label-title mb-0">Enter Unit</label>
                 <input type="text" name="unit" placeholder="Unit" value="{{ $product->unit ?? '' }}" class="form-control" maxlength="100">
             </div>
 
-            <div class="mb-3 col-md-6">
+            <div class="mb-3 col-md-4">
                 <label for="flag" class="form-label-title mb-0">Select Flag</label>
                 <select name="flag" id="flag" class="form-control">
                     <option value="">Select Flag</option>
                     <option value="Trending" @selected(($product->flag ?? '') == 'Trending')>Trending</option>
                     <option value="On Sale" @selected(($product->flag ?? '') == 'On Sale')>On Sale</option>
                     <option value="Casual" @selected(($product->flag ?? '') == 'Casual')>Casual</option>
+                </select>
+            </div>
+
+            <div class="mb-3 col-md-4">
+                <label for="status" class="form-label-title mb-0">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="Active" @selected(($product->status ?? '') == 'Active')>Active</option>
+                    <option value="Inactive" @selected(($product->status ?? '') == 'Inactive')>Inactive</option>
                 </select>
             </div>
         </div>

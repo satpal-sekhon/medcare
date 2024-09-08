@@ -10,17 +10,26 @@
 
 @if($hasPlugin('contentEditor'))
 @push('styles')
-<link href="{{ asset('assets/css/summernote/summernote-bs4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/summernote/summernote-lite.min.css') }}" rel="stylesheet">
 
 @endpush
 @push('scripts')
-<script src="{{ asset('assets/js/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('assets/js/summernote/summernote-lite.min.js') }}"></script>
 <script>
     $(function(){
         $('#editor').summernote({
-            height: 400, // Set editor height
-            minHeight: null, // Set minimum height of editor
-            maxHeight: null, // Set maximum height of editor
+            height: 400,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'hr']],
+                ['view', ['fullscreen', 'codeview', 'help']],
+            ],
         });
     })
 </script>

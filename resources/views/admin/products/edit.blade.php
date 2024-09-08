@@ -22,6 +22,8 @@
 
                 @include('admin.products.partials.product-description')
 
+                @include('admin.products.partials.product-specifications')
+
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary w-25">Save Product</button>
                 </div>

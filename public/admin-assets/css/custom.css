@@ -13,3 +13,7 @@
 .preview-img{
     max-width: 100%;
 }
+
+.note-editor .dropdown-toggle::after{
+    display: none!important;
+}

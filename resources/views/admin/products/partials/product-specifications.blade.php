@@ -9,21 +9,23 @@
             @if($product)
             @foreach ($product->specifications as $key => $specification)
             <div class="row mb-3 specification-row" id="{{$key}}">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-10 mb-3">
                     <label class="form-label-title" for="specTitle{{$key}}">Title</label>
                     <input type="text" name="specifications[{{$key}}][title]" id="specTitle{{$key}}"
                         class="form-control" placeholder="Enter title" maxlength="100"
                         value="{{ $specification->title }}">
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label-title" for="specDescription{{$key}}">Description</label>
-                    <textarea name="specifications[{{$key}}][description]" id="specDescription{{$key}}"
-                        class="form-control" placeholder="Enter description">{{ $specification->description }}</textarea>
-                </div>
-                <div class="col-md-12 mb-3">
+                <div class="col-md-2 mb-3">
+                    <label>&nbsp;</label>
                     <button class="btn btn-secondary w-100 h-50 remove-btn" aria-label="Remove Specification">
                         <i class="fa fa-trash"></i>
                     </button>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label-title" for="specDescription{{$key}}">Description</label>
+                    <textarea name="specifications[{{$key}}][description]" id="specDescription{{$key}}"
+                        class="form-control specDescription" placeholder="Enter description">{{ $specification->description }}</textarea>
                 </div>
             </div>
             @endforeach
@@ -45,6 +47,25 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+        function initializeSummerNote(){
+            $('.specDescription').summernote({
+                height: 150,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'hr']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ],
+            });
+        }
+
+        initializeSummerNote();
+        
         let specificationRowCount = "{{ $key ?? 0 }}";
 
         $('#addSpecificationBtn').click(function() {
@@ -74,9 +95,7 @@
             $('#specificationsContainer').append(newRow);
 
             // Initialize Summernote for the newly added description field
-            $('.specDescription').summernote({
-                height: 150
-            });
+            initializeSummerNote();
 
             // Add validation rules for the new fields (if needed)
             $('#productForm').validate().settings.rules[`specifications[${specificationRowCount}][title]`] = "required";

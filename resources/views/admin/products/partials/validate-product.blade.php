@@ -1,11 +1,5 @@
 @push('scripts')
     <script>
-         $.validator.addMethod('summernoteRequired', function(value, element) {
-                console.log('element',element)
-                var editorId = $(element).attr('id');
-                return !$('#' + editorId).summernote('isEmpty');
-            }, 'This field is required.');
-
         $(function() {
             initializeDatepickers();
 
@@ -69,9 +63,7 @@
                     },
                     // composition: "required",
                     // ingredients: "required",
-                    short_description: {
-                        summernoteRequired: true
-                    },
+                    short_description: "required",
                     "diseases[]": "required",
                     customer_price: "required",
                     vendor_price: "required",
@@ -105,6 +97,9 @@
                     let formData = new FormData(form);
                     formData.append('deleted_images', deletedProductImages);
 
+                    $('#productForm [type="submit"]').attr('disabled', 'disabled');
+                    $('#productForm [type="submit"]').html('Saving Product...');
+
                     $.ajax({
                         url: $(form).attr('action'),
                         type: $(form).attr('method').toUpperCase(),
@@ -112,6 +107,10 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
+                            $('.invalid-feedback').remove();
+                            $('#productForm [type="submit"]').removeAttr('disabled');
+                            $('#productForm [type="submit"]').html('Save Product');
+
                             if (response.success) {
                                 Swal.fire(
                                     'Success!',
@@ -123,6 +122,15 @@
                                     window.location =
                                         "{{ route('admin.products.index') }}";
                                 }, 2000);
+                            } else if(response.reason == 'validation_errors'){
+                                displayErrors(transformKeys(response.errors));
+
+                                Swal.fire(
+                                    'Missing information!',
+                                    'Please check form and fill missing descriptions',
+                                    'error'
+                                );
+
                             } else {
                                 Swal.fire(
                                     'Oops!',
@@ -151,6 +159,36 @@
                     "required";
                 $('#productForm').validate().settings.rules[`variants[${index}][mrp]`] = "required";
             });
+
+
+            function transformKeys(obj) {
+                let newObj = {};
+
+                for (let key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                    // Split the key by '.' and check if it matches the pattern
+                    let parts = key.split('.');
+                    if (parts.length === 3) {
+                        let index = parseInt(parts[1], 10);
+                        let newKey = `${parts[0]}[${index}][${parts[2]}]`;
+                        newObj[newKey] = obj[key];
+                    } else {
+                        newObj[key] = obj[key];
+                    }
+                    }
+                }
+
+                return newObj;
+            }
+
+            function displayErrors(errors) {
+                $.each(errors, function(key, messages) {
+                    let field = $(`[name="${key}"]`);
+                    if (field.length) {
+                        field.parent().append(`<span class="invalid-feedback d-block">This field is required</span>`);
+                    }
+                });
+            }
         })
     </script>
 @endpush

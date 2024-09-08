@@ -8,7 +8,6 @@ use App\Models\PrimaryCategory;
 use App\Models\Product;
 use App\Models\ProductDisease;
 use App\Models\ProductImage;
-use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -46,82 +45,111 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $thumbnailPath = null;
-        if ($request->hasFile('thumbnail')) {
-            $base_image_path = 'uploads/product-thumbnails/';
-            $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
-            $request->file('thumbnail')->move(public_path($base_image_path), $filename);
-                    
-            $thumbnailPath = $base_image_path.$filename;
-        }
-
-        $product = Product::create([
-            'primary_category_id' => $request->input('primary_category'),
-            'category_id' => $request->input('category'),
-            'brand_id' => $request->input('brand'),
-            'name' => $request->input('name'),
-            'unit' => $request->input('unit'),
-            'thumbnail' => $thumbnailPath,
-            'composition' => $request->input('composition'),
-            'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
-            'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
-            'stock_type' => $request->input('stock_type'),
-            'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
-            'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
-            'customer_price' => $request->input('customer_price'),
-            'vendor_price' => $request->input('vendor_price'),
-            'mrp' => $request->input('mrp'),
-            'flag' => $request->input('flag'),
-            'product_type' => $request->input('product_type'),
-            'expiry_date' => $request->input('expiry_date'),
-            'short_description' => $request->input('short_description'),
-            'ingredients' => $request->input('ingredients'),
-            'description' => $request->input('description'),
-        ]);
-
-        if($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $base_image_path = 'uploads/products/';
-                $filename = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path($base_image_path), $filename);
-                $path = $base_image_path.$filename;
-
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'path' => $path
-                ]);
+        try {
+            $request->validate([
+                'short_description' => 'required|string',
+                'description' => 'required|string',
+                'specifications.*.description' => 'required|string',
+            ]);
+            
+            $thumbnailPath = null;
+            if ($request->hasFile('thumbnail')) {
+                $base_image_path = 'uploads/product-thumbnails/';
+                $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
+                $request->file('thumbnail')->move(public_path($base_image_path), $filename);
+                        
+                $thumbnailPath = $base_image_path.$filename;
             }
-        }
 
-        $variants = $request->input('variants');
-        if($variants){
-            foreach ($variants as $variant) {
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'name' => $variant['variant_name'],
-                    'customer_price' => $variant['price_customer'],
-                    'vendor_price' => $variant['price_vendor'],
-                    'mrp' => $variant['mrp'],
-                    'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
-                    'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
-                    'expiry_date' => $variant['expiry_date'],
-                ]);
+            $product = Product::create([
+                'primary_category_id' => $request->input('primary_category'),
+                'category_id' => $request->input('category'),
+                'brand_id' => $request->input('brand'),
+                'name' => $request->input('name'),
+                'unit' => $request->input('unit'),
+                'thumbnail' => $thumbnailPath,
+                'composition' => $request->input('composition'),
+                'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
+                'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
+                'stock_type' => $request->input('stock_type'),
+                'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
+                'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
+                'customer_price' => $request->input('customer_price'),
+                'vendor_price' => $request->input('vendor_price'),
+                'mrp' => $request->input('mrp'),
+                'flag' => $request->input('flag'),
+                'product_type' => $request->input('product_type'),
+                'expiry_date' => $request->input('expiry_date'),
+                'short_description' => $request->input('short_description'),
+                'ingredients' => $request->input('ingredients'),
+                'description' => $request->input('description'),
+                'status' => $request->input('status'),
+            ]);
+
+            if($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $base_image_path = 'uploads/products/';
+                    $filename = time().'.'.$image->getClientOriginalExtension();
+                    $image->move(public_path($base_image_path), $filename);
+                    $path = $base_image_path.$filename;
+
+                    $product->images()->create([
+                        'path' => $path
+                    ]);
+                }
             }
-        }
 
-        if($request->input('diseases')){
-            foreach($request->input('diseases') as $disease){
-                ProductDisease::create([
-                    'product_id' => $product->id,
-                    'disease_id' => $disease
-                ]);
+            $variants = $request->input('variants');
+            if($variants){
+                foreach ($variants as $variant) {
+                    $product->variants()->create([
+                        'name' => $variant['variant_name'],
+                        'customer_price' => $variant['price_customer'],
+                        'vendor_price' => $variant['price_vendor'],
+                        'mrp' => $variant['mrp'],
+                        'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
+                        'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
+                        'expiry_date' => $variant['expiry_date'],
+                    ]);
+                }
             }
-        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Product created successfully!'
-        ], 200);
+            $specifications = $request->input('specifications');
+            if($specifications){
+                foreach ($specifications as $specification) {
+                    $product->specifications()->create([
+                        'title' => $specification['title'] ?? null,
+                        'description' => $specification['description'] ?? null,
+                    ]);
+                }
+            }
+
+            if($request->input('diseases')){
+                foreach($request->input('diseases') as $disease){
+                    $product->diseases()->create([
+                        'disease_id' => $disease
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Product created successfully!'
+            ], 200);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'validation_errors',
+                'errors' => $e->errors()
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'unknown',
+                'message' => $e->getMessage()
+            ], 200);
+        }
     }
 
     public function get(Request $request)
@@ -194,114 +222,144 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $thumbnailPath = $product->thumbnail;
-        if ($request->hasFile('thumbnail')) {
-            // Do not remove the product thumbnail if the product image needs to be shown after the product has been deleted
-            /* if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
-                unlink(public_path($thumbnailPath));
-            } */
+        try {
+            $request->validate([
+                'short_description' => 'required|string',
+                'description' => 'required|string',
+                'specifications.*.description' => 'required|string',
+            ]);
+            
+            $thumbnailPath = $product->thumbnail;
+            if ($request->hasFile('thumbnail')) {
+                // Do not remove the product thumbnail if the product image needs to be shown after the product has been deleted
+                /* if ($thumbnailPath && file_exists(public_path($thumbnailPath))) {
+                    unlink(public_path($thumbnailPath));
+                } */
 
-            $base_image_path = 'uploads/product-thumbnails/';
-            $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
-            $request->file('thumbnail')->move(public_path($base_image_path), $filename);
+                $base_image_path = 'uploads/product-thumbnails/';
+                $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
+                $request->file('thumbnail')->move(public_path($base_image_path), $filename);
+                        
+                $thumbnailPath = $base_image_path.$filename;
+            }
+
+            // Update product attributes
+            $product->update([
+                'primary_category_id' => $request->input('primary_category'),
+                'category_id' => $request->input('category'),
+                'brand_id' => $request->input('brand'),
+                'name' => $request->input('name'),
+                'unit' => $request->input('unit'),
+                'product_type' => $request->input('product_type'),
+                'thumbnail' => $thumbnailPath,
+                'composition' => $request->input('composition'),
+                'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
+                'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
+                'stock_type' => $request->input('stock_type'),
+                'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
+                'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
+                'customer_price' => $request->input('customer_price'),
+                'vendor_price' => $request->input('vendor_price'),
+                'mrp' => $request->input('mrp'),
+                'weight' => $request->input('weight') ?? 0,
+                'flag' => $request->input('flag'),
+                'expiry_date' => $request->input('expiry_date'),
+                'short_description' => $request->input('short_description'),
+                'ingredients' => $request->input('ingredients'),
+                'description' => $request->input('description'),
+                'status' => $request->input('status'),
+            ]);
+
+            // Deleted product images
+            if($request->input('deleted_images')){
+                $deleted_images = explode(',', $request->input('deleted_images'));
+
+                foreach($deleted_images as $deleted_image){
+                    $product_image = ProductImage::find($deleted_image);
                     
-            $thumbnailPath = $base_image_path.$filename;
-        }
+                    if($product_image){
+                        if ($product_image->path && file_exists(public_path($product_image->path))) {
+                            unlink(public_path($product_image->path));
+                        }
 
-        // Update product attributes
-        $product->update([
-            'primary_category_id' => $request->input('primary_category'),
-            'category_id' => $request->input('category'),
-            'brand_id' => $request->input('brand'),
-            'name' => $request->input('name'),
-            'unit' => $request->input('unit'),
-            'product_type' => $request->input('product_type'),
-            'thumbnail' => $thumbnailPath,
-            'composition' => $request->input('composition'),
-            'is_prescription_required' => $request->input('is_prescription_required') ?? 0,
-            'show_on_homepage' => $request->input('show_on_homepage') ?? 0,
-            'stock_type' => $request->input('stock_type'),
-            'stock_quantity_for_customer' => $request->input('stock_quantity_for_customer') ?? 0,
-            'stock_quantity_for_vendor' => $request->input('stock_quantity_for_vendor') ?? 0,
-            'customer_price' => $request->input('customer_price'),
-            'vendor_price' => $request->input('vendor_price'),
-            'mrp' => $request->input('mrp'),
-            'weight' => $request->input('weight') ?? 0,
-            'flag' => $request->input('flag'),
-            'expiry_date' => $request->input('expiry_date'),
-            'short_description' => $request->input('short_description'),
-            'ingredients' => $request->input('ingredients'),
-            'description' => $request->input('description'),
-        ]);
-
-        // Deleted product images
-        if($request->input('deleted_images')){
-            $deleted_images = explode(',', $request->input('deleted_images'));
-
-            foreach($deleted_images as $deleted_image){
-                $product_image = ProductImage::find($deleted_image);
-                
-                if($product_image){
-                    if ($product_image->path && file_exists(public_path($product_image->path))) {
-                        unlink(public_path($product_image->path));
+                        $product_image->delete();
                     }
-
-                    $product_image->delete();
                 }
             }
-        }
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $base_image_path = 'uploads/products/';
-                $filename = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path($base_image_path), $filename);
-                $path = $base_image_path.$filename;
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $base_image_path = 'uploads/products/';
+                    $filename = time().'.'.$image->getClientOriginalExtension();
+                    $image->move(public_path($base_image_path), $filename);
+                    $path = $base_image_path.$filename;
 
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'path' => $path
-                ]);
+                    $product->images()->create([
+                        'path' => $path
+                    ]);
+                }
             }
-        }
 
-        // Handle variants
-        $variants = $request->input('variants');
-        
-        ProductVariant::where('product_id', $product->id)->delete();
+            // Handle variants
+            $variants = $request->input('variants');
+            $product->variants()->delete();
 
-        if ($variants) {
-            foreach ($variants as $variant) {
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'name' => $variant['variant_name'],
-                    'customer_price' => $variant['price_customer'],
-                    'vendor_price' => $variant['price_vendor'],
-                    'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
-                    'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
-                    'mrp' => $variant['mrp'],
-                    'weight' => $variant['weight'] ?? 0,
-                    'expiry_date' => $variant['expiry_date'],
-                ]);
+            if ($variants) {
+                foreach ($variants as $variant) {
+                    $product->variants()->create([
+                        'name' => $variant['variant_name'],
+                        'customer_price' => $variant['price_customer'],
+                        'vendor_price' => $variant['price_vendor'],
+                        'stock_quantity_for_customer' => $variant['stock_quantity_for_customer'] ?? 0,
+                        'stock_quantity_for_vendor' => $variant['stock_quantity_for_vendor'] ?? 0,
+                        'mrp' => $variant['mrp'],
+                        'weight' => $variant['weight'] ?? 0,
+                        'expiry_date' => $variant['expiry_date'],
+                    ]);
+                }
             }
-        }
 
-        // Handle diseases
-        ProductDisease::where('product_id', $product->id)->delete();
+            // Handle product specifications
+            $product->specifications()->delete();
 
-        if($request->input('diseases')){
-            foreach($request->input('diseases') as $disease){
-                ProductDisease::create([
-                    'product_id' => $product->id,
-                    'disease_id' => $disease
-                ]);
+            $specifications = $request->input('specifications');
+            if($specifications){
+                foreach ($specifications as $specification) {
+                    $product->specifications()->create([
+                        'title' => $specification['title'] ?? null,
+                        'description' => $specification['description'] ?? null,
+                    ]);
+                }
             }
-        }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Product updated successfully!'
-        ], 200);
+            // Handle diseases
+            $product->diseases()->delete();
+
+            if($request->input('diseases')){
+                foreach($request->input('diseases') as $disease){
+                    $product->diseases()->create([
+                        'disease_id' => $disease
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Product updated successfully!'
+            ], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'validation_errors',
+                'errors' => $e->errors()
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'unknown',
+                'message' => $e->getMessage()
+            ], 200);
+        }
     }
 
     /**
