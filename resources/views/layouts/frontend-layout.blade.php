@@ -51,9 +51,7 @@
                                     <div>
                                         <div class="timer-notification text-center">
                                             <h6><strong class="me-1">Welcome to Medine Shop!</strong>Wrap new
-                                                offers/gift
-                                                every single day on Weekends.<strong class="ms-1">New Coupon Code:
-                                                    Med2589
+                                                offers/gift every single day on Weekends.<strong class="ms-1">New Coupon Code: Med2589
                                                 </strong>
                                             </h6>
                                         </div>
@@ -62,8 +60,7 @@
                                     <div>
                                         <div class="timer-notification text-center">
                                             <h6>Extra 50% Off on All Generic Medicine
-                                                <a href="javascript:void(0)" class="text-white">Buy Now
-                                                    !</a>
+                                                <a href="#" class="text-white">Buy Now !</a>
                                             </h6>
                                         </div>
                                     </div>
@@ -74,7 +71,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="top-nav top-header sticky-header">
                 <div class="container-fluid-lg">
                     <div class="row">
@@ -220,125 +217,40 @@
                                         </button>
                                     </div>
 
-                                    <ul class="category-list">
-                                        <li class="onhover-category-list">
-                                            <a href="javascript:void(0)" class="category-name">
-                                                <h6>Baby Care</h6>
-                                                <i class="fa-solid fa-angle-right"></i>
-                                            </a>
+                                    @if(isset($menuPrimaryCategories))
+                                        <ul class="category-list">
+                                            @foreach ($menuPrimaryCategories as $menuPrimaryCategory)
+                                            <li class="onhover-category-list">
+                                                <a href="javascript:void(0)" class="category-name">
+                                                    <h6>{{ $menuPrimaryCategory->name }}</h6>
+                                                    <i class="fa-solid fa-angle-right"></i>
+                                                </a>
 
-                                            <div class="onhover-category-box">
-                                                <div class="list-1">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Cerals</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Formula Milk</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Cream</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Lotion</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Massage</a>
-                                                        </li>
-                                                    </ul>
+                                                <div class="onhover-category-box">
+                                                    <div class="list-1">
+                                                        <ul>
+                                                            @foreach($menuPrimaryCategory->categories->take(8) as $category)
+                                                                <li>
+                                                                    <a href="#">{{ $category->name }}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="list-2">
+                                                        <ul>
+                                                            @foreach($menuPrimaryCategory->categories->skip(8)->take(8) as $category)
+                                                                <li>
+                                                                    <a href="#">{{ $category->name }}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
-
-                                                <div class="list-2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Powder</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Diapers</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Wiper</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="onhover-category-list">
-                                            <a href="javascript:void(0)" class="category-name">
-                                                <h6>Personal Care</h6>
-                                                <i class="fa-solid fa-angle-right"></i>
-                                            </a>
-
-                                            <div class="onhover-category-box">
-                                                <div class="list-1">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Bath & Body</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Face Care</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Facial Wipes</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hair Oil</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Shampoo</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="list-2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Conditioner</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Tooth Brush</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Tooth Paste</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Mouth Wash</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="onhover-category-list">
-                                            <a href="javascript:void(0)" class="category-name">
-                                                <h6>Women Care</h6>
-                                                <i class="fa-solid fa-angle-right"></i>
-                                            </a>
-
-                                            <div class="onhover-category-box w-100">
-                                                <div class="list-1">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Snitary Pads</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Intimate Care</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Multivitamin</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Health Tonics</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">PCOS</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                             </div>
 
