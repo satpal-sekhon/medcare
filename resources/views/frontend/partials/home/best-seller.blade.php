@@ -12,175 +12,88 @@
 <div class="best-selling-slider product-wrapper wow fadeInUp">
     <div>
         <ul class="product-list">
+            @foreach ($saleProducts->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/1.png" class="blur-up lazyload" alt="">
+                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
+                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                                <h6 class="name">{{ $product->name }}</h6>
                             </a>
-                            <span>500 G</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
+                            <span>{{ $product->unit }}</span>
+                            <h5 class="sold text-content">
+                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                @if($product->mrp > 0)
+                                    <del class="ms-1">₹{{ $product->mrp }}</del>
+                                @endif
+                            </h5>
                         </div>
                     </div>
                 </div>
             </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/5.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>500 G</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/7.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>150 G</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
 
     <div>
         <ul class="product-list">
+            @foreach ($saleProducts->skip(3)->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/8.png" class="blur-up lazyload" alt="">
+                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
+                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                                <h6 class="name">{{ $product->name }}</h6>
                             </a>
-                            <span>500 G</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
+                            <span>{{ $product->unit }}</span>
+                            <h5 class="sold text-content">
+                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                @if($product->mrp > 0)
+                                    <del class="ms-1">₹{{ $product->mrp }}</del>
+                                @endif
+                            </h5>
                         </div>
                     </div>
                 </div>
             </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/1.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>1 KG</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/2.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>150 G</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
 
     <div>
         <ul class="product-list">
+            @foreach ($saleProducts->skip(6)->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/6.png" class="blur-up lazyload" alt="">
+                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
+                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                                <h6 class="name">{{ $product->name }}</h6>
                             </a>
-                            <span>1 L</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
+                            <span>{{ $product->unit }}</span>
+                            <h5 class="sold text-content">
+                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                @if($product->mrp > 0)
+                                    <del class="ms-1">₹{{ $product->mrp }}</del>
+                                @endif
+                            </h5>
                         </div>
                     </div>
                 </div>
             </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/3.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>1 KG</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="offer-product">
-                    <a href="#" class="offer-image">
-                        <img src="/assets/images/product/2.png" class="blur-up lazyload" alt="">
-                    </a>
-
-                    <div class="offer-detail">
-                        <div>
-                            <a href="#" class="text-title">
-                                <h6 class="name">Medical Syrup</h6>
-                            </a>
-                            <span>160 ML</span>
-                            <h6 class="price theme-color">$ 10.00</h6>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            @endforeach
         </ul>
     </div>
 </div>

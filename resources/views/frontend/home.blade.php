@@ -73,8 +73,8 @@
             </div>
 
             <div class="col-xxl-9 col-xl-8">
-                @if($homepageProducts->count())
-                    @include('frontend.partials.home.home-products')
+                @if($generalProducts->count())
+                    @include('frontend.partials.home.general-products')
                 @else
                 <x-warning-message message="We will launch products soon!"></x-warning-message>
                 @endif
@@ -168,7 +168,11 @@
     <div class="container-fluid-lg">
         <div class="row g-sm-4 g-3">
             <div class="col-xxl-10 col-xl-10">
-                @include('frontend.partials.home.products-second-section')
+                @if ($genericProducts->count() > 0)
+                    @include('frontend.partials.home.generic-products')
+                @else
+                    <x-warning-message message="We will launch medicines soon!"></x-warning-message>
+                @endif
             </div>
             <div class="col-xxl-2 col-xl-2 reto">
                 <img src="{{ asset('assets/images/banners/vertical-3.png') }}" class="img-fluid social-image blur-up w-100 lazyloaded" alt="">

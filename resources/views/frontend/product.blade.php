@@ -57,8 +57,7 @@
                                         @if(file_exists(public_path($image->path)))
                                         <div>
                                             <div class="sidebar-image">
-                                                <img src="{{ asset($image->path) }}" class="img-fluid lazyload"
-                                                    alt="">
+                                                <img src="{{ asset($image->path) }}" class="img-fluid lazyload" alt="">
                                             </div>
                                         </div>
                                         @endif
@@ -215,14 +214,14 @@
                                 @foreach ($tendingProducts as $tendingProduct)
                                 <li>
                                     <div class="offer-product">
-                                        <a href="#" class="offer-image">
+                                        <a href="{{ route('products.view', $tendingProduct->id) }}" class="offer-image">
                                             <img src="{{ file_exists(public_path($tendingProduct->thumbnail)) ? asset($tendingProduct->thumbnail) : asset('assets/images/default/product.jpg') }}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="#">
+                                                <a href="{{ route('products.view', $tendingProduct->id) }}">
                                                     <h6 class="name">{{ $tendingProduct->name }}</h6>
                                                 </a>
                                                 <span>{{ $tendingProduct->unit }}</span>

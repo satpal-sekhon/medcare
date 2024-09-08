@@ -2,12 +2,12 @@
     <div class="product-border border-row overflow-hidden">
         <div class="product-box-slider no-arrow">
             <div class="row m-0">
-                @foreach ($homepageProducts->take(2) as $product)
+                @foreach ($generalProducts->take(2) as $product)
                 <div class="col-12 px-0">
                     <product-item :product='{{ json_encode([
                         "id" => $product->id,
                         "name" => $product->name,
-                        "image" => file_exists(public_path($product->thumbnail)) ? public_path($product->thumbnail) : asset('assets/images/default/product.jpg'),
+                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'),
                         "price" => $product->customer_price,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->id),
@@ -21,12 +21,12 @@
             </div>
 
             <div class="row m-0">
-                @foreach ($homepageProducts->skip(2)->take(2) as $product)
+                @foreach ($generalProducts->skip(2)->take(2) as $product)
                 <div class="col-12 px-0">
                     <product-item :product='{{ json_encode([
                         "id" => $product->id,
                         "name" => $product->name,
-                        "image" => file_exists(public_path($product->thumbnail)) ? public_path($product->thumbnail) : asset('assets/images/default/product.jpg'),
+                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'),
                         "price" => $product->customer_price,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->id),
@@ -40,12 +40,12 @@
             </div>
 
             <div class="row m-0">
-                @foreach ($homepageProducts->skip(4)->take(2) as $product)
+                @foreach ($generalProducts->skip(4)->take(2) as $product)
                 <div class="col-12 px-0">
                     <product-item :product='{{ json_encode([
                         "id" => $product->id,
                         "name" => $product->name,
-                        "image" => file_exists(public_path($product->thumbnail)) ? public_path($product->thumbnail) : asset('assets/images/default/product.jpg'),
+                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'),
                         "price" => $product->customer_price,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->id),
@@ -59,12 +59,12 @@
             </div>
 
             <div class="row m-0">
-                @foreach ($homepageProducts->skip(6)->take(2) as $product)
+                @foreach ($generalProducts->skip(6)->take(2) as $product)
                 <div class="col-12 px-0">
                     <product-item :product='{{ json_encode([
                         "id" => $product->id,
                         "name" => $product->name,
-                        "image" => file_exists(public_path($product->thumbnail)) ? public_path($product->thumbnail) : asset('assets/images/default/product.jpg'),
+                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'),
                         "price" => $product->customer_price,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->id),
