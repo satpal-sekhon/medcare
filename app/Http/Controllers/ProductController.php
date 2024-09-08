@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Disease;
 use App\Models\PrimaryCategory;
 use App\Models\Product;
@@ -17,7 +18,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('frontend.products');
+        $categories = Category::latest()->limit(16)->withCount('products')->get();
+        $products = Product::paginate(20);
+
+        // Get the current and last page numbers
+        $currentPage = $products->currentPage();
+        $lastPage = $products->lastPage();
+        
+        // Redirect if the current page exceeds the last page
+        if ($currentPage > $lastPage) {
+            return redirect()->route('brands.index', ['page' => $lastPage]);
+        }
+
+        return view('frontend.products', compact('categories', 'products'));
     }
 
     /**
