@@ -93,7 +93,7 @@
                                 let defaultImagePath = 'assets/images/default/category.jpg';
                                 let imageUrl = data ? data : defaultImagePath;
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
                             }
                         },
                         {
