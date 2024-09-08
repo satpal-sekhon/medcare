@@ -67,13 +67,13 @@
 <script src="{{ asset('assets/js/flatpickr/flatpickr.min.js') }}"></script>
 <script>
     function initializeDatepickers() {
-            $('.datepicker').each(function() {
-                flatpickr(this, {
-                    dateFormat: "Y-m-d",
-                    minDate: "today"
-                });
+        $('.datepicker').each(function() {
+            flatpickr(this, {
+                dateFormat: "Y-m-d",
+                minDate: "today"
             });
-        }
+        });
+    }
 </script>
 @endpush
 @endif

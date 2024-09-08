@@ -34,7 +34,7 @@
                     <div class="mb-2">
                         <label class="form-label-title">Product Weight (in KG)</label>
                         <div class="form-group">
-                            <input type="number" name="weight" class="form-control" placeholder="Weight" value="{{ $product->weight ?? '' }}" step="0.01">
+                            <input type="number" name="variants[{{$key}}][weight]" class="form-control" placeholder="Weight" value="{{ $product->weight ?? '' }}" step="0.01">
                         </div>
                     </div>
                 </div>

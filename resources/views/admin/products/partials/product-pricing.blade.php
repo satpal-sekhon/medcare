@@ -55,8 +55,8 @@
             </div>
             <div class="mb-3 col-md-4">
                 <label class="form-label-title mb-2">Expiry Date</label>
-                <input type="text" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date') }}"
-                    class="form-control datepicker" value="{{ $product->expiry_date ?? '' }}">
+                <input type="text" name="expiry_date" placeholder="Expiry Date" value="{{ old('expiry_date', $product->expiry_date ?? '') }}"
+                    class="form-control datepicker">
             </div>
         </div>
     </div>
