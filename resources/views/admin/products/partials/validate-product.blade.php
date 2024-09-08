@@ -115,10 +115,10 @@
                                     'success'
                                 );
 
-                                /* setTimeout(() => {
+                                setTimeout(() => {
                                     window.location =
                                         "{{ route('admin.products.index') }}";
-                                }, 2000); */
+                                }, 2000);
                             } else if(response.reason == 'validation_errors'){
                                 displayErrors(transformKeys(response.errors));
 

@@ -73,7 +73,7 @@
                             name: 'status',
                             orderable: false,
                             render: function(data, type, row) {
-                                if(!row.show_on_homepage){
+                                if(row.show_on_homepage != '1'){
                                     return ``;
                                 }
 
