@@ -15,10 +15,6 @@ class OrderController extends Controller
         //
     }
 
-    public function quickOrder(){
-        return view('frontend.quick-order');
-    }
-
     /**
      * Show the form for creating a new resource.
      */

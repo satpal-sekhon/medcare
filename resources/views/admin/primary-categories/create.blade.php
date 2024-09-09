@@ -17,7 +17,7 @@
                             <input type="text" name="name" placeholder="Category Name" value="{{ old('name') }}"
                                 @class(['form-control', 'is-invalid'=> $errors->first('name')]) maxlength="100">
                             @if ($errors->has('name'))
-                            <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
 
@@ -27,7 +27,7 @@
                                 <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid'=>
                                 $errors->first('image')])>
                                 @if ($errors->has('image'))
-                                <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
+                                <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                                 @endif
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                                 , 'is-invalid'=> $errors->first('description'),
                                 ])>{{ old('description') }}</textarea>
                             @if ($errors->has('description'))
-                            <div class="invalid-feedback d-block">{{ $errors->first('description') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                             @endif
                         </div>
 

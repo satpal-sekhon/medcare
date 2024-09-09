@@ -211,7 +211,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function searchMedicines(Request $request, $alphabet){
+    public function searchMedicines(Request $request, $alphabet = 'a'){
         if(!$alphabet){
             $alphabet = $request->query('alphabet');
             $alphabet = substr($alphabet, 0, 1); 

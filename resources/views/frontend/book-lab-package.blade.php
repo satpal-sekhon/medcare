@@ -107,11 +107,11 @@
 @push('scripts')
 <script>
     $(function(){
-            $('#continueOrderAsGuest').click(function(){
-                $('#bookLabPackage').removeClass('d-none');
-                $('#checkoutConfirmation').addClass('d-none');
-            })
+        $('#continueOrderAsGuest').click(function(){
+            $('#bookLabPackage').removeClass('d-none');
+            $('#checkoutConfirmation').addClass('d-none');
         })
+    })
 </script>
 @endpush
 @endsection

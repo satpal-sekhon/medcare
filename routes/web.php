@@ -21,6 +21,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\QuickOrderController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
@@ -52,7 +53,9 @@ Route::post('/consult-doctor', [DoctorConsultationOrderController::class, 'store
 Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->name('search-medicines');
 Route::get('/search-medicines/{alphabet}', [ProductController::class, 'searchMedicines'])->name('search-medicine.alphabet');
 
-Route::get('/quick-order', [OrderController::class, 'quickOrder'])->name('quick-order');
+Route::get('/quick-order', [QuickOrderController::class, 'create'])->name('quick-order');
+Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick-order.store');
+
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 

@@ -7,7 +7,8 @@
         <div class="row">
             <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
                 <div class="image-contain">
-                    <img src="{{ asset('assets/images/prescription-guide.png') }}" class="img-fluid" alt="Prescription Order Image">
+                    <img src="{{ asset('assets/images/prescription-guide.png') }}" class="img-fluid"
+                        alt="Prescription Order Image">
                 </div>
             </div>
 
@@ -18,42 +19,59 @@
                     </div>
 
                     <div class="input-box">
-                        <form class="row g-4">
-                            <div class="col-12">
-                                <div class="form-floating theme-form-floating log-in-form">
-                                    <input type="text" class="form-control" id="name" placeholder="Name">
-                                    <label for="name">Name</label>
-                                </div>
+                        @if (!$errors->count())
+                        @guest
+                        <div class="d-flex justify-content-between mb-3" id="guestConfirmation">
+                            <button id="continueOrderAsGuest" type="button" class="btn btn-sm btn-theme-outline">Continue
+                                as Guest</button>
+                            <a href="{{ route('sign-up') }}" class="btn btn-sm btn-theme-outline">Create an Account</a>
+                        </div>
+                        @endguest
+                        @endif
+
+                        <form method="POST" action="{{ route('quick-order.store') }}" enctype="multipart/form-data"
+                            @class(["row", "d-none"=> !auth()->check() && !$errors->count() ]) id="orderForm">
+                            @csrf
+
+                            <div class="col-12 mb-2">
+                                <x-form-input name="customer_name" label="Name"></x-form-input>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating theme-form-floating log-in-form">
-                                    <input type="number" class="form-control" id="number" placeholder="Number">
-                                    <label for="number">Number</label>
-                                </div>
+                            <div class="col-12 mb-2">
+                                <x-form-input name="email" label="Email Address"></x-form-input>
                             </div>
-                            <div class="col-12">
-                                <div class="form-floating theme-form-floating log-in-form">
-                                    <input type="text" class="form-control" id="instruction" placeholder="Enter Instruction">
-                                    <label for="instruction">Enter Instruction</label>
-                                </div>
+                            <div class="col-12 mb-2">
+                                <x-form-input name="phone_number" label="Phone Number"></x-form-input>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <x-form-input type="file" name="prescription" label="Upload Prescription"
+                                    accept=".pdf,.jpg,.jpeg,.png"></x-form-input>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <x-textarea name="instructions" :label="'Enter Instructions (If any)'"></x-textarea>
                             </div>
 
-                            <div class="col-12" style="background:white;">
-                                <br>
-                                <label for="file">Upload Prescription</label><br>
-                                <div class="form-floating theme-form-floating log-in-form">
-                                    <input type="file" class="form-control" id="file" placeholder="Choose File">
-                                </div>
-                            </div>
-
                             <div class="col-12">
-                                <button class="btn btn-animation w-100 justify-content-center" type="submit">Submit</button>
+                                <button class="btn btn-animation w-100 justify-content-center"
+                                    type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+@push('scripts')
+<script>
+    $(function(){
+        $('#continueOrderAsGuest').click(function(){
+            $('#guestConfirmation').addClass('d-none');
+            $('#orderForm').removeClass('d-none');
+        })
+    })
+</script>
+@endpush
 @endsection
