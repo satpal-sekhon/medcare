@@ -38,10 +38,8 @@ class DoctorConsultationOrderController extends Controller
             'doctor_type' => 'required|string|max:100',
         ]);
 
-        $doctorType = DoctorType::select('name')->find($request->input('doctor_type'));
+        $doctorType = DoctorType::select('name')->find($request->input('doctor_type'))->name ?? '';
         $doctor = Doctor::select('name', 'qualification', 'fee', 'experience', 'image')->find($request->input('doctor_id'));
-
-        dd($doctor->toArray());
 
         DoctorConsultationOrder::create([
             'doctor_type_id' => $request->input('doctor_type'),
@@ -50,6 +48,7 @@ class DoctorConsultationOrderController extends Controller
             'name' => $request->input('customer_name'),
             'email' => $request->input('email'),
             'phone_number' => $request->input('phone_number'),
+            'doctor_type' => $doctorType,
             'doctor_name' => $doctor->name,
             'doctor_image' => $doctor->image,
             'doctor_qualification' => $doctor->qualification,

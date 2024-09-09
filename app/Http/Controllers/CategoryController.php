@@ -153,7 +153,19 @@ class CategoryController extends Controller
                 'required',
                 'string',
                 'max:100',
-                Rule::unique('categories')->ignore($category->id)
+                function ($attribute, $value, $fail) use ($request) {
+                    $primaryCategoryId = $request->input('primary_category');
+                    $categoryId = $request->route('category')->id; // Adjust this based on how you get the category ID
+
+                    $exists = Category::where('name', $value)
+                        ->where('primary_category_id', $primaryCategoryId)
+                        ->where('id', '!=', $categoryId) // Ignore the current category if updating
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('The '.$attribute.' has already been taken in the selected category.');
+                    }
+                },
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'

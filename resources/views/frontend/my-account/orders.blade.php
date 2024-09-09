@@ -115,8 +115,11 @@
                 <div class="tab-pane fade" id="lab-packages" role="tabpanel">
                     @forelse($labPackageOrders as $order)
                     <div class="product-order-detail">
-                        <a href="{{ route('lab-package.show', $order->lab_package_id ?? '0') }}" class="order-image w-25">
-                            <img src="{{ asset($order->package_image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/lab.jpg') }}';" class="img-fluid blur-up lazyload" alt="">
+                        <a href="{{ route('lab-package.show', $order->lab_package_id ?? '0') }}"
+                            class="order-image w-25">
+                            <img src="{{ asset($order->package_image) }}"
+                                onerror="this.onerror=null; this.src='{{ asset('assets/images/default/lab.jpg') }}';"
+                                class="img-fluid blur-up lazyload" alt="">
                         </a>
 
                         <div class="order-wrap">
@@ -133,7 +136,7 @@
                             </ul>
                             <ul class="product-size mt-2">
                                 <h5 class="fw-bold">{{ $order->package_title }}</h5>
-                                
+
                                 @foreach (json_decode($order->included_tests) as $key => $test)
                                 <li>
                                     <div class="size-box">
@@ -141,7 +144,7 @@
                                     </div>
                                 </li>
                                 @endforeach
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -156,15 +159,33 @@
                     @forelse($doctorConsultationOrders as $order)
                     <div class="product-order-detail">
                         <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}" class="order-image w-25">
-                            <img src="{{ asset($order->doctor_image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/doctor.png   ') }}';" class="img-fluid blur-up lazyload" alt="">
+                            <img src="{{ asset($order->doctor_image) }}"
+                                onerror="this.onerror=null; this.src='{{ asset('assets/images/default/doctor.png   ') }}';"
+                                class="img-fluid blur-up lazyload" alt="">
                         </a>
 
                         <div class="order-wrap">
                             <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}">
-                                <h3>{{ $order->doctor_name }}</h3>
+                                <h3>{{ $order->doctor_name }} ({{ $order->doctor_qualification }})</h3>
                             </a>
                             <h5 class="fw-bold">{{ $order->doctor_type }}</h5>
+
+                            <ul class="product-size mt-2">
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Experience : </h6>
+                                        <h5>{{ $order->doctor_experience }} years</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Price : </h6>
+                                        <h5>₹{{ $order->amount_paid }}</h5>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
+
                     </div>
                     @empty
                     <div class="p-4">
