@@ -9,6 +9,7 @@
         <div class="row">
             <div class="col-12 wow fadeInUp">
                 <x-success-message :message="session('success')"></x-success-message>
+                <x-error-message :message="session('error')" />
                 
                 @if($errors->count() > 0)
                 <x-error-message message="Please enter valid form to consult with doctor"></x-error-message>

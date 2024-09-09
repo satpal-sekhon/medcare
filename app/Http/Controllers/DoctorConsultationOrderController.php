@@ -6,6 +6,8 @@ use App\Models\Doctor;
 use App\Models\DoctorConsultationOrder;
 use App\Models\DoctorType;
 use Illuminate\Http\Request;
+use App\Mail\DoctorConsultationOrderConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 
 class DoctorConsultationOrderController extends Controller
 {
@@ -41,26 +43,43 @@ class DoctorConsultationOrderController extends Controller
         $doctorType = DoctorType::select('name')->find($request->input('doctor_type'))->name ?? '';
         $doctor = Doctor::select('name', 'qualification', 'fee', 'experience', 'image')->find($request->input('doctor_id'));
 
-        DoctorConsultationOrder::create([
-            'doctor_type_id' => $request->input('doctor_type'),
-            'doctor_id' => $request->input('doctor_id'),
-            'user_id' => $request->user()->id ?? null,
-            'name' => $request->input('customer_name'),
-            'email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
-            'doctor_type' => $doctorType,
-            'doctor_name' => $doctor->name,
-            'doctor_image' => $doctor->image,
-            'doctor_qualification' => $doctor->qualification,
-            'doctor_experience' => $doctor->experience,
-            'amount_paid' => $doctor->fee,
-        ]);
-        
-        if($request->user()){
-            return redirect()->route('my-account.orders')->with('success', 'Doctor consultation booked successfully!');
-        }
+        try {
+            DoctorConsultationOrder::create([
+                'doctor_type_id' => $request->input('doctor_type'),
+                'doctor_id' => $request->input('doctor_id'),
+                'user_id' => $request->user()->id ?? null,
+                'name' => $request->input('customer_name'),
+                'email' => $request->input('email'),
+                'phone_number' => $request->input('phone_number'),
+                'doctor_type' => $doctorType,
+                'doctor_name' => $doctor->name ?? '',
+                'doctor_image' => $doctor->image ?? '',
+                'doctor_qualification' => $doctor->qualification ?? '',
+                'doctor_experience' => $doctor->experience ?? 0.0,
+                'amount_paid' => $doctor->fee ?? 0.00,
+            ]);
+    
+            
+            // Attempt to send the password reset email
+            $data = [
+                'name' => $request->input('customer_name'),
+                'doctor_type' => $doctorType,
+                'doctor_name' => $doctor->name ?? 'N/A',
+                'amount_paid' => $doctor->fee ?? 0.00,
+            ];
+            
+            Mail::to($request->email)->send(new DoctorConsultationOrderConfirmationMail($data));
 
-        return redirect()->back()->with('success', 'Doctor consultation booked successfully!');
+            
+            if($request->user()){
+                return redirect()->route('my-account.orders')->with('success', 'Doctor consultation booked successfully!');
+            }
+    
+            return redirect()->back()->with('success', 'Doctor consultation booked successfully!');
+        } catch (\Exception $e) {    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
     }
 
     /**

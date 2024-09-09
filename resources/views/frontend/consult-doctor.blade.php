@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col-12 wow fadeInUp">
                 <x-success-message :message="session('success')" />
+                <x-error-message :message="session('error')" />
                 
                 <div class="row g-4">
                     <div class="col-xl-7 wow fadeInUp">
