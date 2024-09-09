@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('email', 100);
             $table->string('phone_number', 12);
-            $table->text('instructions');
+            $table->text('instructions')->nullable();
             $table->string('payment_method', 50)->nullable();
             $table->enum('payment_status', ['Pending', 'Completed'])->default('Pending');
             $table->string('transaction_id')->nullable();
-            $table->string('doctor_name');
-            $table->string('doctor_type')->nullable();
+            $table->string('doctor_name', 50);
+            $table->string('doctor_type', 75)->nullable();
             $table->string('doctor_image')->nullable();
             $table->decimal('amount_paid', 8, 2)->default(0.00);
             $table->timestamps();

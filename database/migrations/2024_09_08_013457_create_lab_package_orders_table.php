@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('lab_package_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('lab_package_id');
+            $table->unsignedBigInteger('lab_package_id')->nullable();
             $table->string('name', 50);
             $table->string('email', 100);
             $table->string('phone_number', 12);
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('lab_package_id')->references('id')->on('lab_packages')->onDelete('cascade');
+            $table->foreign('lab_package_id')->references('id')->on('lab_packages')->onDelete('set null');
 
             // Adding indexes
             $table->index('user_id');

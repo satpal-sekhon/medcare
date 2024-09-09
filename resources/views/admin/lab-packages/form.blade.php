@@ -39,31 +39,32 @@
     @endif
 </div>
 
-<div class="mb-3">
-    <label class="form-label-title">Image</label>
-    <div class="form-group">
-        <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid'=>
-        $errors->first('image')])>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label-title">Image</label>
+        <div class="form-group">
+            <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid'=>
+            $errors->first('image')])>
 
-        @if ($errors->has('image'))
-        <div class="invalid-feedback">{{ $errors->first('image') }}</span>
+            @if ($errors->has('image'))
+            <span class="invalid-feedback">{{ $errors->first('image') }}</span>
+            @endif
+
+            @if ($labPackage->image ?? '')
+            <img src="{{ asset($labPackage->image) }}" alt="" style="width: 100px; height: auto;">
             @endif
         </div>
+    </div>
 
-        @if ($labPackage->image ?? '')
-        <img src="{{ asset($labPackage->image) }}" alt="" style="width: 100px; height: auto;">
+    <div class="col-md-6 mb-3">
+        <label class="form-label-title mb-0">Amount</label>
+        <input type="number" name="amount" placeholder="Enter amount" value="{{ old('fee', ($labPackage->amount ?? '')) }}"
+            @class(['form-control', 'is-invalid'=> $errors->first('amount')]) step="0.01">
+
+        @if ($errors->has('amount'))
+        <span class="invalid-feedback">{{ $errors->first('amount') }}</span>
         @endif
     </div>
-</div>
-
-<div class="mb-3">
-    <label class="form-label-title mb-0">Amount</label>
-    <input type="number" name="amount" placeholder="Enter amount" value="{{ old('fee', ($labPackage->amount ?? '')) }}"
-        @class(['form-control', 'is-invalid'=> $errors->first('amount')]) step="0.01">
-
-    @if ($errors->has('amount'))
-    <div class="invalid-feedback d-block`">{{ $errors->first('amount') }}</div>
-    @endif
 </div>
 
 <div class="mb-3">
