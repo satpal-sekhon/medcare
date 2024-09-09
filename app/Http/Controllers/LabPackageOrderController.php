@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\LabPackage;
 use App\Models\LabPackageOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LabPackageOrderConfirmation;
 
 class LabPackageOrderController extends Controller
 {
@@ -39,25 +41,42 @@ class LabPackageOrderController extends Controller
 
         $labPackage = LabPackage::find($request->input('lab_package_id'));
 
-        LabPackageOrder::create([
-            'user_id' => $request->user()->id ?? null,
-            'lab_package_id' => $request->input('lab_package_id'),
-            'name' => $request->input('customer_name'),
-            'phone_number' => $request->input('phone_number'),
-            'email' => $request->input('email'),
-            'instructions' => $request->input('instructions'),
-            'package_name' => $labPackage->name,
-            'package_title' => $labPackage->package_title,
-            'package_image' => $labPackage->image,
-            'package_amount' => $labPackage->amount,
-            'included_tests' => json_encode($labPackage->labTests->pluck('name')->toArray())
-        ]);
+        try {
+            LabPackageOrder::create([
+                'user_id' => $request->user()->id ?? null,
+                'lab_package_id' => $request->input('lab_package_id'),
+                'name' => $request->input('customer_name'),
+                'phone_number' => $request->input('phone_number'),
+                'email' => $request->input('email'),
+                'instructions' => $request->input('instructions'),
+                'package_name' => $labPackage->name,
+                'package_title' => $labPackage->package_title,
+                'package_image' => $labPackage->image,
+                'package_amount' => $labPackage->amount,
+                'included_tests' => json_encode($labPackage->labTests->pluck('name')->toArray())
+            ]);
 
-        if($request->user()){
-            return redirect()->route('my-account.orders')->with('success', 'Lab package booked successfully!');
-        }
+            $data = [
+                'name' => $request->input('customer_name'),
+                'package_name' => $labPackage->name,
+                'package_title' => $labPackage->package_title,
+                'package_amount' => $labPackage->amount,
+                'included_tests' => json_encode($labPackage->labTests->pluck('name')->toArray()),
+                'instructions' => $labPackage->instructions,
+            ];
 
-        return redirect()->route('lab-package.show', $request->input('lab_package_id'))->with('success', 'Lab package booked successfully!');
+            Mail::to($request->email)->send(new LabPackageOrderConfirmation($data, 'emails.lab-package-order-confirmation'));
+
+            if($request->user()){
+                return redirect()->route('my-account.orders')->with('success', 'Lab package booked successfully!');
+            }
+
+            return redirect()->route('lab-package.show', $request->input('lab_package_id'))->with('success', 'Lab package booked successfully!');
+        } catch (\Exception $e) {    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'Failed to send email');
+        } 
+    
     }
 
     /**

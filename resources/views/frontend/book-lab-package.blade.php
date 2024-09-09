@@ -6,6 +6,8 @@
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12 wow fadeInUp">
+                <x-error-message :message="session('error')" />
+                
                 <div class="row g-4">
                     <div class="col-xl-7 wow fadeInUp">
                         <div class="right-box-contain">

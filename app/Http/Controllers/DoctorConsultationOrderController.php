@@ -6,7 +6,7 @@ use App\Models\Doctor;
 use App\Models\DoctorConsultationOrder;
 use App\Models\DoctorType;
 use Illuminate\Http\Request;
-use App\Mail\DoctorConsultationOrderConfirmationMail;
+use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 
 class DoctorConsultationOrderController extends Controller
@@ -68,7 +68,7 @@ class DoctorConsultationOrderController extends Controller
                 'amount_paid' => $doctor->fee ?? 0.00,
             ];
             
-            Mail::to($request->email)->send(new DoctorConsultationOrderConfirmationMail($data));
+            Mail::to($request->email)->send(new SendMail($data, 'emails.doctor-consultation-order-confirmation'));
 
             
             if($request->user()){

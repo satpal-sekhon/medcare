@@ -166,7 +166,12 @@
 
                         <div class="order-wrap">
                             <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}">
-                                <h3>{{ $order->doctor_name }} ({{ $order->doctor_qualification }})</h3>
+                                <h3>
+                                    {{ $order->doctor_name }} 
+                                    @if($order->doctor_qualification)
+                                        ({{ $order->doctor_qualification }})
+                                    @endif
+                                </h3>
                             </a>
                             <h5 class="fw-bold">{{ $order->doctor_type }}</h5>
 
