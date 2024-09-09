@@ -14,6 +14,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorTypeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LabPackageController;
+use App\Http\Controllers\LabPackageOrderController;
 use App\Http\Controllers\LabTestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
@@ -41,10 +42,13 @@ Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.in
 Route::get('/lab-test', [LabPackageController::class, 'index'])->name('lab-test.index');
 Route::get('/lab-package/{labPackage}', [LabPackageController::class, 'show'])->name('lab-package.show');
 Route::get('/book-package/{labPackage}', [LabPackageController::class, 'book'])->name('lab-package.book');
-Route::post('/order-lab-package', [LabPackageController::class, 'orderPackage'])->name('lab-package.order');
+Route::post('/order-lab-package', [LabPackageOrderController::class, 'store'])->name('lab-package.order');
 
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
+
 Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->name('search-medicines');
+Route::get('/search-medicines/{alphabet}', [ProductController::class, 'searchMedicines'])->name('search-medicine.alphabet');
+
 Route::get('/quick-order', [OrderController::class, 'quickOrder'])->name('quick-order');
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/about-us', [FrontendController::class, 'about'])->name('about');

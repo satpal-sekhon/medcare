@@ -12,8 +12,13 @@
         </span>
     </div>
 
+    <x-success-message :message="session('success')" />
+
+    
     <div class="order-contain">
         <div class="order-box dashboard-bg-box">
+
+
             <div class="order-container">
                 <div class="order-icon">
                     <i data-feather="box"></i>
@@ -43,7 +48,7 @@
                             </div>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <div class="size-box">
                                 <h6 class="text-content">Rate : </h6>
                                 <div class="product-rating ms-2">
@@ -66,7 +71,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li>
                             <div class="size-box">

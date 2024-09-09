@@ -18,8 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->limit(16)->withCount('products')->get();
-        $products = Product::paginate(20);
+        $categories = Category::latest()->limit(16)->withCount(['products as active_products_count' => function($query) {
+            $query->where('status', 'Active');
+        }])->get();
+        $products = Product::where('status', 'Active')->paginate(20);
 
         // Get the current and last page numbers
         $currentPage = $products->currentPage();
@@ -209,8 +211,24 @@ class ProductController extends Controller
         ]);
     }
 
-    public function searchMedicines(){
-        return view('frontend.search-medicines');
+    public function searchMedicines(Request $request, $alphabet){
+        if(!$alphabet){
+            $alphabet = $request->query('alphabet');
+            $alphabet = substr($alphabet, 0, 1); 
+
+            if(!$alphabet){
+                $alphabet = 'a';
+            }
+        }
+
+        $products = Product::where('name', 'like', $alphabet.'%')
+            ->where('product_type', 'Generic')
+            ->where('status', 'Active')
+            ->paginate(16);
+
+        $alphabets = range('A', 'Z');
+
+        return view('frontend.search-medicines', compact('alphabet', 'alphabets', 'products'));
     }
 
     /**

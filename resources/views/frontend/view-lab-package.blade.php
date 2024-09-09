@@ -25,6 +25,8 @@
 
                     <div class="col-xl-7 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="right-box-contain">
+                            <x-success-message :message="session('success')" />
+
                             <h2 class="name">{{ $labPackage->name }}</h2>
                             <div class="price-rating">
                                 <h3 class="theme-color price">₹{{ $labPackage->amount }}</h3>

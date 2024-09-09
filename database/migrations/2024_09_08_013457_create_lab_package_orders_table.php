@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('instructions')->nullable();
             $table->string('payment_method', 50)->nullable();
             $table->enum('payment_status', ['Pending', 'Completed'])->default('Pending');
+            $table->enum('order_status', ['Pending', 'Canceled', 'Completed'])->default('Pending');
             $table->string('transaction_id')->nullable();
             $table->timestamps();
 

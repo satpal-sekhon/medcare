@@ -40,31 +40,51 @@
 
                     <div class="col-xl-5 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="right-box-contain">
-                            @guest
-                            <div class="d-flex justify-content-between mb-3" id="checkoutConfirmation">
-                                <button id="continueOrderAsGuest" type="button" class="btn btn-theme-outline">Continue as Guest</button>
-                                <a href="{{ route('sign-up') }}" class="btn btn-theme-outline">Create an Account</a>
-                            </div>
-                            @endguest
+                            @if (!$errors->count())
+                                @guest
+                                <div class="d-flex justify-content-between mb-3" id="checkoutConfirmation">
+                                    <button id="continueOrderAsGuest" type="button" class="btn btn-theme-outline">Continue
+                                        as Guest</button>
+                                    <a href="{{ route('sign-up') }}" class="btn btn-theme-outline">Create an Account</a>
+                                </div>
+                                @endguest
+                            @endif
 
-
-                            <form action="{{ route('lab-package.order') }}" method="POST" @class(["mb-4", "d-none" => !auth()->check() ]) id="bookLabPackage">
+                            <form action="{{ route('lab-package.order') }}" method="POST" @class(["mb-4", "d-none"=>
+                                !auth()->check() && !$errors->count() ]) id="bookLabPackage">
                                 @csrf
+
+                                <input type="hidden" name="lab_package_id" value="{{ $labPackage->id }}">
 
                                 <div class="mb-3">
                                     <label for="customerName" class="form-label">Your Name</label>
-                                    <input type="text" name="customer_name" class="form-control" id="customerName"
+                                    <input type="text" name="customer_name" id="customerName"
+                                        @class(['form-control', 'is-invalid'=> $errors->first('customer_name')])
                                         value="{{ old('customer_name', auth()->user()->name ?? '') }}">
+
+                                    @if ($errors->has('customer_name'))
+                                    <span class="invalid-feedback d-block`">{{ $errors->first('customer_name') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="phoneNumber" class="form-label">Phone Number</label>
-                                    <input type="tel" name="phone_number" class="form-control" id="phoneNumber"
+                                    <input type="number" name="phone_number" id="phoneNumber"
+                                        @class(['form-control', 'is-invalid'=> $errors->first('phone_number')])
                                         value="{{ old('phone_number', auth()->user()->phone_number ?? '') }}">
+
+                                    @if ($errors->has('phone_number'))
+                                    <span class="invalid-feedback d-block`">{{ $errors->first('phone_number') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="text" name="email" class="form-control" id="email"
+                                    <input type="text" name="email" id="email"
+                                        @class(['form-control', 'is-invalid'=> $errors->first('email')])
                                         value="{{ old('email', auth()->user()->email ?? '') }}">
+
+                                    @if ($errors->has('email'))
+                                    <span class="invalid-feedback d-block`">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="instructions" class="form-label">Any Instructions</label>
@@ -83,13 +103,13 @@
 </section>
 
 @push('scripts')
-    <script>
-        $(function(){
+<script>
+    $(function(){
             $('#continueOrderAsGuest').click(function(){
                 $('#bookLabPackage').removeClass('d-none');
                 $('#checkoutConfirmation').addClass('d-none');
             })
         })
-    </script>
+</script>
 @endpush
 @endsection

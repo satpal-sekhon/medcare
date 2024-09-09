@@ -20,15 +20,36 @@ class LabPackageOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.book-lab-package', compact('labPackage'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $request->validate([
+            'lab_package_id' => 'required|integer',
+            'customer_name' => 'required|string|max:50',
+            'phone_number' => 'required|digits:10',
+            'email' => 'required|email|max:100',
+            'instructions' => 'nullable|string',
+        ]);
+        
+        LabPackageOrder::create([
+            'user_id' => $request->user()->id ?? null,
+            'lab_package_id' => $request->input('lab_package_id'),
+            'name' => $request->input('customer_name'),
+            'phone_number' => $request->input('phone_number'),
+            'email' => $request->input('email'),
+            'instructions' => $request->input('instructions')
+        ]);
+
+        if($request->user()){
+            return redirect()->route('my-account.orders')->with('success', 'Lab package booked successfully!');
+        }
+
+        return redirect()->route('lab-package.show', $request->input('lab_package_id'))->with('success', 'Lab package booked successfully!');
     }
 
     /**

@@ -10,21 +10,17 @@
         </div>
 
         <div class="alphabet-container" id="alphabetTabs">
-            <a href="javascript:void(0)" data-letter="a" class="active">A</a>
-            <a href="javascript:void(0)" data-letter="b">B</a>
-            <a href="javascript:void(0)" data-letter="c">C</a>
-            <!-- Add more letters as needed -->
-            <a href="javascript:void(0)" data-letter="z">Z</a>
+            @foreach ($alphabets as $letter)
+                <a href="{{ route('search-medicine.alphabet', strtolower($letter)) }}" @class(['active' => $alphabet == strtolower($letter)])>{{ $letter }}</a>
+            @endforeach
         </div>
 
         <!-- Dropdown for mobile view -->
         <div class="resde">
             <select id="alphabetDropdown">
-                <option value="a">A</option>
-                <option value="b">B</option>
-                <option value="c">C</option>
-                <!-- Add more options as needed -->
-                <option value="z">Z</option>
+                @for ($i = 'A'; $i <= 'Z' ; $i++) 
+                    <option value="?alphabet={{ $i }}" data-letter="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
         </div>
 
@@ -35,34 +31,31 @@
             <div id="resultsContainer"></div>
         </div>
 
-        <!-- Medicines for A -->
-        <div id="a" class="medicine-list" style="display: block;">
-            <h2>Amlodipine <span class="composition">(Composition: Amlodipine besylate 5mg, Excipients q.s.)</span></h2>
-            <h2>Aspirin <span class="composition">(Composition: Acetylsalicylic acid 75mg, Microcrystalline cellulose q.s.)</span></h2>
-            <!-- Add more medicines as needed -->
-        </div>
+        <!-- Medicines for $alphabet -->
+        <div id="{{ $alphabet }}" class="medicine-list d-block">
+            @if($products->count() > 0)
+                @foreach ($products as $product)
+                <a href="{{ route('products.view', $product->id) }}">
+                    <h4 class="mb-2">
+                        {{ $product->name }} 
+                        @if ($product->composition)
+                        <span class="composition">(Composition: {{ $product->composition }})</span>
+                        @endif
+                    </h4>
+                </a>
+                @endforeach
+            @else
+                <x-warning-message message="Products not found starting with {{ strtoupper($alphabet) }}"></x-warning-message>
+            @endif
 
-        <!-- Medicines for B -->
-        <div id="b" class="medicine-list">
-            <h2>Bisoprolol <span class="composition">(Composition: Bisoprolol fumarate 5mg, Magnesium stearate q.s.)</span></h2>
-            <h2>Betamethasone <span class="composition">(Composition: Betamethasone valerate 0.1%, White soft paraffin q.s.)</span></h2>
-            <!-- Add more medicines as needed -->
+            {{ $products->links() }}
         </div>
-
-        <!-- Medicines for C -->
-        <div id="c" class="medicine-list">
-            <h2>Ciprofloxacin <span class="composition">(Composition: Ciprofloxacin hydrochloride 500mg, Excipients q.s.)</span></h2>
-            <h2>Cetirizine <span class="composition">(Composition: Cetirizine dihydrochloride 10mg, Lactose monohydrate q.s.)</span></h2>
-            <!-- Add more medicines as needed -->
-        </div>
-
-        <!-- Add more sections for other letters -->
     </div>
 </section>
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             // Function to open the selected tab
             function openTab(letter) {
                 $('.medicine-list').hide();
@@ -135,12 +128,11 @@
                 openTab($(this).data('letter'));
             });
         });
-    </script>
+</script>
 @endpush
 
 @push('styles')
 <style>
-      
     /* Style for search button */
     .search-container {
         margin: 20px;
@@ -171,7 +163,7 @@
         background-color: #218838;
     }
 
-   /* Alphabet tabs */
+    /* Alphabet tabs */
     .alphabet-container {
         display: flex;
         flex-wrap: wrap;
@@ -179,7 +171,7 @@
         margin-top: 20px;
         background: #00cea7;
         border-radius: 5px;
-            padding: 5px 0px;
+        padding: 5px 0px;
     }
 
     .alphabet-container a {
@@ -195,7 +187,7 @@
 
     .alphabet-container a.active {
         background-color: #000;
-        color:white;
+        color: white;
     }
 
     /* Medicine list */
@@ -214,8 +206,9 @@
         font-size: 14px;
         font-style: italic;
         color: #00614e;
-        
+
     }
+
     .search-results {
         margin: 20px;
         padding: 10px;
