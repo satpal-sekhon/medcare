@@ -23,6 +23,12 @@ return new class extends Migration
             $table->enum('payment_status', ['Pending', 'Completed'])->default('Pending');
             $table->enum('order_status', ['Pending', 'Canceled', 'Completed'])->default('Pending');
             $table->string('transaction_id')->nullable();
+            $table->string('package_name', 100);
+            $table->string('package_title', 100)->nullable();
+            $table->string('package_image')->nullable();
+            $table->decimal('package_amount', 8, 2)->default(0.00);
+            $table->text('package_description')->nullable();
+            $table->text('included_tests');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

@@ -18,4 +18,9 @@ class LabPackageOrder extends Model
         }
         $this->attributes['payment_method'] = $value;
     }
+
+    public function labPackage()
+    {
+        return $this->belongsTo(LabPackage::class);
+    }
 }

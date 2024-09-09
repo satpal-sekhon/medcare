@@ -23,6 +23,10 @@ return new class extends Migration
             $table->string('payment_method', 50)->nullable();
             $table->enum('payment_status', ['Pending', 'Completed'])->default('Pending');
             $table->string('transaction_id')->nullable();
+            $table->string('doctor_name');
+            $table->string('doctor_type')->nullable();
+            $table->string('doctor_image')->nullable();
+            $table->decimal('amount_paid', 8, 2)->default(0.00);
             $table->timestamps();
 
             

@@ -195,11 +195,11 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        $imagePath = $doctor->image;
+        /* $imagePath = $doctor->image;
 
         if ($imagePath && file_exists(public_path($imagePath))) {
             unlink(public_path($imagePath));
-        }
+        } */
 
         $doctor->delete();
 

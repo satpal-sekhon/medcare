@@ -147,9 +147,9 @@ class LabPackageController extends Controller
         $imagePath = $labPackage->image;
 
         if ($request->hasFile('image')) {
-            if ($imagePath && file_exists(public_path($imagePath))) {
+            /* if ($imagePath && file_exists(public_path($imagePath))) {
                 unlink(public_path($imagePath));
-            }
+            } */
 
             $base_image_path = 'uploads/lab-packages/';
             $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
@@ -176,11 +176,11 @@ class LabPackageController extends Controller
      */
     public function destroy(LabPackage $labPackage)
     {
-        $imagePath = $labPackage->image;
+        /* $imagePath = $labPackage->image;
 
         if ($imagePath && file_exists(public_path($imagePath))) {
             unlink(public_path($imagePath));
-        }
+        } */
 
         $labPackage->delete();
 
