@@ -18,6 +18,9 @@
                         <h4>Order With Prescription</h4>
                     </div>
 
+                    <x-error-message :message="session('error')" />
+                    <x-success-message :message="session('success')" />
+
                     <div class="input-box">
                         @if (!$errors->count())
                         @guest
@@ -34,13 +37,13 @@
                             @csrf
 
                             <div class="col-12 mb-2">
-                                <x-form-input name="customer_name" label="Name"></x-form-input>
+                                <x-form-input name="customer_name" label="Name" value="{{ auth()->user()->name ?? '' }}"></x-form-input>
                             </div>
                             <div class="col-12 mb-2">
-                                <x-form-input name="email" label="Email Address"></x-form-input>
+                                <x-form-input name="email" label="Email Address" value="{{ auth()->user()->email ?? '' }}"></x-form-input>
                             </div>
                             <div class="col-12 mb-2">
-                                <x-form-input name="phone_number" label="Phone Number"></x-form-input>
+                                <x-form-input name="phone_number" label="Phone Number" value="{{ auth()->user()->phone_number ?? '' }}"></x-form-input>
                             </div>
                             <div class="col-12 mb-2">
                                 <x-form-input type="file" name="prescription" label="Upload Prescription"

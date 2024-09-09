@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('doctor_qualification')->nullable();
             $table->decimal('doctor_experience', 3, 1)->nullable(); 
             $table->decimal('amount_paid', 8, 2)->default(0.00);
+            $table->string('status', 50)->nullable();
             $table->timestamps();
 
             

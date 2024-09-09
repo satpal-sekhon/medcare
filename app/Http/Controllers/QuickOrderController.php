@@ -32,11 +32,35 @@ class QuickOrderController extends Controller
             'customer_name' => 'required|string|max:50',
             'phone_number' => 'required|digits:10',
             'email' => 'required|email|max:100',
-            'prescription' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'prescription' => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048',
             'instructions' => 'nullable|string',
         ]);
 
-        dd($request->all());
+        $prescriptionPath = null;
+        $mimeType = null;
+        if ($request->hasFile('prescription')) {
+            $base_image_path = 'uploads/prescriptions/';
+            $filename = time().'.'.$request->file('prescription')->getClientOriginalExtension();
+            $mimeType = $request->file('prescription')->getMimeType();
+            $request->file('prescription')->move(public_path($base_image_path), $filename);
+                    
+            $prescriptionPath = $base_image_path.$filename;
+        }
+
+        QuickOrder::create([
+            'name' => $request->input('customer_name'),
+            'phone_number' => $request->input('phone_number'),
+            'email' => $request->input('email'),
+            'prescription_path' => $prescriptionPath,
+            'mime_type' => $mimeType,
+            'instructions' => $request->input('instructions'),
+        ]);
+
+        if($request->user()){
+            return redirect()->route('my-account.orders')->with('success', 'Quick order placed successfully!');
+        }
+
+        return redirect()->back()->with('success', 'Quick order placed successfully!');
     }
 
     /**
