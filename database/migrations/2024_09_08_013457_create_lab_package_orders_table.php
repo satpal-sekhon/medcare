@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('package_title', 100)->nullable();
             $table->string('package_image')->nullable();
             $table->decimal('package_amount', 8, 2)->default(0.00);
-            $table->text('package_description')->nullable();
             $table->text('included_tests');
             $table->timestamps();
 

@@ -19,39 +19,42 @@
         <div class="order-box dashboard-bg-box w-100">
             <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="products-tab" data-bs-toggle="tab"
-                        data-bs-target="#products" type="button" role="tab">Products</button>
+                    <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products"
+                        type="button" role="tab">Products</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="lab-packages-tab" data-bs-toggle="tab"
-                        data-bs-target="#lab-packages" type="button" role="tab">Lab Packages</button>
+                    <button class="nav-link" id="lab-packages-tab" data-bs-toggle="tab" data-bs-target="#lab-packages"
+                        type="button" role="tab">Lab Packages</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="doctor-consultations-tab" data-bs-toggle="tab"
                         data-bs-target="#doctor-consultations" type="button" role="tab">Doctor Consultations</button>
                 </li>
             </ul>
-            
-            <div class="tab-content custom-tab" id="myTabContent">
-                <div class="tab-pane fade show active p-4" id="products" role="tabpanel">
-                    <x-warning-message message="You don't have any products order yet"></x-warning-message>
+
+            <div class="tab-content custom-tab">
+                <div class="tab-pane fade show active" id="products" role="tabpanel">
+                    <div class="p-4">
+                        <x-warning-message message="You don't have any products order yet"></x-warning-message>
+                    </div>
+
                     {{-- <div class="order-container pt-4">
                         <div class="order-icon">
                             <i data-feather="box"></i>
                         </div>
-            
+
                         <div class="order-detail">
                             <h4>Delivers <span>Pending</span></h4>
                             <h6 class="text-content">Product is Under Process & It Will be Delivered to you on Time. &
                                 Product is Under Process & It Will be Delivered to you on Time.</h6>
                         </div>
                     </div>
-            
+
                     <div class="product-order-detail">
                         <a href="#" class="order-image">
                             <img src="{{ asset('assets/images/product/1.png') }}" class="blur-up lazyload" alt="">
                         </a>
-            
+
                         <div class="order-wrap">
                             <a href="#">
                                 <h3>Product 1 Name</h3>
@@ -64,7 +67,7 @@
                                         <h5>₹20.68</h5>
                                     </div>
                                 </li>
-            
+
                                 <!-- <li>
                                     <div class="size-box">
                                         <h6 class="text-content">Rate : </h6>
@@ -89,14 +92,14 @@
                                         </div>
                                     </div>
                                 </li> -->
-            
+
                                 <li>
                                     <div class="size-box">
                                         <h6 class="text-content">Sold By : </h6>
                                         <h5>Seller Name</h5>
                                     </div>
                                 </li>
-            
+
                                 <li>
                                     <div class="size-box">
                                         <h6 class="text-content">Quantity : </h6>
@@ -106,53 +109,54 @@
                             </ul>
                         </div>
                     </div> --}}
-                    
+
                 </div>
-            
+
                 <div class="tab-pane fade" id="lab-packages" role="tabpanel">
                     @forelse($labPackageOrders as $order)
-                        <div class="product-order-detail">
-                            <a href="#" class="order-image">
-                                <img src="{{ asset('assets/images/product/2.png') }}" class="blur-up lazyload" alt="">
+                    <div class="product-order-detail">
+                        <a href="{{ route('lab-package.show', $order->lab_package_id ?? '0') }}" class="order-image w-25">
+                            <img src="{{ asset($order->package_image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/lab.jpg') }}';" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+
+                        <div class="order-wrap">
+                            <a href="{{ route('lab-package.show', $order->lab_package_id ?? '0') }}">
+                                <h3>{{ $order->package_name }}</h3>
                             </a>
-
-                            <div class="order-wrap">
-                                <a href="{{ route('lab-package.show', $order->labPackage->id) }}" target="_blank">
-                                    <h3>{{ $order->labPackage->name }}</h3>
-                                </a>
-                                <p class="text-content">{{  }}</p>
-                                <ul class="product-size">
-                                    <li>
-                                        <div class="size-box">
-                                            <h6 class="text-content">Price : </h6>
-                                            <h5>₹20.68</h5>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="size-box">
-                                            <h6 class="text-content">Sold By : </h6>
-                                            <h5>Seller Name</h5>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="size-box">
-                                            <h6 class="text-content">Quantity : </h6>
-                                            <h5>250 G</h5>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="product-size">
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Price : </h6>
+                                        <h5>₹{{ $order->package_amount }}</h5>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="product-size mt-2">
+                                <h5 class="fw-bold">{{ $order->package_title }}</h5>
+                                
+                                @foreach (json_decode($order->included_tests) as $key => $test)
+                                <li>
+                                    <div class="size-box">
+                                        <h5>{{ ++$key }}. {{ $test }}</h5>
+                                    </div>
+                                </li>
+                                @endforeach
+                               
+                            </ul>
                         </div>
+                    </div>
                     @empty
+                    <div class="p-4">
                         <x-warning-message message="You don't have booked any lab package yet"></x-warning-message>
+                    </div>
                     @endforelse
-                    
+
                 </div>
-            
+
                 <div class="tab-pane fade" id="doctor-consultations" role="tabpanel">
-                    <!-- Doctor Consultations Content Here -->
+                    <div class="p-4">
+                        <x-warning-message message="You didn't consulted with any doctor yet"></x-warning-message>
+                    </div>
                 </div>
             </div>
         </div>

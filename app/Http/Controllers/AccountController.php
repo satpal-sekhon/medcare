@@ -19,7 +19,7 @@ class AccountController extends Controller
     }
 
     public function orders(){
-        $labPackageOrders = LabPackageOrder::where('user_id', Auth::id())->get();
+        $labPackageOrders = LabPackageOrder::where('user_id', Auth::id())->latest()->get();
 
         return view('frontend.my-account.orders', compact('labPackageOrders'));
     }
