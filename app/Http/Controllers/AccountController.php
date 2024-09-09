@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\DoctorConsultationOrder;
 use App\Models\LabPackageOrder;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class AccountController extends Controller
 
     public function orders(){
         $labPackageOrders = LabPackageOrder::where('user_id', Auth::id())->latest()->get();
+        $doctorConsultationOrders = DoctorConsultationOrder::where('user_id', Auth::id())->latest()->get();
 
-        return view('frontend.my-account.orders', compact('labPackageOrders'));
+        return view('frontend.my-account.orders', compact('labPackageOrders', 'doctorConsultationOrders'));
     }
 
     public function profile(){

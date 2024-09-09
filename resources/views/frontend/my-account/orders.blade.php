@@ -150,13 +150,27 @@
                         <x-warning-message message="You don't have booked any lab package yet"></x-warning-message>
                     </div>
                     @endforelse
-
                 </div>
 
                 <div class="tab-pane fade" id="doctor-consultations" role="tabpanel">
-                    <div class="p-4">
-                        <x-warning-message message="You didn't consulted with any doctor yet"></x-warning-message>
+                    @forelse($doctorConsultationOrders as $order)
+                    <div class="product-order-detail">
+                        <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}" class="order-image w-25">
+                            <img src="{{ asset($order->doctor_image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/doctor.png   ') }}';" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+
+                        <div class="order-wrap">
+                            <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}">
+                                <h3>{{ $order->doctor_name }}</h3>
+                            </a>
+                            <h5 class="fw-bold">{{ $order->doctor_type }}</h5>
+                        </div>
                     </div>
+                    @empty
+                    <div class="p-4">
+                        <x-warning-message message="You don't consulted wit doctor"></x-warning-message>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

@@ -63,7 +63,7 @@
                                         value="{{ old('customer_name', auth()->user()->name ?? '') }}">
 
                                     @if ($errors->has('customer_name'))
-                                    <span class="invalid-feedback d-block`">{{ $errors->first('customer_name') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('customer_name') }}</span>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -73,7 +73,7 @@
                                         value="{{ old('phone_number', auth()->user()->phone_number ?? '') }}">
 
                                     @if ($errors->has('phone_number'))
-                                    <span class="invalid-feedback d-block`">{{ $errors->first('phone_number') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('phone_number') }}</span>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -83,7 +83,7 @@
                                         value="{{ old('email', auth()->user()->email ?? '') }}">
 
                                     @if ($errors->has('email'))
-                                    <span class="invalid-feedback d-block`">{{ $errors->first('email') }}</span>
+                                    <span class="invalid-feedback">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                                 <div class="mb-3">

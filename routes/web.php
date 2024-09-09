@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiseaseController;
+use App\Http\Controllers\DoctorConsultationOrderController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorTypeController;
 use App\Http\Controllers\FrontendController;
@@ -45,6 +46,8 @@ Route::get('/book-package/{labPackage}', [LabPackageController::class, 'book'])-
 Route::post('/order-lab-package', [LabPackageOrderController::class, 'store'])->name('lab-package.order');
 
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctors.index');
+Route::get('/doctors/{doctor}', [DoctorController::class, 'consult'])->name('doctors.consult');
+Route::post('/consult-doctor', [DoctorConsultationOrderController::class, 'store'])->name('doctors.bookConsultation');
 
 Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->name('search-medicines');
 Route::get('/search-medicines/{alphabet}', [ProductController::class, 'searchMedicines'])->name('search-medicine.alphabet');

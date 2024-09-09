@@ -38,7 +38,22 @@ class CategoryController extends Controller
     {
         $request->validate([
             'primary_category' => 'required',
-            'name' => 'required|string|max:100|unique:categories',
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                function ($attribute, $value, $fail) use ($request) {
+                    $primaryCategoryId = $request->input('primary_category');
+        
+                    $exists = Category::where('name', $value)
+                        ->where('primary_category_id', $primaryCategoryId)
+                        ->exists();
+        
+                    if ($exists) {
+                        $fail('The '.$attribute.' has already been taken in the selected category.');
+                    }
+                }
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);

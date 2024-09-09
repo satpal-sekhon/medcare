@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\DoctorConsultationOrder;
 use App\Models\DoctorType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -127,6 +128,11 @@ class DoctorController extends Controller
     public function show(Doctor $doctor)
     {
         //
+    }
+
+    public function consult(Doctor $doctor){
+        $doctorTypes = DoctorType::all();
+        return view('frontend.consult-doctor', compact('doctor', 'doctorTypes'));
     }
 
     /**
