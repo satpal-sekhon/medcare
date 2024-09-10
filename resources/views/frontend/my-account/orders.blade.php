@@ -140,7 +140,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="size-box d-block">
+                                    <div @class(["size-box", "d-block" => getFileTypeByMimeType($order->mime_type) == 'image'])>
                                         <h6 class="text-content">Prescription: </h6>
                                         @if(getFileTypeByMimeType($order->mime_type) == 'image')
                                         <div class="row">

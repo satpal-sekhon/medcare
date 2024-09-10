@@ -151,10 +151,24 @@
                     </li>
                     
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-list-unordered"></i>
                             <span>Orders</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="">Product Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.quick-orders.index') }}">Quick Orders</a>
+                            </li>
+                            <li>
+                                <a href="#">Lab Package Orders</a>
+                            </li>
+                            <li>
+                                <a href="#">Doctor Consultations</a>
+                            </li>
+                        </ul>
                     </li>
                     
                     <li class="sidebar-list">

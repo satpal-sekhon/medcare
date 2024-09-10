@@ -145,4 +145,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('lab-packages', LabPackageController::class);
     Route::get('/lab-packages', [LabPackageController::class, 'admin_index'])->name('admin.lab-packages.index');
     Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-packages.get');
+
+    // Orders routes
+    Route::resource('quick-orders', QuickOrderController::class);
+    Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('admin.quick-orders.index');
+    Route::post('/quick-orders/get', [QuickOrderController::class, 'get'])->name('quick-orders.get');
 });
