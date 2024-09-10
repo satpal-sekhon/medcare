@@ -18,6 +18,10 @@ class LabPackageOrderController extends Controller
         //
     }
 
+    public function admin_index(){
+        return view('admin.orders.lab-package-orders');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

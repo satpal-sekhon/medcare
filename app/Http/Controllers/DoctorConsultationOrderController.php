@@ -19,6 +19,10 @@ class DoctorConsultationOrderController extends Controller
         //
     }
 
+    public function admin_index(){
+        return view('admin.orders.doctor-consultations');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

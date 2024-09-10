@@ -163,10 +163,10 @@
                                 <a href="{{ route('admin.quick-orders.index') }}">Quick Orders</a>
                             </li>
                             <li>
-                                <a href="#">Lab Package Orders</a>
+                                <a href="{{ route('admin.lab-package-orders.index') }}">Lab Package Orders</a>
                             </li>
                             <li>
-                                <a href="#">Doctor Consultations</a>
+                                <a href="{{ route('admin.doctor-consultations.index') }}">Doctor Consultations</a>
                             </li>
                         </ul>
                     </li>

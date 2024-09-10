@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LabTest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LabTestController extends Controller
 {
@@ -107,7 +108,38 @@ class LabTestController extends Controller
      */
     public function update(Request $request, LabTest $labTest)
     {
-        //
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('lab_tests')->ignore($labTest->id)
+            ],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            //'description' => 'required|string'
+        ]);
+
+        $imagePath = $labTest->image;
+
+        if ($request->hasFile('image')) {
+            if ($imagePath && file_exists(public_path($imagePath))) {
+                unlink(public_path($imagePath));
+            }
+
+            $base_image_path = 'uploads/lab-tests/';
+            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path($base_image_path), $filename);
+                    
+            $imagePath = $base_image_path.$filename;
+        }
+
+        $labTest->update([
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('admin.lab-tests.index')->with('success', 'Lab test updated successfully!');
     }
 
     /**
@@ -115,6 +147,17 @@ class LabTestController extends Controller
      */
     public function destroy(LabTest $labTest)
     {
-        //
+        $imagePath = $labTest->image;
+
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
+        }
+
+        $labTest->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab test deleted successfully.'
+        ]);
     }
 }

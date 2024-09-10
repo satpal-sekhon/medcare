@@ -10,14 +10,14 @@
                     </div>
 
                     <div class="theme-form theme-form-2 mega-form">
-                        <form action="{{ route('brands.update', [$brand->id]) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('lab-tests.update', [$labTest->id]) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <div class="mb-3">
                                 <label class="form-label-title mb-0">Test Name</label>
                                 <input type="text" name="name" placeholder="Category Name" maxlength="100"
-                                    value="{{ old('name', $brand->name) }}" @class(['form-control', 'is-invalid' => $errors->first('name')])>
+                                    value="{{ old('name', $labTest->name) }}" @class(['form-control', 'is-invalid' => $errors->first('name')])>
                                 @if ($errors->has('name'))
                                     <div class="invalid-feedback d-block`">{{ $errors->first('name') }}</div>
                                 @endif
@@ -31,8 +31,8 @@
                                         <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
                                     @endif
 
-                                    @if ($brand->image)
-                                        <img src="{{ asset($brand->image) }}" alt=""
+                                    @if ($labTest->image)
+                                        <img src="{{ asset($labTest->image) }}" alt=""
                                             style="width: 100px; height: auto;">
                                     @endif
                                 </div>
@@ -43,7 +43,7 @@
                                 <textarea name="description" placeholder="Enter Description" @class([
                                     'form-control',
                                     'is-invalid' => $errors->first('description'),
-                                ])>{{ old('description', $brand->description) }}</textarea>
+                                ])>{{ old('description', $labTest->description) }}</textarea>
                                 @if ($errors->has('description'))
                                     <div class="invalid-feedback d-block">{{ $errors->first('description') }}</div>
                                 @endif
