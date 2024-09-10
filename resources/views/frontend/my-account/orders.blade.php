@@ -23,6 +23,10 @@
                         type="button" role="tab">Products</button>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="quick-orders-tab" data-bs-toggle="tab" data-bs-target="#quick-orders"
+                        type="button" role="tab">Quick Orders</button>
+                </li>
+                <li class="nav-item" role="presentation">
                     <button class="nav-link" id="lab-packages-tab" data-bs-toggle="tab" data-bs-target="#lab-packages"
                         type="button" role="tab">Lab Packages</button>
                 </li>
@@ -110,6 +114,53 @@
                         </div>
                     </div> --}}
 
+                </div>
+
+                <div class="tab-pane fade" id="quick-orders" role="tabpanel">
+                    @forelse($quickOrders as $order)
+                    <div class="product-order-detail">
+                        <div class="order-wrap">
+                            <ul class="product-size">
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Customer Name:</h6>
+                                        <h5>{{ $order->name }}</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Phone Number:</h6>
+                                        <h5>{{ $order->phone_number }}</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Email:</h6>
+                                        <h5>{{ $order->email }}</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box d-block">
+                                        <h6 class="text-content">Prescription: </h6>
+                                        @if(getFileTypeByMimeType($order->mime_type) == 'image')
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="{{ asset($order->prescription_path) }}" alt="" class="img-fluid mt-2">
+                                            </div>
+                                        </div>
+                                        @else
+                                            <h5><a href="{{ asset($order->prescription_path) }}" target="_blank">Click here to view prescription</a></h5>
+                                        @endif
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="p-4">
+                        <x-warning-message message="You don't have placed any quick order yet"></x-warning-message>
+                    </div>
+                    @endforelse
                 </div>
 
                 <div class="tab-pane fade" id="lab-packages" role="tabpanel">

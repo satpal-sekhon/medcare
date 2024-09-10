@@ -48,6 +48,7 @@ class QuickOrderController extends Controller
         }
 
         QuickOrder::create([
+            'user_id' => $request->user()->id ?? null,
             'name' => $request->input('customer_name'),
             'phone_number' => $request->input('phone_number'),
             'email' => $request->input('email'),

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone_number', 12);
             $table->string('email', 100);
             $table->string('prescription_path');
-            $table->text('mime_type', 100)->nullable();
+            $table->string('mime_type', 100)->nullable();
             $table->text('instructions')->nullable();
             $table->string('status', 50)->nullable();
             $table->timestamps();

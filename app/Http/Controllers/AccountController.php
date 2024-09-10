@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\DoctorConsultationOrder;
 use App\Models\LabPackageOrder;
+use App\Models\QuickOrder;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +21,11 @@ class AccountController extends Controller
     }
 
     public function orders(){
+        $quickOrders = QuickOrder::where('user_id', Auth::id())->latest()->get();
         $labPackageOrders = LabPackageOrder::where('user_id', Auth::id())->latest()->get();
         $doctorConsultationOrders = DoctorConsultationOrder::where('user_id', Auth::id())->latest()->get();
 
-        return view('frontend.my-account.orders', compact('labPackageOrders', 'doctorConsultationOrders'));
+        return view('frontend.my-account.orders', compact('quickOrders', 'labPackageOrders', 'doctorConsultationOrders'));
     }
 
     public function profile(){
