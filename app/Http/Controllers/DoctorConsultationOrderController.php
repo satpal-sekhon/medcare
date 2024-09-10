@@ -146,8 +146,14 @@ class DoctorConsultationOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DoctorConsultationOrder $doctorConsultationOrder)
+    public function destroy($doctorConsultationOrdeId)
     {
-        //
+        $doctorConsultationOrder = DoctorConsultationOrder::find($doctorConsultationOrdeId);
+        $doctorConsultationOrder->delete();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Doctor consultation deleted successfully.'
+        ], 200);
     }
 }

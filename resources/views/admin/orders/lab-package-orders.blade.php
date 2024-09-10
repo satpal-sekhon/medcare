@@ -6,7 +6,7 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Quick Orders</h5>
+                        <h5>Lab Package Orders</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
@@ -21,7 +21,6 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Instructions</th>
-                                        <th>Prescription</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -38,28 +37,6 @@
 
     @push('scripts')
         <script>
-            function getFileTypeByMimeType(mimeType) {
-                // Define a mapping of MIME types to general file types
-                const mimeTypeToFileType = {
-                    'image/jpeg': 'image',
-                    'image/png': 'image',
-                    'image/gif': 'image',
-                    'text/plain': 'text',
-                    'text/html': 'text',
-                    'application/pdf': 'document',
-                    'application/zip': 'archive',
-                    'application/vnd.ms-excel': 'spreadsheet',
-                    'application/msword': 'document',
-                    'application/json': 'data',
-                    'audio/mpeg': 'audio',
-                    'video/mp4': 'video',
-                    'application/xml': 'data',
-                };
-
-                // Return the general file type or 'unknown' if the MIME type is not in the object
-                return mimeTypeToFileType[mimeType] || 'unknown';
-            }
-
             function nl2br(str) {
                 if(!str){
                     return ``;
@@ -114,20 +91,6 @@
                             orderable: false,
                             render: function(data, type, row) {
                                 return nl2br(row.instructions)
-                            }
-                        },
-                        {
-                            data: 'prescription',
-                            name: 'prescription',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                let attachmentType = getFileTypeByMimeType(row.mime_type);
-                                if(attachmentType=='image'){
-                                    return `<img src="{{ asset('${row.prescription_path}') }}" alt="Uploaded prescription" class="dt-image">`;
-                                } else {
-                                    return `<a href="{{ asset('${row.prescription_path}') }}" target="_blank">Click here to view</a>`;
-                                }
-
                             }
                         },
                         {
