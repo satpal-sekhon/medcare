@@ -17,9 +17,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
+                                        <th>Customer Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>Doctor Type</th>
+                                        <th>Doctor Name</th>
                                         <th>Instructions</th>
                                         <th>Option</th>
                                     </tr>
@@ -84,6 +86,17 @@
                         {
                             data: 'phone_number',
                             name: 'phone_number'
+                        },
+                        {
+                            data: 'doctor_type',
+                            name: 'doctor_type'
+                        },
+                        {
+                            data: 'doctor_name',
+                            name: 'doctor_name',
+                            render: function(data, type, row) {
+                                return row.doctor_name ? doctor_name : 'N/A'
+                            }
                         },
                         {
                             data: 'instructions',
