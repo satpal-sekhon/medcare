@@ -11,7 +11,7 @@
                         <div class="col-xl-12">
                             <div class="contact-image">
                                 <img src="../assets/images/inner-page/contact-us.png"
-                                    class="img-fluid blur-up lazyloaded" alt="">
+                                    class="img-fluid lazyloaded" alt="">
                             </div>
                         </div>
                         <div class="col-xl-12">

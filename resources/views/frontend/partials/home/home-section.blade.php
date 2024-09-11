@@ -6,7 +6,7 @@
             <div class="col-xl-8 ratio_65">
                 <div class="home-contain h-100">
                     <div class="h-100">
-                        <img src="/assets/images/banners/1.jpg" class="bg-img blur-up lazyload" alt="">
+                        <img src="/assets/images/banners/1.jpg" class="bg-img lazyload" alt="">
                     </div>
                     <div class="home-detail p-center-left w-75">
                         <div>
@@ -27,7 +27,7 @@
                 <div class="row g-4">
                     <div class="col-xl-12 col-md-6">
                         <div class="home-contain">
-                            <img src="/assets/images/banners/2.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/2.jpg" class="bg-img lazyload" alt="">
                             <div class="home-detail p-center-left home-p-sm w-75">
                                 <div>
                                     <h2 class="mt-0 text-danger">45% <span class="discount text-title">OFF</span>
@@ -42,7 +42,7 @@
 
                     <div class="col-xl-12 col-md-6">
                         <div class="home-contain">
-                            <img src="/assets/images/banners/3.jpg" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/3.jpg" class="bg-img lazyload" alt="">
                             <div class="home-detail p-center-left home-p-sm w-75">
                                 <div>
                                     <h3 class="mt-0 theme-color fw-bold">Healthy Food</h3>

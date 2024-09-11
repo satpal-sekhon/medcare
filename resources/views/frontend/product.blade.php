@@ -5,9 +5,9 @@
 <section class="product-section">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-xxl-9 col-xl-8 col-lg-7 wow fadeInUp">
+            <div class="col-xxl-9 col-xl-8 col-lg-7">
                 <div class="row g-4">
-                    <div class="col-xl-6 wow fadeInUp">
+                    <div class="col-xl-6">
                         <div class="product-left-box">
                             <div class="row g-2">
                                 <div class="col-12 position-relative">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-xl-6" data-wow-delay="0.1s">
                         <div class="right-box-contain">
                             {{-- <h6 class="offer-top">30% Off</h6> --}}
                             <h2 class="name">{{ $product->name }}</h2>
@@ -136,31 +136,31 @@
                                     <li>
                                         <a href="javascript:void(0)">
                                             <img src="{{ asset('assets/images/payment-methods/visa.svg') }}"
-                                                class="blur-up lazyload" alt="">
+                                                class="lazyload" alt="">
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <img src="{{ asset('assets/images/payment-methods/paypal.svg') }}"
-                                                class="blur-up lazyload" alt="">
+                                                class="lazyload" alt="">
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <img src="{{ asset('assets/images/payment-methods/master-card.svg') }}"
-                                                class="blur-up lazyload" alt="">
+                                                class="lazyload" alt="">
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <img src="{{ asset('assets/images/payment-methods/stripe.svg') }}"
-                                                class="blur-up lazyload" alt="">
+                                                class="lazyload" alt="">
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <img src="{{ asset('assets/images/payment-methods/american-express.svg') }}"
-                                                class="blur-up lazyload" alt="">
+                                                class="lazyload" alt="">
                                         </a>
                                     </li>
                                 </ul>
@@ -203,7 +203,7 @@
                 </div>
             </div>
 
-            <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block wow fadeInUp">
+            <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block">
                 <div class="right-sidebar-box">
                     <!-- Trending Product -->
                     <div class="pt-25">
@@ -216,7 +216,7 @@
                                     <div class="offer-product">
                                         <a href="{{ route('products.view', $tendingProduct->id) }}" class="offer-image">
                                             <img src="{{ file_exists(public_path($tendingProduct->thumbnail)) ? asset($tendingProduct->thumbnail) : asset('assets/images/default/product.jpg') }}"
-                                                class="img-fluid blur-up lazyload" alt="">
+                                                class="img-fluid lazyload" alt="">
                                         </a>
 
                                         <div class="offer-detail">
@@ -244,7 +244,7 @@
                     <!-- Banner Section -->
                     {{-- <div class="ratio_156 pt-25">
                         <div class="home-contain">
-                            <img src="{{ asset('assets/images/banners/4.jpg') }}" class="bg-img blur-up lazyload"
+                            <img src="{{ asset('assets/images/banners/4.jpg') }}" class="bg-img lazyload"
                                 alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>

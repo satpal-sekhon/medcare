@@ -111,7 +111,7 @@
 
             <div class="col-xxl-5">
                 <div class="profile-image">
-                    <img src="../assets/images/page/dashboard-profile.png" class="img-fluid blur-up lazyload"
+                    <img src="../assets/images/page/dashboard-profile.png" class="img-fluid lazyload"
                         alt="">
                 </div>
             </div>

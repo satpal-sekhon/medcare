@@ -5,11 +5,11 @@
 <section class="product-section">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-12 wow fadeInUp">
+            <div class="col-12">
                 <x-error-message :message="session('error')" />
                 
                 <div class="row g-4">
-                    <div class="col-xl-7 wow fadeInUp">
+                    <div class="col-xl-7">
                         <div class="right-box-contain">
                             <h2 class="name">{{ $labPackage->name }}</h2>
                             <div class="price-rating">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-xl-5" data-wow-delay="0.1s">
                         <div class="right-box-contain">
                             @if (!$errors->count())
                                 @guest

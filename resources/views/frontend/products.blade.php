@@ -5,7 +5,7 @@
 <section class="section-b-space shop-section">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-custom-3 wow fadeInUp">
+            <div class="col-custom-3">
                 <div class="left-box">
                     <div class="shop-left-sidebar">
                         <div class="back-button">
@@ -302,7 +302,7 @@
                 </div>
             </div>
 
-            <div class="col-custom- wow fadeInUp">
+            <div class="col-custom-">
                 <div class="show-button">
                     <div class="filter-button-group mt-0">
                         <div class="filter-button d-inline-block d-lg-none">
@@ -344,20 +344,20 @@
                             <ul>
                                 <li class="three-grid">
                                     <a href="javascript:void(0)">
-                                        <img src="../assets/svg/grid-3.svg" class="blur-up lazyload" alt="">
+                                        <img src="../assets/svg/grid-3.svg" class="lazyload" alt="">
                                     </a>
                                 </li>
                                 <li class="grid-btn d-xxl-inline-block d-none active">
                                     <a href="javascript:void(0)">
                                         <img src="../assets/svg/grid-4.svg"
-                                            class="blur-up lazyload d-lg-inline-block d-none" alt="">
+                                            class="lazyload d-lg-inline-block d-none" alt="">
                                         <img src="../assets/svg/grid.svg"
-                                            class="blur-up lazyload img-fluid d-lg-none d-inline-block" alt="">
+                                            class="lazyload img-fluid d-lg-none d-inline-block" alt="">
                                     </a>
                                 </li>
                                 <li class="list-btn">
                                     <a href="javascript:void(0)">
-                                        <img src="../assets/svg/list.svg" class="blur-up lazyload" alt="">
+                                        <img src="../assets/svg/list.svg" class="lazyload" alt="">
                                     </a>
                                 </li>
                             </ul>

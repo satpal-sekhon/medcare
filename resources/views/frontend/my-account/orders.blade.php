@@ -56,7 +56,7 @@
 
                     <div class="product-order-detail">
                         <a href="#" class="order-image">
-                            <img src="{{ asset('assets/images/product/1.png') }}" class="blur-up lazyload" alt="">
+                            <img src="{{ asset('assets/images/product/1.png') }}" class="lazyload" alt="">
                         </a>
 
                         <div class="order-wrap">
@@ -170,7 +170,7 @@
                             class="order-image w-25">
                             <img src="{{ asset($order->package_image) }}"
                                 onerror="this.onerror=null; this.src='{{ asset('assets/images/default/lab.jpg') }}';"
-                                class="img-fluid blur-up lazyload" alt="">
+                                class="img-fluid lazyload" alt="">
                         </a>
 
                         <div class="order-wrap">
@@ -212,7 +212,7 @@
                         <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}" class="order-image w-25">
                             <img src="{{ asset($order->doctor_image) }}"
                                 onerror="this.onerror=null; this.src='{{ asset('assets/images/default/doctor.png   ') }}';"
-                                class="img-fluid blur-up lazyload" alt="">
+                                class="img-fluid lazyload" alt="">
                         </a>
 
                         <div class="order-wrap">

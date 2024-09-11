@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('instructions')->nullable();
             $table->string('payment_method', 50)->nullable();
             $table->enum('payment_status', ['Pending', 'Completed'])->default('Pending');
-            $table->status('order_status', 50)->nullable();
+            $table->string('status', 50)->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('package_name', 100);
             $table->string('package_title', 100)->nullable();

@@ -5,13 +5,13 @@
 <section class="section-b-space shop-section">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-12 wow fadeInUp">
+            <div class="col-12">
                 @if($brands->count() > 0)
                 <div
                     class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
                     @foreach ($brands as $brand)
                     <div>
-                        <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="product-box-3 h-100" data-wow-delay="0.2s">
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="#">

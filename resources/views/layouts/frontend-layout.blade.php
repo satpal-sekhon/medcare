@@ -269,7 +269,7 @@
                                                         data-bs-toggle="dropdown">Search Medicine</a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('search-medicines') }}">Search Medicine By Generic</a>
+                                                            <a class="dropdown-item" href="{{ route('search-medicines') }}">Generic Medicine</a>
                                                         </li>
                                                         <li>
                                                             <a class="dropdown-item" href="{{ route('products.index') }}">All Products</a>
@@ -410,7 +410,7 @@
                             <div class="service-contain">
                                 <div class="service-box">
                                     <div class="service-image">
-                                        <img src="/assets/svg/product.svg" class="blur-up lazyload" alt="">
+                                        <img src="/assets/svg/product.svg" class="lazyload" alt="">
                                     </div>
 
                                     <div class="service-detail">
@@ -420,7 +420,7 @@
 
                                 <div class="service-box">
                                     <div class="service-image">
-                                        <img src="/assets/svg/delivery.svg" class="blur-up lazyload" alt="">
+                                        <img src="/assets/svg/delivery.svg" class="lazyload" alt="">
                                     </div>
 
                                     <div class="service-detail">
@@ -430,7 +430,7 @@
 
                                 <div class="service-box">
                                     <div class="service-image">
-                                        <img src="/assets/svg/discount.svg" class="blur-up lazyload" alt="">
+                                        <img src="/assets/svg/discount.svg" class="lazyload" alt="">
                                     </div>
 
                                     <div class="service-detail">
@@ -440,7 +440,7 @@
 
                                 <div class="service-box">
                                     <div class="service-image">
-                                        <img src="{{ asset('assets/svg/market.svg') }}" class="blur-up lazyload" alt="">
+                                        <img src="{{ asset('assets/svg/market.svg') }}" class="lazyload" alt="">
                                     </div>
 
                                     <div class="service-detail">
@@ -458,7 +458,7 @@
                             <div class="footer-logo">
                                 <div class="theme-logo">
                                     <a href="{{ route('home') }}">
-                                        <img src="{{ asset('assets/images/logo/2.png') }}" class="blur-up lazyload"
+                                        <img src="{{ asset('assets/images/logo/2.png') }}" class="lazyload"
                                             alt="">
                                     </a>
                                 </div>
@@ -604,7 +604,7 @@
                     </div>
 
                     <div class="payment">
-                        <img src="{{ asset('assets/images/payment-methods.png') }}" class="blur-up lazyload" alt="">
+                        <img src="{{ asset('assets/images/payment-methods.png') }}" class="lazyload" alt="">
                     </div>
 
                     <div class="social-link">
@@ -645,8 +645,8 @@
 
     <!-- latest jquery-->
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    
     <!-- jquery ui-->
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
 
@@ -671,12 +671,27 @@
     <!-- Quantity js -->
     <script src="{{ asset('assets/js/quantity-2.js') }}"></script>
 
-    <!-- WOW js -->
-    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom-wow.js') }}"></script>
-
     <!-- script js -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
+    <!-- Slick Slider -->
+    <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/slick/slick-animation.min.js') }}"></script>
+
+    <script>
+        $(function(){
+            $('.header-top .notification-slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: false,
+                vertical: true,
+                variableWidth: false,
+                autoplay: true,
+                autoplaySpeed: 2500,
+                arrows: false,
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>

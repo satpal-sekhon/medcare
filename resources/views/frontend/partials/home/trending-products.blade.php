@@ -6,7 +6,7 @@
             <li>
                 <div class="offer-product">
                     <a href="#" class="offer-image">
-                        <img src="/assets/images/product/23.png" class="blur-up lazyload" alt="">
+                        <img src="/assets/images/product/23.png" class="lazyload" alt="">
                     </a>
 
                     <div class="offer-detail">
@@ -24,7 +24,7 @@
             <li>
                 <div class="offer-product">
                     <a href="#" class="offer-image">
-                        <img src="/assets/images/product/24.png" class="blur-up lazyload" alt="">
+                        <img src="/assets/images/product/24.png" class="lazyload" alt="">
                     </a>
 
                     <div class="offer-detail">
@@ -42,7 +42,7 @@
             <li>
                 <div class="offer-product">
                     <a href="#" class="offer-image">
-                        <img src="/assets/images/product/25.png" class="blur-up lazyload" alt="">
+                        <img src="/assets/images/product/25.png" class="lazyload" alt="">
                     </a>
 
                     <div class="offer-detail">
@@ -60,7 +60,7 @@
             <li class="mb-0">
                 <div class="offer-product">
                     <a href="#" class="offer-image">
-                        <img src="/assets/images/product/26.png" class="blur-up lazyload" alt="">
+                        <img src="/assets/images/product/26.png" class="lazyload" alt="">
                     </a>
 
                     <div class="offer-detail">

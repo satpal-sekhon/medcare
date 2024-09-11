@@ -10,7 +10,7 @@
                     <div class="product-header">
                         <div class="product-image">
                             <a href="#">
-                                <img src="{{ asset('assets/images/product/2.png') }}" class="img-fluid blur-up lazyload"
+                                <img src="{{ asset('assets/images/product/2.png') }}" class="img-fluid lazyload"
                                     alt="">
                             </a>
 
@@ -64,7 +64,7 @@
                     <div class="product-header">
                         <div class="product-image">
                             <a href="#">
-                                <img src="{{ asset('assets/images/product/3.png') }}" class="img-fluid blur-up lazyload" alt="">
+                                <img src="{{ asset('assets/images/product/3.png') }}" class="img-fluid lazyload" alt="">
                             </a>
 
                             <div class="product-header-top">

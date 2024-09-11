@@ -17,7 +17,7 @@
                 <div class="p-sticky">
                     <div class="ratio_156">
                         <div class="home-contain hover-effect">
-                            <img src="/assets/images/banners/vertical-1.png" class="bg-img blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/vertical-1.png" class="bg-img lazyload" alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>
                                     <h6 class="text-yellow home-banner">All Range Available </h6>
@@ -36,7 +36,7 @@
 
                     <div class="ratio_medium section-t-space">
                         <div class="home-contain hover-effect">
-                            <img src="/assets/images/banners/vertical-2.png" class="img-fluid blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/vertical-2.png" class="img-fluid lazyload" alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>
                                     <h4 class="text-yellow home-banner">Extra Discount On</h4>
@@ -55,7 +55,7 @@
 
                     <div class="ratio_medium section-t-space">
                         <div class="home-contain hover-effect">
-                            <img src="/assets/images/banners/11.jpg" class="img-fluid blur-up lazyload" alt="">
+                            <img src="/assets/images/banners/11.jpg" class="img-fluid lazyload" alt="">
                             <div class="home-detail p-top-left home-p-medium">
                                 <div>
                                     <h4 class="text-yellow text-exo home-banner">Organic</h4>
@@ -84,7 +84,7 @@
                         <div class="col-md-12">
                             <div class="banner-contain">
                                 <img src="{{ asset('assets/images/banners/horizonal-1.jpg') }}"
-                                    class="bg-img blur-up lazyload" alt="">
+                                    class="bg-img lazyload" alt="">
                                 <div class="banner-details p-center p-4 text-white text-center">
                                     <div>
                                         <h3 class="lh-base fw-bold offer-text">Get ₹ 300 Cashback! Min Order of ₹ 30
@@ -107,14 +107,14 @@
     @include('frontend.partials.home.shop-by-category')
 @endif
 
-<img src="{{asset('assets/images/banners/horizontal-2.jpg') }}" class="blur-up lazyload mw-100" alt="">
+<img src="{{asset('assets/images/banners/horizontal-2.jpg') }}" class="lazyload mw-100" alt="">
 
 <section class="banner-section">
     <div class="container-fluid-lg">
         <div class="row gy-lg-0 gy-3">
             <div class="col-lg-8">
-                <div class="banner-contain-3 h-100 pt-sm-5 hover-effect bg-size blur-up lazyloaded ">
-                    <img src="/assets/images/banners/6.png" class="bg-img blur-up lazyload" alt="">
+                <div class="banner-contain-3 h-100 pt-sm-5 hover-effect bg-size lazyloaded ">
+                    <img src="/assets/images/banners/6.png" class="bg-img lazyload" alt="">
                     <div
                         class="banner-detail banner-p-sm p-center-right position-relative banner-minus-position banner-detail-deliver">
                         <div>
@@ -155,7 +155,7 @@
             <div class="col-lg-4">
                 <div class="banner-contain-3 pt-lg-4 h-100 hover-effect">
                     <a href="javascript:void(0)">
-                        <img src="assets/images/banners/7.jpg" class="img-fluid social-image blur-up w-100 lazyloaded"
+                        <img src="assets/images/banners/7.jpg" class="img-fluid social-image w-100 lazyloaded"
                             alt="">
                     </a>
                 </div>
@@ -175,7 +175,7 @@
                 @endif
             </div>
             <div class="col-xxl-2 col-xl-2 reto">
-                <img src="{{ asset('assets/images/banners/vertical-3.png') }}" class="img-fluid social-image blur-up w-100 lazyloaded" alt="">
+                <img src="{{ asset('assets/images/banners/vertical-3.png') }}" class="img-fluid social-image w-100 lazyloaded" alt="">
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@
     @include('frontend.partials.home.shop-by-brands')
 @endif
 
-<img src="{{asset('assets/images/banners/horizontal-3.png') }}" class="blur-up lazyload mw-100" alt="">
+<img src="{{asset('assets/images/banners/horizontal-3.png') }}" class="lazyload mw-100" alt="">
 
 <x-include-plugins :plugins="['slickSlider']"></x-include-plugins>
 @endsection

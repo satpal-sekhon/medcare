@@ -7,7 +7,7 @@
 <section class="section-b-space shop-section">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-12 wow fadeInUp">
+            <div class="col-12">
                 <x-success-message :message="session('success')"></x-success-message>
                 <x-error-message :message="session('error')" />
                 
@@ -21,7 +21,7 @@
 
                     @foreach ($doctors as $doctor)
                     <div>
-                        <div class="product-box-3 h-100 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="product-box-3 h-100" data-wow-delay="0.2s">
                             <div class="product-header">
                                 <div class="mb-3">
                                     <a href="{{ route('doctors.consult', $doctor->id) }}">

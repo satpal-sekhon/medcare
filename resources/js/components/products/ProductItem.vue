@@ -3,7 +3,7 @@
         <div class="product-box">
             <div class="product-image">
                 <a :href="product.link">
-                    <img :src="product.image" class="img-fluid blur-up lazyload" alt="" />
+                    <img :src="product.image" class="img-fluid lazyload" alt="" />
                 </a>
                 <ul class="product-option">
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">

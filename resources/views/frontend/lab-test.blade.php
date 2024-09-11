@@ -5,12 +5,12 @@
 <section class="section-b-space">
     <div class="container-fluid-lg">
         <div class="row">
-            <div class="col-12 wow fadeInUp">
+            <div class="col-12">
                 @if($labPackages->count() > 0)
                     <div class="row product-list-section">
                         @foreach($labPackages as $labPackage)
                         <div class="col-md-6 mb-4">
-                            <div class="product-box-3 wow fadeInUp row mx-1" data-wow-delay="0.2s">
+                            <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
                                 <div class="col-md-5 product-image d-flex align-items-center position-relative">
                                     <a href="#" class="d-block">
                                         <img src="{{ asset($labPackage->image) }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/lab.jpg') }}';"

@@ -1,9 +1,9 @@
-<section class="banner-section ratio_60 wow fadeInUp">
+<section class="banner-section ratio_60">
     <div class="container-fluid-lg">
         <div class="banner-slider">
             <div> 
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/banners/2.png" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/2.png" class="bg-img lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -18,7 +18,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/banners/3.png" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/3.png" class="bg-img lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -33,7 +33,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/banners/4.png" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/4.png" class="bg-img lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>
@@ -48,7 +48,7 @@
 
             <div>
                 <div class="banner-contain hover-effect">
-                    <img src="/assets/images/banners/5.png" class="bg-img blur-up lazyload" alt="">
+                    <img src="/assets/images/banners/5.png" class="bg-img lazyload" alt="">
                     <div class="banner-details">
                         <div class="banner-box">
                             <h6 class="text-danger">5% OFF</h6>

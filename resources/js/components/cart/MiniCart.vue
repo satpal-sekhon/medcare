@@ -4,7 +4,7 @@
         <li v-for="(item, index) in cartItems" :key="index" class="product-box-contain w-100">
           <div class="drop-cart">
             <a href="#" class="drop-image">
-              <img :src="item.image" class="blur-up lazyload mh-100px" :alt="item.name" />
+              <img :src="item.image" class="lazyload mh-100px" :alt="item.name" />
             </a>
             <div class="drop-contain">
               <a href="#">

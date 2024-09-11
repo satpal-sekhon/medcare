@@ -9,14 +9,14 @@
     </div>
 </div>
 
-<div class="best-selling-slider product-wrapper wow fadeInUp">
+<div class="best-selling-slider product-wrapper">
     <div>
         <ul class="product-list">
             @foreach ($saleProducts->take(3) as $product)
             <li>
                 <div class="offer-product">
                     <a href="{{ route('products.view', $product->id) }}" class="offer-image">
-                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
+                        <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
@@ -45,7 +45,7 @@
             <li>
                 <div class="offer-product">
                     <a href="{{ route('products.view', $product->id) }}" class="offer-image">
-                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
+                        <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
@@ -74,7 +74,7 @@
             <li>
                 <div class="offer-product">
                     <a href="{{ route('products.view', $product->id) }}" class="offer-image">
-                        <img src="{{ asset($product->thumbnail) }}" class="blur-up lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
+                        <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
