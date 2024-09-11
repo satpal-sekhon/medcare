@@ -7,7 +7,8 @@ if (!function_exists('getFileTypeByMimeType')) {
      * @param string $mimeType The MIME type to categorize.
      * @return string The general file type, such as 'image', 'document', or 'audio'.
      */
-    function getFileTypeByMimeType($mimeType) {
+    function getFileTypeByMimeType($mimeType)
+    {
         // Define a mapping of MIME types to general file types
         $mimeTypeToFileType = [
             'image/jpeg' => 'image',
@@ -28,4 +29,16 @@ if (!function_exists('getFileTypeByMimeType')) {
         // Return the general file type or 'unknown' if the MIME type is not in the array
         return $mimeTypeToFileType[$mimeType] ?? 'unknown';
     }
+}
+
+
+/**
+ * Retrieves a disease by its ID.
+ *
+ * @param int $diseaseId The ID of the disease to retrieve.
+ * @return \App\Models\Disease|null The disease model instance or null if not found.
+ */
+function diseaseName($diseaseId)
+{
+    return \App\Models\Disease::find($diseaseId)->name ?? '';
 }

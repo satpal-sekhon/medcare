@@ -2,7 +2,7 @@
 @section('title', 'Order Lab Package')
 
 @section('content')
-<section class="product-section">
+<section class="product-section section-b-space">
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12">
@@ -17,7 +17,7 @@
                             </div>
 
                             <div class="product-contain">
-                                <p>{{ $labPackage->description }}</p>
+                                <p>{!! nl2br($labPackage->description) !!}</p>
                             </div>
 
 

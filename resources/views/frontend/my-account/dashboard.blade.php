@@ -27,7 +27,7 @@
                     <img src="{{ asset('assets/svg/order.svg') }}" class="lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Order</h5>
-                        <h3>3658</h3>
+                        <h3>{{ $totalOrders }}</h3>
                     </div>
                 </div>
             </div>

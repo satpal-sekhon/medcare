@@ -25,15 +25,7 @@
                             </div>
 
                             <input type="hidden" name="email" value="{{ $email }}">
-                            <input type="hidden" id="otp" name="otp" value="">
-                            <div class="inputs d-flex flex-row justify-content-center">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                                <input class="text-center form-control rounded otp-field" type="text" maxlength="1">
-                            </div>
+                            <input type="text" id="otp" name="otp" class="form-control" maxlength="6" pattern="\d*" inputmode="numeric" aria-label="OTP" placeholder="Enter OTP">
                             <div class="send-box pt-4">
                                 <h5>Didn't get the code?
                                     <a href="{{ route('resend-verification-email') }}" class="theme-color fw-bold">Resend It</a>
@@ -48,28 +40,4 @@
         </div>
     </div>
 </section>
-
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        $('.otp-field').on('input', function(e) {
-            var current = $(this);
-            var next = current.next('.otp-field');
-            if (current.val().length >= current.attr('maxlength')) {
-                if (next.length) {
-                    next.focus();
-                }
-            }
-        });
-
-        $('#otp-form').on('submit', function() {
-            var otp = '';
-            $('.otp-field').each(function() {
-                otp += $(this).val();
-            });
-            $('#otp').val(otp);
-        });
-    });
-</script>
-@endpush
 @endsection

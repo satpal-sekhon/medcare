@@ -38,7 +38,7 @@
 
             <div class="tab-content custom-tab">
                 <div class="tab-pane fade show active" id="products" role="tabpanel">
-                    <div class="p-4">
+                    <div class="p-md-4">
                         <x-warning-message message="You don't have any products order yet"></x-warning-message>
                     </div>
 
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     @empty
-                    <div class="p-4">
+                    <div class="p-md-4">
                         <x-warning-message message="You don't have placed any quick order yet"></x-warning-message>
                     </div>
                     @endforelse
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     @empty
-                    <div class="p-4">
+                    <div class="p-md-4">
                         <x-warning-message message="You don't have booked any lab package yet"></x-warning-message>
                     </div>
                     @endforelse
@@ -241,10 +241,9 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                     @empty
-                    <div class="p-4">
+                    <div class="p-md-4">
                         <x-warning-message message="You don't consulted wit doctor"></x-warning-message>
                     </div>
                     @endforelse

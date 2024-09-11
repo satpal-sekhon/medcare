@@ -75,10 +75,8 @@
 
                             <div class="chips-container mb-3">
                                 @if($product->product_type=='Generic')
-                                    <a href="#"><div class="chip">{{ $product->brand->name }}</div></a>
-
                                    @foreach ($product->diseases as $disease)
-                                   <a href="#"><div class="chip">{{ $disease->id }}</div></a>
+                                   <a href="#"><div class="chip">{{ diseaseName($disease->disease_id) }}</div></a>
                                    @endforeach
                                 @else
                                     <a href="#"><div class="chip">{{ $product->category->name }}</div></a>
@@ -90,7 +88,22 @@
                                 @endif
                             </div>
 
-                            <div class="price-rating">
+                            @if($product->composition)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="fw-bold mb-1">Composition</h5>
+                                    <p class="m-0">{!! $product->composition !!}</p>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if($product->short_description)
+                            <div class="product-contain">
+                                {!! $product->short_description !!}
+                            </div>
+                            @endif
+
+                            <div class="price-rating mt-3">
                                 <h3 class="theme-color price">
                                     ₹{{ $product->customer_price }}
                                     <del class="text-content">₹{{ $product->mrp }}</del>
@@ -118,9 +131,22 @@
                                 </div> --}}
                             </div>
 
-                            <div class="product-contain mt-2">
-                                {!! nl2br($product->short_description) !!}
-                            </div>
+                            @if($product->variants->count() > 0)
+                                <div class="product-package">
+                                    <div class="product-title">
+                                        <h4>Variant</h4>
+                                    </div>
+
+                                    <div class="select-package">
+                                        <select class="form-control form-select">
+                                            <option value="">{{ $product->name }}</option>
+                                            @foreach($product->variants as $variant)
+                                                <option value="{{ $variant->id }}">{{ $variant->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="note-box product-package">
                                 <div class="cart_qty qty-box product-qty">
@@ -182,6 +208,13 @@
                                         </a>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <div class="mt-2">
+                                <a href="#" class="d-flex gap-4 align-items-center">
+                                    <img src="{{ asset($product->brand->image) }}" class="w-60px">
+                                    <h4 class="text-dark fw-bold">{{ $product->brand->name }}</h4>
+                                </a>
                             </div>
                         </div>
                     </div>

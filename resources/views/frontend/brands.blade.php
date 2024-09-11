@@ -8,7 +8,7 @@
             <div class="col-12">
                 @if($brands->count() > 0)
                 <div
-                    class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
+                    class="row g-sm-4 g-3 row-cols-xxl-6 row-cols-xl-4 row-cols-lg-3 row-cols-md-4 row-cols-3 product-list-section">
                     @foreach ($brands as $brand)
                     <div>
                         <div class="product-box-3 h-100">

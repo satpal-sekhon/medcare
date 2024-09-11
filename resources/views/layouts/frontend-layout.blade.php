@@ -381,7 +381,7 @@
         <!-- mobile fix menu end -->
 
         @hasSection('title')
-        <section class="breadcrumb-section pt-0">
+        {{-- <section class="breadcrumb-section pt-0">
             <div class="container-fluid-lg">
                 <div class="row">
                     <div class="col-12">
@@ -401,7 +401,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         @endif
 
         @yield('content')

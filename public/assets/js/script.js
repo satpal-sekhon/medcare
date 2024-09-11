@@ -95,7 +95,7 @@
 /*=====================
     03. Footer function js
 ==========================*/
-var contentwidth = $(window).width();
+/* var contentwidth = $(window).width();
 if (contentwidth < "576") {
     $(".footer-title h4").append(
         '<span class="according-menu float-end"><i class="fa-solid fa-angle-down"></i></span>'
@@ -127,7 +127,7 @@ if (contentwidth < "576") {
     $(".footer-contact, .footer-contain").hide();
 } else {
     $(".footer-contact, .footer-contain").show();
-}
+} */
 
 /*=====================
   04. mobile menu active class js

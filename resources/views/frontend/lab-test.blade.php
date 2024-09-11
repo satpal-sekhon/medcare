@@ -20,7 +20,7 @@
                                 <div class="col-md-7 product-detail-wrapper d-flex flex-column justify-content-between p-3">
                                     <div class="product-detail mb-1">
                                         <h4 class="name fw-bold fs-4 text-dark">{{ $labPackage->name }}</h4>
-                                        <p class="text-muted mb-2">{{ $labPackage->description }}</p>
+                                        <p class="text-muted mb-2 text-truncate-multiline">{!! nl2br($labPackage->description) !!}</p>
                                         <div class="mb-2">
                                             <strong class="text-great">{{ $labPackage->package_title }}:</strong>
                                             <ul class="list-group-numbered ms-3 mb-0 text-muted">
