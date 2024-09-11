@@ -45,6 +45,33 @@ body.admin-login {
     max-height: 100px;
 }
 
+/* Customize product tags */
+.product-label-tag.success-label-tag{
+    background: #198754!important;
+}
+.product-label-tag.success-label-tag::before, .product-label-tag.success-label-tag::after{
+    border-bottom: solid 15px #198754;
+}
+
+.product-label-tag.danger-label-tag{
+    background: #dc3545!important;
+}
+.product-label-tag.danger-label-tag::before, .product-label-tag.danger-label-tag::after{
+    border-bottom: solid 15px #dc3545;
+}
+
+/* Chips */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.8rem;
+    margin: 0.2rem;
+    background-color: #e0e0e0;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
 /* Homepage Diseases Section Start */
 .diseases-section {
     width: 100%;
@@ -88,7 +115,6 @@ body.admin-login {
         display: none;
     }
 }
-
 /* Homepage Diseases Section End */
 
 /* Mobile responisve */

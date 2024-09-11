@@ -45,7 +45,7 @@
                 </a>
                 @endforeach
             @else
-                <x-warning-message message="Products not found starting with {{ strtoupper($alphabet) }}"></x-warning-message>
+                <x-warning-message message="Products will be added soon"></x-warning-message>
             @endif
 
             {{ $products->links() }}

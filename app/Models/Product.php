@@ -15,6 +15,21 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function primaryCategory()
+    {
+        return $this->belongsTo(primaryCategory::class);
+    }
+
     public function diseases()
     {
         return $this->hasMany(ProductDisease::class);

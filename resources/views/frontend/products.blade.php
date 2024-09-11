@@ -375,6 +375,7 @@
                                 <product-item :product='{{ json_encode([
                                     "id" => $product->id,
                                     "name" => $product->name,
+                                    "flag" => $product->flag,
                                     "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'),
                                     "price" => $product->customer_price,
                                     "originalPrice" => $product->mrp,

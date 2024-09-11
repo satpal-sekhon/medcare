@@ -11,9 +11,9 @@
                         <div class="product-left-box">
                             <div class="row g-2">
                                 <div class="col-12 position-relative">
-                                    @if($product->flag)
+                                    @if($product->flag && $product->flag!='Casual')
                                     <div class="product-label-group">
-                                        <div class="product-label-tag warning-label-tag">
+                                        <div @class(["product-label-tag", "success-label-tag" => $product->flag=='Trending', "danger-label-tag" => $product->flag=='On Sale' ])>
                                             <span>{{ $product->flag }}</span>
                                         </div>
                                     </div>
@@ -72,6 +72,24 @@
                         <div class="right-box-contain">
                             {{-- <h6 class="offer-top">30% Off</h6> --}}
                             <h2 class="name">{{ $product->name }}</h2>
+
+                            <div class="chips-container mb-3">
+                                @if($product->product_type=='Generic')
+                                    <a href="#"><div class="chip">{{ $product->brand->name }}</div></a>
+
+                                   @foreach ($product->diseases as $disease)
+                                   <a href="#"><div class="chip">{{ $disease->id }}</div></a>
+                                   @endforeach
+                                @else
+                                    <a href="#"><div class="chip">{{ $product->category->name }}</div></a>
+                                    <a href="#"><div class="chip">{{ $product->primaryCategory->name }}</div></a>
+                                @endif
+
+                                @if($product->is_prescription_required)
+                                    <div class="chip bg-info">Rx required</div>
+                                @endif
+                            </div>
+
                             <div class="price-rating">
                                 <h3 class="theme-color price">
                                     ₹{{ $product->customer_price }}
