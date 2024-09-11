@@ -196,7 +196,7 @@
                 </div>
             </div>
 
-            <div class="container-fluid-lg py-2">
+            <div class="container-fluid-lg py-2 d-none d-md-block">
                 <div class="row">
                     <div class="col-12">
                         <div class="header-nav">

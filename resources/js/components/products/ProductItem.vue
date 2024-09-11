@@ -1,6 +1,10 @@
 <template>
     <div class="col-12 px-0">
         <div class="product-box">
+            <div class="label-tag" v-if="product.flag && product.flag!=='Casual'" :class="getFlagClass(product.flag)">
+                <span>{{ product.flag }}</span>
+            </div>
+
             <div class="product-image">
                 <a :href="product.link">
                     <img :src="product.image" class="img-fluid lazyload" alt="" />
@@ -32,11 +36,14 @@
                             <i data-feather="star" :class="{ 'fill': star <= product.ratingValue }"></i>
                         </li>
                     </ul> -->
-                    <h6 class="theme-color" v-if="(product.stock_type==='With Stock' && product.available_quantity > 0) || product.stock_type==='Without Stock'">In Stock</h6>
+                    <h6 class="theme-color"
+                        v-if="(product.stock_type === 'With Stock' && product.available_quantity > 0) || product.stock_type === 'Without Stock'">
+                        In Stock</h6>
                     <h6 class="text-danger" v-else>Out of Stock</h6>
                 </div>
                 <div class="add-to-cart-box">
-                    <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled" @click="changeQuantity(1)">
+                    <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled"
+                        @click="changeQuantity(1)">
                         Add
                         <span class="add-icon">
                             <i class="fa-solid fa-plus"></i>
@@ -44,11 +51,14 @@
                     </button>
                     <div :class="['cart_qty qty-box mw-100', { 'open': quantity > 0 }]">
                         <div class="input-group">
-                            <button type="button" class="qty-left-minus" data-type="minus" data-field="" @click="changeQuantity(-1)">
+                            <button type="button" class="qty-left-minus" data-type="minus" data-field=""
+                                @click="changeQuantity(-1)">
                                 <i class="fa fa-minus"></i>
                             </button>
-                            <input class="form-control input-number qty-input" type="text" name="quantity" :value="quantity" />
-                            <button type="button" class="qty-right-plus" data-type="plus" data-field="" @click="changeQuantity(1)">
+                            <input class="form-control input-number qty-input" type="text" name="quantity"
+                                :value="quantity" />
+                            <button type="button" class="qty-right-plus" data-type="plus" data-field=""
+                                @click="changeQuantity(1)">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
@@ -77,6 +87,16 @@ export default {
             const newQuantity = this.quantity + amount;
             if (newQuantity >= 0) {
                 this.quantity = newQuantity;
+            }
+        },
+        getFlagClass(flag) {
+            switch(flag) {
+                case 'On Sale':
+                return 'bg-danger';
+                case 'Trending':
+                return 'bg-success';
+                default:
+                return '';
             }
         }
     },

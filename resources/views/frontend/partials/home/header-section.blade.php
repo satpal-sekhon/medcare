@@ -1,4 +1,4 @@
-<section class="home-section pt-2">
+<section class="home-section pt-0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
