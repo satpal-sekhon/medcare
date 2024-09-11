@@ -22,6 +22,7 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuickOrderController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
@@ -151,11 +152,18 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('admin.quick-orders.index');
     Route::post('/quick-orders/get', [QuickOrderController::class, 'get'])->name('quick-orders.get');
 
+    /* Lab package order routes */
     Route::resource('lab-package-orders', LabPackageOrderController::class);
     Route::get('/lab-package-orders', [LabPackageOrderController::class, 'admin_index'])->name('admin.lab-package-orders.index');
     Route::post('/lab-package-orders/get', [LabPackageOrderController::class, 'get'])->name('lab-package-orders.get');
     
+    /* Doctor consultations routes */
     Route::resource('doctor-consultations', DoctorConsultationOrderController::class);
     Route::get('/doctor-consultations', [DoctorConsultationOrderController::class, 'admin_index'])->name('admin.doctor-consultations.index');
     Route::post('/doctor-consultations/get', [DoctorConsultationOrderController::class, 'get'])->name('doctor-consultations.get');
+
+    /* Setting routes */
+    Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');
+    Route::post('/general-settings', [SettingController::class, 'admin_general_settings_update'])->name('admin.settings.general.update');
+
 });

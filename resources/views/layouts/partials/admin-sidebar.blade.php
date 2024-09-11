@@ -207,6 +207,21 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-list">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-settings-line"></i>
+                            <span>Settings</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="#">Site Settings</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.settings.general') }}">General Settings</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
