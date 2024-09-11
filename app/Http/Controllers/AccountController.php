@@ -11,9 +11,9 @@ class AccountController extends Controller
 {
     public function user_account(){
         $totalOrders = 0;
-        $totalOrders += QuickOrder::where('user_id', Auth::id())->latest()->count();
-        $totalOrders += LabPackageOrder::where('user_id', Auth::id())->latest()->count();
-        $totalOrders = DoctorConsultationOrder::where('user_id', Auth::id())->latest()->count();
+        $totalOrders += QuickOrder::where('user_id', Auth::id())->count();
+        $totalOrders += LabPackageOrder::where('user_id', Auth::id())->count();
+        $totalOrders += DoctorConsultationOrder::where('user_id', Auth::id())->count();
 
         return view('frontend.my-account.dashboard', compact('totalOrders'));
     }

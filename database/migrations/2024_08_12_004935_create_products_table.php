@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('name', 100);
+            $table->string('slug')->unique()->nullable();
             $table->string('unit', 100)->nullable();
             $table->enum('product_type', ['General', 'Generic'])->default('General');
             $table->string('thumbnail')->nullable();
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->decimal('weight', 8, 2)->default(0.00);
             $table->date('expiry_date')->nullable();
             $table->text('short_description')->nullable();
-            $table->text('ingredients')->nullable();
+            $table->text('meta_description')->nullable();
             $table->longtext('description')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();

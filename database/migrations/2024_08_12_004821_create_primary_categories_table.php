@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('primary_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->string('slug')->unique()->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->boolean('show_on_homepage')->default(false);

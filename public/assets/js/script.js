@@ -202,10 +202,11 @@ $(document).ready(function () {
 /*=====================
    08. User Dashboard Left Sidebar Show Js
    ==========================*/
-$(".left-dashboard-show").click(function () {
+$(document).on('click', '.left-dashboard-show', function () {
     $(".bg-overlay, .dashboard-left-sidebar").addClass("show");
 });
-$(".close-button, .bg-overlay, .user-nav-pills .nav-item .nav-link").click(function () {
+
+$(document).on('click', '.close-button, .bg-overlay, .user-nav-pills .nav-item .nav-link', function () {
     $(".bg-overlay, .dashboard-left-sidebar").removeClass("show");
 });
 

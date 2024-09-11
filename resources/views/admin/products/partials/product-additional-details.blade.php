@@ -11,9 +11,9 @@
                     class="form-control">{{ $product->composition ?? '' }}</textarea>
             </div>
             <div class="mb-3 col-md-6">
-                <label class="form-label-title col-sm-4 mb-0">Ingredients</label>
-                <textarea name="ingredients" placeholder="Enter ingredients"
-                    class="form-control">{{ $product->ingredients ?? '' }}</textarea>
+                <label class="form-label-title col-sm-4 mb-0">Meta description</label>
+                <textarea name="meta_description" placeholder="Enter Meta description"
+                    class="form-control">{{ $product->meta_description ?? '' }}</textarea>
             </div>
         </div>
 

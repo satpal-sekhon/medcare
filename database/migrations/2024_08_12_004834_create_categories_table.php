@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('primary_category_id')->nullable();
             $table->string('name', 100);
+            $table->string('slug')->unique()->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->boolean('show_on_homepage')->default(false);

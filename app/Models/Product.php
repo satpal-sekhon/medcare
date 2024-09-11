@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     protected $guarded=[];
 
     public function variants()
@@ -48,5 +49,16 @@ class Product extends Model
     public function specifications()
     {
         return $this->hasMany(ProductSpecification::class);
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => true, // Regenerate slug on name change
+                'unique' => true, // Ensure uniqueness
+            ]
+        ];
     }
 }

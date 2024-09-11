@@ -116,6 +116,11 @@
 @push('scripts')
 <script>
     $(function(){
+        $('#brand').chosen({
+            width: '100%',
+            placeholder_text_multiple: 'Select brand'
+        });
+
         $('#diseases').chosen({
             width: '100%',
             placeholder_text_multiple: 'Select Diseases'

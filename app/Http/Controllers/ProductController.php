@@ -7,9 +7,9 @@ use App\Models\Category;
 use App\Models\Disease;
 use App\Models\PrimaryCategory;
 use App\Models\Product;
-use App\Models\ProductDisease;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -76,6 +76,7 @@ class ProductController extends Controller
                 $thumbnailPath = $base_image_path.$filename;
             }
 
+            
             $product = Product::create([
                 'primary_category_id' => $request->input('primary_category'),
                 'category_id' => $request->input('category'),
@@ -97,7 +98,7 @@ class ProductController extends Controller
                 'product_type' => $request->input('product_type'),
                 'expiry_date' => $request->input('expiry_date'),
                 'short_description' => $request->input('short_description'),
-                'ingredients' => $request->input('ingredients'),
+                'meta_description' => $request->input('meta_description'),
                 'description' => $request->input('description'),
                 'status' => $request->input('status'),
             ]);
@@ -299,7 +300,7 @@ class ProductController extends Controller
                 'flag' => $request->input('flag'),
                 'expiry_date' => $request->input('expiry_date'),
                 'short_description' => $request->input('short_description'),
-                'ingredients' => $request->input('ingredients'),
+                'meta_description' => $request->input('meta_description'),
                 'description' => $request->input('description'),
                 'status' => $request->input('status'),
             ]);

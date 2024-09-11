@@ -5,7 +5,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label-title">Thumbnail</label>
+            <label class="form-label-title">Product image</label>
             <div class="form-group">
                 <input type="file" name="thumbnail" accept="image/*" class="form-control" id="thumbnailInput">
                 <div id="thumbnailPreview" class="image-preview row">

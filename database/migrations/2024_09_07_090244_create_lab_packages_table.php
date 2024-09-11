@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lab_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->string('slug')->unique()->nullable();
             $table->string('package_title', 100);
             $table->string('image')->nullable();
             $table->decimal('amount', 8, 2)->default(0.00);

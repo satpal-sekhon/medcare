@@ -59,7 +59,7 @@
                         }
                     },
                     // composition: "required",
-                    // ingredients: "required",
+                    // meta_description: "required",
                     short_description: "required",
                     "diseases[]": "required",
                     customer_price: "required",

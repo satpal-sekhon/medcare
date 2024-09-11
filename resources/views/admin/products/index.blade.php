@@ -21,7 +21,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Product Image</th>
+                                        <th>Thumbnail</th>
                                         <th>Product Name</th>
                                         <th>Brand</th>
                                         <th>Price</th>
@@ -65,6 +65,7 @@
                         {
                             data: 'thumbnail',
                             name: 'thumbnail',
+                            className: 'product-thumbnail-column',
                             orderable: false,
                             render: function(data, type, row) {
                                 let defaultImagePath = 'assets/images/default/product.jpg';
@@ -75,7 +76,13 @@
                         },
                         {
                             data: 'name',
-                            name: 'name'
+                            name: 'name',
+                            className: 'product-name-column',
+                            render: function(data, type, row) {
+                                let viewUrl = `{{ route('products.view', ':id') }}`.replace(':id', row.id);
+                                
+                                return `<a href="${viewUrl}" target="_blank">${row.name}</a>`;
+                            }
                         },
                         {
                             data: 'brand_name',

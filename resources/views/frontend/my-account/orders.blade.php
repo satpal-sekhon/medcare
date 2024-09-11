@@ -123,6 +123,12 @@
                             <ul class="product-size">
                                 <li>
                                     <div class="size-box">
+                                        <h6 class="text-content">Order ID:</h6>
+                                        <h5>#ODR-101{{ $order->id }}</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box">
                                         <h6 class="text-content">Customer Name:</h6>
                                         <h5>{{ $order->name }}</h5>
                                     </div>
@@ -175,12 +181,18 @@
 
                         <div class="order-wrap">
                             <a href="{{ route('lab-package.show', $order->lab_package_id ?? '0') }}">
-                                <h3>{{ $order->package_name }}</h3>
+                                <h5 class="fw-bold">{{ $order->package_name }}</h5>
                             </a>
-                            <ul class="product-size">
+                            <ul class="product-size mt-2">
                                 <li>
                                     <div class="size-box">
-                                        <h6 class="text-content">Price : </h6>
+                                        <h6 class="text-content">Order ID: </h6>
+                                        <h5>#ODR-101{{ $order->id }}</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Price: </h6>
                                         <h5>₹{{ $order->package_amount }}</h5>
                                     </div>
                                 </li>

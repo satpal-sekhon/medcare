@@ -83,21 +83,9 @@
             <div class="row g-4">
                 <div class="col-xxl-6">
                     <div class="dashboard-detail">
-                        <h6 class="text-content">Default Billing Address</h6>
-                        <h6 class="text-content">You have not set a default billing
-                            address.</h6>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editProfile">Edit
-                            Address</a>
-                    </div>
-                </div>
-
-                <div class="col-xxl-6">
-                    <div class="dashboard-detail">
-                        <h6 class="text-content">Default Shipping Address</h6>
-                        <h6 class="text-content">You have not set a default shipping
-                            address.</h6>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editProfile">Edit
-                            Address</a>
+                        <h6 class="text-content">Default Address</h6>
+                        <h6 class="text-content">You have not set a default address.</h6>
+                        <a href="javascript:void(0)">Edit Address</a>
                     </div>
                 </div>
             </div>
