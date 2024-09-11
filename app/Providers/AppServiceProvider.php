@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.frontend-layout', function ($view) {
             $menuPrimaryCategories = PrimaryCategory::with(['categories' => function($query) {
                 $query->latest()->limit(16);
-            }])->latest()->limit(6)->get();
+            }])->limit(6)->get();
 
             $view->with('menuPrimaryCategories', $menuPrimaryCategories);
         });

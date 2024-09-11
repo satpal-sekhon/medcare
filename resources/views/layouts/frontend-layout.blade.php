@@ -48,7 +48,8 @@
                                     <div>
                                         <div class="timer-notification text-center">
                                             <h6><strong class="me-1">Welcome to Medine Shop!</strong>Wrap new
-                                                offers/gift every single day on Weekends.<strong class="ms-1">New Coupon Code: Med2589
+                                                offers/gift every single day on Weekends.<strong class="ms-1">New Coupon
+                                                    Code: Med2589
                                                 </strong>
                                             </h6>
                                         </div>
@@ -68,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="top-nav top-header sticky-header">
                 <div class="container-fluid-lg">
                     <div class="row">
@@ -81,8 +82,8 @@
                                     </span>
                                 </button>
                                 <a href="{{ route('home') }}" class="web-logo nav-logo">
-                                    <img src="{{ asset('assets/images/logo/1.png') }}"
-                                        class="img-fluid lazyload" alt="">
+                                    <img src="{{ asset('assets/images/logo/1.png') }}" class="img-fluid lazyload"
+                                        alt="">
                                 </a>
 
                                 <div class="middle-box">
@@ -196,7 +197,7 @@
                 </div>
             </div>
 
-            <div class="container-fluid-lg py-2 d-none d-md-block">
+            <div class="container-fluid-lg py-md-2 mob-height-0">
                 <div class="row">
                     <div class="col-12">
                         <div class="header-nav">
@@ -208,28 +209,31 @@
 
                                 <div class="category-dropdown">
                                     <div class="category-title">
-                                        <h5>Categories</h5>
+                                        <h5>Welness</h5>
                                         <button type="button" class="btn p-0 close-button text-content">
                                             <i class="fa-solid fa-xmark"></i>
                                         </button>
                                     </div>
 
                                     @if(isset($menuPrimaryCategories))
-                                        <ul class="category-list">
-                                            @foreach ($menuPrimaryCategories as $menuPrimaryCategory)
-                                            <li class="onhover-category-list">
-                                                <a href="javascript:void(0)" class="category-name">
-                                                    <h6>{{ $menuPrimaryCategory->name }}</h6>
-                                                    <i class="fa-solid fa-angle-right"></i>
-                                                </a>
+                                    <ul class="category-list">
+                                        @foreach ($menuPrimaryCategories as $menuPrimaryCategory)
+                                        <li class="onhover-category-list">
+                                            <a href="javascript:void(0)" class="category-name">
+                                                <h6>{{ $menuPrimaryCategory->name }}</h6>
+                                                <i class="fa-solid fa-angle-right"></i>
+                                            </a>
 
-                                                <div class="onhover-category-box">
+                                            <div class="onhover-category-box d-block">
+                                                <h5 class="text-center fw-bold d-none d-md-block">{{ $menuPrimaryCategory->name }}</h5>
+
+                                                <div class="flex">
                                                     <div class="list-1">
                                                         <ul>
                                                             @foreach($menuPrimaryCategory->categories->take(8) as $category)
-                                                                <li>
-                                                                    <a href="#">{{ $category->name }}</a>
-                                                                </li>
+                                                            <li>
+                                                                <a href="#">{{ $category->name }}</a>
+                                                            </li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
@@ -237,16 +241,17 @@
                                                     <div class="list-2">
                                                         <ul>
                                                             @foreach($menuPrimaryCategory->categories->skip(8)->take(8) as $category)
-                                                                <li>
-                                                                    <a href="#">{{ $category->name }}</a>
-                                                                </li>
+                                                            <li>
+                                                                <a href="#">{{ $category->name }}</a>
+                                                            </li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            @endforeach
-                                        </ul>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                     @endif
                                 </div>
                             </div>
@@ -266,10 +271,13 @@
                                                         data-bs-toggle="dropdown">Search Medicine</a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('search-medicines') }}">Generic Medicine</a>
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('search-medicines') }}">Generic
+                                                                Medicine</a>
                                                         </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('products.index') }}">All Products</a>
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('products.index') }}">All Products</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -289,7 +297,7 @@
                                                 </li>
 
                                                 <li class="nav-item dropdown new-nav-item">
-                                                    <label class="new-dropdown">New</label>
+                                                    <label class="new-dropdown d-none d-md-block">New</label>
                                                     <a class="nav-link" href="{{ route('doctors.index') }}">Doctors</a>
                                                 </li>
 
@@ -344,7 +352,7 @@
                 <li class="mobile-category">
                     <a href="javascript:void(0)">
                         <i class="iconly-Category icli js-link"></i>
-                        <span>Category</span>
+                        <span>Wellness</span>
                     </a>
                 </li>
 
@@ -356,14 +364,14 @@
                 </li>
 
                 <li>
-                    <a href="#" class="notifi-wishlist">
+                    <a href="{{ route('wishlist.index') }}" class="notifi-wishlist">
                         <i class="iconly-Heart icli"></i>
                         <span>My Wish</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('cart') }}">
                         <i class="iconly-Bag-2 icli fly-cate"></i>
                         <span>Cart</span>
                     </a>
@@ -455,8 +463,7 @@
                             <div class="footer-logo">
                                 <div class="theme-logo">
                                     <a href="{{ route('home') }}">
-                                        <img src="{{ asset('assets/images/logo/2.png') }}" class="lazyload"
-                                            alt="">
+                                        <img src="{{ asset('assets/images/logo/2.png') }}" class="lazyload" alt="">
                                     </a>
                                 </div>
 
@@ -643,7 +650,7 @@
     <!-- latest jquery-->
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-    
+
     <!-- jquery ui-->
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
 

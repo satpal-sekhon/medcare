@@ -397,10 +397,11 @@ $(".close_button").click(function () {
 /*=====================
    22. Category Box js
    ==========================*/
-$(".mobile-category").click(function () {
+$(document).on('click', '.mobile-category', function () {
     $(".bg-overlay, .category-dropdown").addClass("show");
 });
-$(".close-button, .bg-overlay").click(function () {
+
+$(document).on('click', '.close-button, .bg-overlay', function () {
     $(".bg-overlay, .category-dropdown").removeClass("show");
 });
 

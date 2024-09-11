@@ -90,3 +90,14 @@ body.admin-login {
 }
 
 /* Homepage Diseases Section End */
+
+/* Mobile responisve */
+@media (max-width: 767px) {
+    header .onhover-category-list .onhover-category-box {
+        min-height: auto;
+    }
+
+    .mob-height-0{
+        height: 0;
+    }
+}
