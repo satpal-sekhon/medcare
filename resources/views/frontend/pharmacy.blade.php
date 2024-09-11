@@ -30,7 +30,7 @@
             <div class="col-12  section-t-space">
                 <div class="row product-list-section">
                     <div class="col-md-4 mb-4">
-                        <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
+                        <div class="product-box-3 row mx-1">
                             <div class="col-md-5 product-image d-flex align-items-center">
                                 <a href="#">
                                     <img src="{{ asset('assets/images/default/pharmacy.png') }}"
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
+                        <div class="product-box-3 row mx-1">
                             <div class="col-md-5 product-image d-flex align-items-center">
                                 <a href="#">
                                     <img src="{{ asset('assets/images/default/pharmacy.png') }}"
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
+                        <div class="product-box-3 row mx-1">
                             <div class="col-md-5 product-image d-flex align-items-center">
                                 <a href="#">
                                     <img src="{{ asset('assets/images/default/pharmacy.png') }}"
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
+                        <div class="product-box-3 row mx-1">
                             <div class="col-md-5 product-image d-flex align-items-center">
                                 <a href="#">
                                     <img src="{{ asset('assets/images/default/pharmacy.png') }}"
@@ -226,7 +226,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="product-box-3 row mx-1" data-wow-delay="0.2s">
+                        <div class="product-box-3 row mx-1">
                             <div class="col-md-5 product-image d-flex align-items-center">
                                 <a href="#">
                                     <img src="{{ asset('assets/images/default/pharmacy.png') }}"

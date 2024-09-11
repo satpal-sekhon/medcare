@@ -21,7 +21,7 @@
 
                     @foreach ($doctors as $doctor)
                     <div>
-                        <div class="product-box-3 h-100" data-wow-delay="0.2s">
+                        <div class="product-box-3 h-100">
                             <div class="product-header">
                                 <div class="mb-3">
                                     <a href="{{ route('doctors.consult', $doctor->id) }}">

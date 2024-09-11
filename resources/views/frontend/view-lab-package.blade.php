@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-7" data-wow-delay="0.1s">
+                    <div class="col-xl-7">
                         <div class="right-box-contain">
                             <x-success-message :message="session('success')" />
 

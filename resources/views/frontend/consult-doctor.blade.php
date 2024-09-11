@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-5" data-wow-delay="0.1s">
+                    <div class="col-xl-5">
                         <div class="right-box-contain">
                             @if (!$errors->count())
                                 @guest

@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-6" data-wow-delay="0.1s">
+                    <div class="col-xl-6">
                         <div class="right-box-contain">
                             {{-- <h6 class="offer-top">30% Off</h6> --}}
                             <h2 class="name">{{ $product->name }}</h2>

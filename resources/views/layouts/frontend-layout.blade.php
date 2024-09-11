@@ -21,9 +21,6 @@
     <!-- bootstrap css -->
     <link id="rtl-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
 
-    <!-- wow css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
-
     <!-- Iconly css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bulk-style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">

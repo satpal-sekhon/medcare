@@ -21,9 +21,6 @@
     <!-- bootstrap css -->
     <link id="rtl-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
 
-    <!-- wow css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
-
     <!-- Iconly css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bulk-style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
@@ -118,10 +115,6 @@
 
     <!-- Quantity js -->
     <script src="{{ asset('assets/js/quantity-2.js') }}"></script>
-
-    <!-- WOW js -->
-    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/js/custom-wow.js') }}"></script>
 
     <!-- script js -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
