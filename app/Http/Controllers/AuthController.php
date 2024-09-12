@@ -72,6 +72,55 @@ class AuthController extends Controller
     }
 
     public function create_vendor_account(Request $request){
+        $request->validate([
+            'full_name'             => 'required|string|max:50',
+            'email'                 => 'required|email|max:100|unique:users,email',
+            'phone_number'          => 'required|digits:10',
+            'address'               => 'required|string|max:255',
+            'city'                  => 'required|string|max:50',
+            'pincode'               => 'required|digits:6',
+            'state'                 => 'required|string|max:50',
+            'terms'                 => 'required|in:accepted',
+
+            'business_name'         => 'required|string|max:75',
+            'business_email'        => 'required|email|max:100|unique:vendors,email',
+            'business_phone_number' => 'required|digits:10',
+            'business_address'      => 'required|string|max:255',
+            'business_city'         => 'required|string|max:50',
+            'business_pincode'      => 'required|digits:6',
+            'business_state'        => 'required|string|max:50',
+            'license_number'        => 'required|string',
+            'store_image'           => 'required|file|mimes:jpg,jpeg,png',
+            'documents'             => 'required|array',
+            'documents.*'           => 'file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048'
+        ]);
+
+
+        try {
+            $user = new User();
+            $otp = $user->sendOtp($request->full_name, $request->email);
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors([
+                'message' => $e->getMessage(),
+            ]);
+        }
+
+        // Save the user
+        $user = User::create([
+            'name'          => $request->input('full_name'),
+            'email'         => $request->input('email'),
+            'phone_number'  => preg_replace('/\D/', '', $request->input('phone_number')),
+            'address'       => $request->input('address'),
+            'city'          => $request->input('city'),
+            'pincode'       => $request->input('pincode'),
+            'password'      => Hash::make(''),
+            'otp'           => $otp
+        ]);
+        // Assign role to user
+        $user->assignRole('Vendor');
+
+        $request->session()->put('reset_email', $request->email);
+
         dd($request->all());
     }
 

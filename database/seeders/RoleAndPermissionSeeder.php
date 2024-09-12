@@ -64,7 +64,7 @@ class RoleAndPermissionSeeder extends Seeder
         // Define roles and their permissions
         $roles = [
             'Admin' => $permissions, // Admin gets all permissions
-            'Pharmacy' => [
+            'Vendor' => [
                 'view categories',
                 'view subcategories',
                 'view brands',

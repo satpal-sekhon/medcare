@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
             $table->string('name', 75);
-            $table->string('address', 200);
+            $table->string('address');
             $table->string('city', 50);
             $table->string('state', 50);
             $table->string('pincode', 6);
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('license_number', 100)->nullable();
             $table->string('license_path')->nullable();
-            $table->string('image')->nullable();
             $table->enum('type', ['Pharmacy Store', 'Channel Partner', 'Other'])->default('Other');
             $table->enum('shop_type', ['Owned', 'Rented'])->nullable();
             $table->string('status', 25)->nullable();

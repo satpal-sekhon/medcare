@@ -21,15 +21,5 @@ class UserSeeder extends Seeder
         ]);
         // Assign role to user
         $user->assignRole('Admin');
-        
-        
-        // Create a user
-        $user = User::create([
-            'name' => 'Dr. Pharmacy',
-            'email' => 'pharmacy@gmail.com',
-            'password' => Hash::make('Admin@123')
-        ]);
-        // Assign role to user
-        $user->assignRole('Pharmacy');
     }
 }

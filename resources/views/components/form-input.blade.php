@@ -2,11 +2,12 @@
     <label for="{{ $name }}">{{ $label }}</label>
 
     <input type="{{ $type }}"
-        name="{{ $name }}"
-        @if (old($name, $value) !== null) 
+        name="{{ $name }}{{ $type === 'file' && $multiple ? '[]' : '' }}"
+        @if ((old($name, $value) !== null) && $type!=='file') 
            value="{{ old($name, $value) }}"
         @endif
         {{ $attributes->merge(['class' => 'form-control'.($errors->has($name) ? ' is-invalid' : '')]) }}
+        {{ $multiple ? 'multiple' : '' }}
     />
 
 
