@@ -72,7 +72,7 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/lab.jpg';
+                                let defaultImagePath = '{{ getSetting("default_lab_package_image") }}';
                                 let imageUrl = data ? data : defaultImagePath;
 
                                 return `<img src="{{ asset('${imageUrl}') }}" alt="Lab Package" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;

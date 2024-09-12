@@ -85,7 +85,7 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/disease.png';
+                                let defaultImagePath = '{{ getSetting("default_disease_image") }}';
                                 let imageUrl = data ? data : defaultImagePath;
 
                                 return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image">`;

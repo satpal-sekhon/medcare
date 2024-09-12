@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('slug')->unique()->nullable();
             $table->string('image')->nullable();
+            $table->string('banner_image')->nullable();
             $table->text('description')->nullable();
             $table->boolean('show_on_homepage')->default(false);
             $table->timestamps();

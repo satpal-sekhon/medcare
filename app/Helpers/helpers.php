@@ -42,3 +42,19 @@ function diseaseName($diseaseId)
 {
     return \App\Models\Disease::find($diseaseId)->name ?? '';
 }
+
+
+/**
+ * Retrieves the value of a setting by its key.
+ *
+ * @param string $key The key of the setting to retrieve.
+ * @return string|null The value of the setting or null if not found.
+ */
+function getSetting($key)
+{
+    // Retrieve the setting model instance by key
+    $setting = \App\Models\Setting::where('key', $key)->first();
+
+    // Return the value if the setting is found, otherwise return null
+    return $setting->value ?? null;
+}

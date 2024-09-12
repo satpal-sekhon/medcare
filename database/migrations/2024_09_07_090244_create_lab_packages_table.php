@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
             $table->string('package_title', 100);
             $table->string('image')->nullable();
+            $table->string('banner_image')->nullable();
             $table->decimal('amount', 8, 2)->default(0.00);
             $table->text('description')->nullable();
             $table->timestamps();

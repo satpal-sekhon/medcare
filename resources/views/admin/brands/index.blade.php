@@ -85,7 +85,7 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/brand.png';
+                                let defaultImagePath = '{{ getSetting("default_brand_image") }}';
                                 let imageUrl = data ? data : defaultImagePath;
 
                                 return `<img src="{{ asset('${imageUrl}') }}" alt="Brand Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;

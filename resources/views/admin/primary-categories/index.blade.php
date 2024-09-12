@@ -85,7 +85,7 @@
                             name: 'image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = 'assets/images/default/primary-category.png';
+                            let defaultImagePath = '{{ getSetting("default_primary_category_image") }}';
                                 let imageUrl = data ? data : defaultImagePath;
 
                                 return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;

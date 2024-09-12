@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone_number', 12);
             $table->string('qualification', 100);
             $table->string('image')->nullable();
+            $table->string('banner_image')->nullable();
             $table->decimal('experience', 3, 1)->nullable(); 
             $table->decimal('fee', 8, 2)->default(0.00);
             $table->text('description')->nullable();
