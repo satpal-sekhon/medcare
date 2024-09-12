@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendor_images', function (Blueprint $table) {
+        Schema::create('vendor_assets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->string('path');
+            $table->string('mime_type', 100);
             $table->timestamps();
 
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendor_images');
+        Schema::dropIfExists('vendor_assets');
     }
 };

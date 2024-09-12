@@ -17,15 +17,16 @@ return new class extends Migration
             $table->string('address', 200);
             $table->string('city', 50);
             $table->string('state', 50);
-            $table->string('postal_code', 6);
+            $table->string('pincode', 6);
             $table->string('image')->nullable();
             $table->string('phone_number', 12)->nullable();
             $table->string('email', 100)->nullable();
             $table->text('description')->nullable();
             $table->string('license_number', 100)->nullable();
             $table->string('license_path')->nullable();
+            $table->string('image')->nullable();
             $table->enum('type', ['Pharmacy Store', 'Channel Partner', 'Other'])->default('Other');
-            $table->enum('shop_type', ['Owned', 'Rented'])->default('Rented');
+            $table->enum('shop_type', ['Owned', 'Rented'])->nullable();
             $table->string('status', 25)->nullable();
             $table->timestamps();
         });

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
+use App\Models\State;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -63,6 +64,15 @@ class AuthController extends Controller
 
         // Redirect or return a success response
         return redirect()->route('verify-email')->with('success', 'Account created successfully! Please check your email to verify your account.');
+    }
+
+    public function vendor_registration(){
+        $states = State::select('name')->get();
+        return view('register-vendor', compact('states'));
+    }
+
+    public function create_vendor_account(Request $request){
+        dd($request->all());
     }
 
     public function resend_verification_email(){

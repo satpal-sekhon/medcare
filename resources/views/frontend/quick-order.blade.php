@@ -50,7 +50,7 @@
                                     accept=".pdf,.jpg,.jpeg,.png"></x-form-input>
                             </div>
                             <div class="col-12 mb-2">
-                                <x-textarea name="instructions" :label="'Enter Instructions (If any)'"></x-textarea>
+                                <x-textarea name="instructions" label="Enter Instructions (If any)"></x-textarea>
                             </div>
 
                             <div class="col-12">

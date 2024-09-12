@@ -174,6 +174,10 @@
                                                     </li>
 
                                                     <li class="product-box-contain">
+                                                        <a href="{{ route('vendor-registration') }}">Vendor Registration</a>
+                                                    </li>
+
+                                                    <li class="product-box-contain">
                                                         <a href="{{ route('forgot-password') }}">Forgot Password</a>
                                                     </li>
                                                     @endguest
