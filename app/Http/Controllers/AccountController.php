@@ -45,7 +45,7 @@ class AccountController extends Controller
         // Validate the request
         $request->validate([
             'store_image' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-            'documents.*' => 'sometimes|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'documents.*' => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048',
         ]);
 
         // Initialize paths

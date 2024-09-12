@@ -13,7 +13,7 @@
 
                         <div class="row">
                             <div class="col-md-12 mb-1">
-                                <x-form-input type="file" name="store_image" label="Store Image"></x-form-input>
+                                <x-form-input type="file" name="store_image" label="Store Image" accept="image/*"></x-form-input>
                             </div>
                             <div class="col-md-12 mb-1">
                                 <x-form-input type="file" name="documents" label="Upload Documents" multiple="true">

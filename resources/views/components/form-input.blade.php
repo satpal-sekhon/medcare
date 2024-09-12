@@ -7,7 +7,9 @@
            value="{{ old($name, $value) }}"
         @endif
         {{ $attributes->merge(['class' => 'form-control'.($errors->has($name) ? ' is-invalid' : '')]) }}
-        {{ $multiple ? 'multiple' : '' }}
+        @if ($multiple)
+            multiple
+        @endif
     />
 
 

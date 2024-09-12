@@ -102,8 +102,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('users.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('users.destroy', ':id') }}`.replace(':id', row.id);
+                                let editUrl = `{{ route('vendors.edit', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
@@ -113,7 +113,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="user" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="vendor" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>
