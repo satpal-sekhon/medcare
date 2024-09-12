@@ -122,13 +122,10 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="#">Manage Vendors</a>
+                                <a href="{{ route('admin.vendors.index') }}">Manage Vendors</a>
                             </li>
                             <li>
-                                <a href="#">New Registration</a>
-                            </li>
-                            <li>
-                                <a href="#">Approve Vendor</a>
+                                <a href="{{ route('admin.vendors.pending-approvals') }}">Pending Approvals</a>
                             </li>
                             <li>
                                 <a href="#">Banned Vendors</a>

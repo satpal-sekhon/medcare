@@ -25,6 +25,7 @@ use App\Http\Controllers\QuickOrderController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -133,6 +134,11 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
     Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
+
+    // Vendor routes
+    Route::resource('vendors', VendorController::class);
+    Route::get('/vendors', [VendorController::class, 'admin_index'])->name('admin.vendors.index');
+    Route::get('/pending-approval-vendors', [VendorController::class, 'pending_approval_index'])->name('admin.vendors.pending-approvals');
 
     // Doctor types routes
     Route::resource('doctor-types', DoctorTypeController::class);

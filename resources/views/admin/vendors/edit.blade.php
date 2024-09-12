@@ -111,7 +111,6 @@
                                         <select name="status" @class(['form-control', 'is-invalid' => $errors->first('status')])>
                                             <option value="Active" @selected(old('status', $user->status) == 'Active')>Active</option>
                                             <option value="Inactive" @selected(old('status', $user->status) == 'Inactive')>Inactive</option>
-                                            <option value="Pending Approval" @selected(old('status', $user->status) == 'Pending Approval')>Pending Approval</option>
                                             <option value="Suspended" @selected(old('status', $user->status) == 'Suspended')>Suspended</option>
                                         </select>
                                         @if ($errors->has('status'))

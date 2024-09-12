@@ -77,6 +77,21 @@ class UserController extends Controller
             });
         }
 
+        // Filter by status if specified
+        if ($request->has('status')) {
+            $status = $request->input('status');
+
+            // Special case for 'Pending Approval'
+            if ($status === 'Pending Approval') {
+                $query->whereHas('vendor', function ($q) {
+                    $q->whereNotNull('image');
+                });
+            }
+        
+            // Apply the status filter
+            $query->where('status', $status);
+        }
+
         // Handle search filtering
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
