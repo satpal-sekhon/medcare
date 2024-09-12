@@ -58,3 +58,18 @@ function getSetting($key)
     // Return the value if the setting is found, otherwise return null
     return $setting->value ?? null;
 }
+
+
+/**
+ * Handle file uploads and return the file path.
+ *
+ * @param \Illuminate\Http\UploadedFile $file
+ * @param string $directory
+ * @return string
+ */
+function uploadFile($file, $directory)
+{
+    $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+    $file->move(public_path($directory), $filename);
+    return $directory . $filename;
+}

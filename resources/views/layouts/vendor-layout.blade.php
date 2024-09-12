@@ -43,13 +43,20 @@
 
         <div class="page-body-wrapper">
             @include('layouts.partials.vendor-sidebar')
-
             <div class="page-body">
                 <div class="container-fluid">
-                    @yield('content')
+                    <x-success-message :message="session('success')" />
+
+                    @if(auth()->user() && !auth()->user()->vendor->image)
+                        @include('vendor.partials.upload-documents-for-verification')
+                    @elseif(auth()->user() && auth()->user()->status == 'Pending Approval')
+                        @include('vendor.partials.pending-approval')
+                    @else
+                        @yield('content')
+                    @endif
                 </div>
             </div>
-
+            
         </div>
     </div>
 

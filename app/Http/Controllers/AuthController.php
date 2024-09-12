@@ -134,7 +134,8 @@ class AuthController extends Controller
             'pincode'       => $request->input('pincode'),
             'state'         => $request->input('state'),
             'password'      => Hash::make($request->input('new_password')),
-            'otp'           => $otp
+            'otp'           => $otp,
+            'status'        => 'Pending Approval'
         ]);
         // Assign role to user
         $user->assignRole('Vendor');
