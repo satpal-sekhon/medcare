@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
 use App\Models\State;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         if (Auth::check()) {
             $user = Auth::user();
-            
+
             if ($user->hasRole('Customer')) {
                 return redirect()->route('my-account');
             } else {
@@ -28,7 +30,8 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function create_account(Request $request){
+    public function create_account(Request $request)
+    {
         // Validate the form data
         $request->validate([
             'name'         => 'required|string|max:50',
@@ -62,37 +65,51 @@ class AuthController extends Controller
 
         $request->session()->put('reset_email', $request->email);
 
-        // Redirect or return a success response
         return redirect()->route('verify-email')->with('success', 'Account created successfully! Please check your email to verify your account.');
     }
 
-    public function vendor_registration(){
+    public function vendor_registration()
+    {
         $states = State::select('name')->get();
         return view('register-vendor', compact('states'));
     }
 
-    public function create_vendor_account(Request $request){
+    /**
+     * Handle file uploads and return the file path.
+     *
+     * @param \Illuminate\Http\UploadedFile $file
+     * @param string $directory
+     * @return string
+     */
+    private function uploadFile($file, $directory)
+    {
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path($directory), $filename);
+        return $directory . $filename;
+    }
+
+    public function create_vendor_account(Request $request)
+    {
         $request->validate([
             'full_name'             => 'required|string|max:50',
             'email'                 => 'required|email|max:100|unique:users,email',
-            'phone_number'          => 'required|digits:10',
+            'phone_number'          => 'required|digits:10|unique:users,phone_number',
             'address'               => 'required|string|max:255',
             'city'                  => 'required|string|max:50',
             'pincode'               => 'required|digits:6',
             'state'                 => 'required|string|max:50',
+            'new_password'          => 'required|string|max:25',
+            'confirm_password'      => 'required|string|max:25|same:new_password',
             'terms'                 => 'required|in:accepted',
 
             'business_name'         => 'required|string|max:75',
             'business_email'        => 'required|email|max:100|unique:vendors,email',
-            'business_phone_number' => 'required|digits:10',
+            'business_phone_number' => 'required|digits:10|unique:vendors,phone_number',
             'business_address'      => 'required|string|max:255',
             'business_city'         => 'required|string|max:50',
             'business_pincode'      => 'required|digits:6',
             'business_state'        => 'required|string|max:50',
             'license_number'        => 'required|string',
-            'store_image'           => 'required|file|mimes:jpg,jpeg,png',
-            'documents'             => 'required|array',
-            'documents.*'           => 'file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048'
         ]);
 
 
@@ -113,7 +130,8 @@ class AuthController extends Controller
             'address'       => $request->input('address'),
             'city'          => $request->input('city'),
             'pincode'       => $request->input('pincode'),
-            'password'      => Hash::make(''),
+            'state'         => $request->input('state'),
+            'password'      => Hash::make($request->input('new_password')),
             'otp'           => $otp
         ]);
         // Assign role to user
@@ -121,10 +139,25 @@ class AuthController extends Controller
 
         $request->session()->put('reset_email', $request->email);
 
-        dd($request->all());
+        $user->vendor()->create([
+            'name'              => $request->input('business_name'),
+            'email'             => $request->input('business_email'),
+            'phone_number'      => preg_replace('/\D/', '', $request->input('business_phone_number')),
+            'address'           => $request->input('business_address'),
+            'city'              => $request->input('business_city'),
+            'state'             => $request->input('business_state'),
+            'pincode'           => $request->input('business_pincode'),
+            'type'              => $request->input('business_type'),
+            'shop_type'         => $request->input('shop_type'),
+            'license_number'    => $request->input('license_number'),
+        ]);
+
+        return redirect()->route('verify-email')->with('success', 'Please check your email to verify your account. So that we can verify your account.');
     }
 
-    public function resend_verification_email(){
+
+    public function resend_verification_email()
+    {
         try {
             $email = session('reset_email');
 
@@ -155,10 +188,11 @@ class AuthController extends Controller
         }
     }
 
-    public function admin_login(){
+    public function admin_login()
+    {
         if (Auth::check()) {
             $user = Auth::user();
-            
+
             if ($user->hasRole('Customer')) {
                 return redirect()->route('my-account');
             } else {
@@ -184,51 +218,52 @@ class AuthController extends Controller
             return back()->withInput()->withErrors([
                 'message' => 'Invalid login credentials',
             ]);
-        } else if(!Hash::check($request->input('password'), $user->password)){
+        } else if (!Hash::check($request->input('password'), $user->password)) {
             return back()->withInput()->withErrors([
                 'message' => 'Invalid login credentials',
             ]);
-        } else if(!$user->email_verified_at && !$user->hasRole('Admin')){
+        } else if (!$user->email_verified_at && !$user->hasRole('Admin')) {
             // Store email in session in the case if user wants to verify email
             $request->session()->put('reset_email', $request->email);
 
             return back()->withInput()->withErrors([
                 'message' => 'Email is not verified. <a href="' . route('resend-verification-email') . '">Click here to verify</a>',
-            ]);            
-        } else{
+            ]);
+        } else {
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                                
+
                 if ($user->hasRole('Customer')) {
                     return redirect()->route('my-account');
                 } else {
                     return redirect()->route('admin-dashboard');
                 }
-                
             }
         }
 
         return back()->withErrors([
             'message' => 'Invalid login credentials',
         ]);
-        
     }
 
-    public function admin_logout(Request $request){
+    public function admin_logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('admin.login');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
     }
-    
-    public function signup(){
+
+    public function signup()
+    {
         return view('signup');
     }
 
@@ -268,7 +303,7 @@ class AuthController extends Controller
                 $request->session()->put('reset_email', $request->email);
 
                 return redirect()->route('forgot-password')->with('success', 'Password reset link sent to your email.');
-            } catch (\Exception $e) {    
+            } catch (\Exception $e) {
                 // Redirect back with an error message
                 return redirect()->route('forgot-password')->with('error', 'Failed to send email. Please try again later.');
             }
@@ -319,16 +354,16 @@ class AuthController extends Controller
             'new_password'      => 'required',
             'confirm_password'  => 'required|same:new_password'
         ]);
-    
+
         $user = User::where('email', $request->email)->first();
-    
+
         if ($user) {
             $user->update([
                 'password' => Hash::make($request->new_password)
             ]);
-    
+
             $request->session()->forget('reset_email');
-    
+
             return redirect()->route('login')->with('success', 'Password changed successfully');
         } else {
             return redirect()->route('change-password')->with('error', 'No user found with this email address');

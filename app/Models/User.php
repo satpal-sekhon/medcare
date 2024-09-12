@@ -58,6 +58,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function vendor(){
+        return $this->hasOne(Vendor::class);
+    }
+
 
     /**
      * Generate an OTP, send an email for verification, and return the OTP.
@@ -79,11 +83,11 @@ class User extends Authenticatable
         ];
 
         // Try sending the OTP email
-        try {
+        //try {
             Mail::to($email)->send(new VerifyEmail($data));
-        } catch (\Exception $e) {
-            throw new \Exception('Email not exists or failed to send email. Please try again.');
-        }
+        /* } catch (\Exception $e) {
+            throw new \Exception('Invalid email or failed to send email. Please try again.');
+        } */
 
         return $otp;
     }

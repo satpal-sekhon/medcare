@@ -6,6 +6,8 @@
 
 <section class="section-b-space">
     <div class="container-fluid-lg w-100">
+        <x-error-message :message="$errors->first('message')" />   
+
         <form method="POST" action="{{ route('create-vendor-account') }}" enctype="multipart/form-data">
             @csrf
 
@@ -47,6 +49,14 @@
 
                                 <div class="col-md-6 mb-1">
                                     <x-form-input type="number" name="pincode" label="Pin Code"></x-form-input>
+                                </div>
+
+                                <div class="col-md-6 mb-1">
+                                    <x-form-input type="password" name="new_password" label="Password"></x-form-input>
+                                </div>
+
+                                <div class="col-md-6 mb-1">
+                                    <x-form-input type="password" name="confirm_password" label="Confirm Password"></x-form-input>
                                 </div>
 
                                 <div class="col-12">
@@ -99,7 +109,7 @@
                                 <div class="col-md-6 mb-1">
                                     <x-form-input type="number" name="business_pincode" label="Business Pincode"></x-form-input>
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-6 mb-2">
                                     <label for="business_type">Business Type</label>
                                     <select name="business_type" id="business_type" @class(['form-control'])>
                                         <option value="Pharmacy Store">Pharmacy Store</option>
@@ -107,7 +117,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 mb-1">
+                                <div class="col-md-6 mb-2">
                                     <label for="shop_type">Shop Type</label>
                                     <select name="shop_type" id="shop_type" @class(['form-control'])>
                                         <option value="Owned">Owned</option>
@@ -117,21 +127,11 @@
                                 <div class="col-md-6 mb-1">
                                     <x-form-input name="license_number" label="License Number"></x-form-input>
                                 </div>
-                                <div class="col-md-6 mb-1">
-                                    <x-form-input type="file" name="store_image" label="Store Image"></x-form-input>
-                                </div>
-                                <div class="col-md-6 mb-1">
-                                    <x-form-input type="file" name="documents" label="Upload Documents" multiple="true"></x-form-input>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    @php
-                        print_r($errors->all())
-                    @endphp
-
-                    <button class="btn btn-animation mt-4">Submit</button>
+                    <button class="btn btn-animation mt-4m w-25 mx-auto">Submit</button>
 
                 </div>
             </div>

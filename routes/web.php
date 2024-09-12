@@ -26,6 +26,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // Include the auth routes
@@ -166,4 +167,13 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');
     Route::post('/general-settings', [SettingController::class, 'admin_general_settings_update'])->name('admin.settings.general.update');
 
+});
+
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email.', function ($message) {
+        $message->to('satpalsekhon01@gmail.com')->subject('Test Email');
+    });
+
+    return 'Email successfully sent!';
 });

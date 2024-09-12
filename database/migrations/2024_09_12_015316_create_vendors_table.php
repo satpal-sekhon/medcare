@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name', 75);
+            $table->string('slug')->nullable();
             $table->string('address');
             $table->string('city', 50);
             $table->string('state', 50);
@@ -28,6 +30,11 @@ return new class extends Migration
             $table->enum('shop_type', ['Owned', 'Rented'])->nullable();
             $table->string('status', 25)->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            // Adding indexes
+            $table->index('user_id');
         });
     }
 
