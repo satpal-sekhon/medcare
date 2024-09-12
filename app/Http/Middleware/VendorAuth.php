@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
-class AdminAuth
+class VendorAuth
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,11 @@ class AdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         // Check if the user is authenticated and is an admin
-        if (Auth::check() && Auth::user()->hasRole('Admin')) {
+        if (Auth::check() && Auth::user()->hasRole('Vendor')) {
             return $next($request);
         }
 
-        // Redirect to the admin login page if not authenticated
-        return redirect()->route('admin.login');
+        // Redirect to the vendor login page if not authenticated
+        return redirect()->route('login');
     }
 }

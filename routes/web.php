@@ -78,6 +78,13 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+
+Route::prefix('/vendor')->middleware('vendor')->group(function () {
+    // Dashboard route
+    Route::get('/', [DashboardController::class, 'vendor_dashboard'])->name('vendor-dashboard');
+});
+
+
 Route::prefix('/admin')->middleware('admin')->group(function () {
     // Dashboard route
     Route::get('/', [DashboardController::class, 'admin_dashboard'])->name('admin-dashboard');

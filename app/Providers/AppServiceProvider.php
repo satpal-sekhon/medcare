@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::defaultView('vendor.pagination.custom');
+        Paginator::defaultView('pagination.custom');
 
         View::composer('layouts.frontend-layout', function ($view) {
             $menuPrimaryCategories = PrimaryCategory::with(['categories' => function($query) {

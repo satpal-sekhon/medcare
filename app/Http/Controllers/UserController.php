@@ -58,7 +58,7 @@ class UserController extends Controller
         // Redirect or return a success response
         $route_name = 'admin.users.index';
         if($request->role=='Vendor'){
-            $route_name = 'admin.vendors.index';
+            $route_name = 'vendor.index';
         }
         return redirect()->route($route_name)->with('success', 'User saved successfully!');
     }
@@ -179,7 +179,7 @@ class UserController extends Controller
         
         $route_name = 'admin.users.index';
         if ($request->role === 'Vendor') {
-            $route_name = 'admin.vendors.index';
+            $route_name = 'vendor.index';
         }
 
         return redirect()->route($route_name)->with('success', 'User updated successfully!');

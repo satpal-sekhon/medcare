@@ -19,9 +19,11 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-
+            
             if ($user->hasRole('Customer')) {
                 return redirect()->route('my-account');
+            } else if($user->hasRole('Vendor')){
+                return redirect()->route('vendor-dashboard');
             } else {
                 return redirect()->route('admin-dashboard');
             }

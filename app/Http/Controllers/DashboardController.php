@@ -41,6 +41,10 @@ class DashboardController extends Controller
         return view('frontend.home', compact('diseases', 'categories', 'brands', 'generalProducts', 'saleProducts', 'genericProducts'));
     }
 
+    public function vendor_dashboard(){
+        return view('vendor.dashboard');
+    }
+
     public function admin_dashboard(){
         return view('admin.dashboard');
     }
