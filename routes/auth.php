@@ -10,7 +10,7 @@ Route::get('/signup', [AuthController::class, 'signup'])->name('sign-up');
 Route::post('/create-account', [AuthController::class, 'create_account'])->name('create-account');
 
 Route::get('/vendor-registration', [AuthController::class, 'vendor_registration'])->name('vendor-registration');
-Route::get('/create-vendor-account', [AuthController::class, 'create_vendor_account'])->name('create-vendor-account');
+Route::post('/create-vendor-account', [AuthController::class, 'create_vendor_account'])->name('create-vendor-account');
 
 Route::get('/verify-email', [AuthController::class, 'verify_email'])->name('verify-email');
 Route::get('/resend-verification-email', [AuthController::class, 'resend_verification_email'])->name('resend-verification-email');

@@ -6,7 +6,7 @@
 
 <section class="section-b-space">
     <div class="container-fluid-lg w-100">
-        <form method="POST" action="{{ route('create-vendor-account') }}">
+        <form method="POST" action="{{ route('create-vendor-account') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="card">
@@ -16,19 +16,19 @@
                             <h2>About You</h2>
                             <div class="row mt-4">
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="full_name" label="Full Name"></x-form-input>
+                                    <x-form-input name="full_name" label="Full Name" maxlength="50"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="email" label="Email Address"></x-form-input>
+                                    <x-form-input name="email" label="Email Address" maxlength="100"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="phone_number" label="Phone Number"></x-form-input>
+                                    <x-form-input type="number" name="phone_number" label="Phone Number"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="city" label="City"></x-form-input>
+                                    <x-form-input name="city" label="City" maxlength="50"></x-form-input>
                                 </div>
                                 <div class="col-12 mb-1">
-                                    <x-textarea name="address" label="Address"></x-textarea>
+                                    <x-textarea name="address" label="Address" maxlength="255"></x-textarea>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <div class="form-group">
@@ -46,7 +46,21 @@
                                 </div>
 
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="pincode" label="Pin Code"></x-form-input>
+                                    <x-form-input type="number" name="pincode" label="Pin Code"></x-form-input>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="forgot-box">
+                                        <div class="form-check ps-0 m-0 remember-box">
+                                            <input name="terms" class="checkbox_animated check-box" type="checkbox" id="acceptTerms" value="accepted" @checked(old('terms'))>
+                                            <label class="form-check-label" for="acceptTerms">
+                                                I agree with <span>Terms</span> and <span>Privacy</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @error('terms')
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -54,19 +68,19 @@
                             <h2>About Your Business</h2>
                             <div class="row mt-4">
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="business_name" label="Business Name"></x-form-input>
+                                    <x-form-input name="business_name" label="Business Name" maxlength="75"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="business_email" label="Business Email Address"></x-form-input>
+                                    <x-form-input name="business_email" label="Business Email Address" maxlength="100"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="buiness_phone_number" label="Business Phone Number"></x-form-input>
+                                    <x-form-input type="number" name="business_phone_number" label="Business Phone Number"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="business_city" label="Business City"></x-form-input>
+                                    <x-form-input name="business_city" label="Business City" maxlength="50"></x-form-input>
                                 </div>
                                 <div class="col-12 mb-1">
-                                    <x-textarea name="business_address" label="Business Address"></x-textarea>
+                                    <x-textarea name="business_address" label="Business Address" maxlength="255"></x-textarea>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <div class="form-group">
@@ -83,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input name="business_pincode" label="Business Pincode"></x-form-input>
+                                    <x-form-input type="number" name="business_pincode" label="Business Pincode"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label for="business_type">Business Type</label>
@@ -104,11 +118,18 @@
                                     <x-form-input name="license_number" label="License Number"></x-form-input>
                                 </div>
                                 <div class="col-md-6 mb-1">
-                                    <x-form-input type="file" name="documents" label="Upload Documents"></x-form-input>
+                                    <x-form-input type="file" name="store_image" label="Store Image"></x-form-input>
+                                </div>
+                                <div class="col-md-6 mb-1">
+                                    <x-form-input type="file" name="documents" label="Upload Documents" multiple="true"></x-form-input>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @php
+                        print_r($errors->all())
+                    @endphp
 
                     <button class="btn btn-animation mt-4">Submit</button>
 
