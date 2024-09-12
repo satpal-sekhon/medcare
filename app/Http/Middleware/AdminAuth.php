@@ -19,6 +19,8 @@ class AdminAuth
         // Check if the user is authenticated and is an admin
         if (Auth::check() && Auth::user()->hasRole('Admin')) {
             return $next($request);
+        } else if(Auth::check() && Auth::user()->hasRole('Vendor')){
+            return redirect()->route('vendor-dashboard');
         }
 
         // Redirect to the admin login page if not authenticated
