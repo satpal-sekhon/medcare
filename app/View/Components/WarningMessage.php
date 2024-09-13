@@ -9,13 +9,15 @@ use Illuminate\View\Component;
 class WarningMessage extends Component
 {
     public $message;
+    public $class;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($message)
+    public function __construct($message, $class='')
     {
         $this->message = $message;
+        $this->class = $class;
     }
 
     /**
@@ -23,6 +25,7 @@ class WarningMessage extends Component
      */
     public function render(): View|Closure|string
     {
+
         return view('components.warning-message');
     }
 }

@@ -110,7 +110,7 @@
                                 <a href="{{ route('admin.users.index') }}">Manage Users</a>
                             </li>
                             <li>
-                                <a href="#">Banned Users</a>
+                                <a href="#">Suspended Users</a>
                             </li>
                         </ul>
                     </li>
@@ -121,6 +121,9 @@
                             <span>Vendor</span>
                         </a>
                         <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('admin.vendors.new') }}">New Registrations</a>
+                            </li>
                             <li>
                                 <a href="{{ route('admin.vendors.index') }}">Manage Vendors</a>
                             </li>
