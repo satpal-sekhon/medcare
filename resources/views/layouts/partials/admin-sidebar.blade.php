@@ -187,7 +187,7 @@
                     </li>
                     
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.pharmacy-stores.index') }}">
                             <i class="ri-store-2-line"></i>
                             <span>Pharmacy Stores</span>
                         </a>

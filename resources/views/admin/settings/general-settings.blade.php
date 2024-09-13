@@ -21,10 +21,12 @@
                                     'default_product_image' => 'Product',
                                     'default_doctor_image' => 'Doctor',
                                     'default_lab_test_image' => 'Lab Test',
-                                    'default_lab_package_image' => 'Lab Package'
+                                    'default_lab_package_image' => 'Lab Package',
+                                    'default_user_image' => 'User',
+                                    'default_pharmacy_image' => 'Pharmacy Store'
                                 ] as $key => $label)
                                     <div class="col-md-6 mb-2">
-                                        <label class="form-label-title">{{ $label }} Default Image</label>
+                                        <label class="form-label-title">Default {{ $label }} Image</label>
                                         <div class="form-group">
                                             <input type="file" name="{{ $key }}" accept="image/*" @class(['form-control', 'is-invalid' => $errors->has($key)])>
                                             @if ($errors->has($key))

@@ -190,6 +190,26 @@ class VendorController extends Controller
      */
     public function destroy(Vendor $vendor)
     {
-        //
+        if ($vendor->image && file_exists(public_path($vendor->image))) {
+            unlink(public_path($vendor->image));
+        } 
+
+        if ($vendor->user->profile_pic && file_exists(public_path($vendor->user->image))) {
+            unlink(public_path($vendor->user->image));
+        } 
+
+        foreach($vendor->assets as $document){
+            if ($document && file_exists(public_path($document->path))) {
+                unlink(public_path($document->path));
+            }
+        }
+        
+        $vendor->user->delete();
+        $vendor->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendor deleted successfully.'
+        ]);
     }
 }
