@@ -69,11 +69,7 @@ class ProductController extends Controller
             
             $thumbnailPath = null;
             if ($request->hasFile('thumbnail')) {
-                $base_image_path = 'uploads/product-thumbnails/';
-                $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
-                $request->file('thumbnail')->move(public_path($base_image_path), $filename);
-                        
-                $thumbnailPath = $base_image_path.$filename;
+                $thumbnailPath = uploadFile($request->file('thumbnail'), 'uploads/product-thumbnails/');
             }
 
             
@@ -105,10 +101,7 @@ class ProductController extends Controller
 
             if($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $base_image_path = 'uploads/products/';
-                    $filename = time().'.'.$image->getClientOriginalExtension();
-                    $image->move(public_path($base_image_path), $filename);
-                    $path = $base_image_path.$filename;
+                    $path = uploadFile($image, 'uploads/products/');
 
                     $product->images()->create([
                         'path' => $path
@@ -271,11 +264,7 @@ class ProductController extends Controller
                     unlink(public_path($thumbnailPath));
                 } */
 
-                $base_image_path = 'uploads/product-thumbnails/';
-                $filename = time().'.'.$request->file('thumbnail')->getClientOriginalExtension();
-                $request->file('thumbnail')->move(public_path($base_image_path), $filename);
-                        
-                $thumbnailPath = $base_image_path.$filename;
+                $thumbnailPath = uploadFile($request->file('thumbnail'), 'uploads/product-thumbnails/');
             }
 
             // Update product attributes
@@ -324,10 +313,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $base_image_path = 'uploads/products/';
-                    $filename = time().'.'.$image->getClientOriginalExtension();
-                    $image->move(public_path($base_image_path), $filename);
-                    $path = $base_image_path.$filename;
+                    $path = uploadFile($image, 'uploads/products/');
 
                     $product->images()->create([
                         'path' => $path
