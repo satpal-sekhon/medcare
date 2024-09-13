@@ -137,6 +137,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
 
     // Vendor routes
     Route::resource('vendors', VendorController::class);
+    Route::get('/new-vendors', [VendorController::class, 'new_vendors_index'])->name('admin.vendors.new');
     Route::get('/vendors', [VendorController::class, 'admin_index'])->name('admin.vendors.index');
     Route::get('/pending-approval-vendors', [VendorController::class, 'pending_approval_index'])->name('admin.vendors.pending-approvals');
     Route::get('/suspended-vendors', [VendorController::class, 'suspended_admin_index'])->name('admin.vendors.suspended');

@@ -19,6 +19,10 @@ class VendorController extends Controller
         //
     }
 
+    public function new_vendors_index(){
+        return view('admin.vendors.new-vendors');
+    }
+
     public function admin_index(){
         return view('admin.vendors.index');
     }

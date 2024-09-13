@@ -40,17 +40,17 @@
                                 @endif
                             </div>
 
-                            <div class="mb-2 row">
-                                <label class="form-label-title">Category Image</label>
-                                <div class="form-group">
-                                    <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid' => $errors->first('image')])>
-                                    @if ($errors->has('image'))
-                                        <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
-                                    @endif
-
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <x-form-input type="file" name="image" label="Category Image" accept="image/*" labelClass="form-label-title"></x-form-input>
                                     @if ($category->image)
-                                        <img src="{{ asset($category->image) }}" alt=""
-                                            style="width: 100px; height: auto;">
+                                        <img src="{{ asset($category->image) }}" alt="" style="width: 100px; height: auto;">
+                                    @endif
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <x-form-input type="file" name="banner_image" label="Banner Image" accept="image/*" labelClass="form-label-title"></x-form-input>
+                                    @if ($category->banner_image)
+                                        <img src="{{ asset($category->banner_image) }}" alt="" style="width: 100px; height: auto;">
                                     @endif
                                 </div>
                             </div>

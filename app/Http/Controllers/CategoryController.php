@@ -60,11 +60,12 @@ class CategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $base_image_path = 'uploads/categories/';
-            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path($base_image_path), $filename);
-                    
-            $imagePath = $base_image_path.$filename;
+            $imagePath = uploadFile($request->file('image'), 'uploads/categories/');
+        }
+
+        $bannerImagePath = null;
+        if ($request->hasFile('banner_image')) {
+            $bannerImagePath = uploadFile($request->file('banner_image'), 'uploads/banners/categories/');
         }
 
         Category::create([
@@ -72,6 +73,7 @@ class CategoryController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'image' => $imagePath,
+            'banner_image' => $bannerImagePath,
             'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
@@ -83,7 +85,7 @@ class CategoryController extends Controller
         $columns = ['name', 'image', 'primary_category_name'];
 
         $query = Category::query()
-            ->select('categories.id', 'categories.name', 'categories.show_on_homepage', 'categories.image')
+            ->select('categories.id', 'categories.name', 'categories.show_on_homepage', 'categories.image', 'categories.banner_image')
             ->leftJoin('primary_categories', 'categories.primary_category_id', '=', 'primary_categories.id')
             ->addSelect('primary_categories.name as primary_category_name');
 
@@ -168,6 +170,7 @@ class CategoryController extends Controller
                 },
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             //'description' => 'required|string'
         ]);
 
@@ -178,17 +181,23 @@ class CategoryController extends Controller
                 unlink(public_path($imagePath));
             }
 
-            $base_image_path = 'uploads/categories/';
-            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path($base_image_path), $filename);
-                    
-            $imagePath = $base_image_path.$filename;
+            $imagePath = uploadFile($request->file('image'), 'uploads/categories/');
+        }
+
+        $bannerImagePath = $category->banner_image;
+        if ($request->hasFile('banner_image')) {
+            if ($bannerImagePath && file_exists(public_path($bannerImagePath))) {
+                unlink(public_path($bannerImagePath));
+            }
+
+            $bannerImagePath = uploadFile($request->file('banner_image'), 'uploads/banners/categories/');
         }
 
         $category->update([
             'primary_category_id' => $request->input('primary_category'),
             'name' => $request->input('name'),
             'image' => $imagePath,
+            'banner_image' => $bannerImagePath,
             'description' => $request->input('description'),
             'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);

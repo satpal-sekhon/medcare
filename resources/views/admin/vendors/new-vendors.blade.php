@@ -6,20 +6,12 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Primary Categories</h5>
-                        <div class="right-options">
-                            <ul>
-                                <li>
-                                    <a class="align-items-center btn btn-theme d-flex"
-                                        href="{{ route('primary-categories.create') }}">
-                                        <i data-feather="plus-square"></i> Add New
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <h5>New Registrations</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
+
+                    <x-warning-message message="Vendors who created their account. But not uploads their documents" :class="'text-center'"></x-warning-message>
 
                     <div>
                         <div class="table-responsive">
@@ -27,10 +19,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Banner Image</th>
-                                        <th>Flag</th>
+                                        <th>User Name</th>
+                                        <th>Business Name</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Status</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -52,10 +45,13 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('primary-categories.get') }}",
+                        url: "{{ route('users.get') }}",
                         type: 'POST',
                         data: {
-                            _token: "{{ csrf_token() }}"
+                            _token: "{{ csrf_token() }}",
+                            role: "Vendor",
+                            status: "Pending Approval",
+                            new_registrations: true
                         }
                     },
                     columns: [{
@@ -70,37 +66,38 @@
                             name: 'name'
                         },
                         {
-                            data: 'image',
-                            name: 'image',
-                            orderable: false,
-                            render: function(data, type, row) {
-                            let defaultImagePath = '{{ getSetting("default_primary_category_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
-
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
-                            }
+                            data: 'name',
+                            name: 'name'
                         },
                         {
-                            data: 'banner_image',
-                            name: 'banner_image',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                let defaultImagePath = '{{ getSetting("default_primary_category_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
-
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
-                            }
+                            data: 'email',
+                            name: 'email'
                         },
                         {
-                            data: 'status',
+                            data: 'phone_number',
+                            name: 'phone_number'
+                        },
+                        {
+                            data: null,
                             name: 'status',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                if(row.show_on_homepage != '1'){
-                                    return ``;
+                            render: function(data, type, row, meta) {
+                                let badgeClass = '';
+
+                                switch (row.status) {
+                                    case 'Active':
+                                        badgeClass = 'badge bg-success';
+                                        break;
+                                    case 'Inactive':
+                                        badgeClass = 'badge bg-warning';
+                                        break;
+                                    case 'Suspended':
+                                        badgeClass = 'badge bg-danger';
+                                        break;
+                                    default:
+                                        badgeClass = 'badge bg-light';
                                 }
 
-                                return `<span class="badge badge-success">Show On Homepage</span>`;
+                                return `<span class="${badgeClass}">${row.status}</span>`;
                             }
                         },
                         {
@@ -108,8 +105,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('primary-categories.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('primary-categories.destroy', ':id') }}`.replace(':id', row.id);
+                                let editUrl = `{{ route('vendors.edit', ':id') }}`.replace(':id', row.vendor.id);
+                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.vendor.vendor_id);
                     
                                 return `
                                 <ul>
@@ -119,7 +116,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="primary category" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="vendor" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>
@@ -127,8 +124,7 @@
                             `;
                             }
                         }
-                    ],
-                    order: [[0, 'desc']]
+                    ]
                 });
             });
         </script>
