@@ -90,6 +90,10 @@ class UserController extends Controller
                 $query->whereHas('vendor', function ($q) {
                     $q->whereNotNull('image');
                 });
+            } else if($status === 'Pending Approval' && $request->input('new_registrations')){
+                $query->whereHas('vendor', function ($q) {
+                    $q->whereNull('image');
+                });
             }
         
             // Apply the status filter

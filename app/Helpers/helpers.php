@@ -69,6 +69,10 @@ function getSetting($key)
  */
 function uploadFile($file, $directory)
 {
+    if(!$file){
+        return null;
+    }
+
     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
     $file->move(public_path($directory), $filename);
     return $directory . $filename;
