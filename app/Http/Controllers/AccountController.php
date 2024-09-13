@@ -53,8 +53,8 @@ class AccountController extends Controller
 
         // Handle the store image
         if ($request->hasFile('store_image')) {
-            $storeImage = $request->file('store_image');
-            $storeImagePath = uploadFile($storeImage, 'uploads/store_images/');
+            $storeImage = $request->file('stores');
+            $storeImagePath = uploadFile($storeImage, 'uploads/stores/');
         }
 
         // Update vendor's image

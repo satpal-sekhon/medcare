@@ -1,5 +1,5 @@
-<div class="form-group mb-2">
-    <label for="{{ $name }}">{{ $label }}</label>
+<div @class(["form-group mb-2"])>
+    <label for="{{ $name }}" @class([$labelClass, 'mb-0' => $labelClass])>{{ $label }}</label>
 
     <input type="{{ $type }}"
         name="{{ $name }}{{ $type === 'file' && $multiple ? '[]' : '' }}"

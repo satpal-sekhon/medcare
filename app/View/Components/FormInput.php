@@ -14,11 +14,12 @@ class FormInput extends Component
     public $value;
     public $attributes;
     public $multiple;
+    public $labelClass;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($name, $label = '', $type = 'text', $value = null, $attributes = [], $multiple = false)
+    public function __construct($name, $label = '', $type = 'text', $value = null, $attributes = [], $multiple = false, $labelClass = '')
     {
         $this->name = $name;
         $this->label = $label ?? $name;
@@ -26,6 +27,7 @@ class FormInput extends Component
         $this->value = $value;
         $this->attributes = $attributes;
         $this->multiple = $multiple;
+        $this->labelClass = $labelClass;
     }
 
     /**

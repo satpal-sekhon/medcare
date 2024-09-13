@@ -75,6 +75,10 @@ class UserController extends Controller
             $query->whereHas('roles', function($q) use ($role) {
                 $q->where('name', $role);
             });
+
+            if ($role === 'Vendor') {
+                $query->with('vendor');
+            }            
         }
 
         // Filter by status if specified
@@ -205,8 +209,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->profile_pic && Storage::disk('public')->exists($user->profile_pic)) {
-            Storage::disk('public')->delete($user->profile_pic);
+        $profilePic = $user->profile_pic;
+
+        if ($profilePic && file_exists(public_path($profilePic))) {
+            unlink(public_path($profilePic));
         }
 
         $user->delete();

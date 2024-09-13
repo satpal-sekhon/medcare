@@ -51,6 +51,8 @@
                         @include('vendor.partials.upload-documents-for-verification')
                     @elseif(auth()->user() && auth()->user()->status == 'Pending Approval')
                         @include('vendor.partials.pending-approval')
+                    @elseif(auth()->user() && auth()->user()->status == 'Suspended')
+                        @include('vendor.partials.suspended-account')
                     @else
                         @yield('content')
                     @endif

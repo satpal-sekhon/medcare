@@ -6,7 +6,7 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Pending Approval Vendors</h5>
+                        <h5>Suspended Vendors</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
@@ -48,7 +48,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                             role: "Vendor",
-                            status: "Pending Approval"
+                            status: "Suspended"
                         }
                     },
                     columns: [{
@@ -103,7 +103,7 @@
                             orderable: false,
                             render: function(data, type, row) {
                                 let editUrl = `{{ route('vendors.edit', ':id') }}`.replace(':id', row.vendor.id);
-                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.vendor.vendor_id);
+                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.vendor.id);
                     
                                 return `
                                 <ul>

@@ -16,6 +16,11 @@ class Vendor extends Model
         return $this->hasMany(VendorAsset::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function sluggable(): array
     {
         return [

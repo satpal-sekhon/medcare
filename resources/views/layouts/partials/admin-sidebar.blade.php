@@ -128,7 +128,7 @@
                                 <a href="{{ route('admin.vendors.pending-approvals') }}">Pending Approvals</a>
                             </li>
                             <li>
-                                <a href="#">Banned Vendors</a>
+                                <a href="{{ route('admin.vendors.suspended') }}">Suspended Vendors</a>
                             </li>
                         </ul>
                     </li>
