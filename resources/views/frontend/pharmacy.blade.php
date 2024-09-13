@@ -25,7 +25,6 @@
                 </div>
             </div>
 
-
             <!-- Pharmacy List -->
             <div class="col-12  section-t-space">
                 <div class="row product-list-section">

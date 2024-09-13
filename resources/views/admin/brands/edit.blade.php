@@ -23,16 +23,21 @@
                                 @endif
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label-title">Brand Logo</label>
-                                <div class="form-group">
-                                    <input type="file" name="image" accept="image/*" @class(['form-control', 'is-invalid' => $errors->first('image')])>
-                                    @if ($errors->has('image'))
-                                        <div class="invalid-feedback d-block">{{ $errors->first('image') }}</div>
-                                    @endif
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <x-form-input type="file" name="image" label="Category Image" accept="image/*" labelClass="form-label-title"></x-form-input>
 
                                     @if ($brand->image)
                                         <img src="{{ asset($brand->image) }}" alt=""
+                                            style="width: 100px; height: auto;">
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <x-form-input type="file" name="banner_image" label="Banner Image" accept="image/*" labelClass="form-label-title"></x-form-input>
+
+                                    @if ($brand->banner_image)
+                                        <img src="{{ asset($brand->banner_image) }}" alt=""
                                             style="width: 100px; height: auto;">
                                     @endif
                                 </div>
