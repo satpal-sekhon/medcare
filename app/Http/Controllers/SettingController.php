@@ -24,7 +24,7 @@ class SettingController extends Controller
             'lab_package_image' => 'nullable|image|max:2048',
         ]);
 
-        foreach ($request->all() as $key => $file) {
+        foreach ($request->all() as $key => $image) {
             if ($key === '_token' || !$request->hasFile($key)) {
                 continue;
             }
@@ -32,15 +32,11 @@ class SettingController extends Controller
             $currentImagePath = Setting::where('key', $key)->pluck('value')->first();
             // Delete the old file if it exists
             if ($currentImagePath && file_exists(public_path($currentImagePath))) {
-                File::delete(public_path($currentImagePath));
+                unlink(public_path($currentImagePath));
             }
 
             // Handle the file upload
-            $baseImagePath = 'uploads/default-images/';
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path($baseImagePath), $filename);
-
-            $imagePath = $baseImagePath . $filename;
+            $imagePath = uploadFile($image, 'uploads/default-images/');
 
             // Update or create the setting
             Setting::updateOrCreate(

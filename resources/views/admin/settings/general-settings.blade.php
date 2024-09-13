@@ -26,14 +26,14 @@
                                     'default_pharmacy_image' => 'Pharmacy Store'
                                 ] as $key => $label)
                                     <div class="col-md-6 mb-2">
-                                        <label class="form-label-title">Default {{ $label }} Image</label>
+                                        <label class="form-label-title mb-0">Default {{ $label }} Image</label>
                                         <div class="form-group">
                                             <input type="file" name="{{ $key }}" accept="image/*" @class(['form-control', 'is-invalid' => $errors->has($key)])>
                                             @if ($errors->has($key))
                                                 <div class="invalid-feedback d-block">{{ $errors->first($key) }}</div>
                                             @endif
                                             @if (isset($settings[$key]))
-                                                <div class="mt-2">
+                                                <div class="my-2">
                                                     <img src="{{ asset($settings[$key]) }}" alt="{{ $label }} Image" width="100">
                                                 </div>
                                             @endif
