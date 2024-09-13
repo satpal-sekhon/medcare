@@ -164,6 +164,12 @@ class PrimaryCategoryController extends Controller
             unlink(public_path($imagePath));
         }
 
+        $bannerImagePath = $primaryCategory->banner_image;
+
+        if ($bannerImagePath && file_exists(public_path($bannerImagePath))) {
+            unlink(public_path($bannerImagePath));
+        }
+
         $primaryCategory->delete();
 
         return response()->json([

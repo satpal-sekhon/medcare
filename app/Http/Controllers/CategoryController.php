@@ -216,6 +216,12 @@ class CategoryController extends Controller
             unlink(public_path($imagePath));
         }
 
+        $bannerImagePath = $category->banner_image;
+
+        if ($bannerImagePath && file_exists(public_path($bannerImagePath))) {
+            unlink(public_path($bannerImagePath));
+        }
+
         $category->delete();
 
         return response()->json([

@@ -85,10 +85,9 @@
                             name: 'banner_image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = '{{ getSetting("default_primary_category_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
+                                let imageUrl = data ? data : '';
 
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="" class="dt-image">`;
                             }
                         },
                         {
