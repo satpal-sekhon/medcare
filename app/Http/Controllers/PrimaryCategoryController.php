@@ -133,7 +133,7 @@ class PrimaryCategoryController extends Controller
             $imagePath = uploadFile($request->file('image'), 'uploads/primary-categories/');
         }
 
-        $bannerImagePath = $primaryCategory->image;
+        $bannerImagePath = $primaryCategory->banner_image;
         if ($request->hasFile('banner_image')) {
             if ($bannerImagePath && file_exists(public_path($bannerImagePath))) {
                 unlink(public_path($bannerImagePath));

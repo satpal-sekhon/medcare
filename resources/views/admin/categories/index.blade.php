@@ -29,8 +29,9 @@
                                         <th>#</th>
                                         <th>Primary Category</th>
                                         <th>Name</th>
-                                        <th>Flag</th>
                                         <th>Image</th>
+                                        <th>Banner Image</th>
+                                        <th>Flag</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -74,6 +75,28 @@
                             name: 'name'
                         },
                         {
+                            data: 'image',
+                            name: 'image',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                let defaultImagePath = '{{ getSetting("default_category_image") }}';
+                                let imageUrl = data ? data : defaultImagePath;
+
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
+                            }
+                        },
+                        {
+                            data: 'banner_image',
+                            name: 'banner_image',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                let defaultImagePath = '{{ getSetting("default_category_image") }}';
+                                let imageUrl = data ? data : defaultImagePath;
+
+                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
+                            }
+                        },
+                        {
                             data: 'status',
                             name: 'status',
                             orderable: false,
@@ -83,17 +106,6 @@
                                 }
 
                                 return `<span class="badge badge-success">Show On Homepage</span>`;
-                            }
-                        },
-                        {
-                            data: 'image',
-                            name: 'image',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                let defaultImagePath = '{{ getSetting("default_category_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
-
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Category Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
                             }
                         },
                         {
