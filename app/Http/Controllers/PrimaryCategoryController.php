@@ -42,17 +42,19 @@ class PrimaryCategoryController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $base_image_path = 'uploads/primary-categories/';
-            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path($base_image_path), $filename);
-                    
-            $imagePath = $base_image_path.$filename;
+            $imagePath = uploadFile($request->file('image'), 'uploads/primary-categories/');
+        }
+
+        $bannerImagePath = null;
+        if ($request->hasFile('banner_image')) {
+            $bannerImagePath = uploadFile($request->file('banner_image'), 'uploads/banners/primary-categories/');
         }
 
         PrimaryCategory::create([
             'name' => $request->input('name'),
-            'description' => $request->input('description'),
             'image' => $imagePath,
+            'banner_image' => $bannerImagePath,
+            'description' => $request->input('description'),
             'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
 
@@ -128,16 +130,22 @@ class PrimaryCategoryController extends Controller
                 unlink(public_path($imagePath));
             }
 
-            $base_image_path = 'uploads/primary-categories/';
-            $filename = time().'.'.$request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path($base_image_path), $filename);
-                    
-            $imagePath = $base_image_path.$filename;
+            $imagePath = uploadFile($request->file('image'), 'uploads/primary-categories/');
+        }
+
+        $bannerImagePath = $primaryCategory->image;
+        if ($request->hasFile('banner_image')) {
+            if ($bannerImagePath && file_exists(public_path($bannerImagePath))) {
+                unlink(public_path($bannerImagePath));
+            }
+
+            $bannerImagePath = uploadFile($request->file('banner_image'), 'uploads/banners/primary-categories/');
         }
 
         $primaryCategory->update([
             'name' => $request->input('name'),
             'image' => $imagePath,
+            'banner_image' => $bannerImagePath,
             'description' => $request->input('description'),
             'show_on_homepage' => $request->input('show_on_homepage') ?? 0
         ]);
