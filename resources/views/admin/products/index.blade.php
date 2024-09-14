@@ -123,7 +123,7 @@
                             name: 'name',
                             className: 'product-name-column',
                             render: function(data, type, row) {
-                                let viewUrl = `{{ route('products.view', ':id') }}`.replace(':id', row.id);
+                                let viewUrl = `{{ route('products.view', ':slug') }}`.replace(':slug', row.slug);
                                 
                                 return `<a href="${viewUrl}" target="_blank">${row.name}</a>`;
                             }

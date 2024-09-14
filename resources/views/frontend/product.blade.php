@@ -265,14 +265,14 @@
                                 @foreach ($tendingProducts as $tendingProduct)
                                 <li>
                                     <div class="offer-product">
-                                        <a href="{{ route('products.view', $tendingProduct->id) }}" class="offer-image">
+                                        <a href="{{ route('products.view', $tendingProduct->slug) }}" class="offer-image">
                                             <img src="{{ file_exists(public_path($tendingProduct->thumbnail)) ? asset($tendingProduct->thumbnail) : asset('assets/images/default/product.jpg') }}"
                                                 class="img-fluid lazyload" alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="{{ route('products.view', $tendingProduct->id) }}">
+                                                <a href="{{ route('products.view', $tendingProduct->slug) }}">
                                                     <h6 class="name">{{ $tendingProduct->name }}</h6>
                                                 </a>
                                                 <span>{{ $tendingProduct->unit }}</span>

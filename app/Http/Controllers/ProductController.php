@@ -174,7 +174,7 @@ class ProductController extends Controller
 
         // Create the initial query with necessary joins and selects
         $query = Product::query()
-            ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_type', 'products.stock_quantity_for_customer', 'products.stock_quantity_for_vendor', 'brands.name as brand_name')
+            ->select('products.id', 'products.name as category_name', 'products.name', 'products.slug', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_type', 'products.stock_quantity_for_customer', 'products.stock_quantity_for_vendor', 'brands.name as brand_name')
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
             ->leftJoin('product_diseases', 'products.id', '=', 'product_diseases.product_id');
 
