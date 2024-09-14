@@ -23,22 +23,53 @@ class PrimaryCategoryController extends Controller
         $sortDirection = $request->input('sort_direction', $defaultSortDirection);
         $perPage = $request->input('per_page', $defaultPerPage);
         $paginate = $request->input('paginate', true); // Default to true for pagination
+        $search = $request->input('search'); // Search term
 
         // Validate sort direction
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : $defaultSortDirection;
 
         // Build the query
         $query = PrimaryCategory::select('id', 'name', 'slug', 'image')
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy($sortColumn, $sortDirection);
 
-        // Apply pagination if needed
         if ($paginate) {
-            $categories = $query->paginate($perPage);
+            // Get the total count for pagination metadata
+            $total = $query->count();
+
+            // Get the current page, defaulting to 1 if not provided
+            $currentPage = max(1, (int) $request->input('page', 1));
+
+            // Get the items for the current page
+            $items = $query->forPage($currentPage, $perPage)->get();
+
+            // Calculate pagination metadata
+            $pagination = [
+                'total' => $total,
+                'per_page' => $perPage,
+                'current_page' => $currentPage,
+                'last_page' => (int) ceil($total / $perPage),
+                'from' => $total > 0 ? (($currentPage - 1) * $perPage) + 1 : null,
+                'to' => $total > 0 ? min($total, $currentPage * $perPage) : null,
+            ];
         } else {
-            $categories = $query->get(); // Get all records if pagination is not required
+            // Get all records if pagination is not required
+            $items = $query->get();
+            $pagination = null; // No pagination metadata when not paginated
         }
 
-        return response()->json($categories);
+        // Construct the response
+        $response = [
+            'data' => $items,
+        ];
+
+        if ($paginate) {
+            $response['pagination'] = $pagination;
+        }
+
+        return response()->json($response);
     }
 
 

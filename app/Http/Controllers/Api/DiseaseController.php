@@ -23,23 +23,58 @@ class DiseaseController extends Controller
         $sortDirection = $request->input('sort_direction', $defaultSortDirection);
         $perPage = $request->input('per_page', $defaultPerPage);
         $paginate = $request->input('paginate', true); // Default to true for pagination
+        $search = $request->input('search'); // Search term (optional)
 
         // Validate sort direction
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : $defaultSortDirection;
 
         // Build the query
         $query = Disease::select('id', 'name', 'slug', 'image')
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy($sortColumn, $sortDirection);
 
-        // Apply pagination if needed
         if ($paginate) {
-            $categories = $query->paginate($perPage);
+            // Count the total number of records matching the filters
+            $total = $query->count();
+
+            // Get the current page from the request, defaulting to 1 if not provided
+            $currentPage = max(1, (int) $request->input('page', 1));
+
+            // Calculate the offset for the current page
+            $offset = ($currentPage - 1) * $perPage;
+
+            // Retrieve the items for the current page
+            $items = $query->skip($offset)->take($perPage)->get();
+
+            // Calculate pagination metadata
+            $pagination = [
+                'total' => $total,
+                'per_page' => $perPage,
+                'current_page' => $currentPage,
+                'last_page' => (int) ceil($total / $perPage),
+                'from' => $total > 0 ? (($currentPage - 1) * $perPage) + 1 : null,
+                'to' => $total > 0 ? min($total, $currentPage * $perPage) : null,
+            ];
         } else {
-            $categories = $query->get(); // Get all records if pagination is not required
+            // Retrieve all records if pagination is not required
+            $items = $query->get();
+            $pagination = null; // No pagination metadata when not paginated
         }
 
-        return response()->json($categories);
+        // Construct the response
+        $response = [
+            'data' => $items,
+        ];
+
+        if ($paginate) {
+            $response['pagination'] = $pagination;
+        }
+
+        return response()->json($response);
     }
+
 
     /**
      * Store a newly created resource in storage.

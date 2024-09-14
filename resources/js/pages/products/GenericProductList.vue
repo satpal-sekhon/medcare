@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import Pagination from '../components/Pagination.vue';
-import WarningMessage from '../components/WarningMessage.vue';
+import Pagination from '../../components/Pagination.vue';
+import WarningMessage from '../../components/WarningMessage.vue';
 
 export default {
     name: 'GenericProductList',
