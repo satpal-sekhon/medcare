@@ -62,6 +62,7 @@ export default {
       this.fetchProducts();
     }
   },
+  emits: ['page-change'],
   methods: {
     async fetchProducts() {
       try {

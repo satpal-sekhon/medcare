@@ -7,4 +7,8 @@
         <products></products>
     </div>
 </section>
+
+@push('scripts')
+    <script src="{{ asset('assets/js/filter-sidebar.js') }}"></script>
+@endpush
 @endsection

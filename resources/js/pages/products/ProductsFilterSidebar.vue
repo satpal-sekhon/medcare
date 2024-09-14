@@ -1,15 +1,53 @@
 <template>
     <div class="shop-left-sidebar">
-
-        <div class="accordion custom-accordion" id="accordionExample">
+        <div class="accordion custom-accordion">
             <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne">
                         <span>Primary Categories</span>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="form-floating theme-form-floating-2 search-box">
+                            <input type="search" class="form-control" v-model="searchPrimaryCategoryQuery"
+                                @input="debouncedSearch" placeholder="Search ..">
+                            <label for="search">Search</label>
+                        </div>
+
+                        <ul class="category-list custom-padding custom-height">
+                            <li v-if="primaryCategories.length > 0" v-for="category in primaryCategories" :key="category.id">
+                                <div class="form-check ps-0 m-0 category-list-box">
+                                    <input
+                                        class="checkbox_animated"
+                                        type="checkbox"
+                                        :id="`filter-cat-${category.id}`"
+                                        :value="category.id"
+                                        v-model="category.isChecked"
+                                        @change="handleCheckboxChange"
+                                    />
+                                    <label class="form-check-label" :for="`filter-cat-${category.id}`">
+                                        <span class="name">{{ category.name }}</span>
+                                        <span class="number">({{ category.products_count }})</span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li v-else>
+                                No Primary Categories found!
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo">
+                        <span>Categories</span>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show">
                     <div class="accordion-body">
                         <div class="form-floating theme-form-floating-2 search-box">
                             <input type="search" class="form-control" v-model="searchPrimaryCategoryQuery"
@@ -65,10 +103,10 @@ export default {
         };
     },
     mounted() {
-        this.fetchCategories();
+        this.fetchPrimaryCategories();
     },
     methods: {
-        async fetchCategories(search = '') {
+        async fetchPrimaryCategories(search = '') {
             try {
                 const response = await axios.get('/api/primary-categories', {
                     params: {
@@ -89,12 +127,12 @@ export default {
 
         // Debounced search method to handle user input
         debouncedSearch: debounce(function () {
-            this.fetchCategories(this.searchPrimaryCategoryQuery);
+            this.fetchPrimaryCategories(this.searchPrimaryCategoryQuery);
         }, 300),
 
         clearAll() {
             this.searchPrimaryCategoryQuery = '';
-            this.fetchCategories();
+            this.fetchPrimaryCategories();
         },
 
         handleCheckboxChange(event) {

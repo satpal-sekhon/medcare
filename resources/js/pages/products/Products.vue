@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       selectedPrimaryCategories: [],
+      selectedCategories: [],
       currentPage: 1
     }
   },
