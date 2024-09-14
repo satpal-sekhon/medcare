@@ -23,58 +23,54 @@ class CategoryController extends Controller
         $sortDirection = $request->input('sort_direction', $defaultSortDirection);
         $perPage = $request->input('per_page', $defaultPerPage);
         $paginate = $request->input('paginate', true); // Default to true for pagination
-        $primaryCategoryId = $request->input('primary_category_id'); // Filter by primary category
+        $primaryCategoryIds = $request->input('primary_category_ids'); // Array of primary category IDs
         $search = $request->input('search'); // Search term
 
         // Validate sort direction
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : $defaultSortDirection;
 
+        // Validate primary category IDs
+        if ($primaryCategoryIds) {
+            $primaryCategoryIds = is_array($primaryCategoryIds) ? $primaryCategoryIds : explode(',', $primaryCategoryIds);
+            $primaryCategoryIds = array_filter($primaryCategoryIds, 'is_numeric');
+        } else {
+            $primaryCategoryIds = [];
+        }
+
         // Build the query
-        $query = Category::select('id', 'primary_category_id', 'name', 'slug', 'image')
-            ->withCount('products')
+        $query = Category::select('categories.id', 'categories.primary_category_id', 'categories.name', 'categories.slug', 'categories.image')
+            ->leftJoin('products', 'categories.id', '=', 'products.category_id')
+            ->selectRaw('COUNT(products.id) as products_count')
+            ->groupBy('categories.id', 'categories.primary_category_id', 'categories.name', 'categories.slug', 'categories.image')
             ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
+                return $query->where('categories.name', 'like', '%' . $search . '%');
             })
-            ->when($primaryCategoryId, function ($query, $primaryCategoryId) {
-                return $query->where('primary_category_id', $primaryCategoryId);
+            ->when($primaryCategoryIds, function ($query, $primaryCategoryIds) {
+                return $query->whereIn('categories.primary_category_id', $primaryCategoryIds);
             })
             ->orderBy($sortColumn, $sortDirection);
 
         if ($paginate) {
-            // Count the total number of records matching the filters
-            $total = $query->count();
-
-            // Get the current page from the request, defaulting to 1 if not provided
-            $currentPage = max(1, (int) $request->input('page', 1));
-
-            // Calculate the offset for the current page
-            $offset = ($currentPage - 1) * $perPage;
-
-            // Retrieve the items for the current page
-            $items = $query->skip($offset)->take($perPage)->get();
-
-            // Calculate pagination metadata
-            $pagination = [
-                'total' => $total,
-                'per_page' => $perPage,
-                'current_page' => $currentPage,
-                'last_page' => (int) ceil($total / $perPage),
-                'from' => $total > 0 ? (($currentPage - 1) * $perPage) + 1 : null,
-                'to' => $total > 0 ? min($total, $currentPage * $perPage) : null,
+            // Use Laravel's paginate method
+            $items = $query->paginate($perPage);
+            $response = [
+                'data' => $items->items(),
+                'pagination' => [
+                    'total' => $items->total(),
+                    'per_page' => $items->perPage(),
+                    'current_page' => $items->currentPage(),
+                    'last_page' => $items->lastPage(),
+                    'from' => $items->firstItem(),
+                    'to' => $items->lastItem(),
+                ],
             ];
         } else {
             // Retrieve all records if pagination is not required
             $items = $query->get();
-            $pagination = null; // No pagination metadata when not paginated
-        }
-
-        // Construct the response
-        $response = [
-            'data' => $items,
-        ];
-
-        if ($paginate) {
-            $response['pagination'] = $pagination;
+            $response = [
+                'data' => $items,
+                'pagination' => null, // No pagination metadata when not paginated
+            ];
         }
 
         return response()->json($response);

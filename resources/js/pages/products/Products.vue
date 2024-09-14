@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-custom-3">
       <div class="left-box">
-        <ProductsFilterSidebar :selectedPrimaryCategories="selectedPrimaryCategories"
+        <ProductsFilterSidebar :selectedPrimaryCategories="selectedPrimaryCategories" :selectedCategories="selectedCategories"
           @filter-change="handleFilterChange" />
       </div>
     </div>
@@ -20,7 +20,7 @@
             <h5 class="text-content">Sort By :</h5>
             <div class="dropdown">
               <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                <span>Low - High Price</span> 
+                <span>Low - High Price</span>
                 <i class="fa-solid fa-angle-down"></i>
               </button>
               <ul class="dropdown-menu">
@@ -44,11 +44,8 @@
       </div>
 
       <div>
-        <ProductList 
-          :selectedPrimaryCategories="selectedPrimaryCategories" 
-          :currentPage="currentPage" 
-          @page-change="handlePageChange" 
-        />
+        <ProductList :selectedPrimaryCategories="selectedPrimaryCategories" :selectedCategories="selectedCategories"
+          :currentPage="currentPage" @page-change="handlePageChange" />
       </div>
     </div>
   </div>
@@ -74,23 +71,56 @@ export default {
   methods: {
     updateUrl() {
       const queryParams = new URLSearchParams({
-        categories: this.selectedPrimaryCategories.join(','),
+        primary_categories: this.selectedPrimaryCategories.join(','),
+        categories: this.selectedCategories.join(','),
         page: this.currentPage
       });
       window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
     },
-    handleFilterChange({ categoryId, isChecked }) {
+    handleFilterChange({ filterName, itemId, isChecked }) {
       this.currentPage = 1;
-      
-      if (isChecked) {
-        if (!this.selectedPrimaryCategories.includes(categoryId)) {
-          this.selectedPrimaryCategories.push(categoryId);
-        }
-      } else {
-        this.selectedPrimaryCategories = this.selectedPrimaryCategories.filter(id => id !== categoryId);
+
+      let filterArray;
+
+      switch (filterName) {
+        case 'primaryCategory':
+          filterArray = this.selectedPrimaryCategories;
+          break;
+        case 'Category':
+          filterArray = this.selectedCategories;
+          break;
+        case 'Brand':
+          filterArray = this.selectedBrands;
+          break;
+        default:
+          console.warn(`Unknown filter type: ${filterName}`);
+          return;
       }
 
+      if (isChecked) {
+        if (!filterArray.includes(itemId)) {
+          filterArray.push(itemId);
+        }
+      } else {
+        filterArray = filterArray.filter(id => id !== itemId);
+      }
+      
+      this[this.getFilterArrayName(filterName)] = filterArray;
+
       this.updateUrl();
+    },
+    getFilterArrayName(filterType) {
+      switch (filterType) {
+        case 'primaryCategory':
+          return 'selectedPrimaryCategories';
+        case 'Category':
+          return 'selectedCategories';
+        case 'Brand':
+          return 'selectedBrands';
+        default:
+          console.warn(`Unknown filter type: ${filterType}`);
+          return null;
+      }
     },
     handlePageChange(page) {
       if (page < 1 || page > this.totalPages) return;
@@ -101,8 +131,12 @@ export default {
       const queryParams = new URLSearchParams(window.location.search);
       this.currentPage = parseInt(queryParams.get('page'), 10) || 1;
 
+      if (queryParams.get('primary_categories')) {
+        this.selectedPrimaryCategories = queryParams.get('primary_categories').split(',');
+      }
+
       if (queryParams.get('categories')) {
-        this.selectedPrimaryCategories = queryParams.get('categories').split(',');
+        this.selectedCategories = queryParams.get('categories').split(',');
       }
     }
   },

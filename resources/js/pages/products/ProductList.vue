@@ -5,8 +5,8 @@
         :is-add-to-cart-disabled="isAddToCartDisabled(product)" @change-quantity="changeQuantity(product.id, $event)" />
     </div>
   </div>
-    <!-- Pagination Component -->
-    <Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
+  <!-- Pagination Component -->
+  <Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
 
   <div v-if="products.length == 0">
     <WarningMessage class="mt-4" message="Products will be added soon" />
@@ -29,6 +29,10 @@ export default {
   },
   props: {
     selectedPrimaryCategories: {
+      type: Array,
+      default: () => []
+    },
+    selectedCategories: {
       type: Array,
       default: () => []
     },
@@ -55,6 +59,12 @@ export default {
       },
       deep: true // Use deep watching for arrays or objects
     },
+    selectedCategories: {
+      handler() {
+        this.fetchProducts();
+      },
+      deep: true // Use deep watching for arrays or objects
+    },
     currentPage() {
       this.fetchProducts();
     },
@@ -73,6 +83,10 @@ export default {
 
         if (this.selectedPrimaryCategories && this.selectedPrimaryCategories.length > 0) {
           params.primary_category_ids = this.selectedPrimaryCategories.join(',');
+        }
+
+        if (this.selectedCategories && this.selectedCategories.length > 0) {
+          params.category_ids = this.selectedCategories.join(',');
         }
 
         const response = await axios.get('/api/products', {
