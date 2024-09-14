@@ -30,11 +30,14 @@ class PrimaryCategoryController extends Controller
 
         // Build the query
         $query = PrimaryCategory::select('id', 'name', 'slug', 'image')
+            ->withCount('products')
+            ->withCount('categories')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })
             ->orderBy($sortColumn, $sortDirection);
-
+        
+        
         if ($paginate) {
             // Get the total count for pagination metadata
             $total = $query->count();

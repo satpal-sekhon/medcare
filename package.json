@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^5.1.3",
+        "lodash": "^4.17.21",
         "vue": "^3.4.38",
         "vue-loader": "^17.4.2"
     }

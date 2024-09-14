@@ -47,6 +47,7 @@ class ProductController extends Controller
         $categoryIds = $request->input('category_ids', []);
         $primaryCategoryIds = $request->input('primary_category_ids', []);
         $productTypes = $request->input('product_types', []);
+        $diseaseIds = $request->input('disease_ids', []); // New filter for diseases
         $nameStartsWith = $request->input('name_starts_with', '');
         $search = $request->input('search', '');
 
@@ -55,6 +56,7 @@ class ProductController extends Controller
         $categoryIds = is_array($categoryIds) ? $categoryIds : explode(',', $categoryIds);
         $primaryCategoryIds = is_array($primaryCategoryIds) ? $primaryCategoryIds : explode(',', $primaryCategoryIds);
         $productTypes = is_array($productTypes) ? $productTypes : explode(',', $productTypes);
+        $diseaseIds = is_array($diseaseIds) ? $diseaseIds : explode(',', $diseaseIds);
 
         // Validate and sanitize sort column
         $sortColumn = in_array($sortColumn, $allowedSortColumns) ? $sortColumn : $defaultSortColumn;
@@ -87,6 +89,8 @@ class ProductController extends Controller
             'name',
             'slug',
             'thumbnail',
+            'unit',
+            'flag',
             'composition',
             'product_type',
             'stock_type',
@@ -111,13 +115,19 @@ class ProductController extends Controller
         if (!empty($categoryIds)) {
             $query->whereIn('category_id', $categoryIds);
         }
-
+        
         if (!empty($primaryCategoryIds)) {
             $query->whereIn('primary_category_id', $primaryCategoryIds);
         }
 
         if (!empty($productTypes)) {
             $query->whereIn('product_type', $productTypes);
+        }
+
+        if (!empty($diseaseIds)) {
+            $query->whereHas('diseases', function ($q) use ($diseaseIds) {
+                $q->whereIn('id', $diseaseIds);
+            });
         }
 
         if (!empty($nameStartsWith)) {

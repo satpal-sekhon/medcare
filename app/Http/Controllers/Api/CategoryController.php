@@ -31,6 +31,7 @@ class CategoryController extends Controller
 
         // Build the query
         $query = Category::select('id', 'primary_category_id', 'name', 'slug', 'image')
+            ->withCount('products')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })

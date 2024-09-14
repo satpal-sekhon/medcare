@@ -30,6 +30,7 @@ class DiseaseController extends Controller
 
         // Build the query
         $query = Disease::select('id', 'name', 'slug', 'image')
+            ->withCount('products')
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%');
             })

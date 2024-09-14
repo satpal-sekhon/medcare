@@ -109,6 +109,5 @@ export default {
                 this.product.stock_type !== 'Without Stock';
         }
     }
-
 };
 </script>

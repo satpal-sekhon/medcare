@@ -11,6 +11,10 @@ class Disease extends Model
     use HasFactory, Sluggable;
     protected $guarded=[];
 
+    public function products(){
+        return $this->hasMany(ProductDisease::class);
+    }
+
     public function sluggable(): array
     {
         return [

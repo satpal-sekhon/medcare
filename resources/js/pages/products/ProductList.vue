@@ -1,114 +1,105 @@
 <template>
   <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
-    <div v-for="(product, index) in products" :key="index">
-      <div class="product-box-3 h-100 wow fadeInUp" :data-wow-delay="product.delay">
-        <div class="product-header">
-          <div class="product-image">
-            <a :href="product.link">
-              <img :src="product.image" class="img-fluid blur-up lazyload" :alt="product.name">
-            </a>
-
-            <ul class="product-option">
-              <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                  <i data-feather="eye"></i>
-                </a>
-              </li>
-              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                <a href="compare.html">
-                  <i data-feather="refresh-cw"></i>
-                </a>
-              </li>
-              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                <a href="wishlist.html" class="notifi-wishlist">
-                  <i data-feather="heart"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="product-footer">
-          <div class="product-detail">
-            <span class="span-name">{{ product.category }}</span>
-            <a :href="product.link">
-              <h5 class="name">{{ product.name }}</h5>
-            </a>
-            <p class="text-content mt-1 mb-2 product-content">{{ product.description }}</p>
-            <div class="product-rating mt-2">
-              <ul class="rating">
-                <li v-for="n in product.rating" :key="n">
-                  <i data-feather="star" class="fill"></i>
-                </li>
-                <li v-if="product.rating < 5">
-                  <i data-feather="star"></i>
-                </li>
-              </ul>
-              <span>({{ product.ratingValue }})</span>
-            </div>
-            <h6 class="unit">{{ product.unit }}</h6>
-            <h5 class="price">
-              <span class="theme-color">{{ product.price }}</span>
-              <del>{{ product.originalPrice }}</del>
-            </h5>
-            <div class="add-to-cart-box bg-white">
-              <button class="btn btn-add-cart addcart-button">Add
-                <span class="add-icon bg-light-gray">
-                  <i class="fa-solid fa-plus"></i>
-                </span>
-              </button>
-              <div class="cart_qty qty-box">
-                <div class="input-group bg-white">
-                  <button type="button" class="qty-left-minus bg-gray" data-type="minus" data-field="">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <input class="form-control input-number qty-input" type="text" name="quantity" value="0">
-                  <button type="button" class="qty-right-plus bg-gray" data-type="plus" data-field="">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div v-for="product in products" :key="product.id">
+      <ProductCard :product="product" :quantity="productQuantities[product.id] || 0"
+        :is-add-to-cart-disabled="isAddToCartDisabled(product)" @change-quantity="changeQuantity(product.id, $event)" />
     </div>
   </div>
+    <!-- Pagination Component -->
+    <Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
+
+  <div v-if="products.length == 0">
+    <WarningMessage class="mt-4" message="Products will be added soon" />
+  </div>
+
 </template>
 
 <script>
+import axios from 'axios';
+import ProductCard from './ProductCard.vue';
+import Pagination from '../../components/Pagination.vue';
+import WarningMessage from '../../components/WarningMessage.vue';
+
 export default {
   name: 'ProductList',
+  components: {
+    ProductCard,
+    Pagination,
+    WarningMessage
+  },
+  props: {
+    selectedPrimaryCategories: {
+      type: Array,
+      default: () => []
+    },
+    currentPage: {
+      type: Number,
+      default: 1
+    },
+    perPage: {
+      type: Number,
+      default: 20
+    }
+  },
   data() {
     return {
-      products: [
-        {
-          image: '../assets/images/cake/product/2.png',
-          link: 'product-left-thumbnail.html',
-          name: 'Fresh Bread and Pastry Flour 200 g',
-          category: 'Vegetable',
-          description: 'Cheesy feet cheesy grin brie. Mascarpone cheese and wine hard cheese the big cheese everyone loves smelly cheese macaroni cheese croque monsieur.',
-          rating: 4,
-          ratingValue: '4.0',
-          unit: '250 ml',
-          price: '$08.02',
-          originalPrice: '$15.15',
-          delay: '0s'
-        },
-        {
-          image: '../assets/images/cake/product/3.png',
-          link: 'product-left-thumbnail.html',
-          name: 'Peanut Butter Bite Premium Butter Cookies 600 g',
-          category: 'Vegetable',
-          description: 'Feta taleggio croque monsieur swiss manchego cheesecake dolcelatte jarlsberg. Hard cheese danish fontina boursin melted cheese fondue.',
-          rating: 2,
-          ratingValue: '2.4',
-          unit: '350 G',
-          price: '$04.33',
-          originalPrice: '$10.36',
-          delay: '0.05s'
-        }
-      ]
+      products: [],
+      productQuantities: {},
+      totalPages: 1
     };
+  },
+  watch: {
+    selectedPrimaryCategories: {
+      handler() {
+        this.fetchProducts();
+      },
+      deep: true // Use deep watching for arrays or objects
+    },
+    currentPage() {
+      this.fetchProducts();
+    },
+    perPage() {
+      this.fetchProducts();
+    }
+  },
+  methods: {
+    async fetchProducts() {
+      try {
+        let params = {
+          page: this.currentPage,
+          per_page: this.perPage
+        }
+
+        if (this.selectedPrimaryCategories && this.selectedPrimaryCategories.length > 0) {
+          params.primary_category_ids = this.selectedPrimaryCategories.join(',');
+        }
+
+        const response = await axios.get('/api/products', {
+          params
+        });
+
+        if (response.data.data) {
+          this.products = response.data.data;
+          this.totalPages = response.data.meta.last_page || 1;
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    },
+    changeQuantity(productId, amount) {
+      const currentQuantity = this.productQuantities[productId] || 0;
+      this.productQuantities[productId] = Math.max(currentQuantity + amount, 0);
+    },
+    isAddToCartDisabled(product) {
+      return !(product.stock_type === 'With Stock' && product.stock_quantity_for_customer > 0) &&
+        product.stock_type !== 'Without Stock';
+    },
+    handlePageChange(newPage) {
+      this.$emit('page-change', newPage);
+    }
+  },
+  created() {
+    this.fetchProducts();
   }
 };
 </script>

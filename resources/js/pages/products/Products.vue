@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-custom-3">
       <div class="left-box">
-        <ProductsFilterSidebar />
+        <ProductsFilterSidebar :selectedPrimaryCategories="selectedPrimaryCategories"
+          @filter-change="handleFilterChange" />
       </div>
     </div>
 
@@ -19,15 +20,12 @@
             <h5 class="text-content">Sort By :</h5>
             <div class="dropdown">
               <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                <span>Most Popular</span> <i class="fa-solid fa-angle-down"></i>
+                <span>Low - High Price</span> 
+                <i class="fa-solid fa-angle-down"></i>
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" id="pop" href="javascript:void(0)">Popularity</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" id="low" href="javascript:void(0)">Low - High
-                    Price</a>
+                  <a class="dropdown-item" id="low" href="javascript:void(0)">Low - High Price</a>
                 </li>
                 <li>
                   <a class="dropdown-item" id="high" href="javascript:void(0)">High - Low
@@ -42,32 +40,15 @@
               </ul>
             </div>
           </div>
-
-          <div class="grid-option d-none d-md-block">
-            <ul>
-              <li class="three-grid">
-                <a href="javascript:void(0)">
-                  <img src="../assets/svg/grid-3.svg" class="lazyload" alt="">
-                </a>
-              </li>
-              <li class="grid-btn d-xxl-inline-block d-none active">
-                <a href="javascript:void(0)">
-                  <img src="../assets/svg/grid-4.svg" class="lazyload d-lg-inline-block d-none" alt="">
-                  <img src="../assets/svg/grid.svg" class="lazyload img-fluid d-lg-none d-inline-block" alt="">
-                </a>
-              </li>
-              <li class="list-btn">
-                <a href="javascript:void(0)">
-                  <img src="../assets/svg/list.svg" class="lazyload" alt="">
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
       <div>
-        <ProductList />
+        <ProductList 
+          :selectedPrimaryCategories="selectedPrimaryCategories" 
+          :currentPage="currentPage" 
+          @page-change="handlePageChange" 
+        />
       </div>
     </div>
   </div>
@@ -83,14 +64,52 @@ export default {
     ProductsFilterSidebar,
     ProductList
   },
+  data() {
+    return {
+      selectedPrimaryCategories: [],
+      currentPage: 1
+    }
+  },
+  methods: {
+    updateUrl() {
+      const queryParams = new URLSearchParams({
+        categories: this.selectedPrimaryCategories.join(','),
+        page: this.currentPage
+      });
+      window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
+    },
+    handleFilterChange({ categoryId, isChecked }) {
+      this.currentPage = 1;
+      
+      if (isChecked) {
+        if (!this.selectedPrimaryCategories.includes(categoryId)) {
+          this.selectedPrimaryCategories.push(categoryId);
+        }
+      } else {
+        this.selectedPrimaryCategories = this.selectedPrimaryCategories.filter(id => id !== categoryId);
+      }
+
+      this.updateUrl();
+    },
+    handlePageChange(page) {
+      if (page < 1 || page > this.totalPages) return;
+      this.currentPage = page;
+      this.updateUrl();
+    },
+    initializeParams() {
+      const queryParams = new URLSearchParams(window.location.search);
+      this.currentPage = parseInt(queryParams.get('page'), 10) || 1;
+
+      if (queryParams.get('categories')) {
+        this.selectedPrimaryCategories = queryParams.get('categories').split(',');
+      }
+    }
+  },
   mounted() {
     feather.replace();
   },
+  created() {
+    this.initializeParams();
+  }
 };
 </script>
-
-<style scoped>
-.product-page {
-  padding: 20px;
-}
-</style>
