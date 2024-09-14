@@ -39,7 +39,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/view-product/{product:slug}', [ProductController::class, 'show'])->name('products.view');
+Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('products.view');
 
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.index');

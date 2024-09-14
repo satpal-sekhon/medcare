@@ -85,10 +85,7 @@
                             name: 'banner_image',
                             orderable: false,
                             render: function(data, type, row) {
-                                let defaultImagePath = '{{ getSetting("default_disease_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
-
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="" class="dt-image">`;
+                                return `<img src="{{ asset('${data}') }}" alt="" class="dt-image">`;
                             }
                         },
                         {

@@ -3,7 +3,7 @@
         <div v-if="loading">Loading...</div>
         <div v-if="error" class="error">Error: {{ error }}</div>
         <div v-if="products.length">
-            <a :href="`${appUrl}/view-product/${product.slug}`" v-for="product in products" :key="product.id">
+            <a :href="`/product/${product.slug}`" v-for="product in products" :key="product.id">
                 <h4 class="mb-2">
                     {{ product.name }}
                     <span class="composition" v-if="product.composition">(Composition: {{ product.composition }})</span>
@@ -44,8 +44,6 @@ export default {
             this.loading = true;
             this.error = null;
 
-            const baseUrl = '/api/products';
-
             // Build query parameters using a JSON object
             const queryParams = {
                 product_types: 'Generic',
@@ -54,7 +52,7 @@ export default {
             };
 
             // Convert queryParams object to URL query string
-            const url = `${baseUrl}?${new URLSearchParams(queryParams)}`;
+            const url = `/api/products?${new URLSearchParams(queryParams)}`;
 
             try {
                 const response = await fetch(url, {

@@ -12,7 +12,7 @@
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
                             assets/images/default/product.jpg'), "price"=> $product->customer_price,
                             "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->id),
+                            "link" => route('products.view', $product->slug),
                             "stock_type" => $product->stock_type,
                             "available_quantity" => $product->stock_quantity_for_customer,
                             /* "rating" => [1, 1, 1, 1, 0],
@@ -34,7 +34,7 @@
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
                             assets/images/default/product.jpg'), "price"=> $product->customer_price,
                             "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->id),
+                            "link" => route('products.view', $product->slug),
                             "stock_type" => $product->stock_type,
                             "available_quantity" => $product->stock_quantity_for_customer,
                             /* "rating" => [1, 1, 1, 1, 0],
@@ -56,7 +56,7 @@
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
                             assets/images/default/product.jpg'), "price"=> $product->customer_price,
                             "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->id),
+                            "link" => route('products.view', $product->slug),
                             "stock_type" => $product->stock_type,
                             "quantity" => $product->stock_quantity_for_customer,
                             /* "rating" => [1, 1, 1, 1, 0],
@@ -78,7 +78,7 @@
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
                             assets/images/default/product.jpg'), "price"=> $product->customer_price,
                             "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->id),
+                            "link" => route('products.view', $product->slug),
                             "stock_type" => $product->stock_type,
                             "quantity" => $product->stock_quantity_for_customer,
                             /* "rating" => [1, 1, 1, 1, 0],

@@ -8,7 +8,6 @@ import MiniCart from './components/cart/MiniCart.vue';
 
 // Create Vue application instance
 const app = createApp({});
-app.config.globalProperties.$appUrl = window.App.baseUrl;
 
 app.component('product-list', ProductList);
 app.component('product-item', ProductItem);

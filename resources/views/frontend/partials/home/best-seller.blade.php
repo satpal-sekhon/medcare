@@ -15,13 +15,13 @@
             @foreach ($saleProducts->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                    <a href="{{ route('products.view', $product->slug) }}" class="offer-image">
                         <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                            <a href="{{ route('products.view', $product->slug) }}" class="text-title">
                                 <h6 class="name">{{ $product->name }}</h6>
                             </a>
                             <span>{{ $product->unit }}</span>
@@ -44,13 +44,13 @@
             @foreach ($saleProducts->skip(3)->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                    <a href="{{ route('products.view', $product->slug) }}" class="offer-image">
                         <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                            <a href="{{ route('products.view', $product->slug) }}" class="text-title">
                                 <h6 class="name">{{ $product->name }}</h6>
                             </a>
                             <span>{{ $product->unit }}</span>
@@ -73,13 +73,13 @@
             @foreach ($saleProducts->skip(6)->take(3) as $product)
             <li>
                 <div class="offer-product">
-                    <a href="{{ route('products.view', $product->id) }}" class="offer-image">
+                    <a href="{{ route('products.view', $product->slug) }}" class="offer-image">
                         <img src="{{ asset($product->thumbnail) }}" class="lazyload" onerror="this.onerror=null; this.src='{{ asset('assets/images/default/product.jpg') }}';" alt="">
                     </a>
 
                     <div class="offer-detail">
                         <div>
-                            <a href="{{ route('products.view', $product->id) }}" class="text-title">
+                            <a href="{{ route('products.view', $product->slug) }}" class="text-title">
                                 <h6 class="name">{{ $product->name }}</h6>
                             </a>
                             <span>{{ $product->unit }}</span>
