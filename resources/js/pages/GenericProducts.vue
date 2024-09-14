@@ -1,22 +1,43 @@
 <template>
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search for medicines..." v-model="searchKeyword"
-            @keydown.enter="handleSearch">
-        <button id="searchButton" @click="handleSearch">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search for medicines..." 
+            v-model="searchKeyword"
+            @keydown.enter="handleSearch"
+            aria-label="Search for medicines"
+        />
+        <button 
+            id="searchButton" 
+            @click="handleSearch"
+            aria-label="Search"
+        >
             Search
         </button>
     </div>
 
     <div class="alphabet-container">
-        <a href="javascript:void(0)" v-for="letter in alphabet" :key="letter" @click="handleAlphabetChange(letter)"
-            :class="{ active: selectedAlphabet === letter }">
+        <a 
+            href="javascript:void(0)" 
+            v-for="letter in alphabet" 
+            :key="letter" 
+            @click="handleAlphabetChange(letter)"
+            :class="{ active: selectedAlphabet === letter }"
+            aria-current="selectedAlphabet === letter ? 'true' : 'false'"
+        >
             {{ letter }}
         </a>
     </div>
 
     <div class="resde d-block d-md-none">
         <div class="alphabet-dropdown">
-            <select class="form-control" v-model="selectedAlphabet" @change="handleAlphabetChange(selectedAlphabet)">
+            <select 
+                class="form-control" 
+                :value="selectedAlphabet" 
+                @change="handleDropdownChange"
+                aria-label="Select a letter"
+            >
                 <option value="" disabled>Select a letter</option>
                 <option v-for="letter in alphabet" :key="letter" :value="letter">
                     {{ letter }}
@@ -25,8 +46,13 @@
         </div>
     </div>
 
-    <div class="medicine-list">
-        <GenericProductList :searchQuery="searchQuery" :selectedAlphabet="selectedAlphabet" />
+    <div class="medicine-list ms-4 mt-3">
+        <GenericProductList 
+            :searchQuery="searchQuery" 
+            :selectedAlphabet="selectedAlphabet" 
+            :currentPage="currentPage"
+            @page-change="handlePageChange" 
+        />
     </div>
 </template>
 
@@ -42,41 +68,54 @@ export default {
             alphabet: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),
             selectedAlphabet: 'A',
             searchKeyword: '',
-            searchQuery: ''
+            searchQuery: '',
+            currentPage: 1,
         };
     },
-    created() {
-        this.initializeFiltersFromUrl();
-    },
     methods: {
-        updateUrl() {
-            const queryParams = new URLSearchParams();
-            queryParams.set('letter', this.selectedAlphabet);
-            queryParams.set('search', this.searchQuery);
-            window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
-        },
-        initializeFiltersFromUrl() {
-            const queryParams = new URLSearchParams(window.location.search);
-            const letter = queryParams.get('letter');
-            const search = queryParams.get('search');
-            if (letter) {
-                this.selectedAlphabet = letter;
-            }
-            if (search) {
-                this.searchQuery = search;
-            }
+        handleSearch() {
+            this.searchQuery = this.searchKeyword;
+            this.currentPage = 1; // Reset to first page on search
+            this.updateUrl();
         },
         handleAlphabetChange(letter) {
             this.selectedAlphabet = letter;
+            this.currentPage = 1; // Reset to first page on alphabet change
             this.updateUrl();
         },
-        handleSearch() {
-            this.searchQuery = this.searchKeyword;
+        handleDropdownChange(event) {
+            this.selectedAlphabet = event.target.value;
+            this.currentPage = 1; // Reset to first page on alphabet change
             this.updateUrl();
+        },
+        handlePageChange(page) {
+            if (page < 1 || page > this.totalPages) return;
+            this.currentPage = page;
+            this.updateUrl();
+        },
+        updateUrl() {
+            const queryParams = new URLSearchParams({
+                letter: this.selectedAlphabet,
+                search: this.searchQuery,
+                page: this.currentPage
+            });
+            window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
+        },
+        initializeParams() {
+            const queryParams = new URLSearchParams(window.location.search);
+            this.selectedAlphabet = queryParams.get('letter') || 'A';
+            this.searchQuery = queryParams.get('search') || '';
+            this.currentPage = parseInt(queryParams.get('page'), 10) || 1;
+
+            this.searchKeyword = this.searchQuery;
         }
     },
+    created() {
+        this.initializeParams();
+    }
 };
 </script>
+
 
 <style scoped>
 .search-container {
@@ -136,10 +175,6 @@ export default {
 }
 
 /* Medicine list */
-.medicine-list {
-    margin: 20px;
-}
-
 .medicine-list h2 {
     font-size: 24px;
     margin: 10px 0;

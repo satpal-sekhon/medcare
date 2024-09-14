@@ -39,22 +39,22 @@ class ProductController extends Controller
         // Extract parameters from the request
         $sortColumn = $request->input('sort_column', $defaultSortColumn);
         $sortDirection = $request->input('sort_direction', $defaultSortDirection);
-        $perPage = $request->input('per_page', $defaultPerPage);
+        $perPage = (int) $request->input('per_page', $defaultPerPage);
         $paginate = filter_var($request->input('paginate', true), FILTER_VALIDATE_BOOLEAN); // Default to true for pagination
 
         // Extract and normalize filter parameters from the request
         $brandIds = $request->input('brand_ids', []);
         $categoryIds = $request->input('category_ids', []);
         $primaryCategoryIds = $request->input('primary_category_ids', []);
-        $productTypes = $request->input('product_types', []); // New filter for product types
-        $nameStartsWith = $request->input('name_starts_with', ''); // New filter for name starts with
-        $search = $request->input('search', ''); // New filter for search term
+        $productTypes = $request->input('product_types', []);
+        $nameStartsWith = $request->input('name_starts_with', '');
+        $search = $request->input('search', '');
 
         // Ensure filters are arrays
         $brandIds = is_array($brandIds) ? $brandIds : explode(',', $brandIds);
         $categoryIds = is_array($categoryIds) ? $categoryIds : explode(',', $categoryIds);
         $primaryCategoryIds = is_array($primaryCategoryIds) ? $primaryCategoryIds : explode(',', $primaryCategoryIds);
-        $productTypes = is_array($productTypes) ? $productTypes : explode(',', $productTypes); // Normalize product types
+        $productTypes = is_array($productTypes) ? $productTypes : explode(',', $productTypes);
 
         // Validate and sanitize sort column
         $sortColumn = in_array($sortColumn, $allowedSortColumns) ? $sortColumn : $defaultSortColumn;
@@ -63,7 +63,7 @@ class ProductController extends Controller
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : $defaultSortDirection;
 
         // Validate per_page
-        $perPage = filter_var($perPage, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]) ?: $defaultPerPage;
+        $perPage = max(1, $perPage); // Ensure perPage is at least 1
 
         // Validate and sanitize product types
         $productTypes = array_filter($productTypes, function ($type) use ($allowedProductTypes) {
@@ -116,31 +116,45 @@ class ProductController extends Controller
             $query->whereIn('primary_category_id', $primaryCategoryIds);
         }
 
-        if (!empty($productTypes)) { // Apply product_type filter
+        if (!empty($productTypes)) {
             $query->whereIn('product_type', $productTypes);
         }
 
-        if (!empty($nameStartsWith)) { // Apply name starts with filter
+        if (!empty($nameStartsWith)) {
             $query->where('name', 'like', $nameStartsWith . '%');
         }
 
-        if (!empty($search)) { // Apply search filter
+        if (!empty($search)) {
             $query->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
                     ->orWhere('composition', 'like', '%' . $search . '%');
             });
         }
 
-        // Apply pagination if needed
         if ($paginate) {
-            $products = $query->paginate($perPage);
+            // Count the total number of products matching the filters
+            $total = $query->count();
+            $currentPage = max(1, (int) $request->input('page', 1)); // Ensure currentPage is at least 1
+            $products = $query->forPage($currentPage, $perPage)->get();
+
+            $pagination = [
+                'total' => $total, // Total number of products
+                'per_page' => $perPage,
+                'current_page' => $currentPage,
+                'last_page' => (int) ceil($total / $perPage),
+                'from' => $total > 0 ? (($currentPage - 1) * $perPage) + 1 : null,
+                'to' => $total > 0 ? min($total, $currentPage * $perPage) : null,
+            ];
         } else {
-            $products = $query->get(); // Get all records if pagination is not required
+            $products = $query->get();
+            $pagination = null; // No pagination metadata when not paginated
         }
 
-        return response()->json($products);
+        return response()->json([
+            'data' => $products,
+            'meta' => $pagination,
+        ]);
     }
-
 
 
     /**
