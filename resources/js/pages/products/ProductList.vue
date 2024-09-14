@@ -5,6 +5,7 @@
         :is-add-to-cart-disabled="isAddToCartDisabled(product)" @change-quantity="changeQuantity(product.id, $event)" />
     </div>
   </div>
+
   <!-- Pagination Component -->
   <Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
 
@@ -36,6 +37,14 @@ export default {
       type: Array,
       default: () => []
     },
+    selectedBrands: {
+      type: Array,
+      default: () => []
+    },
+    sortedFilter: {
+      type: Object,
+      default: () => []
+    },
     currentPage: {
       type: Number,
       default: 1
@@ -65,6 +74,18 @@ export default {
       },
       deep: true // Use deep watching for arrays or objects
     },
+    selectedBrands: {
+      handler() {
+        this.fetchProducts();
+      },
+      deep: true // Use deep watching for arrays or objects
+    },
+    sortedFilter: {
+      handler() {
+        this.fetchProducts();
+      },
+      deep: true // Use deep watching for arrays or objects
+    },
     currentPage() {
       this.fetchProducts();
     },
@@ -87,6 +108,15 @@ export default {
 
         if (this.selectedCategories && this.selectedCategories.length > 0) {
           params.category_ids = this.selectedCategories.join(',');
+        }
+
+        if (this.selectedBrands && this.selectedBrands.length > 0) {
+          params.brand_ids = this.selectedBrands.join(',');
+        }
+
+        if (this.sortedFilter.column && this.sortedFilter.order) {
+          params.sort_column = this.sortedFilter.column;
+          params.sort_direction = this.sortedFilter.order;
         }
 
         const response = await axios.get('/api/products', {

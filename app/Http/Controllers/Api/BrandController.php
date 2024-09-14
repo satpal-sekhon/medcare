@@ -24,16 +24,42 @@ class BrandController extends Controller
         $perPage = $request->input('per_page', $defaultPerPage);
         $paginate = $request->input('paginate', true); // Default to true for pagination
         $search = $request->input('search'); // Search term (optional)
+        $primaryCategoryIds = $request->input('primary_category_ids'); // Array of primary category IDs
+        $categoryIds = $request->input('category_ids'); // Array of category IDs
 
         // Validate sort direction
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : $defaultSortDirection;
 
+        // Validate primary category IDs and category IDs
+        if ($primaryCategoryIds) {
+            $primaryCategoryIds = is_array($primaryCategoryIds) ? $primaryCategoryIds : explode(',', $primaryCategoryIds);
+            $primaryCategoryIds = array_filter($primaryCategoryIds, 'is_numeric');
+        } else {
+            $primaryCategoryIds = [];
+        }
+
+        if ($categoryIds) {
+            $categoryIds = is_array($categoryIds) ? $categoryIds : explode(',', $categoryIds);
+            $categoryIds = array_filter($categoryIds, 'is_numeric');
+        } else {
+            $categoryIds = [];
+        }
+
         // Build the query
-        $query = Brand::select('id', 'name', 'slug', 'image')
+        $query = Brand::select('brands.id', 'brands.name', 'brands.slug', 'brands.image')
+            ->leftJoin('products', 'brands.id', '=', 'products.brand_id')
+            ->selectRaw('COUNT(products.id) as products_count')
+            ->groupBy('brands.id', 'brands.name', 'brands.slug', 'brands.image')
             ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', '%' . $search . '%');
+                return $query->where('brands.name', 'like', '%' . $search . '%');
             })
-            ->orderBy($sortColumn, $sortDirection);
+            ->when($primaryCategoryIds, function ($query, $primaryCategoryIds) {
+                return $query->whereIn('products.primary_category_id', $primaryCategoryIds);
+            })
+            ->when($categoryIds, function ($query, $categoryIds) {
+                return $query->whereIn('products.category_id', $categoryIds);
+            })
+            ->orderBy('brands.' . $sortColumn, $sortDirection); // Specify table alias here
 
         if ($paginate) {
             // Count the total number of records matching the filters

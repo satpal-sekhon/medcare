@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-custom-3">
       <div class="left-box">
-        <ProductsFilterSidebar :selectedPrimaryCategories="selectedPrimaryCategories" :selectedCategories="selectedCategories"
+        <ProductsFilterSidebar :selectedPrimaryCategories="selectedPrimaryCategories" :selectedBrands="selectedBrands"
+          :selectedCategories="selectedCategories" @clear-filters="handleClearFilters"
           @filter-change="handleFilterChange" />
       </div>
     </div>
@@ -20,23 +21,14 @@
             <h5 class="text-content">Sort By :</h5>
             <div class="dropdown">
               <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                <span>Low - High Price</span>
+                <span>{{ sortedFilter.label }}</span>
                 <i class="fa-solid fa-angle-down"></i>
               </button>
               <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" id="low" href="javascript:void(0)">Low - High Price</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" id="high" href="javascript:void(0)">High - Low
-                    Price</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" id="aToz" href="javascript:void(0)">A - Z Order</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" id="zToa" href="javascript:void(0)">Z - A Order</a>
-                </li>
+                <li><a class="dropdown-item" id="low" href="#" @click.prevent="sortProducts('customer_price', 'asc', 'Low - High Price')">Low - High Price</a></li>
+                <li><a class="dropdown-item" id="high" href="#" @click.prevent="sortProducts('customer_price', 'desc', 'High - Low Price')">High - Low Price</a></li>
+                <li><a class="dropdown-item" id="aToz" href="#" @click.prevent="sortProducts('name', 'asc', 'A - Z Order')">A - Z Order</a></li>
+                <li><a class="dropdown-item" id="zToa" href="#" @click.prevent="sortProducts('name', 'desc', 'Z - A Order')">Z - A Order</a></li>
               </ul>
             </div>
           </div>
@@ -45,7 +37,7 @@
 
       <div>
         <ProductList :selectedPrimaryCategories="selectedPrimaryCategories" :selectedCategories="selectedCategories"
-          :currentPage="currentPage" @page-change="handlePageChange" />
+          :currentPage="currentPage" :sortedFilter="sortedFilter" :selectedBrands="selectedBrands" @page-change="handlePageChange" />
       </div>
     </div>
   </div>
@@ -65,17 +57,57 @@ export default {
     return {
       selectedPrimaryCategories: [],
       selectedCategories: [],
-      currentPage: 1
+      selectedBrands: [],
+      currentPage: 1,
+      sortedFilter: {
+        column: 'customer_price',
+        order: 'asc',
+        label: 'Low - High Price'
+      }
     }
   },
   methods: {
     updateUrl() {
+      const categoryCheckboxes = document.querySelectorAll('input[name="Category[]"]');
+
+      const availableCategories = [];
+
+      categoryCheckboxes.forEach(checkbox => {
+        availableCategories.push(checkbox.value);
+      });
+
+      this.selectedCategories = this.selectedCategories.filter(category =>
+        availableCategories.includes(category)
+      );
+
+      const brandsCheckboxes = document.querySelectorAll('input[name="Brand[]"]');
+      const availableBrands = [];
+
+      brandsCheckboxes.forEach(checkbox => {
+        availableBrands.push(checkbox.value);
+      });
+
+      this.selectedBrands = this.selectedBrands.filter(category =>
+        availableBrands.includes(category)
+      );
+
+      // Construct the query parameters
       const queryParams = new URLSearchParams({
         primary_categories: this.selectedPrimaryCategories.join(','),
         categories: this.selectedCategories.join(','),
+        brands: this.selectedBrands.join(','),
         page: this.currentPage
       });
+
+      // Update the URL without reloading the page
       window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
+    },
+    sortProducts(column, order, label) {
+      this.sortedFilter = {
+        column,
+        order,
+        label
+      }
     },
     handleFilterChange({ filterName, itemId, isChecked }) {
       this.currentPage = 1;
@@ -104,9 +136,16 @@ export default {
       } else {
         filterArray = filterArray.filter(id => id !== itemId);
       }
-      
+
       this[this.getFilterArrayName(filterName)] = filterArray;
 
+      this.updateUrl();
+    },
+    handleClearFilters() {
+      // Clear all filters
+      this.selectedPrimaryCategories = [];
+      this.selectedCategories = [];
+      this.selectedBrands = [];
       this.updateUrl();
     },
     getFilterArrayName(filterType) {
@@ -137,6 +176,10 @@ export default {
 
       if (queryParams.get('categories')) {
         this.selectedCategories = queryParams.get('categories').split(',');
+      }
+
+      if (queryParams.get('brands')) {
+        this.selectedBrands = queryParams.get('brands').split(',');
       }
     }
   },
