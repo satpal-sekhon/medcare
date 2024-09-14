@@ -15,6 +15,46 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="filter">
+                        <div class="row">
+                            <div class="mb-3 col-md-3">
+                                <label class="form-label-title mb-0">Primary Category</label>
+                                <select name="primary_category" id="primary_category" class="form-control">
+                                    <option value="">All Primary Categories</option>
+                                    @foreach ($primaryCategories as $primary_category)
+                                        <option value="{{ $primary_category->id }}">{{ $primary_category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                
+                            <div class="mb-3 col-md-3">
+                                <label class="form-label-title mb-0">Category</label>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="">All Categories</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label class="form-label-title mb-0">Brand</label>
+                                <select name="brand" id="brand" class="form-control">
+                                    <option value="">All Brands</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3 col-md-3">
+                                <label class="form-label-title col-sm-4 mb-0">Diseases</label>
+                                <select name="diseases" id="diseases" class="form-control">
+                                    <option value="">All Diseases</option>
+                                    @foreach ($diseases as $disease)
+                                        <option value="{{ $disease->id }}">{{ $disease->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div>
                         <div class="table-responsive">
                             <table class="table w-100 theme-table table-product" id="table_id">
@@ -50,8 +90,12 @@
                     ajax: {
                         url: "{{ route('products.get') }}",
                         type: 'POST',
-                        data: {
-                            _token: "{{ csrf_token() }}"
+                        data: function(d) {
+                            d._token = "{{ csrf_token() }}";
+                            d.primary_category = $('#primary_category').val();
+                            d.category = $('#category').val();
+                            d.brand = $('#brand').val();
+                            d.disease = $('#diseases').val();
                         }
                     },
                     columns: [
@@ -190,6 +234,37 @@
                         }
                     ],
                     order: [[0, 'desc']]
+                });
+
+                function populateCategories(primaryCategoryId, selectedCategoryId) {
+                    $.ajax({
+                        url: "{{ route('categories.get-by-primary-category') }}",
+                        method: 'GET',
+                        data: {
+                            category_id: primaryCategoryId
+                        },
+                        success: function(response){
+                            if(response.success){
+                                let categories = response.categories;
+                                let $categorySelect = $('#category');
+                                $categorySelect.html('<option value="">All Categories</option>');
+
+                                categories.forEach(function(category){
+                                    $categorySelect.append(`<option value="${category.id}">${category.name}</option>`);
+                                });
+                            }
+                        }
+                    });
+                }
+
+                $('#primary_category').change(function(){
+                    let selectedPrimaryCategoryId = $(this).val();
+                    populateCategories(selectedPrimaryCategoryId, '');
+                    window.table.ajax.reload();
+                });
+
+                $('#category, #brand , #diseases').change(function(){
+                    window.table.ajax.reload();
                 });
             });
         </script>

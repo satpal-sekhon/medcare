@@ -47,6 +47,8 @@ class ProductController extends Controller
         $categoryIds = $request->input('category_ids', []);
         $primaryCategoryIds = $request->input('primary_category_ids', []);
         $productTypes = $request->input('product_types', []); // New filter for product types
+        $nameStartsWith = $request->input('name_starts_with', ''); // New filter for name starts with
+        $search = $request->input('search', ''); // New filter for search term
 
         // Ensure filters are arrays
         $brandIds = is_array($brandIds) ? $brandIds : explode(',', $brandIds);
@@ -68,6 +70,14 @@ class ProductController extends Controller
             return in_array($type, $allowedProductTypes);
         });
 
+        // Validate and sanitize name_starts_with
+        $nameStartsWith = trim($nameStartsWith);
+        $nameStartsWith = preg_replace('/[^a-zA-Z]/', '', $nameStartsWith); // Allow only letters
+
+        // Validate and sanitize search term
+        $search = trim($search);
+        $search = preg_replace('/[^a-zA-Z0-9\s]/', '', $search); // Allow letters, numbers, and spaces
+
         // Build the query
         $query = Product::select(
             'id',
@@ -77,6 +87,7 @@ class ProductController extends Controller
             'name',
             'slug',
             'thumbnail',
+            'composition',
             'product_type',
             'stock_type',
             'stock_quantity_for_customer',
@@ -107,6 +118,17 @@ class ProductController extends Controller
 
         if (!empty($productTypes)) { // Apply product_type filter
             $query->whereIn('product_type', $productTypes);
+        }
+
+        if (!empty($nameStartsWith)) { // Apply name starts with filter
+            $query->where('name', 'like', $nameStartsWith . '%');
+        }
+
+        if (!empty($search)) { // Apply search filter
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('composition', 'like', '%' . $search . '%');
+            });
         }
 
         // Apply pagination if needed

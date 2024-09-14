@@ -40,7 +40,11 @@ class ProductController extends Controller
      */
     public function admin_index()
     {
-        return view('admin.products.index');
+        $primaryCategories = PrimaryCategory::all();
+        $brands = Brand::all();
+        $diseases = Disease::all();
+
+        return view('admin.products.index', compact('primaryCategories', 'brands', 'diseases'));
     }
 
     /**
@@ -171,7 +175,37 @@ class ProductController extends Controller
         // Create the initial query with necessary joins and selects
         $query = Product::query()
             ->select('products.id', 'products.name as category_name', 'products.name', 'products.thumbnail', 'products.customer_price', 'products.vendor_price', 'products.mrp', 'products.stock_type', 'products.stock_quantity_for_customer', 'products.stock_quantity_for_vendor', 'brands.name as brand_name')
-            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id');
+            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
+            ->leftJoin('product_diseases', 'products.id', '=', 'product_diseases.product_id');
+
+             // Apply filters if present
+        if ($request->has('primary_category') && $request->primary_category) {
+            $primaryCategoryId = $request->primary_category;
+            $query->whereHas('category', function($q) use ($primaryCategoryId) {
+                $q->where('primary_category_id', $primaryCategoryId);
+            });
+        }
+
+        if ($request->has('category') && $request->category) {
+            $categoryId = $request->category;
+            $query->whereHas('category', function($q) use ($categoryId) {
+                $q->where('id', $categoryId);
+            });
+        }
+
+        if ($request->has('brand') && $request->brand) {
+            $brandId = $request->brand;
+            $query->where('products.brand_id', $brandId);
+        }
+
+        if ($request->has('disease') && $request->disease) {
+            $diseaseIds = $request->disease;
+            if (is_array($diseaseIds)) {
+                $query->whereIn('product_diseases.disease_id', $diseaseIds);
+            } else {
+                $query->where('product_diseases.disease_id', $diseaseIds);
+            }
+        }
 
         // Apply search filter if present
         if ($request->has('search') && $request->search['value']) {
