@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DiseaseController;
+use App\Http\Controllers\Api\PharmacyController;
 use App\Http\Controllers\Api\PrimaryCategoryController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
@@ -26,6 +27,10 @@ Route::prefix('diseases')->group(function () {
 
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
+});
+
+Route::prefix('pharmacies')->group(function () {
+    Route::get('/', [PharmacyController::class, 'index']);
 });
 
 Route::get('/user', function (Request $request) {

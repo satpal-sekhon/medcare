@@ -28,7 +28,7 @@ class Product extends Model
 
     public function primaryCategory()
     {
-        return $this->belongsTo(primaryCategory::class);
+        return $this->belongsTo(PrimaryCategory::class);
     }
 
     public function diseases()
