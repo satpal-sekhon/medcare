@@ -155,8 +155,7 @@
             <div class="col-lg-4">
                 <div class="banner-contain-3 pt-lg-4 h-100 hover-effect">
                     <a href="javascript:void(0)">
-                        <img src="assets/images/banners/7.jpg" class="img-fluid social-image w-100 lazyloaded"
-                            alt="">
+                        <img src="assets/images/banners/7.jpg" class="img-fluid social-image w-100 lazyloaded" alt="">
                     </a>
                 </div>
             </div>
@@ -174,7 +173,7 @@
                     <x-warning-message message="We will launch medicines soon!"></x-warning-message>
                 @endif
             </div>
-            <div class="col-xxl-2 col-xl-2 reto">
+            <div class="col-xxl-2 col-xl-2 reto d-md-none">
                 <img src="{{ asset('assets/images/banners/vertical-3.png') }}" class="img-fluid social-image w-100 lazyloaded" alt="">
             </div>
         </div>

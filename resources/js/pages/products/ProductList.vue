@@ -1,8 +1,8 @@
 <template>
   <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
     <div v-for="product in products" :key="product.id">
-      <ProductCard :product="product" :quantity="productQuantities[product.id] || 0"
-        :is-add-to-cart-disabled="isAddToCartDisabled(product)" @change-quantity="changeQuantity(product.id, $event)" />
+      <ProductCard :product="product"
+        :is-add-to-cart-disabled="isAddToCartDisabled(product)" />
     </div>
   </div>
 
@@ -57,7 +57,6 @@ export default {
   data() {
     return {
       products: [],
-      productQuantities: {},
       totalPages: 1
     };
   },
@@ -130,10 +129,6 @@ export default {
       } catch (error) {
         console.error('Error fetching products:', error);
       }
-    },
-    changeQuantity(productId, amount) {
-      const currentQuantity = this.productQuantities[productId] || 0;
-      this.productQuantities[productId] = Math.max(currentQuantity + amount, 0);
     },
     isAddToCartDisabled(product) {
       return !(product.stock_type === 'With Stock' && product.stock_quantity_for_customer > 0) &&

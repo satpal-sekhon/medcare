@@ -34,56 +34,27 @@
                     <span class="theme-color">₹{{ product.customer_price }}</span>
                     <del>₹{{ product.mrp }}</del>
                 </h5>
-                <div class="add-to-cart-box bg-white">
-                    <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled" @click="addToCart">
-                        Add
-                        <span class="add-icon bg-light-gray">
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
-                    </button>
-                    <div :class="['cart_qty qty-box mw-100', { 'open': quantity > 0 }]">
-                        <div class="input-group bg-white">
-                            <button type="button" class="qty-left-minus bg-gray" @click="changeQuantity(-1)">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            <input class="form-control input-number qty-input" type="text" :value="quantity" readonly>
-                            <button type="button" class="qty-right-plus bg-gray" @click="changeQuantity(1)">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <QuantityBox :productId="product.id" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import QuantityBox from '../../components/cart/QuantityBox.vue';
+
 export default {
     name: 'ProductCard',
     props: {
         product: {
             type: Object,
             required: true
-        },
-        quantity: {
-            type: Number,
-            default: 0
-        },
-        isAddToCartDisabled: {
-            type: Boolean,
-            default: false
         }
     },
+    components: {
+        QuantityBox
+    },
     methods: {
-        addToCart() {
-            if (!this.isAddToCartDisabled) {
-                this.$emit('change-quantity', 1);
-            }
-        },
-        changeQuantity(amount) {
-            this.$emit('change-quantity', amount);
-        },
         getFlagClass(flag) {
             switch(flag) {
                 case 'On Sale':

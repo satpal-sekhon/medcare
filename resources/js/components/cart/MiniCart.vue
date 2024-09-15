@@ -1,7 +1,17 @@
 <template>
-    <div class="onhover-div">
+  <button type="button" class="btn p-0 position-relative header-wishlist">
+    <i data-feather="shopping-cart"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge" v-if="cartDetails && cartDetails.total_items">
+      {{ cartDetails.total_items }}
+      <span class="visually-hidden">unread messages</span>
+    </span>
+  </button>
+
+  <div class="onhover-div">
+    <div class="mini-cart-container" v-if="cartDetails && cartDetails.total_items">
+
       <ul class="cart-list">
-        <li v-for="(item, index) in cartItems" :key="index" class="product-box-contain w-100">
+        <li v-for="(item, id) in cartDetails.products" :key="id" class="product-box-contain w-100">
           <div class="drop-cart">
             <a href="#" class="drop-image">
               <img :src="item.image" class="lazyload mh-100px" :alt="item.name" />
@@ -10,70 +20,78 @@
               <a href="#">
                 <h5>{{ item.name }}</h5>
               </a>
-              <h6><span>{{ item.quantity }} x</span> {{ formatPrice(item.price) }}</h6>
-              <button @click="removeItem(index)" class="close-button close_button">
+              <h6>
+                <span>{{ item.quantity }} x</span>
+                {{ formatPrice(item.price) }}
+              </h6>
+              <button @click="removeItem(id)" class="close-button close_button">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
           </div>
         </li>
       </ul>
-  
+
       <div class="price-box">
         <h5>Total :</h5>
-        <h4 class="theme-color fw-bold">{{ formatPrice(totalPrice) }}</h4>
+        <h4 class="theme-color fw-bold">{{ formatPrice(cartDetails.total) }}</h4>
       </div>
-  
+
       <div class="button-group">
         <a href="/cart" class="btn btn-sm cart-button">View Cart</a>
         <a href="/checkout" class="btn btn-sm cart-button theme-bg-color text-white">Checkout</a>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        cartItems: [
-          {
-            name: 'Product 1 Name',
-            price: 80.58,
-            quantity: 1,
-            image: '/assets/images/product/1.png'
-          },
-          {
-            name: 'Product 2 Name',
-            price: 25.68,
-            quantity: 1,
-            image: '/assets/images/product/2.png'
-          },
-          {
-            name: 'Product 3 Name',
-            price: 35.68,
-            quantity: 1,
-            image: '/assets/images/product/2.png'
-          }
-        ]
-      };
+    <div v-else>
+      <h4 class="text-center fw-bold">
+        Cart is Empty
+      </h4>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { emit, on } from '../../eventBus';
+
+export default {
+  name: 'MiniCart',
+  data() {
+    return {
+      cartDetails: {}
+    };
+  },
+  created() {
+    on('cart-updated', this.handleCartUpdate);
+    this.fetchCartData();
+  },
+  methods: {
+    handleCartUpdate(updatedData) {
+      this.cartDetails = updatedData.cart;
     },
-    computed: {
-      totalPrice() {
-        return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-      }
+    removeItem(productId) {
+      axios.delete(`/cart/${productId}`)
+        .then(response => {
+          this.cartDetails = response.data.cart;
+          emit('product-quantity-updated', productId, 0);
+        })
+        .catch(error => {
+          console.error('Error removing item from cart:', error.response.data);
+        });
     },
-    methods: {
-      formatPrice(amount) {
-        return `$${amount.toFixed(2)}`;
-      },
-      removeItem(index) {
-        this.cartItems.splice(index, 1);
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  /* Add your styles here */
-  </style>
-  
+    formatPrice(amount) {
+      if (!amount) { return `-` }
+      return `₹${parseFloat(amount).toFixed(2)}`;
+    },
+    async fetchCartData() {
+      const response = await axios.get('/cart/details');
+      this.cartDetails = response.data.cart;
+      emit('updated-cart-fetch', this.cartDetails);
+    },
+  }
+};
+</script>
+
+<style scoped>
+/* Add your styles here */
+</style>

@@ -41,35 +41,15 @@
                         In Stock</h6>
                     <h6 class="text-danger" v-else>Out of Stock</h6>
                 </div>
-                <div class="add-to-cart-box">
-                    <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled"
-                        @click="changeQuantity(1)">
-                        Add
-                        <span class="add-icon">
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
-                    </button>
-                    <div :class="['cart_qty qty-box mw-100', { 'open': quantity > 0 }]">
-                        <div class="input-group">
-                            <button type="button" class="qty-left-minus" data-type="minus" data-field=""
-                                @click="changeQuantity(-1)">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            <input class="form-control input-number qty-input" type="text" name="quantity"
-                                :value="quantity" />
-                            <button type="button" class="qty-right-plus" data-type="plus" data-field=""
-                                @click="changeQuantity(1)">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <QuantityBox :productId="product.id" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import QuantityBox from '../cart/QuantityBox.vue';
+
 export default {
     props: {
         product: {
@@ -77,18 +57,15 @@ export default {
             required: true,
         },
     },
+    components: {
+        QuantityBox
+    },
     data() {
         return {
             quantity: 0,
         };
     },
     methods: {
-        changeQuantity(amount) {
-            const newQuantity = this.quantity + amount;
-            if (newQuantity >= 0) {
-                this.quantity = newQuantity;
-            }
-        },
         getFlagClass(flag) {
             switch(flag) {
                 case 'On Sale':
@@ -102,12 +79,6 @@ export default {
     },
     mounted() {
         feather.replace();
-    },
-    computed: {
-        isAddToCartDisabled() {
-            return !(this.product.stock_type === 'With Stock' && this.product.available_quantity > 0) &&
-                this.product.stock_type !== 'Without Stock';
-        }
     }
 };
 </script>

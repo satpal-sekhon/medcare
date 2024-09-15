@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -15,51 +16,108 @@ class CartController extends Controller
         return view('frontend.cart');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // Add or update item in the cart
+    public function addOrUpdate(Request $request)
     {
-        //
+        // Validate request input
+        $validated = $request->validate([
+            'productId' => 'required|integer|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $productId = $validated['productId'];
+        $quantity = $validated['quantity'];
+
+        // Retrieve product details from the database
+        $product = Product::with('brand', 'category', 'primaryCategory')
+            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'customer_price', 'mrp', 'flag', 'thumbnail')
+            ->find($productId);
+
+        if (!$product) {
+            return response()->json(['error' => 'Product not found!'], 404);
+        }
+
+        // Retrieve the current cart from the session
+        $cart = session()->get('cart', []);
+        $cart_status = '';
+
+        // Check if the item already exists in the cart
+        if (isset($cart['products'][$productId])) {
+            // Update the quantity
+            $cart['products'][$productId]['quantity'] = $quantity;
+            $cart_status = 'UPDATED';
+        } else {
+            // Add new item to the cart with detailed information
+            $cart['products'][$productId] = [
+                'quantity' => $quantity,
+                'name' => $product->name,
+                'price' => $product->customer_price,
+                'mrp' => $product->mrp,
+                'flag' => $product->flag,
+                'brand' => $product->brand->name,
+                'primary_category' => $product->primaryCategory->name,
+                'category' => $product->category->name,
+                'image' => $product->thumbnail,
+            ];
+            $cart_status = 'ADDED';
+        }
+
+        // Calculate the new total
+        $cart['total'] = $this->calculateTotal($cart['products']);
+
+        // Calculate the total number of items in the cart
+        $cart['total_items'] = array_sum(array_column($cart['products'], 'quantity'));
+
+        $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;
+
+        // Store the updated cart back in the session
+        session()->put('cart', $cart);
+
+        return response()->json(['success' => true, 'status' => $cart_status, 'cart' => $cart]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    private function calculateTotal($products)
     {
-        //
+        $total = 0;
+        foreach ($products as $product) {
+            $total += $product['price'] * $product['quantity'];
+        }
+        return $total;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cart $cart)
+
+    public function getDetails()
     {
-        //
+        $cart = session()->get('cart', []);
+        return response()->json(['cart' => $cart]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cart $cart)
+    // Delete item from the cart
+    public function delete($id)
     {
-        //
-    }
+        // Retrieve the current cart from the session
+        $cart = session()->get('cart', []);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
+        // Check if the item exists in the cart
+        if (!isset($cart['products'][$id])) {
+            return response()->json(['error' => 'Item not found in cart!'], 404);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
-    {
-        //
+        // Remove the item from the cart
+        unset($cart['products'][$id]);
+
+        // Calculate the new total
+        $cart['total'] = $this->calculateTotal($cart['products']);
+
+        // Calculate the total number of items in the cart
+        $cart['total_items'] = array_sum(array_column($cart['products'], 'quantity'));
+
+        // Handle applied coupons if needed
+        $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;
+
+        // Store the updated cart back in the session
+        session()->put('cart', $cart);
+
+        return response()->json(['success' => 'Item removed from cart!', 'cart' => $cart]);
     }
 }

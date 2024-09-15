@@ -66,6 +66,14 @@ Route::resources([
     '/wishlist' => WishlistController::class,
 ]);
 
+
+Route::prefix('cart')->group(function () {
+    Route::post('/', [CartController::class, 'addOrUpdate'])->name('cart.add-or-update');
+    Route::delete('/{id}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::get('/details', [CartController::class, 'getDetails'])->name('cart.details');
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::prefix('/my-account')->group(function () {
         Route::resources([
