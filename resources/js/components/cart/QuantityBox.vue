@@ -3,17 +3,17 @@
         <div class="note-box product-package">
             <div class="cart_qty qty-box product-qty">
                 <div class="input-group">
-                    <button type="button" class="qty-left-minus" data-type="minus" data-field="">
+                    <button type="button" class="qty-left-minus" :disabled="tempQuantity<1" @click="dicreaseQuantity">
                         <i class="fa fa-minus"></i>
                     </button>
-                    <input class="form-control input-number qty-input" type="text" name="quantity" value="0">
-                    <button type="button" class="qty-right-plus" data-type="plus" data-field="">
+                    <input class="form-control input-number qty-input" type="text" name="quantity" :value="tempQuantity">
+                    <button type="button" class="qty-right-plus" @click="increaseQuantity">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
             </div>
 
-            <button class="btn btn-md bg-dark cart-button text-white w-100">Add To Cart</button>
+            <button class="btn btn-md bg-dark cart-button text-white w-100" @click="addToCart">Add To Cart</button>
         </div>
     </div>
     <div class="add-to-cart-box" v-else>
@@ -25,12 +25,11 @@
         </button>
         <div :class="['cart_qty qty-box mw-100', { 'open': quantity > 0 }]">
             <div class="input-group">
-                <button type="button" class="qty-left-minus" data-type="minus" data-field=""
-                    @click="changeQuantity(-1)">
+                <button type="button" class="qty-left-minus" @click="changeQuantity(-1)">
                     <i class="fa fa-minus"></i>
                 </button>
                 <input class="form-control input-number qty-input" type="text" name="quantity" :value="quantity" />
-                <button type="button" class="qty-right-plus" data-type="plus" data-field="" @click="changeQuantity(1)">
+                <button type="button" class="qty-right-plus" @click="changeQuantity(1)">
                     <i class="fa fa-plus"></i>
                 </button>
             </div>
@@ -62,6 +61,7 @@ export default {
         return {
             quantity: this.initialQuantity,
             isAddToCartDisabled: false,
+            tempQuantity: this.initialQuantity
         };
     },
     created() {
@@ -69,16 +69,26 @@ export default {
         on('product-quantity-updated', this.handleCartQuantity);
     },
     methods: {
+        increaseQuantity(){
+            this.tempQuantity += 1;
+        },
+        dicreaseQuantity(){
+            this.tempQuantity -= 1;
+        },
+        addToCart(){
+            this.quantity = this.tempQuantity;
+            this.updateCart();
+        },
         handleCartUpdate(updatedData) {
             if (updatedData.products && updatedData.products[this.productId]) {
                 this.quantity = updatedData.products[this.productId].quantity;
+                this.tempQuantity = this.quantity;
             }
         },
         handleCartQuantity(productId, quantity = 0) {
-            if (this.productId == productId) {
+            if (parseInt(this.productId) === parseInt(productId)) {
                 this.quantity = 0;
-                console.log('productId', productId)
-                console.log('quantity', quantity)
+                this.tempQuantity = 0;
             }
         },
         changeQuantity(amount) {

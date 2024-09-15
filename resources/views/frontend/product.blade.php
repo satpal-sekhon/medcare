@@ -148,8 +148,7 @@
                                 </div>
                             @endif
 
-                            <quantity-box variant="product-detail" />
-                            
+                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}" />
 
                             <div class="buy-box">
                                 <a href="#">
