@@ -150,7 +150,13 @@
                                                 </div>
                                                 <div class="delivery-detail">
                                                     <h6>Hello,</h6>
-                                                    <h5>My Account</h5>
+                                                    @guest
+                                                    <h5>Guest User</h5>
+                                                    @endguest
+
+                                                    @auth
+                                                    <h5>{{ auth()->user()->name }}</h5>
+                                                    @endauth
                                                 </div>
                                             </div>
 

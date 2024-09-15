@@ -87,8 +87,8 @@ export default {
         },
         handleCartQuantity(productId, quantity = 0) {
             if (parseInt(this.productId) === parseInt(productId)) {
-                this.quantity = 0;
-                this.tempQuantity = 0;
+                this.quantity = quantity;
+                this.tempQuantity = quantity;
             }
         },
         changeQuantity(amount) {

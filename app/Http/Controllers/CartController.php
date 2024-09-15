@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -50,6 +49,7 @@ class CartController extends Controller
             // Add new item to the cart with detailed information
             $cart['products'][$productId] = [
                 'quantity' => $quantity,
+                'product_id' => $product->id,
                 'name' => $product->name,
                 'slug' => $product->slug,
                 'price' => $product->customer_price,
@@ -64,6 +64,7 @@ class CartController extends Controller
         }
 
         // Calculate the new total
+        $cart['sub_total'] = $this->calculateTotal($cart['products']);
         $cart['total'] = $this->calculateTotal($cart['products']);
 
         // Calculate the total number of items in the cart
