@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
     public function index(){
-        return view('frontend.checkout');
+        $cart = session()->get('cart', []);
+        if(empty($cart['total'])){
+            return redirect()->route('cart');
+        }
+
+        $states = State::select('name', 'code')->orderBy('name', 'asc')->get();
+        return view('frontend.checkout', compact('states'));
     }
 }

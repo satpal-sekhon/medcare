@@ -8,6 +8,7 @@ import MiniCart from './components/cart/MiniCart.vue';
 import QuantityBox from './components/cart/QuantityBox.vue';
 import PharmacyShops from './pages/PharmacyShops.vue';
 import Cart from './pages/Cart.vue';
+import Checkout from './pages/checkout/Checkout.vue';
 
 // Create Vue application instance
 const app = createApp({});
@@ -20,6 +21,7 @@ app.component('products', Products);
 app.component('mini-cart', MiniCart);
 app.component('quantity-box', QuantityBox);
 app.component('cart', Cart);
+app.component('checkout', Checkout);
 
 // Mount Vue instance to a DOM element
 app.mount('#vue-components');
