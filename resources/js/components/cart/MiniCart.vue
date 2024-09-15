@@ -13,11 +13,11 @@
       <ul class="cart-list">
         <li v-for="(item, id) in cartDetails.products" :key="id" class="product-box-contain w-100">
           <div class="drop-cart">
-            <a href="#" class="drop-image">
-              <img :src="item.image" class="lazyload mh-100px" :alt="item.name" />
+            <a :href="`/product/${item.slug}`" class="drop-image">
+              <img :src="`/${item.image}`" class="lazyload mh-100px" :alt="item.name" />
             </a>
             <div class="drop-contain">
-              <a href="#">
+              <a :href="`/product/${item.slug}`">
                 <h5>{{ item.name }}</h5>
               </a>
               <h6>
@@ -49,7 +49,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 import { emit, on } from '../../eventBus';
@@ -58,7 +57,9 @@ export default {
   name: 'MiniCart',
   data() {
     return {
-      cartDetails: {}
+      cartDetails: {},
+      isLoading: false,  // For managing loading state
+      error: null,       // For managing errors
     };
   },
   created() {
@@ -69,25 +70,39 @@ export default {
     handleCartUpdate(updatedData) {
       this.cartDetails = updatedData.cart;
     },
-    removeItem(productId) {
-      axios.delete(`/cart/${productId}`)
-        .then(response => {
-          this.cartDetails = response.data.cart;
-          emit('product-quantity-updated', productId, 0);
-        })
-        .catch(error => {
-          console.error('Error removing item from cart:', error.response.data);
-        });
+    async removeItem(productId) {
+      try {
+        this.isLoading = true;  // Start loading
+        const response = await axios.delete(`/cart/${productId}`);
+        this.cartDetails = response.data.cart;
+        emit('product-quantity-updated', productId, 0);
+      } catch (error) {
+        this.error = 'Error removing item from cart';  // Handle error
+        console.error('Error removing item from cart:', error.response?.data || error.message);
+      } finally {
+        this.isLoading = false;  // Stop loading
+      }
     },
     formatPrice(amount) {
-      if (!amount) { return `-` }
+      if (amount == null || isNaN(amount)) { return `-` }
       return `₹${parseFloat(amount).toFixed(2)}`;
     },
     async fetchCartData() {
-      const response = await axios.get('/cart/details');
-      this.cartDetails = response.data.cart;
-      emit('updated-cart-fetch', this.cartDetails);
+      try {
+        this.isLoading = true;  // Start loading
+        const response = await axios.get('/cart/details');
+        this.cartDetails = response.data.cart;
+        emit('updated-cart-fetch', this.cartDetails);
+      } catch (error) {
+        this.error = 'Error fetching cart data';  // Handle error
+        console.error('Error fetching cart data:', error.response?.data || error.message);
+      } finally {
+        this.isLoading = false;  // Stop loading
+      }
     },
+  },
+  mounted() {
+    feather.replace();
   }
 };
 </script>

@@ -20,6 +20,7 @@ import axios from 'axios';
 import ProductCard from './ProductCard.vue';
 import Pagination from '../../components/Pagination.vue';
 import WarningMessage from '../../components/WarningMessage.vue';
+import { emit } from '../../eventBus';
 
 export default {
   name: 'ProductList',
@@ -124,6 +125,11 @@ export default {
 
         if (response.data.data) {
           this.products = response.data.data;
+
+          const cartResponse = await axios.get('/cart/details');
+          this.cartDetails = cartResponse.data.cart;
+          emit('updated-cart-fetch', this.cartDetails);
+          
           this.totalPages = response.data.meta.last_page || 1;
         }
       } catch (error) {

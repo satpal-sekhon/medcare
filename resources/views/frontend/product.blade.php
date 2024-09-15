@@ -148,22 +148,8 @@
                                 </div>
                             @endif
 
-                            <div class="note-box product-package">
-                                <div class="cart_qty qty-box product-qty">
-                                    <div class="input-group">
-                                        <button type="button" class="qty-right-plus" data-type="plus" data-field="">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                        <input class="form-control input-number qty-input" type="text" name="quantity"
-                                            value="0">
-                                        <button type="button" class="qty-left-minus" data-type="minus" data-field="">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-md bg-dark cart-button text-white w-100">Add To Cart</button>
-                            </div>
+                            <quantity-box variant="product-detail" />
+                            
 
                             <div class="buy-box">
                                 <a href="#">

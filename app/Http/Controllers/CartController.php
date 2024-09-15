@@ -30,7 +30,7 @@ class CartController extends Controller
 
         // Retrieve product details from the database
         $product = Product::with('brand', 'category', 'primaryCategory')
-            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'customer_price', 'mrp', 'flag', 'thumbnail')
+            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'slug', 'customer_price', 'mrp', 'flag', 'thumbnail')
             ->find($productId);
 
         if (!$product) {
@@ -51,6 +51,7 @@ class CartController extends Controller
             $cart['products'][$productId] = [
                 'quantity' => $quantity,
                 'name' => $product->name,
+                'slug' => $product->slug,
                 'price' => $product->customer_price,
                 'mrp' => $product->mrp,
                 'flag' => $product->flag,
