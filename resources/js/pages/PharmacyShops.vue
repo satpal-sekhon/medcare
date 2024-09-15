@@ -60,7 +60,7 @@
             <Pagination :currentPage="currentPage" :totalPages="totalPages" @page-change="handlePageChange" />
 
             <div v-if="pharmacies.length == 0">
-                <WarningMessage class="mt-4" message="Pharmacies not available!" />
+                <WarningMessage message="Pharmacies not available!" />
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Active Vendors</h5>
+                        <h5>Inactive Vendors</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
@@ -48,7 +48,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                             role: "Vendor",
-                            status: "Active"
+                            status: "Inactive"
                         }
                     },
                     columns: [{

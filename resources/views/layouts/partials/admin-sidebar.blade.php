@@ -125,7 +125,10 @@
                                 <a href="{{ route('admin.vendors.new') }}">New Registrations</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.vendors.index') }}">Manage Vendors</a>
+                                <a href="{{ route('admin.vendors.index') }}">Active Vendors</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.vendors.inactive') }}">Inactive Vendors</a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.vendors.pending-approvals') }}">Pending Approvals</a>

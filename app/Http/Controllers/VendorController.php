@@ -27,6 +27,10 @@ class VendorController extends Controller
         return view('admin.vendors.index');
     }
 
+    public function inactive_admin_index(){
+        return view('admin.vendors.inactive-vendors');
+    }
+
     public function pending_approval_index(){
         return view('admin.vendors.pending-approval-vendors');
     }
