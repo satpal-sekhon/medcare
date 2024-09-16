@@ -180,7 +180,7 @@
                             <ul class="summery-contain pb-0 border-bottom-0">
                                 <li class="d-block pt-0">
                                     <p class="text-content">Pay on Delivery (Cash/Card). Cash on delivery (COD)
-                                        available. Card/Net banking acceptance subject to device availability.</p>
+                                        available.</p>
                                 </li>
                             </ul>
                         </div>

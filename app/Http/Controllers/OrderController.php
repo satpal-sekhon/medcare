@@ -15,6 +15,52 @@ class OrderController extends Controller
         //
     }
 
+    public function admin_index(){
+        return view('admin.orders.index');
+    }
+
+    public function get(Request $request)
+    {
+        $columns = ['id', 'name', 'email', 'phone_number'];
+    
+        // Eager load the items relationship to calculate sum later
+        $query = Order::query()
+            ->withCount('items as total_quantity')
+            ->select('orders.*');
+    
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('shipping_address', 'like', "%{$search}%");
+            });
+        }
+    
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count(); // This is before applying pagination
+    
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+    
+        // Apply pagination
+        $orders = $query->skip($request->start)->take($request->length)->get();
+    
+        // Calculate total quantities
+        $orders->each(function ($order) {
+            $order->total_quantity = $order->items->sum('quantity');
+        });
+    
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $orders
+        ]);
+    }
+    
+
     public function create_order(Request $request)
     {
         $cart = session()->get('cart', []);
@@ -110,6 +156,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Order deleted successfully.'
+        ]);
     }
 }

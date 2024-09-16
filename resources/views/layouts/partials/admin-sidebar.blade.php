@@ -160,7 +160,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="">Product Orders</a>
+                                <a href="{{ route('admin.orders.index') }}">Product Orders</a>
                             </li>
                             <li>
                                 <a href="{{ route('admin.quick-orders.index') }}">Quick Orders</a>
