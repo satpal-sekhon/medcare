@@ -57,6 +57,7 @@ class OrderController extends Controller
         }
 
         session()->forget('cart');
+        session()->put('order_id', $order->id);
 
         return response()->json([
             'success' => true,

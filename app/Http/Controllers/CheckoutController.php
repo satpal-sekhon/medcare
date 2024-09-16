@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\State;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,13 @@ class CheckoutController extends Controller
     }
 
     public function success(){
-        return view('frontend.order-success');
+        $placed_order_id = session()->get('order_id');
+        if(!$placed_order_id){
+            return redirect()->route('home');
+        }
+
+        $order = Order::with('items')->find($placed_order_id);
+
+        return view('frontend.order-success', compact('order'));
     }
 }

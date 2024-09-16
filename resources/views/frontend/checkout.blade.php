@@ -6,7 +6,7 @@
 @push('styles')
     <script>
         window.appData = {
-            states: @json($states) // Safely encode PHP data to JSON
+            states: @json($states)
         };
     </script>
 @endpush
