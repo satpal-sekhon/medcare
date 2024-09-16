@@ -31,8 +31,8 @@
                 </div>
             </div>
 
-            <button class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" :disabled="!this.selectedPaymentMethod" @click="submitForm">
-                Continue
+            <button class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" :disabled="!this.selectedPaymentMethod || isSubmitting" @click="submitForm">
+                Place Order
             </button>
         </div>
     </div>
@@ -49,6 +49,10 @@ export default {
         paymentOptions: {
             type: Array,
             default: () => [],
+        },
+        isSubmitting: {
+            type: Boolean,
+            required: true
         }
     },
     data() {

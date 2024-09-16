@@ -16,4 +16,8 @@ class CheckoutController extends Controller
         $states = State::select('name', 'code')->orderBy('name', 'asc')->get();
         return view('frontend.checkout', compact('states'));
     }
+
+    public function success(){
+        return view('frontend.order-success');
+    }
 }

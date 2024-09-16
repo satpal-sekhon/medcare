@@ -37,6 +37,8 @@ Route::get('/', [DashboardController::class, 'index'])->name('home');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/orders/create', [OrderController::class, 'create_order'])->name('order.create');
+Route::get('/order-success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('products.view');

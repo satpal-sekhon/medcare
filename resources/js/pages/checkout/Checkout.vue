@@ -71,27 +71,23 @@ export default {
             ],
             deliveryAddress: {},
             selectedDeliveryMethod: {},
-            selectedPaymentMethod: ''
+            selectedPaymentMethod: '',
+            isSubmitting: false
         };
     },
     methods: {
         getComponentProps(componentName) {
-            switch (componentName) {
-                case 'DeliveryAddress':
-                    return { address: this.deliveryAddress };
-                case 'DeliveryOptions':
-                    return { deliveryMethod: this.selectedDeliveryMethod };
-                case 'PaymentOptions':
-                    return {
-                        paymentOptions: [
-                            { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' },
-                            /* { id: 'credit', label: 'Credit Card', description: 'Pay with your credit card securely' },
-                            { id: 'paypal', label: 'PayPal', description: 'Pay using your PayPal account' }, */
-                        ]
-                    };
-                default:
-                    return {};
-            }
+            const propsMap = {
+                'DeliveryAddress': { address: this.deliveryAddress },
+                'DeliveryOptions': { deliveryMethod: this.selectedDeliveryMethod },
+                'PaymentOptions': {
+                    isSubmitting: this.isSubmitting,
+                    paymentOptions: [
+                        { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' }
+                    ]
+                }
+            };
+            return propsMap[componentName] || {};
         },
         handleSubmit(index, data) {
             const step = this.steps[index];
@@ -126,14 +122,19 @@ export default {
         },
         async placeOrder() {
             try {
+                this.isSubmitting = true;
+
                 const response = await axios.post('/orders/create', {
                     deliveryAddress: this.deliveryAddress,
                     selectedDeliveryMethod: this.selectedDeliveryMethod,
                     selectedPaymentMethod: this.selectedPaymentMethod
                 });
 
-                // Handle success response
-                console.log('Order placed successfully:', response.data);
+                this.isSubmitting = false;
+
+                if (response.data.success && response.data.success === true) {
+                    window.location = '/order-success';
+                }
 
             } catch (error) {
                 console.error('Failed to place order:', error.response?.data || error.message);

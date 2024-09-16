@@ -15,6 +15,55 @@ class OrderController extends Controller
         //
     }
 
+    public function create_order(Request $request)
+    {
+        $cart = session()->get('cart', []);
+
+        if (empty($cart['total'])) {
+            return response()->json([
+                'success' => false,
+                'status' => 'EMPTY_CART',
+                'message' => 'Your cart is empty!'
+            ]);
+        }
+
+        $order = Order::create([
+            'user_id' => $request->user()->id ?? null,
+            'shipping_address' => json_encode($request->deliveryAddress),
+            'shipping_method' => json_encode($request->selectedDeliveryMethod),
+            'payment_method' => $request->selectedPaymentMethod,
+            'sub_total' => $cart['sub_total'],
+            'total' => $cart['total'],
+            'coupon_code' => $cart['applied_coupon'],
+        ]);
+
+        $orderItems = $cart['products'];
+        if ($orderItems) {
+            foreach ($orderItems as $item) {
+                $order->items()->create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'name' => $item['name'],
+                    'brand_name' => $item['brand'],
+                    'primary_category_name' => $item['primary_category'],
+                    'category_name' => $item['category'],
+                    'product_type' => $item['product_type'] ?? 'General',
+                    'thumbnail' => $item['image'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                    'mrp' => $item['mrp'] ?? 0,
+                ]);
+            }
+        }
+
+        session()->forget('cart');
+
+        return response()->json([
+            'success' => true,
+            'order' => $order
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
