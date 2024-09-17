@@ -294,7 +294,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $cart = $user->cart;
 
-            if ($cart->items) {
+            if (isset($cart->items)) {
                 session()->put('cart', json_decode($cart->items, true));
             }
         }

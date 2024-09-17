@@ -64,7 +64,7 @@
                         <div class="order-contain">
                             <h3 class="theme-color">Order Success</h3>
                             <h5 class="text-content">Payment Is Successfully And Your Order Is On The Way</h5>
-                            <h6>Transaction ID: 1708031724431131</h6>
+                            <h6>Order ID: #{{ $order->order_number }}</h6>
                         </div>
                     </div>
                 </div>

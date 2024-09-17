@@ -2,13 +2,17 @@
     <div class="checkout-box">
         <div class="checkout-title">
             <h4>Delivery Address</h4>
-            
+
             <a href="javascript:void(0)" v-if="!step.isActive" @click="editThisStep">Edit</a>
         </div>
 
         <div class="checkout-detail" v-if="step.isActive">
-            <!-- <Addresses /> -->
-            <DeliveryAddressForm @submit="handleFormSubmit" />
+            <div v-if="!addresses">
+                <DeliveryAddressForm @submit="handleFormSubmit" />
+            </div>
+            <div v-else>
+                <Addresses @submit="handleFormSubmit" :addresses="addresses" />
+            </div>
         </div>
         <div class="checkout-detail" v-else>
             <div class="delivery-address-box">
@@ -27,7 +31,7 @@
 
                         <li>
                             <h6 class="text-content">
-                                <span class="text-title">Pin Code :</span> 
+                                <span class="text-title">Pin Code :</span>
                                 {{ address.pinCode }}
                             </h6>
                         </li>
@@ -65,16 +69,23 @@ export default {
         DeliveryAddressForm,
         Addresses
     },
+    data() {
+        return {
+            addresses: null
+        }
+    },
     methods: {
         handleFormSubmit(billingAddress) {
-            // Just to prevent submit form whenever form is not valid
-            if(billingAddress.customerName){
+            if (billingAddress.customerName) {
                 this.$emit('continue', billingAddress);
             }
         },
         editThisStep() {
             this.$emit('on-edit');
         }
+    },
+    mounted() {
+        this.addresses = window.appData.addresses;
     }
 };
 </script>

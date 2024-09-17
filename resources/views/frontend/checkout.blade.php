@@ -6,7 +6,9 @@
 @push('styles')
     <script>
         window.appData = {
-            states: @json($states)
+            states: @json($states),
+            addresses: @json(auth()->user()->addresses ?? null),
+            user_email: "{{ auth()->user()->email ?? '' }}"
         };
     </script>
 @endpush
