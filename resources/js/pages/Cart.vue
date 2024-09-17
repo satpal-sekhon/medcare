@@ -32,13 +32,13 @@
                                                     <div class="cart_qty">
                                                         <div class="input-group">
                                                             <button type="button" class="btn qty-left-minus"
-                                                                @click="updateCart(item.product_id, item.quantity-1)">
+                                                                @click="updateCart(item.product_id, item.quantity - 1)">
                                                                 <i class="fa fa-minus ms-0"></i>
                                                             </button>
                                                             <input class="form-control input-number qty-input"
                                                                 type="text" v-model.number="item.quantity" />
                                                             <button type="button" class="btn qty-right-plus"
-                                                                @click="updateCart(item.product_id, item.quantity+1)">
+                                                                @click="updateCart(item.product_id, item.quantity + 1)">
                                                                 <i class="fa fa-plus ms-0"></i>
                                                             </button>
                                                         </div>
@@ -55,7 +55,7 @@
                                 <td class="price">
                                     <h4 class="table-title text-content">Price</h4>
                                     <h5>
-                                            {{ formatPrice(item.price) }} 
+                                        {{ formatPrice(item.price) }}
                                         <del class="text-content">{{ formatPrice(item.mrp) }}</del>
                                     </h5>
                                     <h6 class="theme-color">You Save : {{ formatPrice(item.mrp - item.price) }}</h6>
@@ -67,13 +67,13 @@
                                         <div class="cart_qty">
                                             <div class="input-group">
                                                 <button type="button" class="btn qty-left-minus"
-                                                    @click="updateCart(item.product_id, item.quantity-1)">
+                                                    @click="updateCart(item.product_id, item.quantity - 1)">
                                                     <i class="fa fa-minus ms-0"></i>
                                                 </button>
                                                 <input class="form-control input-number qty-input" type="text"
                                                     v-model.number="item.quantity" />
                                                 <button type="button" class="btn qty-right-plus"
-                                                    @click="updateCart(item.product_id, item.quantity+1)">
+                                                    @click="updateCart(item.product_id, item.quantity + 1)">
                                                     <i class="fa fa-plus ms-0"></i>
                                                 </button>
                                             </div>
@@ -106,12 +106,20 @@
                 </div>
 
                 <div class="summery-contain">
-                    <div class="coupon-cart">
+                    <div class="mb-3 coupon-cart">
                         <h6 class="text-content mb-2">Coupon Apply</h6>
-                        <div class="mb-3 coupon-box input-group">
+                        <div class="coupon-box input-group">
                             <input type="text" class="form-control" v-model="couponCode"
                                 placeholder="Enter Coupon Code Here..." />
-                            <button class="btn-apply" @click="applyCoupon">Apply</button>
+                            <button class="btn-apply" :disabled="!couponCode" @click="applyCoupon">Apply</button>
+                        </div>
+
+                        <span class="invalid-feedback d-block" v-if="couponCodeError">{{ couponCodeError }}</span>
+                        <span class="valid-feedback d-block" v-if="couponCodeSuccessMessage">{{ couponCodeSuccessMessage }}</span>
+
+                        <div class="applied-coupon d-flex justify-content-between mt-2" v-if="cart.applied_coupon">
+                            <div>Applied Coupon: <span class="text-success">{{ cart.applied_coupon }}</span></div>
+                            <div class="text-danger">Remove</div>
                         </div>
                     </div>
                     <ul>
@@ -119,9 +127,9 @@
                             <h4>Subtotal</h4>
                             <h4 class="price">{{ formatPrice(cart.sub_total) }}</h4>
                         </li>
-                        <li class="d-none">
+                        <li v-if="cart.applied_coupon">
                             <h4>Coupon Discount</h4>
-                            <h4 class="price">(-) {{ couponDiscount }}</h4>
+                            <h4 class="price">(-) {{ formatPrice(cart.discount_amount) }}</h4>
                         </li>
                         <li class="align-items-start">
                             <h4>Shipping</h4>
@@ -129,7 +137,7 @@
                         </li>
                     </ul>
                 </div>
-
+                
                 <ul class="summery-total">
                     <li class="list-total border-top-0">
                         <h4>Total (INR)</h4>
@@ -170,6 +178,8 @@ export default {
             couponCode: '',
             couponDiscount: '0.00',
             checkoutLink: '/checkout',
+            couponCodeError: '',
+            couponCodeSuccessMessage: ''
         };
     },
     created() {
@@ -237,8 +247,27 @@ export default {
         saveForLater(index) {
             // Implement save for later functionality
         },
-        applyCoupon() {
-            // Implement coupon application logic
+        async applyCoupon() {
+            const response = await fetch('/apply-coupon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.getCsrfToken()
+                },
+                body: JSON.stringify({ code: this.couponCode })
+            });
+
+            const data = await response.json();
+            if(!data.success){
+                this.couponCodeError = data.message;
+            } else {
+                this.couponCodeError = '';
+                this.couponCodeSuccessMessage = data.message;
+                this.cart = data.cart;
+            }
+        },
+        getCsrfToken() {
+            return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         }
     }
 };

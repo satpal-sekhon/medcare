@@ -20,6 +20,11 @@
                     <h4 class="price">{{ formatPrice(cart.sub_total) }}</h4>
                 </li>
 
+                <li v-if="cart.applied_coupon">
+                    <h4>Applied Coupon</h4>
+                    <h4 class="price">(-) {{ formatPrice(cart.discount_amount) }}</h4>
+                </li>
+
                 <li>
                     <h4>Shipping</h4>
                     <h4 class="price">-</h4>

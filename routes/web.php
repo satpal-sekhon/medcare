@@ -64,10 +64,11 @@ Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 
+Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+
 Route::resources([
     '/wishlist' => WishlistController::class,
 ]);
-
 
 Route::prefix('cart')->group(function () {
     Route::post('/', [CartController::class, 'addOrUpdate'])->name('cart.add-or-update');
