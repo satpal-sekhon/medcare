@@ -58,8 +58,8 @@ export default {
   data() {
     return {
       cartDetails: {},
-      isLoading: false,  // For managing loading state
-      error: null,       // For managing errors
+      isLoading: false,
+      error: null,
     };
   },
   created() {

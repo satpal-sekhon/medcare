@@ -3,10 +3,11 @@
         <div class="note-box product-package">
             <div class="cart_qty qty-box product-qty">
                 <div class="input-group">
-                    <button type="button" class="qty-left-minus" :disabled="tempQuantity<1" @click="dicreaseQuantity">
+                    <button type="button" class="qty-left-minus" :disabled="tempQuantity < 1" @click="dicreaseQuantity">
                         <i class="fa fa-minus"></i>
                     </button>
-                    <input class="form-control input-number qty-input" type="text" name="quantity" :value="tempQuantity">
+                    <input class="form-control input-number qty-input" type="text" name="quantity"
+                        :value="tempQuantity">
                     <button type="button" class="qty-right-plus" @click="increaseQuantity">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -40,6 +41,8 @@
 <script>
 import axios from 'axios';
 import { on, emit } from '../../eventBus';
+import CartNotification from './CartNotification.vue';
+import { createApp } from 'vue';
 
 export default {
     name: 'QuantityBox',
@@ -61,7 +64,8 @@ export default {
         return {
             quantity: this.initialQuantity,
             isAddToCartDisabled: false,
-            tempQuantity: this.initialQuantity
+            tempQuantity: this.initialQuantity,
+            showNotification: false,
         };
     },
     created() {
@@ -69,13 +73,13 @@ export default {
         on('product-quantity-updated', this.handleCartQuantity);
     },
     methods: {
-        increaseQuantity(){
+        increaseQuantity() {
             this.tempQuantity += 1;
         },
-        dicreaseQuantity(){
+        dicreaseQuantity() {
             this.tempQuantity -= 1;
         },
-        addToCart(){
+        addToCart() {
             this.quantity = this.tempQuantity;
             this.updateCart();
         },
@@ -115,11 +119,44 @@ export default {
                     });
                 }
 
+                if(response.data.status && response.data.status==='ADDED'){
+                    let addedProduct = response.data.cart.products[this.productId] || {};
+                    this.renderNotification(addedProduct);
+                }
+
                 emit('cart-updated', response.data);
             } catch (error) {
                 console.error('Error updating cart:', error.response ? error.response.data : error.message);
             } finally {
                 this.isAddToCartDisabled = false;
+            }
+        },
+        renderNotification(addedProduct) {
+            const container = document.querySelector('#notification-container');
+
+            if (container) {
+                // Clear existing notifications if necessary
+                container.innerHTML = '';
+
+                const app = createApp({
+                    components: {
+                        CartNotification
+                    },
+                    data() {
+                        return {
+                            showNotification: true,
+                            addedProduct: addedProduct
+                        };
+                    },
+                    template: '<CartNotification :show="showNotification" :product="addedProduct" />',
+                    mounted() {
+                        setTimeout(() => {
+                            //container.innerHTML = '';
+                        }, 3000);
+                    }
+                });
+
+                app.mount(container);
             }
         }
     }

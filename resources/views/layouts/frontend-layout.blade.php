@@ -645,6 +645,8 @@
         </footer>
         <!-- Footer Section End -->
 
+        <div id="notification-container"></div>
+
         <!-- Bg overlay Start -->
         <div class="bg-overlay"></div>
         <!-- Bg overlay End -->
