@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DiseaseController;
 use App\Http\Controllers\Api\PharmacyController;
 use App\Http\Controllers\Api\PrimaryCategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

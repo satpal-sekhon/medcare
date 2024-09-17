@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -150,5 +152,66 @@ class CartController extends Controller
         session()->put('cart', $cart);
 
         return response()->json(['success' => 'Item removed from cart!', 'cart' => $cart]);
+    }
+
+    public function applyCoupon(Request $request){
+        $couponCode = $request->input('code');
+        $coupon = Coupon::where('code', $couponCode)
+            ->where('is_active', true)
+            ->where(function ($query) {
+                $query->whereNull('start_date')
+                    ->orWhere('start_date', '<=', Carbon::now());
+            })
+            ->where(function ($query) {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>=', Carbon::now());
+            })
+            ->first();
+      
+        if (!$coupon) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid or expired coupon code.'
+            ], 400);
+        }
+        
+          
+        $cart = session()->get('cart', []);
+        
+        if(!isset($cart['total'])){
+            return response()->json([
+                'success' => false,
+                'message' => 'Cart is empty'
+            ], 400);
+        }
+
+        $totalAmount = $cart['total'];
+        $discount = 0;
+
+        if ($coupon->discount_type == 'amount') {
+            $discount = $coupon->discount_amount;
+        } elseif ($coupon->discount_type == 'percentage') {
+            $discount = ($coupon->discount_amount / 100) * $totalAmount;
+        }
+
+        // Apply discount
+        $cart['applied_coupon'] = $couponCode;
+        $cart['discount_amount'] = (float)$discount;
+        $cart['total'] = (float)$cart['sub_total'] - (float)$discount;
+        session()->put('cart', $cart);
+
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+            $userCart->items = json_encode($cart);
+            $userCart->save();
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Coupon applied successfully.',
+            'cart' => $cart
+        ], 200);
     }
 }
