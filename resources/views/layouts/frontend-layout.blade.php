@@ -520,7 +520,7 @@
 
                         <div class="col-xl col-lg-2 col-sm-3">
                             <div class="footer-title">
-                                <h4>Useful Links</h4>
+                                <h4>Brands</h4>
                             </div>
 
                             <div class="footer-contain">
@@ -546,7 +546,7 @@
 
                         <div class="col-xl-2 col-sm-3">
                             <div class="footer-title">
-                                <h4>Help Center</h4>
+                                <h4>Diseases</h4>
                             </div>
 
                             <div class="footer-contain">

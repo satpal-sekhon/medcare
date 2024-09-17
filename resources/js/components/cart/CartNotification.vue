@@ -12,6 +12,7 @@
 
 <script>
 export default {
+    name: 'CartNotification',
     props: {
         show: {
             type: Boolean,
@@ -72,7 +73,7 @@ export default {
 }
 
 .cart-notification .go-to-cart-button {
-    background-color: #007bff;
+    background-color: var(--theme-color);
     color: #fff;
     border: none;
     padding: 5px 10px;
@@ -83,6 +84,6 @@ export default {
 }
 
 .cart-notification .go-to-cart-button:hover {
-    background-color: #0056b3;
+    background-color: var(--theme-color);
 }
 </style>

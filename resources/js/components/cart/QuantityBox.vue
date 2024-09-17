@@ -19,7 +19,7 @@
     </div>
     <div class="add-to-cart-box" v-else>
         <button class="btn btn-add-cart addcart-button" :disabled="isAddToCartDisabled" @click="changeQuantity(1)">
-            Add
+            Add to cart
             <span class="add-icon">
                 <i class="fa-solid fa-plus"></i>
             </span>
@@ -151,7 +151,7 @@ export default {
                     template: '<CartNotification :show="showNotification" :product="addedProduct" />',
                     mounted() {
                         setTimeout(() => {
-                            //container.innerHTML = '';
+                            container.innerHTML = '';
                         }, 3000);
                     }
                 });

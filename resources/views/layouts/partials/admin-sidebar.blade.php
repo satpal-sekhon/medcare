@@ -122,6 +122,9 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
+                                <a href="{{ route('admin.vendors.new') }}">All Vendors</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.vendors.new') }}">New Registrations</a>
                             </li>
                             <li>

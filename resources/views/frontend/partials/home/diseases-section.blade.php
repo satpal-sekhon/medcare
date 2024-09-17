@@ -22,7 +22,7 @@
       if ($(window).width() <= 767) {
         if (!$('.diseases-section').hasClass('slick-initialized')) {
           $('.diseases-section').slick({
-            slidesToShow: 4,
+            slidesToShow: 6,
             slidesToScroll: 1,
             infinite: true,
             arrows: true, // Show navigation arrows

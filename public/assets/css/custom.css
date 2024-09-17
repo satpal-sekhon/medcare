@@ -54,6 +54,7 @@ body.admin-login {
 }
 .product-label-tag.success-label-tag::before, .product-label-tag.success-label-tag::after{
     border-bottom: solid 15px #198754;
+    display: none!important;
 }
 
 .product-label-tag.danger-label-tag{
@@ -110,7 +111,7 @@ body.admin-login {
     }
 
     .diseases-section .slick-slide {
-        width: 150px!important;
+        width: 110px!important;
     }
 
     .diseases-section .category-item {

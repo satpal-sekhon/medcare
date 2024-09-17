@@ -23,12 +23,14 @@
             <div class="form-group">
                 <input type="file" name="images[]" accept="image/*" class="form-control" id="imagesInput" multiple>
                 <div id="imagesPreview" class="image-preview row">
-                    @foreach($product->images as $image)
-                    <div class="preview-container col-md-3 mt-2">
-                        <img src="{{ asset($image->path) }}" class="preview-img">
-                        <button type="button" class="btn btn-secondary btn-sm px-2 rounded-pill" data-image-id="{{ $image->id }}"><i class="fa fa-trash"></i></button>
-                    </div>
-                    @endforeach
+                    @if ($product->images ?? '')
+                        @foreach($product->images as $image)
+                        <div class="preview-container col-md-3 mt-2">
+                            <img src="{{ asset($image->path) }}" class="preview-img">
+                            <button type="button" class="btn btn-secondary btn-sm px-2 rounded-pill" data-image-id="{{ $image->id }}"><i class="fa fa-trash"></i></button>
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

@@ -71,7 +71,7 @@
                     <div class="col-xl-6">
                         <div class="right-box-contain">
                             {{-- <h6 class="offer-top">30% Off</h6> --}}
-                            <h2 class="name">{{ $product->name }}</h2>
+                            <h2 class="name">{{ $product->name }} - {{ $product->unit }}</h2>
 
                             <div class="chips-container mb-3">
                                 @if($product->product_type=='Generic')
@@ -90,9 +90,14 @@
 
                             @if($product->composition)
                             <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="fw-bold mb-1">Composition</h5>
-                                    <p class="m-0">{!! $product->composition !!}</p>
+                                <div class="card-body d-flex gap-2 align-items-center">
+                                    <div>
+                                        <img src="{{ asset('assets/svg/composition.svg') }}" alt="">
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-1">Composition</h5>
+                                        <p class="m-0">{!! $product->composition !!}</p>
+                                    </div>
                                 </div>
                             </div>
                             @endif
