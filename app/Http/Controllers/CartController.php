@@ -111,6 +111,7 @@ class CartController extends Controller
 
             if ($cart->items) {
                 $cart = json_decode($cart->items, true);
+                session()->put('cart', $cart);
             }
         }
 
