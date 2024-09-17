@@ -2,7 +2,7 @@
     <div class="right-side-summery-box">
         <div class="summery-box-2">
             <div class="summery-header">
-                <h3>Order Summery</h3>
+                <h3>Order Summary</h3>
             </div>
 
             <ul class="summery-contain">

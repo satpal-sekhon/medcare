@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
+use App\Models\Cart;
 use App\Models\State;
-use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -19,10 +19,10 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            
+
             if ($user->hasRole('Customer')) {
                 return redirect()->route('my-account');
-            } else if($user->hasRole('Vendor')){
+            } else if ($user->hasRole('Vendor')) {
                 return redirect()->route('vendor-dashboard');
             } else {
                 return redirect()->route('admin-dashboard');
@@ -234,6 +234,9 @@ class AuthController extends Controller
             ]);
         } else {
             if (Auth::attempt($credentials)) {
+
+                $this->mergeGuestCartToUser();
+
                 $request->session()->regenerate();
 
                 if ($user->hasRole('Customer')) {
@@ -248,6 +251,69 @@ class AuthController extends Controller
             'message' => 'Invalid login credentials',
         ]);
     }
+
+    protected function mergeGuestCartToUser()
+    {
+        // Retrieve the guest cart from the session
+        $guestCart = session()->get('cart', []);
+
+        if (Auth::check() && !empty($guestCart)) {
+            $userId = Auth::id();
+
+            // Retrieve or create a cart for the authenticated user
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+
+            // Decode the existing user cart items
+            $userCartItems = json_decode($userCart->items, true) ?? [];
+            $newCartItems = $guestCart['products'] ?? [];
+
+            // Merge guest cart items into user cart items
+            foreach ($newCartItems as $productId => $item) {
+                if (isset($userCartItems[$productId])) {
+                    // Update quantity if item already exists
+                    $userCartItems['products'][$productId]['quantity'] += $item['quantity'];
+                } else {
+                    // Add new item
+                    $userCartItems['products'][$productId] = $item;
+                }
+            }
+
+            // Calculate totals
+            $cartItems['products'] = $userCartItems['products'];
+            $cartItems['sub_total'] = $this->calculateTotal($userCartItems['products']);
+            $cartItems['total'] = $this->calculateTotal($userCartItems['products']);
+            $cartItems['total_items'] = array_sum(array_column($userCartItems['products'], 'quantity'));
+            $cartItems['applied_coupon'] = $guestCart['applied_coupon'] ?? null;
+
+            // Save the updated cart items to the user's cart
+            $userCart->items = json_encode($cartItems);
+            $userCart->save();
+
+            session()->put('cart', $cartItems);
+        } else if (Auth::check()) {
+            $user = Auth::user();
+            $cart = $user->cart;
+
+            if ($cart->items) {
+                session()->put('cart', json_decode($cart->items, true));
+            }
+        }
+    }
+
+    protected function calculateTotal($items)
+    {
+        $total = 0;
+
+        foreach ($items as $item) {
+            if (isset($item['price']) && isset($item['quantity'])) {
+                $total += $item['price'] * $item['quantity'];
+            }
+        }
+
+        return $total;
+    }
+
+
 
     public function admin_logout(Request $request)
     {

@@ -55,7 +55,7 @@
                                 <td class="price">
                                     <h4 class="table-title text-content">Price</h4>
                                     <h5>
-                                        x{{ formatPrice(item.price) }} 
+                                            {{ formatPrice(item.price) }} 
                                         <del class="text-content">{{ formatPrice(item.mrp) }}</del>
                                     </h5>
                                     <h6 class="theme-color">You Save : {{ formatPrice(item.mrp - item.price) }}</h6>

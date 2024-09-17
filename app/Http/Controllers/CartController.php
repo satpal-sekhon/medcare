@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -77,6 +79,13 @@ class CartController extends Controller
         $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;
 
         // Store the updated cart back in the session
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+            $userCart->items = json_encode($cart);
+            $userCart->save();
+        }
+
         session()->put('cart', $cart);
 
         return response()->json(['success' => true, 'status' => $cart_status, 'cart' => $cart]);
@@ -95,6 +104,16 @@ class CartController extends Controller
     public function getDetails()
     {
         $cart = session()->get('cart', []);
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart = $user->cart;
+
+            if ($cart->items) {
+                $cart = json_decode($cart->items, true);
+            }
+        }
+
         return response()->json(['cart' => $cart]);
     }
 
@@ -120,8 +139,13 @@ class CartController extends Controller
 
         // Handle applied coupons if needed
         $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;
-
-        // Store the updated cart back in the session
+        
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+            $userCart->items = json_encode($cart);
+            $userCart->save();
+        }
         session()->put('cart', $cart);
 
         return response()->json(['success' => 'Item removed from cart!', 'cart' => $cart]);

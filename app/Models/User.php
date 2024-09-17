@@ -62,6 +62,10 @@ class User extends Authenticatable
         return $this->hasOne(Vendor::class);
     }
 
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
+
 
     /**
      * Generate an OTP, send an email for verification, and return the OTP.
