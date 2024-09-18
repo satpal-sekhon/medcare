@@ -38,7 +38,7 @@
     </div>
 
     <div class="resde d-block d-md-none">
-        <div class="alphabet-dropdown">
+        <div class="alphabet-dropdown m-4">
             <select 
                 class="form-control" 
                 :value="selectedAlphabet" 
