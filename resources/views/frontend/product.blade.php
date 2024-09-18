@@ -153,7 +153,7 @@
                                 </div>
                             @endif
 
-                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}" />
+                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}"></quantity-box>
 
                             <div class="buy-box">
                                 <a href="#">
@@ -201,7 +201,7 @@
                             </div>
 
                             <div class="mt-2">
-                                <a href="#" class="d-flex gap-4 align-items-center">
+                                <a href="{{ route('brand.view', $product->brand->slug) }}" class="d-flex gap-4 align-items-center">
                                     <img src="{{ asset($product->brand->image) }}" class="w-60px">
                                     <h4 class="text-dark fw-bold">{{ $product->brand->name }}</h4>
                                 </a>
