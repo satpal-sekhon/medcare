@@ -31,4 +31,42 @@ class Vendor extends Model
             ]
         ];
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (empty($user->user_code)) {
+                $user->user_code = self::generateUserCode();
+            }
+        });
+    }
+
+    /**
+     * Generate the next vendor code.
+     *
+     * @return string
+     */
+    protected static function generateUserCode()
+    {
+        // Define prefix
+        $prefix = 'USR-';
+
+        // Get the last vendor number
+        $lastVendor = self::where('user_code', 'like', $prefix . '%')
+            ->orderBy('user_code', 'desc')
+            ->first();
+
+        // Generate the vendor number
+        $nextNumber = 1;
+
+        if ($lastVendor) {
+            $lastNumber = (int) substr($lastVendor->user_code, strlen($prefix));
+            $nextNumber = $lastNumber + 1;
+        }
+
+        // Format number with leading zeros
+        return $prefix . str_pad($nextNumber, 5, '0', STR_PAD_LEFT);
+    }
 }

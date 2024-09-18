@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('assigned_to')->nullable();
             $table->decimal('sub_total', 10, 2);
             $table->decimal('tax', 10, 2)->nullable();
             $table->decimal('discount', 10, 2)->nullable();
@@ -25,12 +26,15 @@ return new class extends Migration
             $table->string('payment_method', 100)->nullable();
             $table->string('transaction_id')->nullable();
             $table->string('status', 50)->default('Pending');
+            $table->string('payment_status', 50)->default('Pending');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
 
             // Adding indexes
             $table->index('user_id');
+            $table->index('assigned_to');
         });
     }
 

@@ -71,6 +71,45 @@ class User extends Authenticatable
     }
 
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (empty($user->user_code)) {
+                $user->user_code = self::generateUserCode();
+            }
+        });
+    }
+
+    /**
+     * Generate the next user code.
+     *
+     * @return string
+     */
+    protected static function generateUserCode()
+    {
+        // Define prefix
+        $prefix = 'USR-';
+
+        // Get the last user code
+        $lastUser = self::where('user_code', 'like', $prefix . '%')
+            ->orderBy('user_code', 'desc')
+            ->first();
+
+        // Generate the next number
+        $nextNumber = 1;
+
+        if ($lastUser) {
+            $lastNumber = (int) substr($lastUser->user_code, strlen($prefix));
+            $nextNumber = $lastNumber + 1;
+        }
+
+        // Format number with leading zeros
+        return $prefix . str_pad($nextNumber, 5, '0', STR_PAD_LEFT);
+    }
+
+
     /**
      * Generate an OTP, send an email for verification, and return the OTP.
      *

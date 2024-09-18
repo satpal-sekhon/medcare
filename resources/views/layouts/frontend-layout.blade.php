@@ -575,7 +575,7 @@
 
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="footer-title">
-                                <h4>Contact Us</h4>
+                                <h4>Userful Links</h4>
                             </div>
 
                             <div class="footer-contact">
