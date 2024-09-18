@@ -45,6 +45,7 @@ Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name(
 Route::get('/disease/{disease:slug}', [DiseaseController::class, 'show'])->name('disease.view');
 Route::get('/primary-category/{primary_category:slug}', [PrimaryCategoryController::class, 'show'])->name('primary-category.view');
 Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('category.view');
+Route::get('/brand/{brand:slug}', [BrandController::class, 'show'])->name('brand.view');
 
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 Route::get('/pharmacy', [PharmacyController::class, 'index'])->name('pharmacy.index');

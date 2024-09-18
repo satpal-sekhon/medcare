@@ -14,7 +14,7 @@
                         <div class="product-box-3 h-100">
                             <div class="product-header">
                                 <div class="product-image">
-                                    <a href="#">
+                                    <a href="{{ route('brand.view', $brand->slug) }}">
                                         <img src="{{ asset($brand->image ?? 'assets/images/default/brand.png') }}"
                                             class="img-fluid lazyload" alt="{{ $brand->name }}">
                                     </a>
@@ -23,7 +23,7 @@
 
                             <div class="product-footer">
                                 <div class="product-detail">
-                                    <a href="#">
+                                    <a href="{{ route('brand.view', $brand->slug) }}">
                                         <h4 class="text-center">{{ $brand->name }}</h4>
                                     </a>
                                 </div>
