@@ -110,8 +110,8 @@
 
                             <div class="price-rating mt-3">
                                 <h3 class="theme-color price">
-                                    ₹{{ $product->customer_price }}
-                                    <del class="text-content">₹{{ $product->mrp }}</del>
+                                    <span class="main-product-price fs-4 me-1">₹{{ $product->customer_price }}</span>
+                                    <del class="text-content main-product-mrp">₹{{ $product->mrp }}</del>
                                     {{-- <span class="offer theme-color">(8% off)</span> --}}
                                 </h3>
                                 {{-- <div class="product-rating custom-rate">
@@ -143,14 +143,33 @@
                                     </div>
 
                                     <div class="select-package">
-                                        <select class="form-control form-select">
+                                        <select name="variant_id" class="form-control form-select">
                                             <option value="">{{ $product->name }}</option>
                                             @foreach($product->variants as $variant)
-                                                <option value="{{ $variant->id }}">{{ $variant->name }}</option>
+                                                <option value="{{ $variant->id }}" data-variant-price="{{$variant->customer_price}}" data-variant-mrp="{{$variant->mrp}}">{{ $variant->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+
+                                @push('scripts')
+                                    <script>
+                                        $(function(){
+                                            $('[name="variant_id"]').change(function(){
+                                                if($(this).val()){
+                                                    let variant_price = $(this).find('option:selected').attr('data-variant-price');
+                                                    let variant_mrp = $(this).find('option:selected').attr('data-variant-mrp');
+
+                                                    $('.main-product-price').html(`₹${variant_price}`);
+                                                    $('.main-product-mrp').html(`₹${variant_mrp}`);
+                                                } else {
+                                                    $('.main-product-price').html(`₹{{ $product->customer_price }}`);
+                                                    $('.main-product-mrp').html(`₹{{ $product->mrp }}`);
+                                                }
+                                            })
+                                        })
+                                    </script>
+                                @endpush
                             @endif
 
                             <quantity-box variant="product-detail" :product-Id="{{ $product->id }}"></quantity-box>
