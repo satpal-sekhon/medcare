@@ -96,7 +96,7 @@ class PrimaryCategoryController extends Controller
      */
     public function show(PrimaryCategory $primaryCategory)
     {
-        //
+        return view('frontend.primary-category', compact('primaryCategory'));
     }
 
     /**

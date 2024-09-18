@@ -223,7 +223,7 @@
                                     <ul class="category-list">
                                         @foreach ($menuPrimaryCategories as $menuPrimaryCategory)
                                         <li class="onhover-category-list">
-                                            <a href="javascript:void(0)" class="category-name">
+                                            <a href="{{ route('primary-category.view', $menuPrimaryCategory->slug) }}" class="category-name">
                                                 <h6>{{ $menuPrimaryCategory->name }}</h6>
                                                 <i class="fa-solid fa-angle-right"></i>
                                             </a>
