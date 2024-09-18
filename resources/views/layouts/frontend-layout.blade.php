@@ -236,7 +236,7 @@
                                                         <ul>
                                                             @foreach($menuPrimaryCategory->categories->take(8) as $category)
                                                             <li>
-                                                                <a href="#">{{ $category->name }}</a>
+                                                                <a href="{{ route('category.view', $category->slug) }}">{{ $category->name }}</a>
                                                             </li>
                                                             @endforeach
                                                         </ul>
@@ -246,7 +246,7 @@
                                                         <ul>
                                                             @foreach($menuPrimaryCategory->categories->skip(8)->take(8) as $category)
                                                             <li>
-                                                                <a href="#">{{ $category->name }}</a>
+                                                                <a href="{{ route('category.view', $category->slug) }}">{{ $category->name }}</a>
                                                             </li>
                                                             @endforeach
                                                         </ul>
