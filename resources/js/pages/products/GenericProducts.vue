@@ -17,11 +17,13 @@
                 Search
             </button>
         </div>
-        <GenericProductList 
-            :searchQuery="searchQuery" 
-            :currentSearchPage="currentSearchPage"
-            @search-page-change="handleSearchPageChange" 
-        />
+        <div v-if="searchQuery">
+            <GenericProductList 
+                :searchQuery="searchQuery" 
+                :currentSearchPage="currentSearchPage"
+                @search-page-change="handleSearchPageChange" 
+            />
+        </div>
     </div>
 
     <div class="alphabet-container">

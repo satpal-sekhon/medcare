@@ -108,7 +108,7 @@ export default {
                 product_types: 'Generic',
                 page: this.currentPage,
                 per_page: this.perPage,
-                name_starts_with: this.selectedAlphabet ? this.selectedAlphabet.toLowerCase() : '',
+                name_starts_with: this.selectedAlphabet ? this.selectedAlphabet.toLowerCase() : 'a',
                 search: this.searchQuery || '',
             };
 
