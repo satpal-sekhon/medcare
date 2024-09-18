@@ -48,24 +48,12 @@ body.admin-login {
     max-height: 100px;
 }
 
-.main-footer .accordion-content {
-    display: none;
-}
-
-/* Style for the icon */
-.main-footer .accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* Media query for mobile screens */
-@media (max-width: 768px) {
-    .main-footer .accordion-header {
-        cursor: pointer;
+@media (max-width: 767px) {
+    header .header-nav .header-nav-left .category-dropdown.show {
+        overflow-y: scroll;
     }
 }
+
 
 /* Customize product tags */
 .product-label-tag.success-label-tag{

@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="medicine-list ms-4 mt-3">
+    <div class="medicine-list mx-4 mt-3">
         <GenericProductList 
             :selectedAlphabet="selectedAlphabet" 
             :currentPage="currentPage"

@@ -703,9 +703,9 @@
             });
 
             $('.main-footer .footer-title').click(function() {
-                    if ($(window).width() <= 768) {
-                    var content = $(this).next('.footer-contain');
-                    var icon = $(this).find('i');
+                if ($(window).width() <= 768) {
+                    let content = $(this).next('.footer-contain');
+                    let icon = $(this).find('i');
 
                     content.slideToggle();
 

@@ -418,13 +418,16 @@ $(".close-notification").click(function () {
 ==========================*/
 var contentwidth = $(window).width();
 if (contentwidth < "767") {
+    $('.onhover-category-box').removeClass('d-block');
     $(".onhover-category-list .category-name").append('<span class="according-menu">+</span>');
-    $(".category-name").on("click", function () {
+    
+    $(document).on('click', '.category-name', function () {
         $(".category-name")
             .removeClass("active")
             .find("span")
             .replaceWith('<span class="according-menu">+</span>');
         $(".onhover-category-list .onhover-category-box").slideUp("normal");
+
         if ($(this).next().is(":hidden") == true) {
             $(this).addClass("active");
             $(this)
