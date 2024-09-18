@@ -44,6 +44,12 @@ function diseaseName($diseaseId)
 }
 
 
+function diseaseSlug($diseaseId)
+{
+    return \App\Models\Disease::find($diseaseId)->slug ?? '';
+}
+
+
 /**
  * Retrieves the value of a setting by its key.
  *

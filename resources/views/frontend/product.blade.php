@@ -76,11 +76,11 @@
                             <div class="chips-container mb-3">
                                 @if($product->product_type=='Generic')
                                    @foreach ($product->diseases as $disease)
-                                   <a href="#"><div class="chip">{{ diseaseName($disease->disease_id) }}</div></a>
+                                   <a href="{{ route('disease.view', diseaseSlug($disease->disease_id)) }}"><div class="chip">{{ diseaseName($disease->disease_id) }}</div></a>
                                    @endforeach
                                 @else
-                                    <a href="#"><div class="chip">{{ $product->category->name }}</div></a>
-                                    <a href="#"><div class="chip">{{ $product->primaryCategory->name }}</div></a>
+                                    <a href="{{ route('category.view', $product->category->slug) }}"><div class="chip">{{ $product->category->name }}</div></a>
+                                    <a href="{{ route('primary-category.view', $product->primaryCategory->slug) }}"><div class="chip">{{ $product->primaryCategory->name }}</div></a>
                                 @endif
 
                                 @if($product->is_prescription_required)
