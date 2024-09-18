@@ -142,16 +142,23 @@ class ProductController extends Controller
         }
 
         if ($paginate) {
+            // Ensure $perPage is defined and a valid integer
+            $perPage = $perPage > 0 ? $perPage : 15; // Default to 15 if $perPage is not set or invalid
+        
             // Count the total number of products matching the filters
             $total = $query->count();
             $currentPage = max(1, (int) $request->input('page', 1)); // Ensure currentPage is at least 1
+        
+            // Get the products for the current page
             $products = $query->forPage($currentPage, $perPage)->get();
-
+        
+            // Calculate pagination metadata
+            $lastPage = (int) ceil($total / $perPage);
             $pagination = [
                 'total' => $total, // Total number of products
                 'per_page' => $perPage,
                 'current_page' => $currentPage,
-                'last_page' => (int) ceil($total / $perPage),
+                'last_page' => $lastPage,
                 'from' => $total > 0 ? (($currentPage - 1) * $perPage) + 1 : null,
                 'to' => $total > 0 ? min($total, $currentPage * $perPage) : null,
             ];
@@ -159,11 +166,11 @@ class ProductController extends Controller
             $products = $query->get();
             $pagination = null; // No pagination metadata when not paginated
         }
-
+        
         return response()->json([
             'data' => $products,
             'meta' => $pagination,
-        ]);
+        ]);        
     }
 
 

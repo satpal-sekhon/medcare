@@ -111,7 +111,7 @@ class CartController extends Controller
             $user = Auth::user();
             $cart = $user->cart;
 
-            if ($cart->items) {
+            if ($cart->items ?? null) {
                 $cart = json_decode($cart->items, true);
                 session()->put('cart', $cart);
             }

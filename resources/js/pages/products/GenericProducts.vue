@@ -1,20 +1,27 @@
 <template>
-    <div class="search-container">
-        <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="Search for medicines..." 
-            v-model="searchKeyword"
-            @keydown.enter="handleSearch"
-            aria-label="Search for medicines"
+    <div class="search-products-results bg-gray p-4">
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search for medicines..." 
+                v-model="searchKeyword"
+                @keydown.enter="handleSearch"
+                aria-label="Search for medicines"
+            />
+            <button 
+                id="searchButton" 
+                @click="handleSearch"
+                aria-label="Search"
+            >
+                Search
+            </button>
+        </div>
+        <GenericProductList 
+            :searchQuery="searchQuery" 
+            :currentSearchPage="currentSearchPage"
+            @search-page-change="handleSearchPageChange" 
         />
-        <button 
-            id="searchButton" 
-            @click="handleSearch"
-            aria-label="Search"
-        >
-            Search
-        </button>
     </div>
 
     <div class="alphabet-container">
@@ -48,7 +55,6 @@
 
     <div class="medicine-list ms-4 mt-3">
         <GenericProductList 
-            :searchQuery="searchQuery" 
             :selectedAlphabet="selectedAlphabet" 
             :currentPage="currentPage"
             @page-change="handlePageChange" 
@@ -70,12 +76,13 @@ export default {
             searchKeyword: '',
             searchQuery: '',
             currentPage: 1,
+            currentSearchPage: 1,
         };
     },
     methods: {
         handleSearch() {
             this.searchQuery = this.searchKeyword;
-            this.currentPage = 1; // Reset to first page on search
+            this.currentSearchPage = 1; // Reset to first page on search
             this.updateUrl();
         },
         handleAlphabetChange(letter) {
@@ -93,11 +100,17 @@ export default {
             this.currentPage = page;
             this.updateUrl();
         },
+        handleSearchPageChange(page) {
+            if (page < 1 || page > this.totalSearchPages) return;
+            this.currentSearchPage = page;
+            this.updateUrl();
+        },
         updateUrl() {
             const queryParams = new URLSearchParams({
                 letter: this.selectedAlphabet,
                 search: this.searchQuery,
-                page: this.currentPage
+                page: this.currentPage,
+                search_page: this.currentSearchPage
             });
             window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
         },
@@ -106,6 +119,7 @@ export default {
             this.selectedAlphabet = queryParams.get('letter') || 'A';
             this.searchQuery = queryParams.get('search') || '';
             this.currentPage = parseInt(queryParams.get('page'), 10) || 1;
+            this.currentSearchPage = parseInt(queryParams.get('search_page'), 10) || 1;
 
             this.searchKeyword = this.searchQuery;
         }
