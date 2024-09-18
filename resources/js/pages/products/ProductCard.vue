@@ -1,32 +1,33 @@
 <template>
     <div class="product-box-3 h-100">
         <div class="product-header">
-            <div class="d-inline px-3 py-1 text-white" v-if="product.flag && product.flag!=='Casual'" :class="getFlagClass(product.flag)">
+            <div class="d-inline px-3 py-1 text-white" v-if="product.flag && product.flag !== 'Casual'"
+                :class="getFlagClass(product.flag)">
                 <span>{{ product.flag }}</span>
             </div>
 
             <div class="product-image">
-                <a :href="product.link">
-                    <img :src="product.thumbnail" class="img-fluid lazyload" :alt="product.name">
+                <a :href="`/product/${product.slug}`">
+                    <img :src="`/${product.thumbnail}`" class="img-fluid lazyload" :alt="product.name">
+                    <ul class="product-option">
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                            <a :href="`/product/${product.slug}`">
+                                <i data-feather="eye"></i>
+                            </a>
+                        </li>
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                            <a href="#" class="notifi-wishlist">
+                                <i data-feather="heart"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </a>
-                <ul class="product-option">
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                        <a :href="`/product/${product.slug}`">
-                            <i data-feather="eye"></i>
-                        </a>
-                    </li>
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                        <a href="#" class="notifi-wishlist">
-                            <i data-feather="heart"></i>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="product-footer">
             <div class="product-detail">
                 <span class="span-name">{{ product.category.name }}</span>
-                <a :href="product.link">
+                <a :href="`/product/${product.slug}`">
                     <h5 class="name">{{ product.name }}</h5>
                 </a>
                 <h6 class="unit">{{ product.unit }}</h6>
@@ -56,13 +57,13 @@ export default {
     },
     methods: {
         getFlagClass(flag) {
-            switch(flag) {
+            switch (flag) {
                 case 'On Sale':
-                return 'bg-danger';
+                    return 'bg-danger';
                 case 'Trending':
-                return 'bg-success';
+                    return 'bg-success';
                 default:
-                return '';
+                    return '';
             }
         }
     },

@@ -96,7 +96,7 @@ class DiseaseController extends Controller
      */
     public function show(Disease $disease)
     {
-        //
+        return view('frontend.disease', compact('disease'));
     }
 
     /**

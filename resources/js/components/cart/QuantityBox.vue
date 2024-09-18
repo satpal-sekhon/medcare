@@ -84,9 +84,11 @@ export default {
             this.updateCart();
         },
         handleCartUpdate(updatedData) {
-            if (updatedData.products && updatedData.products[this.productId]) {
-                this.quantity = updatedData.products[this.productId].quantity;
-                this.tempQuantity = this.quantity;
+            if(updatedData){
+                if (updatedData.products && updatedData.products[this.productId]) {
+                    this.quantity = updatedData.products[this.productId].quantity;
+                    this.tempQuantity = this.quantity;
+                }
             }
         },
         handleCartQuantity(productId, quantity = 0) {

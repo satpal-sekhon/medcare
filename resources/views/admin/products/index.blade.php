@@ -207,7 +207,7 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let viewUrl = `{{ route('products.view', ':id') }}`.replace(':id', row.id);
+                                let viewUrl = `{{ route('products.view', ':slug') }}`.replace(':slug', row.slug);
                                 let editUrl = `{{ route('products.edit', ':id') }}`.replace(':id', row.id);
                                 let deleteUrl = `{{ route('products.destroy', ':id') }}`.replace( ':id', row.id);
 

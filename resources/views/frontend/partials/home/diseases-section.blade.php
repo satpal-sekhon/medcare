@@ -2,7 +2,7 @@
 <div class="product-wrapper no-arrow mt-3 overflow-hidden diseases-section">
     @foreach ($diseases as $disease)
     <div style="width: 162px;">
-        <a href="#" class="category-box category-dark">
+        <a href="{{ route('diseases.view', $disease->slug) }}" class="category-box category-dark">
             <div>
                 <img src="{{ asset($disease->image ?? 'assets/images/default/disease.png') }}" class="lazyload"
                     alt="{{ $disease->name }}">

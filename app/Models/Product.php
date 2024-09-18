@@ -36,6 +36,11 @@ class Product extends Model
         return $this->hasMany(ProductDisease::class);
     }
 
+    public function product_diseases()
+    {
+        return $this->hasMany(ProductDisease::class, 'product_id');
+    }
+
     public function diseaseIds()
     {
         return $this->diseases->pluck('disease_id')->toArray();

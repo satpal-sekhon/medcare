@@ -9,6 +9,7 @@ import QuantityBox from './components/cart/QuantityBox.vue';
 import PharmacyShops from './pages/PharmacyShops.vue';
 import Cart from './pages/Cart.vue';
 import Checkout from './pages/checkout/Checkout.vue';
+import CategoryProducts from './pages/products/CategoryProducts.vue';
 
 // Create Vue application instance
 const app = createApp({});
@@ -18,6 +19,7 @@ app.component('generic-products', GenericProducts);
 app.component('pharmacy-shops', PharmacyShops);
 
 app.component('products', Products);
+app.component('category-products', CategoryProducts);
 app.component('mini-cart', MiniCart);
 app.component('quantity-box', QuantityBox);
 app.component('cart', Cart);

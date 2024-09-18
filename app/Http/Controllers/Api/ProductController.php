@@ -103,10 +103,11 @@ class ProductController extends Controller
             ->with([
                 'brand:id,name,slug',
                 'category:id,name,slug',
-                'primaryCategory:id,name,slug'
+                'primaryCategory:id,name,slug',
+                'product_diseases'
             ])
             ->orderBy($sortColumn, $sortDirection);
-
+        
         // Apply filters
         if (!empty($brandIds)) {
             $query->whereIn('brand_id', $brandIds);
@@ -125,8 +126,8 @@ class ProductController extends Controller
         }
 
         if (!empty($diseaseIds)) {
-            $query->whereHas('diseases', function ($q) use ($diseaseIds) {
-                $q->whereIn('id', $diseaseIds);
+            $query->whereHas('product_diseases', function ($query) use ($diseaseIds) {
+                $query->whereIn('disease_id', $diseaseIds);
             });
         }
 
