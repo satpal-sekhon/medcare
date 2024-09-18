@@ -490,8 +490,9 @@
                         </div>
 
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="footer-title">
+                            <div class="footer-title d-flex justify-content-between">
                                 <h4>Categories</h4>
+                                <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
@@ -519,8 +520,9 @@
                         </div>
 
                         <div class="col-xl col-lg-2 col-sm-3">
-                            <div class="footer-title">
+                            <div class="footer-title d-flex justify-content-between">
                                 <h4>Brands</h4>
+                                <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
@@ -545,8 +547,9 @@
                         </div>
 
                         <div class="col-xl-2 col-sm-3">
-                            <div class="footer-title">
+                            <div class="footer-title d-flex justify-content-between">
                                 <h4>Diseases</h4>
+                                <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
@@ -574,32 +577,31 @@
                         </div>
 
                         <div class="col-xl-3 col-lg-4 col-sm-6">
-                            <div class="footer-title">
-                                <h4>Userful Links</h4>
+                            <div class="footer-title d-flex justify-content-between">
+                                <h4>Diseases</h4>
+                                <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
-                            <div class="footer-contact">
+                            <div class="footer-contain">
                                 <ul>
                                     <li>
-                                        <div class="footer-number">
-                                            <i data-feather="phone"></i>
-                                            <div class="contact-number">
-                                                <h6 class="text-content">Hotline 24/7 :</h6>
-                                                <h5>+91 888 104 2340</h5>
-                                            </div>
-                                        </div>
+                                        <a href="#" class="text-content">Disease 1</a>
                                     </li>
-
                                     <li>
-                                        <div class="footer-number">
-                                            <i data-feather="mail"></i>
-                                            <div class="contact-number">
-                                                <h6 class="text-content">Email Address :</h6>
-                                                <h5>Mediacllife@hotmail.com</h5>
-                                            </div>
-                                        </div>
+                                        <a href="#" class="text-content">Disease 2</a>
                                     </li>
-
+                                    <li>
+                                        <a href="#" class="text-content">Disease 3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-content">Disease 4</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-content">Disease 5</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-content">Disease 6</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -698,6 +700,21 @@
                 autoplay: true,
                 autoplaySpeed: 2500,
                 arrows: false,
+            });
+
+            $('.main-footer .footer-title').click(function() {
+                    if ($(window).width() <= 768) {
+                    var content = $(this).next('.footer-contain');
+                    var icon = $(this).find('i');
+
+                    content.slideToggle();
+
+                    if (icon.hasClass('fa-chevron-down')) {
+                        icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                    } else {
+                        icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                    }
+                }
             });
         });
     </script>
