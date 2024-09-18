@@ -37,8 +37,8 @@ class Vendor extends Model
         parent::boot();
 
         static::creating(function ($user) {
-            if (empty($user->user_code)) {
-                $user->user_code = self::generateUserCode();
+            if (empty($user->vendor_code)) {
+                $user->vendor_code = self::generateUserCode();
             }
         });
     }
@@ -51,18 +51,18 @@ class Vendor extends Model
     protected static function generateUserCode()
     {
         // Define prefix
-        $prefix = 'USR-';
+        $prefix = 'VNDR-';
 
         // Get the last vendor number
-        $lastVendor = self::where('user_code', 'like', $prefix . '%')
-            ->orderBy('user_code', 'desc')
+        $lastVendor = self::where('vendor_code', 'like', $prefix . '%')
+            ->orderBy('vendor_code', 'desc')
             ->first();
 
         // Generate the vendor number
         $nextNumber = 1;
 
         if ($lastVendor) {
-            $lastNumber = (int) substr($lastVendor->user_code, strlen($prefix));
+            $lastNumber = (int) substr($lastVendor->vendor_code, strlen($prefix));
             $nextNumber = $lastNumber + 1;
         }
 

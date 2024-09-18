@@ -148,6 +148,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
 
     // Vendor routes
     Route::resource('vendors', VendorController::class);
+    Route::get('/all-vendors', [VendorController::class, 'all_vendors_index'])->name('admin.vendors.all');
     Route::get('/new-vendors', [VendorController::class, 'new_vendors_index'])->name('admin.vendors.new');
     Route::get('/vendors', [VendorController::class, 'admin_index'])->name('admin.vendors.index');
     Route::get('/inactive-vendors', [VendorController::class, 'inactive_admin_index'])->name('admin.vendors.inactive');

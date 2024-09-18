@@ -102,8 +102,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('vendors.edit', ':id') }}`.replace(':id', row.vendor.id);
-                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.vendor.id);
+                                let editUrl = `{{ route('vendors.edit', ':id') }}`.replace(':id', row.vendor?.id);
+                                let deleteUrl = `{{ route('vendors.destroy', ':id') }}`.replace(':id', row.vendor?.id);
                     
                                 return `
                                 <ul>
