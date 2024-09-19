@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('assigned_to')->nullable();
+            $table->string('order_number')->unique();
             $table->string('name', 50);
             $table->string('phone_number', 12);
             $table->string('email', 100);

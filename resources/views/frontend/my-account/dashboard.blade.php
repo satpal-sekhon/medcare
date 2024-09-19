@@ -38,7 +38,7 @@
                     <img src="{{ asset('assets/svg/pending.svg') }}" class="lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Pending Order</h5>
-                        <h3>254</h3>
+                        <h3>{{ $totalOrders }}</h3>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <img src="{{ asset('assets/svg/wishlist.svg') }}" class="lazyload" alt="">
                     <div class="total-detail">
                         <h5>Total Wishlist</h5>
-                        <h3>32158</h3>
+                        <h3>0</h3>
                     </div>
                 </div>
             </div>

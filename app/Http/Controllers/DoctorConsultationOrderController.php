@@ -80,7 +80,7 @@ class DoctorConsultationOrderController extends Controller
         $doctorType = DoctorType::select('name')->find($request->input('doctor_type'))->name ?? '';
         $doctor = Doctor::select('name', 'qualification', 'fee', 'experience', 'image')->find($request->input('doctor_id'));
 
-        try {
+       // try {
             DoctorConsultationOrder::create([
                 'doctor_type_id' => $request->input('doctor_type'),
                 'doctor_id' => $request->input('doctor_id'),
@@ -113,10 +113,10 @@ class DoctorConsultationOrderController extends Controller
             }
     
             return redirect()->back()->with('success', 'Doctor consultation booked successfully!');
-        } catch (\Exception $e) {    
+        /* } catch (\Exception $e) {    
             // Redirect back with an error message
             return redirect()->back()->with('error', 'Something went wrong!');
-        }
+        } */
     }
 
     /**

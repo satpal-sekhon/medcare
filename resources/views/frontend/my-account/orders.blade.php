@@ -38,81 +38,59 @@
 
             <div class="tab-content custom-tab">
                 <div class="tab-pane fade show active" id="products" role="tabpanel">
-                    <div class="p-md-4">
-                        <x-warning-message message="You don't have any products order yet"></x-warning-message>
-                    </div>
-
-                    {{-- <div class="order-container pt-4">
-                        <div class="order-icon">
-                            <i data-feather="box"></i>
+                    @forelse ($orders as $order)
+                        <div class="order-container pt-4">
+                            <div class="order-icon">
+                                <i data-feather="box"></i>
+                            </div>
+                            
+                            <div class="order-detail">
+                                <h4>#{{ $order->order_number }} <span>{{ $order->status }}</span></h4>
+                                <h6 class="text-content">Product is Under Process & It Will be Delivered to you on Time.</h6>
+                            </div>
                         </div>
 
-                        <div class="order-detail">
-                            <h4>Delivers <span>Pending</span></h4>
-                            <h6 class="text-content">Product is Under Process & It Will be Delivered to you on Time. &
-                                Product is Under Process & It Will be Delivered to you on Time.</h6>
+                        @foreach($order->items as $item)
+                            <div class="product-order-detail">
+                                <a href="#" class="order-image w-120px">
+                                    <img src="{{ asset($item->thumbnail) }}" class="lazyload w-120px" alt="">
+                                </a>
+
+                                <div class="order-wrap">
+                                    <a href="#">
+                                        <h3>{{ $item->name }}</h3>
+                                    </a>
+                                    {{-- <p class="text-content">Use with Care, Product Descrption & Short Details</p> --}}
+                                    <ul class="product-size">
+                                        <li>
+                                            <div class="size-box">
+                                                <h6 class="text-content">Price : </h6>
+                                                <h5>₹{{ $item->price }}</h5>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="size-box">
+                                                <h6 class="text-content">Brand : </h6>
+                                                <h5>{{ $item->brand_name }}</h5>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="size-box">
+                                                <h6 class="text-content">Quantity : </h6>
+                                                <h5>{{ $item->quantity }}</h5>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endforeach
+                        @empty
+                        <div class="p-md-4">
+                            <x-warning-message message="You don't have any products order yet"></x-warning-message>
                         </div>
-                    </div>
-
-                    <div class="product-order-detail">
-                        <a href="#" class="order-image">
-                            <img src="{{ asset('assets/images/product/1.png') }}" class="lazyload" alt="">
-                        </a>
-
-                        <div class="order-wrap">
-                            <a href="#">
-                                <h3>Product 1 Name</h3>
-                            </a>
-                            <p class="text-content">Use with Care, Product Descrption & Short Details</p>
-                            <ul class="product-size">
-                                <li>
-                                    <div class="size-box">
-                                        <h6 class="text-content">Price : </h6>
-                                        <h5>₹20.68</h5>
-                                    </div>
-                                </li>
-
-                                <!-- <li>
-                                    <div class="size-box">
-                                        <h6 class="text-content">Rate : </h6>
-                                        <div class="product-rating ms-2">
-                                            <ul class="rating">
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star"></i>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li> -->
-
-                                <li>
-                                    <div class="size-box">
-                                        <h6 class="text-content">Sold By : </h6>
-                                        <h5>Seller Name</h5>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="size-box">
-                                        <h6 class="text-content">Quantity : </h6>
-                                        <h5>250 G</h5>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> --}}
+                    @endforelse
 
                 </div>
 
@@ -124,7 +102,7 @@
                                 <li>
                                     <div class="size-box">
                                         <h6 class="text-content">Order ID:</h6>
-                                        <h5>#ODR-101{{ $order->id }}</h5>
+                                        <h5>#{{ $order->order_number }}</h5>
                                     </div>
                                 </li>
                                 <li>
@@ -228,6 +206,10 @@
                         </a>
 
                         <div class="order-wrap">
+                            <a href="javascript:void(0)">
+                                <h5 class="fw-bold">#{{ $order->order_number }}</h5>
+                            </a>
+
                             <a href="{{ route('doctors.consult', $order->doctor_id ?? '0') }}">
                                 <h3>
                                     {{ $order->doctor_name }} 

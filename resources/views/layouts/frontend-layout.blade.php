@@ -491,7 +491,7 @@
 
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Categories</h4>
+                                <h4>Primary Categories</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
@@ -521,7 +521,7 @@
 
                         <div class="col-xl col-lg-2 col-sm-3">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Brands</h4>
+                                <h4>Categories</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
@@ -548,7 +548,7 @@
 
                         <div class="col-xl-2 col-sm-3">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Diseases</h4>
+                                <h4>Brands</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
