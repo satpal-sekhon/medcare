@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\State;
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -41,6 +42,17 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.users.create');
+    }
+
+    public function sendNotification(Request $request){
+        $user = User::find($request->user_id);
+
+        $user->notify(new UserNotification($request->message));
+
+        return response()->json([
+            'success' => true,
+            'message' => $request->message
+        ]);
     }
 
     /**

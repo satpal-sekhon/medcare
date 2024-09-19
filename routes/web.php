@@ -17,6 +17,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LabPackageController;
 use App\Http\Controllers\LabPackageOrderController;
 use App\Http\Controllers\LabTestController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
@@ -69,6 +70,7 @@ Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
 
 Route::resources([
     '/wishlist' => WishlistController::class,
