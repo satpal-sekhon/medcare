@@ -110,7 +110,7 @@
                                 <a href="{{ route('admin.users.index') }}">Manage Users</a>
                             </li>
                             <li>
-                                <a href="#">Suspended Users</a>
+                                <a href="{{ route('admin.users.suspended') }}">Suspended Users</a>
                             </li>
                         </ul>
                     </li>

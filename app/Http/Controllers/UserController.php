@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\State;
 use App\Models\User;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -22,12 +23,36 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function suspended_users(){
+        return view('admin.users.suspended');
+    }
+
+    public function user_orders(User $user)
+    {
+        $totalOrdersCount = $user->orders()->count();
+        $quickOrdersCount = $user->quickOrders()->count();
+        $doctorConsultationOrdersCount = $user->doctorConsultationOrders()->count();
+        $labPackageOrdersCount = $user->labPackageOrders()->count();
+
+        return view('admin.users.orders', compact('user', 'totalOrdersCount', 'quickOrdersCount', 'doctorConsultationOrdersCount', 'labPackageOrdersCount'));
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         return view('admin.users.create');
+    }
+
+    public function sendNotification(Request $request){
+        $user = User::find($request->user_id);
+
+        $user->notify(new UserNotification($request->message));
+
+        return response()->json([
+            'success' => true,
+            'message' => $request->message
+        ]);
     }
 
     /**
@@ -66,7 +91,7 @@ class UserController extends Controller
     {
         $columns = ['name', 'email', 'phone_number', 'status'];
 
-        $query = User::query();
+        $query = User::query()->withCount('orders','labPackageOrders', 'quickOrders', 'doctorConsultationOrders');
 
         // Filter by role if specified
         if ($request->has('role') && !empty($request->role)) {
@@ -97,6 +122,12 @@ class UserController extends Controller
         
             // Apply the status filter
             $query->where('status', $status);
+        }
+
+
+        if ($request->has('status_exclude')) {
+            $status = $request->input('status_exclude');
+            $query->where('status', '!=', $status);
         }
 
         // Handle search filtering

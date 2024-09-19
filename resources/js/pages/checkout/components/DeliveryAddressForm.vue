@@ -53,7 +53,7 @@
                 <!-- Pin Code -->
                 <div class="col-md-6 mb-2">
                     <label for="pinCode">Pin Code</label>
-                    <input type="text" id="pinCode" v-model="form.pinCode" class="form-control"
+                    <input type="number" id="pinCode" v-model="form.pinCode" class="form-control"
                         :class="{ 'is-invalid': errors.pinCode }" />
                     <div v-if="errors.pinCode" class="invalid-feedback">
                         {{ errors.pinCode }}

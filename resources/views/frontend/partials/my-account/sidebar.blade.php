@@ -35,6 +35,17 @@
                 DashBoard
             </a>
         </li>
+        <li class="nav-item d-flex">
+            <a href="{{ route('my-account.notifications') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.notifications')])>
+                <i data-feather="bell"></i>
+                Notifications
+
+                @if (auth()->user()->unreadNotifications()->count() > 0)
+                    <span class="badge bg-danger position-absolute end-0 top-50 translate-middle">{{ auth()->user()->unreadNotifications()->count() }}</span>
+                @endif
+            </a>
+
+        </li>
         <li class="nav-item">
             <a href="{{ route('my-account.orders') }}" @class(["nav-link", 'active' => request()->routeIs('my-account.orders')])>
                 <i data-feather="shopping-bag"></i>

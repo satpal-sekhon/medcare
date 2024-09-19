@@ -32,10 +32,20 @@ class DoctorConsultationOrderController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('order_number', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
                   ->orWhere('phone_number', 'like', "%{$search}%");
             });
         }
+
+        
+        if($request->has('user_id')){
+            $user_id = $request->user_id;
+            $query->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            });
+        }
+        
 
         $totalRecords = $query->count();
         $filteredRecords = $query->count();

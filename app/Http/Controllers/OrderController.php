@@ -33,7 +33,15 @@ class OrderController extends Controller
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
-                $q->where('shipping_address', 'like', "%{$search}%");
+                $q->where('shipping_address', 'like', "%{$search}%")
+                  ->orWhere('order_number', 'like', "%{$search}%");
+            });
+        }
+
+        if($request->has('user_id')){
+            $user_id = $request->user_id;
+            $query->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
             });
         }
     
@@ -82,7 +90,8 @@ class OrderController extends Controller
             'payment_method' => $request->selectedPaymentMethod,
             'sub_total' => $cart['sub_total'],
             'total' => $cart['total'],
-            'coupon_code' => $cart['applied_coupon'],
+            'discount' => $cart['discount_amount'] ?? null,
+            'coupon_code' => $cart['applied_coupon'] ?? '',
         ]);
 
         $orderItems = $cart['products'];
@@ -151,7 +160,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('admin.orders.edit-product-order', compact('order'));
     }
 
     /**
@@ -159,7 +168,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->status = $request->status;
+        $order->payment_status = $request->payment_status;
+        $order->save();
+
+        return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully!');
     }
 
     /**

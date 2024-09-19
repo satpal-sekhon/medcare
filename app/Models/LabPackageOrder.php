@@ -43,7 +43,7 @@ class LabPackageOrder extends Model
     protected static function generateOrderNumber()
     {
         // Define prefix
-        $prefix = 'QKODR-';
+        $prefix = 'LPODR-';
 
         // Get the last order number
         $lastOrder = self::where('order_number', 'like', $prefix . '%')

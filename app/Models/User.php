@@ -58,15 +58,39 @@ class User extends Authenticatable
         ];
     }
 
-    public function vendor(){
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function labPackageOrders()
+    {
+        return $this->hasMany(LabPackageOrder::class);
+    }
+
+    public function quickOrders()
+    {
+        return $this->hasMany(QuickOrder::class);
+    }
+
+    public function doctorConsultationOrders()
+    {
+        return $this->hasMany(DoctorConsultationOrder::class);
+    }
+
+
+    public function vendor()
+    {
         return $this->hasOne(Vendor::class);
     }
 
-    public function cart(){
+    public function cart()
+    {
         return $this->hasOne(Cart::class);
     }
 
-    public function addresses(){
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
     }
 
@@ -131,7 +155,7 @@ class User extends Authenticatable
 
         // Try sending the OTP email
         //try {
-            Mail::to($email)->send(new VerifyEmail($data));
+        Mail::to($email)->send(new VerifyEmail($data));
         /* } catch (\Exception $e) {
             throw new \Exception('Invalid email or failed to send email. Please try again.');
         } */

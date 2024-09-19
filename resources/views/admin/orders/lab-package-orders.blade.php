@@ -20,6 +20,8 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>Package Name</th>
+                                        <th>Amount</th>
                                         <th>Instructions</th>
                                         <th>Option</th>
                                     </tr>
@@ -50,7 +52,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('quick-orders.get') }}",
+                        url: "{{ route('lab-package-orders.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -86,11 +88,22 @@
                             name: 'phone_number'
                         },
                         {
+                            data: 'package_name',
+                            name: 'package_name'
+                        },
+                        {
+                            data: 'package_amount',
+                            name: 'package_amount',
+                            render: function(data, type, row, meta) {
+                                return formatCurrency(row.package_amount);
+                            }
+                        },
+                        {
                             data: 'instructions',
                             name: 'instructions',
                             orderable: false,
                             render: function(data, type, row) {
-                                return nl2br(row.instructions)
+                                return nl2br(row.instructions) || `N/A`
                             }
                         },
                         {
@@ -98,12 +111,12 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let deleteUrl = `{{ route('quick-orders.destroy', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('lab-package-orders.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="quick order" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="lab package order" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>

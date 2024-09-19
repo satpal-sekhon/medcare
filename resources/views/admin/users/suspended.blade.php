@@ -6,7 +6,7 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Orders</h5>
+                        <h5>Suspended Users</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
@@ -16,12 +16,11 @@
                             <table class="table theme-table">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer Name</th>
+                                        <th>#</th>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
-                                        <th>Address</th>
-                                        <th>Items</th>
                                         <th>Status</th>
                                         <th>Option</th>
                                     </tr>
@@ -39,81 +38,63 @@
 
     @push('scripts')
         <script>
-            function nl2br(str) {
-                if(!str){
-                    return ``;
-                }
-
-                return str.replace(/\n/g, '<br>');
-            }
-
             $(document).ready(function() {
                 window.table = $('table').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('orders.get') }}",
+                        url: "{{ route('users.get') }}",
                         type: 'POST',
                         data: {
-                            _token: "{{ csrf_token() }}"
+                            _token: "{{ csrf_token() }}",
+                            role: "Customer",
+                            status: "Suspended"
                         }
                     },
                     columns: [{
                             data: null,
                             name: 'id',
                             render: function(data, type, row, meta) {
-                                let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
-
-                                return `<a href="${editUrl}">#${row.order_number}</a>`;
+                                return meta.row + 1;
                             }
+                        },
+                        {
+                            data: 'user_code',
+                            name: 'user_code'
                         },
                         {
                             data: 'name',
-                            name: 'name',
-                            render: function(data, type, row) {
-                                let userBadge = ``;
-
-                                if(!row.user_id){
-                                    userBadge = `<span class="badge badge-warning">Guest</span>`;
-                                }
-
-                                return `${userBadge} ${JSON.parse(row.shipping_address).customerName}`;
-                            }
+                            name: 'name'
                         },
                         {
                             data: 'email',
-                            name: 'email',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).email}`;
-                            }
+                            name: 'email'
                         },
                         {
                             data: 'phone_number',
-                            name: 'phone_number',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).phone}`;
-                            }
+                            name: 'phone_number'
                         },
                         {
-                            data: 'address',
-                            name: 'address',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).addressLine1}`;
-                            }
-                        },
-                        {
-                            data: 'order_items',
-                            name: 'order_items',
-                            render: function(data, type, row) {
-                                return `${row.total_quantity}`;
-                            }
-                        },
-                        {
-                            data: 'status',
+                            data: null,
                             name: 'status',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                return `${row.status}`;
+                            render: function(data, type, row, meta) {
+                                let badgeClass = '';
+
+                                switch (row.status) {
+                                    case 'Active':
+                                        badgeClass = 'badge bg-success';
+                                        break;
+                                    case 'Inactive':
+                                        badgeClass = 'badge bg-warning';
+                                        break;
+                                    case 'Suspended':
+                                        badgeClass = 'badge bg-danger';
+                                        break;
+                                    default:
+                                        badgeClass = 'badge bg-light';
+                                }
+
+                                return `<span class="${badgeClass}">${row.status}</span>`;
                             }
                         },
                         {
@@ -121,8 +102,8 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('orders.destroy', ':id') }}`.replace(':id', row.id);
+                                let editUrl = `{{ route('users.edit', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('users.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
@@ -132,7 +113,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="order" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="user" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>
@@ -140,8 +121,7 @@
                             `;
                             }
                         }
-                    ],
-                    order: [[0, 'desc']]
+                    ]
                 });
             });
         </script>
