@@ -10,6 +10,7 @@ import PharmacyShops from './pages/PharmacyShops.vue';
 import Cart from './pages/Cart.vue';
 import Checkout from './pages/checkout/Checkout.vue';
 import CategoryProducts from './pages/products/CategoryProducts.vue';
+import MediaLibrary from './pages/media/MediaLibrary.vue';
 
 // Create Vue application instance
 const app = createApp({});
@@ -24,6 +25,8 @@ app.component('mini-cart', MiniCart);
 app.component('quantity-box', QuantityBox);
 app.component('cart', Cart);
 app.component('checkout', Checkout);
+
+app.component('media-library', MediaLibrary);
 
 // Mount Vue instance to a DOM element
 app.mount('#vue-components');

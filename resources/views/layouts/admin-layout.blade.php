@@ -31,6 +31,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/css/custom.css') }}">
 
     @stack('styles')
+
+    @vite('resources/js/app.js')
 </head>
 
 <body>

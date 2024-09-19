@@ -213,6 +213,13 @@
                             </li>
                         </ul>
                     </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.media.index') }}">
+                            <i class="ri-gallery-line"></i>
+                            <span>Media</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">

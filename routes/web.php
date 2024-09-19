@@ -17,6 +17,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LabPackageController;
 use App\Http\Controllers\LabPackageOrderController;
 use App\Http\Controllers\LabTestController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmacyController;
@@ -182,6 +183,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('lab-tests', LabTestController::class);
     Route::get('/lab-tests', [LabTestController::class, 'admin_index'])->name('admin.lab-tests.index');
     Route::post('/lab-tests/get', [LabTestController::class, 'get'])->name('lab-tests.get');
+    Route::resource('lab-tests', LabTestController::class);
+    Route::get('/lab-tests', [LabTestController::class, 'admin_index'])->name('admin.lab-tests.index');
+    Route::post('/lab-tests/get', [LabTestController::class, 'get'])->name('lab-tests.get');
 
     // Lab packages routes
     Route::resource('lab-packages', LabPackageController::class);
@@ -207,6 +211,10 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('doctor-consultations', DoctorConsultationOrderController::class);
     Route::get('/doctor-consultations', [DoctorConsultationOrderController::class, 'admin_index'])->name('admin.doctor-consultations.index');
     Route::post('/doctor-consultations/get', [DoctorConsultationOrderController::class, 'get'])->name('doctor-consultations.get');
+
+    /* Media routes */
+    Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');
+    Route::get('/get-media', [MediaController::class, 'get'])->name('admin.media.get');
 
     /* Setting routes */
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');
