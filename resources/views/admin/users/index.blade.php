@@ -27,6 +27,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>User ID</th>
                                         <th>User Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
@@ -65,6 +66,10 @@
                             render: function(data, type, row, meta) {
                                 return meta.row + 1;
                             }
+                        },
+                        {
+                            data: 'user_code',
+                            name: 'user_code'
                         },
                         {
                             data: 'name',
