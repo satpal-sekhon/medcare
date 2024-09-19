@@ -26,6 +26,9 @@ class CheckoutController extends Controller
 
         $order = Order::with('items')->find($placed_order_id);
 
+        if(!$order){
+            return redirect()->route('home');
+        }
         return view('frontend.order-success', compact('order'));
     }
 }

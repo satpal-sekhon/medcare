@@ -16,7 +16,7 @@
                             <table class="table theme-table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Order ID</th>
                                         <th>Customer Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
@@ -62,7 +62,9 @@
                             data: null,
                             name: 'id',
                             render: function(data, type, row, meta) {
-                                return `#${row.order_number}`;
+                                let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
+
+                                return `<a href="${editUrl}">#${row.order_number}</a>`;
                             }
                         },
                         {

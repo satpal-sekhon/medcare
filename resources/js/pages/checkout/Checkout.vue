@@ -135,9 +135,9 @@ export default {
                 if (response.data.success && response.data.success === true) {
                     window.location = '/order-success';
                 }
-
             } catch (error) {
                 console.error('Failed to place order:', error.response?.data || error.message);
+                this.isSubmitting = false;
             }
         },
         setStepState(index) {

@@ -1,5 +1,5 @@
 @extends('layouts.frontend-layout')
-@section('title', 'Checkout')
+@section('title', 'Order Completed')
 
 @section('content')
 <section class="breadcrumb-section pt-0">
@@ -64,7 +64,7 @@
                         <div class="order-contain">
                             <h3 class="theme-color">Order Success</h3>
                             <h5 class="text-content">Payment Is Successfully And Your Order Is On The Way</h5>
-                            <h6>Order ID: #{{ $order->order_number }}</h6>
+                            <h6>Order ID: <strong>#{{ $order->order_number }}</strong></h6>
                         </div>
                     </div>
                 </div>
@@ -136,9 +136,23 @@
 
                             <ul class="summery-contain">
                                 <li>
-                                    <h4>Coupon Discount</h4>
-                                    <h4 class="price text-danger">-</h4>
+                                    <h4>Subtotal</h4>
+                                    <h4 class="price">₹{{ $order->sub_total }}</h4>
                                 </li>
+
+                                @if($order->coupon_code)
+                                <li>
+                                    <h4>Coupon Discount</h4>
+                                    <h4 class="price">{{ $order->coupon_code }}</h4>
+                                </li>
+                                @endif
+
+                                @if($order->discount)
+                                <li>
+                                    <h4>Discount</h4>
+                                    <h4 class="price text-danger">(-) ₹{{ $order->discount }}</h4>
+                                </li>
+                                @endif
                             </ul>
 
                             <ul class="summery-total">

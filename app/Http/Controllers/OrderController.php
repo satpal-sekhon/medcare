@@ -90,7 +90,8 @@ class OrderController extends Controller
             'payment_method' => $request->selectedPaymentMethod,
             'sub_total' => $cart['sub_total'],
             'total' => $cart['total'],
-            'coupon_code' => $cart['applied_coupon'],
+            'discount' => $cart['discount_amount'] ?? null,
+            'coupon_code' => $cart['applied_coupon'] ?? '',
         ]);
 
         $orderItems = $cart['products'];

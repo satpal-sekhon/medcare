@@ -41,8 +41,9 @@
             columns: [{
                     data: null,
                     name: 'id',
-                    render: function(data, type, row, meta) {
-                        return `#${row.order_number}`;
+                    render: function(data, type, row) {
+                        let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
+                        return `<a href="${editUrl}">#${row.order_number}</a>`;
                     }
                 },
                 {
@@ -79,12 +80,17 @@
                     name: 'actions',
                     orderable: false,
                     render: function(data, type, row) {
-                        let deleteUrl = `{{ route('orders.destroy', ':id') }}`.replace(':id',
-                            row.id);
+                        let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
+                        let deleteUrl = `{{ route('orders.destroy', ':id') }}`.replace(':id', row.id);
 
                         return `
                         <ul>
                             <li>
+                                <li>
+                                    <a href="${editUrl}">
+                                        <i class="ri-pencil-line"></i>
+                                    </a>
+                                </li>
                                 <button class="btn p-0 fs-6 delete-btn" data-source="order" data-endpoint="${deleteUrl}">
                                     <i class="ri-delete-bin-line"></i>
                                 </button>

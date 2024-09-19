@@ -79,6 +79,18 @@
                             <th colspan="3" class="text-end">Sub Total</th>
                             <th>₹{{ $order->sub_total }}</th>
                         </tr>
+                        @if ($order->coupon_code)
+                        <tr>
+                            <th colspan="3" class="text-end">Applied Coupon</th>
+                            <th>{{ $order->coupon_code }}</th>
+                        </tr>
+                        @endif
+                        @if ($order->discount)
+                        <tr>
+                            <th colspan="3" class="text-end">Discount</th>
+                            <th>(-)₹{{ $order->discount }}</th>
+                        </tr>
+                        @endif
                         <tr>
                             <th colspan="3" class="text-end">Total</th>
                             <th>₹{{ $order->total }}</th>
@@ -104,6 +116,14 @@
                         <li class="list-group-item">
                             <strong>Payment Status:</strong>
                             {{ $order->payment_status }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-3">
+                    <ul class="list-group mt-2">
+                        <li class="list-group-item">
+                            <strong>Delivery Method:</strong>
+                            {{ json_decode($order->shipping_method)->label }}
                         </li>
                     </ul>
                 </div>
@@ -134,10 +154,12 @@
                             <strong>Phone:</strong>
                             {{ json_decode($order->shipping_address)->phone }}
                         </li>
+                        @if (json_decode($order->shipping_address)->instructions)                            
                         <li class="list-group-item">
                             <strong>Instructions:</strong> 
                             {!! nl2br(json_decode($order->shipping_address)->instructions) !!}
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
