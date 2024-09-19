@@ -7,7 +7,7 @@
         </div>
 
         <div class="checkout-detail" v-if="step.isActive">
-            <div v-if="!addresses">
+            <div v-if="!addresses || addresses.length===0">
                 <DeliveryAddressForm @submit="handleFormSubmit" />
             </div>
             <div v-else>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -99,6 +101,15 @@ class OrderController extends Controller
                     'price' => $item['price'],
                     'mrp' => $item['mrp'] ?? 0,
                 ]);
+            }
+        }
+        
+        if (Auth::check()) {
+            $user = Auth::user();
+            $cart = $user->cart;
+
+            if ($cart) {
+                $cart->delete();
             }
         }
 
