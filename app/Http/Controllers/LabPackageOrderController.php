@@ -153,6 +153,11 @@ class LabPackageOrderController extends Controller
      */
     public function destroy(LabPackageOrder $labPackageOrder)
     {
-        //
+        $labPackageOrder->delete();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Lab package deleted successfully.'
+        ], 200);
     }
 }

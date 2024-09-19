@@ -74,13 +74,13 @@
                         name: 'actions',
                         orderable: false,
                         render: function(data, type, row) {
-                            let deleteUrl = `{{ route('quick-orders.destroy', ':id') }}`.replace(
+                            let deleteUrl = `{{ route('lab-package-orders.destroy', ':id') }}`.replace(
                                 ':id', row.id);
 
                             return `
                                 <ul>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="quick order" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="lab package order" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>

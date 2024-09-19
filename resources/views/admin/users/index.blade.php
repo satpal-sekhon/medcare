@@ -91,6 +91,9 @@
                             render: function(data, type, row, meta) {
                                 let totalOrders = row.orders_count + row.lab_package_orders_count + row.quick_orders_count + row.doctor_consultation_orders_count;
                                 let viewUserOrdersLink = `{{ route('admin.user.orders', ':userId') }}`.replace(':userId', row.id);
+                                if(!totalOrders){
+                                    viewUserOrdersLink = `#`;
+                                }
                                 return `<a href="${viewUserOrdersLink}">${totalOrders}</a>`;
                             }
                         },
