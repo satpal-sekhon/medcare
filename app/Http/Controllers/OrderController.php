@@ -159,7 +159,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('admin.orders.edit-product-order', compact('order'));
     }
 
     /**
@@ -167,7 +167,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->status = $request->status;
+        $order->payment_status = $request->payment_status;
+        $order->save();
+
+        return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully!');
     }
 
     /**
