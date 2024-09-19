@@ -5,7 +5,7 @@
         </div>
         <div>
             <div class="table-responsive">
-                <table class="table quick-orders theme-table">
+                <table class="table quick-orders theme-table" data-table="quickOrderstable">
                     <thead>
                         <tr>
                             <th>Order ID</th>

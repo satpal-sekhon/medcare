@@ -5,7 +5,7 @@
         </div>
         <div>
             <div class="table-responsive">
-                <table class="table lab-package-orders theme-table">
+                <table class="table lab-package-orders theme-table" data-table="labPackageOrders">
                     <thead>
                         <tr>
                             <th>Order ID</th>

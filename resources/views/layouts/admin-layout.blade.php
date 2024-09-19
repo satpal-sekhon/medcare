@@ -124,9 +124,20 @@
                                 _token: "{{ csrf_token() }}"
                             },
                             success: function(response) {
-                                let capitalized_source = source.charAt(0).toUpperCase() + source.slice(1);
+                                let capitalized_source = source.charAt(0)
+                                .toUpperCase() + source.slice(1);
 
-                                window.table.ajax.reload();
+                                if (window.table) {
+                                    window.table.ajax.reload();
+                                }
+
+                                $('[data-table]').each(function() {
+                                    var tableName = $(this).attr('data-table');
+                                    if(window[tableName]){
+                                        window[tableName].ajax.reload();
+                                    }
+                                });
+
                                 Swal.fire(
                                     'Deleted!',
                                     `${capitalized_source} has been deleted.`,
