@@ -88,6 +88,16 @@
 
     <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
 
+    <script>
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        }
+    </script>
     @stack('scripts')
 
     <script>

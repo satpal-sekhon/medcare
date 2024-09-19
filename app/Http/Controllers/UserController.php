@@ -26,6 +26,15 @@ class UserController extends Controller
         return view('admin.users.suspended');
     }
 
+    public function user_orders(User $user)
+    {
+        $totalOrdersCount = $user->orders()->count();
+        $quickOrdersCount = $user->quickOrders()->count();
+        $doctorConsultationOrdersCount = $user->doctorConsultationOrders()->count();
+        $labPackageOrdersCount = $user->labPackageOrders()->count();
+
+        return view('admin.users.orders', compact('user', 'totalOrdersCount', 'quickOrdersCount', 'doctorConsultationOrdersCount', 'labPackageOrdersCount'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -70,7 +79,7 @@ class UserController extends Controller
     {
         $columns = ['name', 'email', 'phone_number', 'status'];
 
-        $query = User::query();
+        $query = User::query()->withCount('orders','labPackageOrders', 'quickOrders', 'doctorConsultationOrders');
 
         // Filter by role if specified
         if ($request->has('role') && !empty($request->role)) {

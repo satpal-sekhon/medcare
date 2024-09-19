@@ -148,6 +148,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Users routes
     Route::resource('users', UserController::class);
     Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
+    Route::get('/user-orders/{user}', [UserController::class, 'user_orders'])->name('admin.user.orders');
     Route::get('/suspended-users', [UserController::class, 'suspended_users'])->name('admin.users.suspended');
     Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
 
@@ -183,7 +184,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Lab packages routes
     Route::resource('lab-packages', LabPackageController::class);
     Route::get('/lab-packages', [LabPackageController::class, 'admin_index'])->name('admin.lab-packages.index');
-    Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-packages.get');
+    Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-package-orders.get');
 
     // Orders routes
     Route::resource('orders', OrderController::class);

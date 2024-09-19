@@ -83,6 +83,46 @@ class LabPackageOrderController extends Controller
     
     }
 
+    public function get(Request $request){
+        $columns = ['id', 'name', 'email', 'phone_number'];
+
+        $query = LabPackageOrder::query();
+
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('phone_number', 'like', "%{$search}%");
+            });
+        }
+
+        if($request->has('user_id')){
+            $user_id = $request->user_id;
+            $query->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            });
+        }
+        
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count();
+
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        $data = $query->skip($request->start)->take($request->length)->get();
+
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $data
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

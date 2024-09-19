@@ -31,6 +31,7 @@
                                         <th>User Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>Total Orders</th>
                                         <th>Status</th>
                                         <th>Option</th>
                                     </tr>
@@ -83,6 +84,15 @@
                         {
                             data: 'phone_number',
                             name: 'phone_number'
+                        },
+                        {
+                            data: null,
+                            name: 'total_orders',
+                            render: function(data, type, row, meta) {
+                                let totalOrders = row.orders_count + row.lab_package_orders_count + row.quick_orders_count + row.doctor_consultation_orders_count;
+                                let viewUserOrdersLink = `{{ route('admin.user.orders', ':userId') }}`.replace(':userId', row.id);
+                                return `<a href="${viewUserOrdersLink}">${totalOrders}</a>`;
+                            }
                         },
                         {
                             data: null,

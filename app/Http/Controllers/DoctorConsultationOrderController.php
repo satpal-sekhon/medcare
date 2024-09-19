@@ -37,6 +37,15 @@ class DoctorConsultationOrderController extends Controller
             });
         }
 
+        
+        if($request->has('user_id')){
+            $user_id = $request->user_id;
+            $query->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            });
+        }
+        
+
         $totalRecords = $query->count();
         $filteredRecords = $query->count();
 
