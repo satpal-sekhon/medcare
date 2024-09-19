@@ -9,9 +9,8 @@
                     <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Package Name</th>
-                            <th>Amount</th>
                             <th>Instructions</th>
+                            <th>Prescription</th>
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -24,6 +23,28 @@
 
 @push('scripts')
     <script>
+        function getFileTypeByMimeType(mimeType) {
+            // Define a mapping of MIME types to general file types
+            const mimeTypeToFileType = {
+                'image/jpeg': 'image',
+                'image/png': 'image',
+                'image/gif': 'image',
+                'text/plain': 'text',
+                'text/html': 'text',
+                'application/pdf': 'document',
+                'application/zip': 'archive',
+                'application/vnd.ms-excel': 'spreadsheet',
+                'application/msword': 'document',
+                'application/json': 'data',
+                'audio/mpeg': 'audio',
+                'video/mp4': 'video',
+                'application/xml': 'data',
+            };
+
+            // Return the general file type or 'unknown' if the MIME type is not in the object
+            return mimeTypeToFileType[mimeType] || 'unknown';
+        }
+
         function nl2br(str) {
             if (!str) {
                 return ``;
@@ -37,7 +58,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('lab-package-orders.get') }}",
+                    url: "{{ route('quick-orders.get') }}",
                     type: 'POST',
                     data: {
                         _token: "{{ csrf_token() }}"
@@ -46,19 +67,8 @@
                 columns: [{
                         data: null,
                         name: 'id',
-                        render: function(data, type, row, meta) {
-                            return meta.row + 1;
-                        }
-                    },
-                    {
-                        data: 'package_name',
-                        name: 'package_name'
-                    },
-                    {
-                        data: 'package_amount',
-                        name: 'package_amount',
-                        render: function(data, type, row, meta) {
-                            return formatCurrency(row.package_amount);
+                        render: function(data, type, row) {
+                            return `#${row.order_number}`;
                         }
                     },
                     {
@@ -66,7 +76,21 @@
                         name: 'instructions',
                         orderable: false,
                         render: function(data, type, row) {
-                            return nl2br(row.instructions) || `N/A`
+                            return nl2br(row.instructions) || `N/A`;
+                        }
+                    },
+                    {
+                        data: 'prescription',
+                        name: 'prescription',
+                        orderable: false,
+                        render: function(data, type, row) {
+                            let attachmentType = getFileTypeByMimeType(row.mime_type);
+                            if (attachmentType == 'image') {
+                                return `<img src="{{ asset('${row.prescription_path}') }}" alt="Uploaded prescription" class="dt-image">`;
+                            } else {
+                                return `<a href="{{ asset('${row.prescription_path}') }}" target="_blank">Click here to view</a>`;
+                            }
+
                         }
                     },
                     {

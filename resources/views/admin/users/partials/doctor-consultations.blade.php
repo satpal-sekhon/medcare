@@ -48,8 +48,8 @@
             columns: [{
                     data: null,
                     name: 'id',
-                    render: function(data, type, row, meta) {
-                        return meta.row + 1;
+                    render: function(data, type, row) {
+                        return `#${row.order_number}`;
                     }
                 },
                 {
@@ -68,7 +68,7 @@
                     name: 'instructions',
                     orderable: false,
                     render: function(data, type, row) {
-                        return nl2br(row.instructions)
+                        return nl2br(row.instructions) || `N/A`
                     }
                 },
                 {

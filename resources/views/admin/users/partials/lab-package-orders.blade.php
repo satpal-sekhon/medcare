@@ -8,10 +8,7 @@
                 <table class="table lab-package-orders theme-table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
+                            <th>Order ID</th>
                             <th>Package Name</th>
                             <th>Amount</th>
                             <th>Instructions</th>
@@ -49,31 +46,9 @@
                 columns: [{
                         data: null,
                         name: 'id',
-                        render: function(data, type, row, meta) {
-                            return meta.row + 1;
-                        }
-                    },
-                    {
-                        data: 'name',
-                        name: 'name',
-                        orderable: false,
                         render: function(data, type, row) {
-                            let userBadge = ``;
-
-                            if (!row.user_id) {
-                                userBadge = `<span class="badge badge-warning">Guest</span>`;
-                            }
-
-                            return `${userBadge} ${row.name}`;
+                            return `#${row.order_number}`;
                         }
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone_number',
-                        name: 'phone_number'
                     },
                     {
                         data: 'package_name',
