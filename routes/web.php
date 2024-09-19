@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AccountController::class, 'user_account'])->name('my-account');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('my-account.wishlist');
         Route::get('/orders', [AccountController::class, 'orders'])->name('my-account.orders');
+        Route::get('/notifications', [AccountController::class, 'notifications'])->name('my-account.notifications');
         Route::get('/profile', [AccountController::class, 'profile'])->name('my-account.profile');
     });
 });
@@ -100,7 +101,6 @@ Route::middleware('auth')->group(function () {
 Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Submit docs for verification
     Route::post('/submit-docs-for-verification', [AccountController::class, 'submit_vendor_docs_for_verification'])->name('vendor.submit-docs-for-verification');
-
 
     // Dashboard route
     Route::get('/', [DashboardController::class, 'vendor_dashboard'])->name('vendor-dashboard');

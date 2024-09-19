@@ -37,6 +37,14 @@ class AccountController extends Controller
         return view('frontend.my-account.orders', compact('orders', 'quickOrders', 'labPackageOrders', 'doctorConsultationOrders'));
     }
 
+    public function notifications(){
+        $user = Auth::user();
+        $notifications = $user->notifications;
+        $user->unreadNotifications->markAsRead();
+        
+        return view('frontend.my-account.notifications', compact('notifications'));
+    }
+
     public function profile()
     {
         return view('frontend.my-account.profile');
