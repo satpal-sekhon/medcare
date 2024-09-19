@@ -324,6 +324,10 @@
     </div>
 </section>
 
+@if($relatedBrandProducts->count() > 0)
+@include('frontend.partials.product.related-brand-products')
+@endif
+
 <x-include-plugins :plugins="['slickSlider']"></x-include-plugins>
 
 

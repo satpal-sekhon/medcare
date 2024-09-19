@@ -305,7 +305,19 @@ class ProductController extends Controller
                 $relatedProducts = collect();
             }
         }
-        return view('frontend.product', compact('product', 'relatedProducts'));
+        
+        $relatedBrandProducts = collect();
+        $limit = 6;
+
+        $brand = Brand::with(['products' => function($query) use ($limit) {
+            $query->limit($limit);
+        }])->find($product->brand_id);
+
+        if($brand){
+            $relatedBrandProducts = $brand->products;
+        }
+
+        return view('frontend.product', compact('product', 'relatedProducts', 'relatedBrandProducts'));
     }
 
     /**
