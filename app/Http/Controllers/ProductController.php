@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->limit(16)->withCount(['products as active_products_count' => function($query) {
+        $categories = Category::latest()->limit(16)->withCount(['products as active_products_count' => function ($query) {
             $query->where('status', 'Active');
         }])->get();
         $products = Product::where('status', 'Active')->paginate(20);
@@ -26,7 +26,7 @@ class ProductController extends Controller
         // Get the current and last page numbers
         $currentPage = $products->currentPage();
         $lastPage = $products->lastPage();
-        
+
         // Redirect if the current page exceeds the last page
         if ($currentPage > $lastPage) {
             return redirect()->route('brands.index', ['page' => $lastPage]);
@@ -70,13 +70,13 @@ class ProductController extends Controller
                 'description' => 'required|string',
                 'specifications.*.description' => 'required|string',
             ]);
-            
+
             $thumbnailPath = null;
             if ($request->hasFile('thumbnail')) {
                 $thumbnailPath = uploadFile($request->file('thumbnail'), 'uploads/product-thumbnails/');
             }
 
-            
+
             $product = Product::create([
                 'primary_category_id' => $request->input('primary_category'),
                 'category_id' => $request->input('category'),
@@ -103,7 +103,7 @@ class ProductController extends Controller
                 'status' => $request->input('status'),
             ]);
 
-            if($request->hasFile('images')) {
+            if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $path = uploadFile($image, 'uploads/products/');
 
@@ -114,7 +114,7 @@ class ProductController extends Controller
             }
 
             $variants = $request->input('variants');
-            if($variants){
+            if ($variants) {
                 foreach ($variants as $variant) {
                     $product->variants()->create([
                         'name' => $variant['variant_name'],
@@ -130,7 +130,7 @@ class ProductController extends Controller
             }
 
             $specifications = $request->input('specifications');
-            if($specifications){
+            if ($specifications) {
                 foreach ($specifications as $specification) {
                     $product->specifications()->create([
                         'title' => $specification['title'] ?? null,
@@ -139,8 +139,8 @@ class ProductController extends Controller
                 }
             }
 
-            if($request->input('diseases')){
-                foreach($request->input('diseases') as $disease){
+            if ($request->input('diseases')) {
+                foreach ($request->input('diseases') as $disease) {
                     $product->diseases()->create([
                         'disease_id' => $disease
                     ]);
@@ -151,7 +151,6 @@ class ProductController extends Controller
                 'success' => true,
                 'message' => 'Product created successfully!'
             ], 200);
-            
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'success' => false,
@@ -178,17 +177,17 @@ class ProductController extends Controller
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
             ->leftJoin('product_diseases', 'products.id', '=', 'product_diseases.product_id');
 
-             // Apply filters if present
+        // Apply filters if present
         if ($request->has('primary_category') && $request->primary_category) {
             $primaryCategoryId = $request->primary_category;
-            $query->whereHas('category', function($q) use ($primaryCategoryId) {
+            $query->whereHas('category', function ($q) use ($primaryCategoryId) {
                 $q->where('primary_category_id', $primaryCategoryId);
             });
         }
 
         if ($request->has('category') && $request->category) {
             $categoryId = $request->category;
-            $query->whereHas('category', function($q) use ($categoryId) {
+            $query->whereHas('category', function ($q) use ($categoryId) {
                 $q->where('id', $categoryId);
             });
         }
@@ -239,17 +238,18 @@ class ProductController extends Controller
         ]);
     }
 
-    public function searchMedicines(Request $request, $alphabet = 'a'){
-        if(!$alphabet){
+    public function searchMedicines(Request $request, $alphabet = 'a')
+    {
+        if (!$alphabet) {
             $alphabet = $request->query('alphabet');
-            $alphabet = substr($alphabet, 0, 1); 
+            $alphabet = substr($alphabet, 0, 1);
 
-            if(!$alphabet){
+            if (!$alphabet) {
                 $alphabet = 'a';
             }
         }
 
-        $products = Product::where('name', 'like', $alphabet.'%')
+        $products = Product::where('name', 'like', $alphabet . '%')
             ->where('product_type', 'Generic')
             ->where('status', 'Active')
             ->paginate(16);
@@ -264,8 +264,48 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $tendingProducts = Product::where('flag', 'Trending')->where('status', 'Active')->where('id', '!=', $product->id)->latest()->limit(6)->get();
-        return view('frontend.product', compact('product', 'tendingProducts'));
+        if ($product->product_type === 'General') {
+            $relatedProducts = Product::where('category_id', $product->category_id)
+                ->where('status', 'Active')
+                ->where('id', '!=', $product->id)
+                ->latest()
+                ->limit(6)
+                ->get();
+
+            if ($relatedProducts->count() < 6) {
+                $needed = 6 - $relatedProducts->count();
+
+                $additionalProducts = Product::where('primary_category_id', $product->primary_category_id)
+                    ->where('status', 'Active')
+                    ->where('id', '!=', $product->id)
+                    ->latest()
+                    ->limit($needed)
+                    ->get();
+
+                $relatedProducts = $relatedProducts->merge($additionalProducts)->take(6);
+            }
+        } else {
+            $diseaseIds = $product->diseases->pluck('disease_id');
+
+            // Check if there are any disease IDs to query
+            if ($diseaseIds->isNotEmpty()) {
+                // Retrieve the last 8 products with the same diseases, excluding the current product
+                $relatedProducts = Product::with('product_diseases')
+                    ->whereIn('id', function ($query) use ($diseaseIds) {
+                    $query->select('product_id')
+                        ->from('product_diseases')
+                        ->whereIn('disease_id', $diseaseIds);
+                    })
+                    ->where('id', '!=', $product->id)
+                    ->latest()
+                    ->limit(8)
+                    ->get();
+
+            } else {
+                $relatedProducts = collect();
+            }
+        }
+        return view('frontend.product', compact('product', 'relatedProducts'));
     }
 
     /**
@@ -290,7 +330,7 @@ class ProductController extends Controller
                 'description' => 'required|string',
                 'specifications.*.description' => 'required|string',
             ]);
-            
+
             $thumbnailPath = $product->thumbnail;
             if ($request->hasFile('thumbnail')) {
                 // Do not remove the product thumbnail if the product image needs to be shown after the product has been deleted
@@ -329,13 +369,13 @@ class ProductController extends Controller
             ]);
 
             // Deleted product images
-            if($request->input('deleted_images')){
+            if ($request->input('deleted_images')) {
                 $deleted_images = explode(',', $request->input('deleted_images'));
 
-                foreach($deleted_images as $deleted_image){
+                foreach ($deleted_images as $deleted_image) {
                     $product_image = ProductImage::find($deleted_image);
-                    
-                    if($product_image){
+
+                    if ($product_image) {
                         if ($product_image->path && file_exists(public_path($product_image->path))) {
                             unlink(public_path($product_image->path));
                         }
@@ -378,7 +418,7 @@ class ProductController extends Controller
             $product->specifications()->delete();
 
             $specifications = $request->input('specifications');
-            if($specifications){
+            if ($specifications) {
                 foreach ($specifications as $specification) {
                     $product->specifications()->create([
                         'title' => $specification['title'] ?? null,
@@ -390,8 +430,8 @@ class ProductController extends Controller
             // Handle diseases
             $product->diseases()->delete();
 
-            if($request->input('diseases')){
-                foreach($request->input('diseases') as $disease){
+            if ($request->input('diseases')) {
+                foreach ($request->input('diseases') as $disease) {
                     $product->diseases()->create([
                         'disease_id' => $disease
                     ]);
@@ -427,7 +467,7 @@ class ProductController extends Controller
             unlink(public_path($product->thumbnail));
         } */
 
-        foreach($product->images as $product_image){
+        foreach ($product->images as $product_image) {
             if ($product_image && file_exists(public_path($product_image))) {
                 unlink(public_path($product_image));
             }

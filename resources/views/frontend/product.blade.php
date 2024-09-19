@@ -265,31 +265,31 @@
 
             <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block">
                 <div class="right-sidebar-box">
-                    <!-- Trending Product -->
+                    <!-- Related Product -->
                     <div class="pt-25">
                         <div class="category-menu">
-                            <h3>Trending Products</h3>
+                            <h3>Related Products</h3>
 
                             <ul class="product-list product-right-sidebar border-0 p-0">
-                                @foreach ($tendingProducts as $tendingProduct)
+                                @foreach ($relatedProducts as $relatedProduct)
                                 <li>
                                     <div class="offer-product">
-                                        <a href="{{ route('products.view', $tendingProduct->slug) }}" class="offer-image">
-                                            <img src="{{ file_exists(public_path($tendingProduct->thumbnail)) ? asset($tendingProduct->thumbnail) : asset('assets/images/default/product.jpg') }}"
+                                        <a href="{{ route('products.view', $relatedProduct->slug) }}" class="offer-image">
+                                            <img src="{{ file_exists(public_path($relatedProduct->thumbnail)) ? asset($relatedProduct->thumbnail) : asset('assets/images/default/product.jpg') }}"
                                                 class="img-fluid lazyload" alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="{{ route('products.view', $tendingProduct->slug) }}">
-                                                    <h6 class="name">{{ $tendingProduct->name }}</h6>
+                                                <a href="{{ route('products.view', $relatedProduct->slug) }}">
+                                                    <h6 class="name">{{ $relatedProduct->name }}</h6>
                                                 </a>
-                                                <span>{{ $tendingProduct->unit }}</span>
+                                                <span>{{ $relatedProduct->unit }}</span>
                                                 
                                                 <h5 class="sold text-content">
-                                                    <span class="theme-color price">₹{{ $tendingProduct->customer_price }}</span>
-                                                    @if($tendingProduct->mrp > 0)
-                                                        <del class="ms-1">₹{{ $tendingProduct->mrp }}</del>
+                                                    <span class="theme-color price">₹{{ $relatedProduct->customer_price }}</span>
+                                                    @if($relatedProduct->mrp > 0)
+                                                        <del class="ms-1">₹{{ $relatedProduct->mrp }}</del>
                                                     @endif
                                                 </h5>
                                             </div>
