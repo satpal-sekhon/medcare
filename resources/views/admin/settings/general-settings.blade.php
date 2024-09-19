@@ -15,9 +15,13 @@
                             <div class="row">
                                 @foreach ([
                                     'default_primary_category_image' => 'Primary Category',
+                                    'default_primary_category_banner_image' => 'Primary Category Banner',
                                     'default_category_image' => 'Category',
+                                    'default_category_banner_image' => 'Category Banner',
                                     'default_brand_image' => 'Brand',
+                                    'default_brand_banner_image' => 'Brand Banner',
                                     'default_disease_image' => 'Disease',
+                                    'default_disease_banner_image' => 'Disease Banner',
                                     'default_product_image' => 'Product',
                                     'default_doctor_image' => 'Doctor',
                                     'default_lab_test_image' => 'Lab Test',

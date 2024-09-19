@@ -186,7 +186,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Lab packages routes
     Route::resource('lab-packages', LabPackageController::class);
     Route::get('/lab-packages', [LabPackageController::class, 'admin_index'])->name('admin.lab-packages.index');
-    Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-package-orders.get');
+    Route::post('/lab-packages/get', [LabPackageController::class, 'get'])->name('lab-packages.get');
 
     // Orders routes
     Route::resource('orders', OrderController::class);

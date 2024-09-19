@@ -2,17 +2,7 @@
 @section('title', $category->name)
 
 @section('content')
-<section class="breadcrumb-section pt-0">
-    <div class="container-fluid-lg">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb-contain text-center">
-                    <h2 class="mx-auto">Category: {{ $category->name }}</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<img src="{{ asset($category->banner_image ?? getSetting('default_category_banner_image')) }}" alt="" class="mw-100 mx-auto d-block">
 
 <section class="section-b-space shop-section">
     <div class="container-fluid-lg">
