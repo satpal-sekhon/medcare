@@ -22,6 +22,10 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function suspended_users(){
+        return view('admin.users.suspended');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -97,6 +101,12 @@ class UserController extends Controller
         
             // Apply the status filter
             $query->where('status', $status);
+        }
+
+
+        if ($request->has('status_exclude')) {
+            $status = $request->input('status_exclude');
+            $query->where('status', '!=', $status);
         }
 
         // Handle search filtering

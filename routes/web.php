@@ -148,6 +148,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Users routes
     Route::resource('users', UserController::class);
     Route::get('/users', [UserController::class, 'admin_index'])->name('admin.users.index');
+    Route::get('/suspended-users', [UserController::class, 'suspended_users'])->name('admin.users.suspended');
     Route::post('/users/get', [UserController::class, 'get'])->name('users.get');
 
     // Vendor routes

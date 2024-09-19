@@ -6,17 +6,7 @@
             <div class="card card-table">
                 <div class="card-body">
                     <div class="title-header option-title d-sm-flex d-block">
-                        <h5>Manage Users</h5>
-                        <div class="right-options">
-                            <ul>
-                                <li>
-                                    <a class="align-items-center btn btn-theme d-flex"
-                                        href="{{ route('users.create') }}">
-                                        <i data-feather="plus-square"></i> Add New
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <h5>Suspended Users</h5>
                     </div>
 
                     <x-success-message :message="session('success')" />
@@ -58,7 +48,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                             role: "Customer",
-                            status_exclude: 'Suspended'
+                            status: "Suspended"
                         }
                     },
                     columns: [{
