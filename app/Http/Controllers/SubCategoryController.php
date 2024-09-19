@@ -40,7 +40,7 @@ class SubCategoryController extends Controller
             'primary_category' => 'required',
             'category' => 'required',
             'name' => 'required|string|max:255|unique:categories',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -135,7 +135,7 @@ class SubCategoryController extends Controller
                 'max:255',
                 Rule::unique('sub_categories')->ignore($subCategory->id)
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 

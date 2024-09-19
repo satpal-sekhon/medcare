@@ -36,7 +36,7 @@ class DoctorTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:75|unique:doctor_types',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -116,7 +116,7 @@ class DoctorTypeController extends Controller
                 'max:100',
                 Rule::unique('primary_categories')->ignore($doctorType->id)
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 

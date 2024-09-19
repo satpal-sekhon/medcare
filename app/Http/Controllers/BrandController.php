@@ -46,7 +46,7 @@ class BrandController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100|unique:brands',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -130,7 +130,7 @@ class BrandController extends Controller
                 'max:100',
                 Rule::unique('brands')->ignore($brand->id)
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 

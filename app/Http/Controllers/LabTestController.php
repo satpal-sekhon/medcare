@@ -35,7 +35,7 @@ class LabTestController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100|unique:lab_tests',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -115,7 +115,7 @@ class LabTestController extends Controller
                 'max:100',
                 Rule::unique('lab_tests')->ignore($labTest->id)
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 

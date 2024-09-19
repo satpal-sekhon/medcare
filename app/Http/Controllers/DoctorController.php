@@ -57,7 +57,7 @@ class DoctorController extends Controller
             'phone_number' => 'required|digits:10|unique:doctors',
             'qualification' => 'required|string|max:100',
             'experience' => 'required|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
             'fee' => 'required|numeric|between:0,999999.99',
             //'description' => 'required|string'
         ]);
@@ -165,7 +165,7 @@ class DoctorController extends Controller
             ],
             'qualification' => 'required|string|max:100',
             'experience' => 'required|numeric|regex:/^\d{1,2}(\.\d{1})?$/',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             'fee' => 'required|numeric|between:0,999999.99',
             'description' => 'nullable|string'
         ]);

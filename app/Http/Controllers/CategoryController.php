@@ -54,7 +54,7 @@ class CategoryController extends Controller
                     }
                 }
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -169,8 +169,8 @@ class CategoryController extends Controller
                     }
                 },
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 

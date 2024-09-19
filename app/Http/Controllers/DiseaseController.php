@@ -36,7 +36,7 @@ class DiseaseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:100|unique:diseases',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
@@ -119,7 +119,7 @@ class DiseaseController extends Controller
                 'max:100',
                 Rule::unique('diseases')->ignore($disease->id)
             ],
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             //'description' => 'required|string'
         ]);
 
