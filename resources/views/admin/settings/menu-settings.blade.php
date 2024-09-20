@@ -9,6 +9,8 @@
                         <h5>Menu Settings</h5>
                     </div>
 
+                    <x-success-message :message="session('success')" />
+                    
                     <div class="theme-form theme-form-2 mega-form">
                         @foreach ($menuItems as $item)
                         <form action="{{ route('admin.settings.menu.update', $item->id) }}" class="mb-3" method="POST">

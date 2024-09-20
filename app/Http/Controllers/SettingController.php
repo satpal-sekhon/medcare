@@ -54,6 +54,27 @@ class SettingController extends Controller
     }
 
     public function updateMenuSettings(Request $request){
-        dd($request->all());
+        foreach($request->label as $id => $label){
+            $menuItem = MenuItem::findOrFail($id);
+            $menuItem->label = $label;
+            
+            $meta_tags = [];
+            if(isset($request->meta_name[$id])){
+                $meta_tags['meta_name'] = $request->meta_name[$id];
+            }
+
+            if(isset($request->meta_description[$id])){
+                $meta_tags['meta_description'] = $request->meta_description[$id];
+            }
+
+            if(isset($request->meta_keywords[$id])){
+                $meta_tags['meta_keywords'] = $request->meta_keywords[$id];
+            }
+            
+            $menuItem->meta_tags = $meta_tags;
+            $menuItem->save();
+        }
+
+        return redirect()->route('admin.settings.menu')->with('success', 'Menu updated successfully.');
     }
 }
