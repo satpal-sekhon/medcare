@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MenuItem;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -46,5 +46,14 @@ class SettingController extends Controller
         }
 
         return redirect()->route('admin.settings.general')->with('success', 'Settings updated successfully.');
+    }
+
+    public function menuSettings(){
+        $menuItems = MenuItem::with('children')->whereNull('parent_id')->get();
+        return view('admin.settings.menu-settings', compact('menuItems'));
+    }
+
+    public function updateMenuSettings(Request $request){
+        dd($request->all());
     }
 }
