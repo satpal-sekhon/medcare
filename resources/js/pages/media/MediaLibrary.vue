@@ -8,8 +8,16 @@
             <div class="selected-options">
               <ul>
                 <li>selected({{ selectedMedia.length }})</li>
-                <li><a href="javascript:void(0)" @click="downloadImages"><i class="ri-download-2-line"></i></a></li>
-                <li><a href="#"><i class="ri-delete-bin-line"></i></a></li>
+                <li v-if="selectedMedia.length > 0">
+                  <a href="#" @click="downloadImages">
+                    <i class="ri-download-2-line"></i>
+                  </a>
+                </li>
+                <li v-if="selectedMedia.length > 0">
+                  <a href="#" @click="deleteImages">
+                    <i class="ri-delete-bin-line"></i>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -17,9 +25,11 @@
           <div
             class="row row-cols-xl-6 row-cols-md-5 row-cols-sm-3 row-cols-2 g-sm-3 g-2 media-library-sec ratio_square">
 
-            <MediaItem v-for="(item, index) in mediaItems" :key="index" :image="item.path" :id="`${index}${item.time}`"
+            <MediaItem v-for="(item, index) in mediaItems" :key="index" :image="item.path" :folder="item.folder"
+              :id="`${index}${item.time}`"
               :isSelected="selectedMedia.some(selected => selected.id === `${index}${item.time}`)"
               @update-selection="updateSelectedMedia"
+              @delete-image="deleteSingleImage"
               @download-image="downloadSingleImage" />
           </div>
 
@@ -67,11 +77,11 @@ export default {
         this.currentPage = page;
       }
     },
-    updateSelectedMedia({ id, selected, image }) {
+    updateSelectedMedia({ id, selected, image, folder }) {
       if (selected) {
         // If selected and not already in the list, add it
         if (!this.selectedMedia.some(selectedId => selectedId.id === id)) {
-          this.selectedMedia.push({ id, url: image });
+          this.selectedMedia.push({ id, url: image, folder });
         }
       } else {
         // If not selected, filter out the item based on the ID
@@ -79,7 +89,6 @@ export default {
       }
     },
     async downloadSingleImage(imageUrl) {
-      console.log('..',imageUrl)
       const response = await fetch(imageUrl);
       const blob = await response.blob();
       const normalizedUrl = imageUrl.replace(/\\/g, '/');
@@ -115,6 +124,40 @@ export default {
 
         this.selectedMedia = [];
       }
+    },
+    async deleteImage(imagesToDelete){
+      try {
+        const response = await axios.delete('/admin/media/delete', {
+          data: {
+            images: imagesToDelete
+          }
+        });
+
+        if (response.data.success) {
+          this.selectedMedia = [];
+          await this.fetchMedia(this.currentPage);
+          alert('Images deleted successfully.');
+        } else {
+          alert('Failed to delete images. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error deleting images:', error);
+        alert('An error occurred while deleting images. Please try again.');
+      }
+    },
+    async deleteSingleImage(selectedImage){
+      this.deleteImage(selectedImage);
+    },
+    async deleteImages() {
+      const confirmed = confirm('Are you sure you want to delete the selected images?');
+      if (!confirmed) return;
+      
+      const imagesToDelete = this.selectedMedia.map(media => ({
+        url: media.url,
+        folder: media.folder
+      }));
+
+      this.deleteImage(imagesToDelete);
     },
     handlePageChange(page) {
       if (page < 1 || page > this.totalPages) return;

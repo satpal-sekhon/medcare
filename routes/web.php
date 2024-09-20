@@ -215,6 +215,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     /* Media routes */
     Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');
     Route::get('/get-media', [MediaController::class, 'get'])->name('admin.media.get');
+    Route::delete('/media/delete', [MediaController::class, 'deleteImages'])->name('admin.media.delete');
 
     /* Setting routes */
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');

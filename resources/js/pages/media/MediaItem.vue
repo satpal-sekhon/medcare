@@ -19,7 +19,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" @click="deleteImage">
                                 <i class="ri-delete-bin-line me-2"></i>
                                 Delete
                             </a>
@@ -39,6 +39,10 @@ export default {
             type: String,
             required: true,
         },
+        folder: {
+            type: String,
+            required: true,
+        },
         id: {
             type: [Number, String],
             required: true,
@@ -53,11 +57,15 @@ export default {
             this.$emit('update-selection', {
                 id: this.id,
                 selected: event.target.checked,
-                image: this.image
+                image: this.image, 
+                folder: this.folder
             });
         },
         downloadImage(){
             this.$emit('download-image', this.image);
+        },
+        deleteImage(){
+            this.$emit('delete-image', [{url: this.image,folder: this.folder}]);
         }
     },
 };
