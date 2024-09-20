@@ -20,6 +20,7 @@ use App\Http\Controllers\LabTestController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PrimaryCategoryController;
 use App\Http\Controllers\ProductController;
@@ -216,6 +217,10 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');
     Route::get('/get-media', [MediaController::class, 'get'])->name('admin.media.get');
     Route::delete('/media/delete', [MediaController::class, 'deleteImages'])->name('admin.media.delete');
+
+    /* Additional page routes */
+    Route::get('/pages/{page:slug}', [PageController::class, 'edit'])->name('admin.pages.edit');
+    Route::put('/pages/{page:slug}', [PageController::class, 'update'])->name('admin.pages.update');
 
     /* Setting routes */
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');

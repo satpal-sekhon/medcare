@@ -223,13 +223,27 @@
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-article-line"></i>
+                            <span>Additional Pages</span>
+                        </a>
+                        @php
+                            $additionalPages = \App\Models\Page::select('id', 'slug', 'name')->get();
+                        @endphp
+                        <ul class="sidebar-submenu">
+                            @foreach ($additionalPages as $page)
+                            <li>
+                                <a href="{{ route('admin.pages.edit', $page->slug) }}">{{ $page->name }}</a>
+                            </li>                                
+                            @endforeach
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-list">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-settings-line"></i>
                             <span>Settings</span>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li>
-                                <a href="#">Site Settings</a>
-                            </li>
                             <li>
                                 <a href="{{ route('admin.settings.menu') }}">Menu Settings</a>
                             </li>
