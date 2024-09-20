@@ -55,26 +55,19 @@ class SettingController extends Controller
 
     public function updateMenuSettings(Request $request){
         $request->validate([
-            'label.*' => 'required|string|max:255'
+            'label.*' => 'required|string|max:255',
+            'meta_name.*' => 'nullable|string|max:255',
+            'meta_description.*' => 'nullable|string|max:500',
+            'meta_keywords.*' => 'nullable|string|max:255',
         ]);
-
         
         foreach($request->label as $id => $label){
             $menuItem = MenuItem::findOrFail($id);
             $menuItem->label = $label;
             
-            $meta_tags = [];
-            if(isset($request->meta_name[$id])){
-                $meta_tags['meta_name'] = $request->meta_name[$id];
-            }
-
-            if(isset($request->meta_description[$id])){
-                $meta_tags['meta_description'] = $request->meta_description[$id];
-            }
-
-            if(isset($request->meta_keywords[$id])){
-                $meta_tags['meta_keywords'] = $request->meta_keywords[$id];
-            }
+            $meta_tags['meta_name'] = $request->meta_name[$id] ?? '';
+            $meta_tags['meta_description'] = $request->meta_description[$id] ?? '';
+            $meta_tags['meta_keywords'] = $request->meta_keywords[$id] ?? '';
             
             $menuItem->meta_tags = $meta_tags;
             $menuItem->save();

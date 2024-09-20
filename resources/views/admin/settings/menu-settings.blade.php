@@ -21,9 +21,9 @@
                                 </div>
                             </div>
 
-                            @if($item->meta_tags)
+                            @if($item->meta_tags && !$item->is_dropdown)
                                 <div class="row">
-                                    @foreach(json_decode($item->meta_tags) as $key=> $meta_tag)
+                                    @foreach(json_decode($item->meta_tags) as $key => $meta_tag)
                                     <div class="col-md-6">
                                         <x-form-input name="{{ $key }}[{{$item->id}}]" label="{{ ucwords(str_replace('_', ' ', $key)) }}" value="{{ $meta_tag }}" :labelClass="'form-label-title'"></x-form-input>
                                     </div>
