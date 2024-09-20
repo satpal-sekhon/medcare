@@ -54,6 +54,11 @@ class SettingController extends Controller
     }
 
     public function updateMenuSettings(Request $request){
+        $request->validate([
+            'label.*' => 'required|string|max:255'
+        ]);
+
+        
         foreach($request->label as $id => $label){
             $menuItem = MenuItem::findOrFail($id);
             $menuItem->label = $label;
