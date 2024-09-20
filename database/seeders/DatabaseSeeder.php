@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class, */
             StateSeeder::class,
             LabTestsSeeder::class,
-            DoctorTypeSeeder::class
+            DoctorTypeSeeder::class,
+            MenuItemSeeder::class
         ]);
     }
 }

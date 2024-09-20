@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\MenuItem;
 use App\Models\PrimaryCategory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -29,7 +30,10 @@ class AppServiceProvider extends ServiceProvider
                 $query->latest()->limit(16);
             }])->limit(6)->get();
 
+            $menus = MenuItem::with('children')->whereNull('parent_id')->get();
+            
             $view->with('menuPrimaryCategories', $menuPrimaryCategories);
+            $view->with('menus', $menus);
         });
     }
 }

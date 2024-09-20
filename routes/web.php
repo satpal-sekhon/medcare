@@ -68,7 +68,7 @@ Route::get('/quick-order', [QuickOrderController::class, 'create'])->name('quick
 Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick-order.store');
 
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
-Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
+Route::get('/about-us', [FrontendController::class, 'about'])->name('about-us');
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
 Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
