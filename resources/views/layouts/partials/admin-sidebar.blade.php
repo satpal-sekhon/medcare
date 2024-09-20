@@ -231,6 +231,9 @@
                                 <a href="#">Site Settings</a>
                             </li>
                             <li>
+                                <a href="{{ route('admin.settings.menu') }}">Menu Settings</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.settings.general') }}">General Settings</a>
                             </li>
                         </ul>

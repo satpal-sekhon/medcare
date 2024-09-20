@@ -68,7 +68,7 @@ Route::get('/quick-order', [QuickOrderController::class, 'create'])->name('quick
 Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick-order.store');
 
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
-Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
+Route::get('/about-us', [FrontendController::class, 'about'])->name('about-us');
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
 Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
@@ -220,6 +220,8 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     /* Setting routes */
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');
     Route::post('/general-settings', [SettingController::class, 'admin_general_settings_update'])->name('admin.settings.general.update');
+    Route::get('/menu-settings', [SettingController::class, 'menuSettings'])->name('admin.settings.menu');
+    Route::post('/menu-settings/{id}', [SettingController::class, 'updateMenuSettings'])->name('admin.settings.menu.update');
 
 });
 

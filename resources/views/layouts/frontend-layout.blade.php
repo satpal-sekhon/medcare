@@ -208,12 +208,12 @@
                             <div class="header-nav-left">
                                 <button class="dropdown-category text-uppercase">
                                     <i data-feather="align-left"></i>
-                                    <span>Wellness</span>
+                                    <span>{{ $menus->first()->label }}</span>
                                 </button>
 
                                 <div class="category-dropdown">
                                     <div class="category-title">
-                                        <h5>Welness</h5>
+                                        <h5>{{ $menus->first()->label }}</h5>
                                         <button type="button" class="btn p-0 close-button text-content">
                                             <i class="fa-solid fa-xmark"></i>
                                         </button>
@@ -270,58 +270,22 @@
                                         </div>
                                         <div class="offcanvas-body">
                                             <ul class="navbar-nav">
-                                                <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                                        data-bs-toggle="dropdown">Search Medicine</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('search-medicines') }}">Generic
-                                                                Medicine</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('products.index') }}">All Products</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('brands.index') }}">Brands</a>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('lab-test.index') }}">Lab
-                                                        Test</a>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a class="nav-link"
-                                                        href="{{ route('pharmacy.index') }}">Pharmacy</a>
-                                                </li>
-
-                                                <li class="nav-item dropdown new-nav-item">
-                                                    <label class="new-dropdown d-none d-md-block">New</label>
-                                                    <a class="nav-link" href="{{ route('doctors.index') }}">Doctors</a>
-                                                </li>
-
-                                                <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                                                        data-bs-toggle="dropdown">Company +</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('about') }}">About
-                                                                Us</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item" href="{{ route('faq') }}">FAQs</a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('contact-us') }}">Contact Us</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+        @foreach($menus->skip(1)->take(6) as $item)
+        <li @class(["nav-item", 'dropdown' => $item->is_dropdown])>
+            @if($item->is_dropdown)
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $item->label }}</a>
+                <ul class="dropdown-menu">
+                    @foreach($item->children as $child)
+                        <li>
+                            <a class="dropdown-item" href="{{ $child->route_name ? route($child->route_name): '#' }}">{{ $child->label }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <a class="nav-link" href="{{ $item->route_name ? route($item->route_name) : '#' }}">{{ $item->label }}</a>
+            @endif
+        </li>
+    @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -329,10 +293,10 @@
                             </div>
 
                             <div class="header-nav-right">
-                                <a href="{{ route('quick-order') }}">
+                                <a href="{{ route($menus->last()->route_name) }}">
                                     <button class="btn deal-button">
                                         <i data-feather="zap"></i>
-                                        <span>Quick Order</span>
+                                        <span>{{ $menus->last()->label }}</span>
                                     </button>
                                 </a>
                             </div>
