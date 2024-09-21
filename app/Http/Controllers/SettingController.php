@@ -101,7 +101,7 @@ class SettingController extends Controller
                 }
 
                 // Update the link regardless of whether a new image was uploaded
-                if ($request->filled("{$prefix}_image_{$i}_link")) {
+                if ($request->has("{$prefix}_image_{$i}_link")) {
                     $settings->{"{$prefix}_image_{$i}_link"} = $request->input("{$prefix}_image_{$i}_link");
                 }
             }

@@ -4,13 +4,31 @@
             <div class="col-12">
                 <div class="slick-slider">
                     <div>
-                        <img src="{{ asset('assets/images/banners/1.jpg') }}" class="img-fluid" alt="Banner Image 1">
+                        @if ($homePage->home_main_banner_image_1_link)
+                            <a href="{{$homePage->home_main_banner_image_1_link}}">
+                        @endif
+                        <img src="{{ asset($homePage->home_main_banner_image_1) }}" class="img-fluid" alt="">
+                        @if ($homePage->home_main_banner_image_1_link)
+                            </a>
+                        @endif
                     </div>
                     <div>
-                        <img src="{{ asset('assets/images/banners/1.jpg') }}" class="img-fluid" alt="Banner Image 2">
+                        @if ($homePage->home_main_banner_image_2_link)
+                            <a href="{{$homePage->home_main_banner_image_2_link}}">
+                        @endif
+                        <img src="{{ asset($homePage->home_main_banner_image_2) }}" class="img-fluid" alt="">
+                        @if ($homePage->home_main_banner_image_2_link)
+                            </a>
+                        @endif
                     </div>
                     <div>
-                        <img src="{{ asset('assets/images/banners/1.jpg') }}" class="img-fluid" alt="Banner Image 3">
+                        @if ($homePage->home_main_banner_image_3_link)
+                            <a href="{{$homePage->home_main_banner_image_3_link}}">
+                        @endif
+                        <img src="{{ asset($homePage->home_main_banner_image_3) }}" class="img-fluid" alt="">
+                        @if ($homePage->home_main_banner_image_3_link)
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

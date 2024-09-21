@@ -125,17 +125,11 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        // Handle success (e.g., display success message)
-                        // You can redirect or update the UI as needed
-                        alert(response.message); // Adjust this as needed
+                        alert(response.message);
+                        window.location.reload();
                     },
                     error: function(xhr) {
-                        // Handle errors (e.g., display error messages)
-                        const errors = xhr.responseJSON.errors;
-                        for (let field in errors) {
-                            $(`[name="${field}"]`).addClass('is-invalid');
-                            $(`[name="${field}"]`).after(`<div class="invalid-feedback">${errors[field][0]}</div>`);
-                        }
+                        alert('Something went wrong!')
                     }
                 });
             }

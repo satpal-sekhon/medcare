@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Disease;
+use App\Models\HomePage;
 use App\Models\Product;
 
 class DashboardController extends Controller
@@ -38,7 +39,8 @@ class DashboardController extends Controller
             ->limit(8)
             ->get();
         
-        return view('frontend.home', compact('diseases', 'categories', 'brands', 'generalProducts', 'saleProducts', 'genericProducts'));
+        $homePage = HomePage::first();
+        return view('frontend.home', compact('diseases', 'categories', 'brands', 'generalProducts', 'saleProducts', 'genericProducts', 'homePage'));
     }
 
     public function vendor_dashboard(){
