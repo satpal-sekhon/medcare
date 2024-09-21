@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             LabTestsSeeder::class,
             DoctorTypeSeeder::class,
             MenuItemSeeder::class,
-            PageSeeder::class
+            PageSeeder::class,
+            HomePageSeeder::class
         ]);
     }
 }
