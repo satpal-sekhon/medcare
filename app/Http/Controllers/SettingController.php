@@ -75,4 +75,16 @@ class SettingController extends Controller
 
         return redirect()->route('admin.settings.menu')->with('success', 'Menu updated successfully.');
     }
+
+    public function homePageSettings(){
+        return view('admin.settings.home-page');
+    }
+
+    public function saveHomePageSettings(Request $request){
+        $request->validate([
+            'top_header_text.*' => 'required|string|max:255'
+        ]);
+        
+        dd($request->all());
+    }
 }

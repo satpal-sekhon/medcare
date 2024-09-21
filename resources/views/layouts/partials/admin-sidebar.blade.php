@@ -220,6 +220,13 @@
                             <span>Media</span>
                         </a>
                     </li>
+                    
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.settings.home-page') }}">
+                            <i class="ri-pages-line"></i>
+                            <span>Home Page</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">

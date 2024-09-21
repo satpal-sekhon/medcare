@@ -223,6 +223,8 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::put('/pages/{page:slug}', [PageController::class, 'update'])->name('admin.pages.update');
 
     /* Setting routes */
+    Route::get('/manage-home-page', [SettingController::class, 'homePageSettings'])->name('admin.settings.home-page');
+    Route::post('/home-page', [SettingController::class, 'saveHomePageSettings'])->name('admin.settings.home-page.update');
     Route::get('/general-settings', [SettingController::class, 'admin_general_settings'])->name('admin.settings.general');
     Route::post('/general-settings', [SettingController::class, 'admin_general_settings_update'])->name('admin.settings.general.update');
     Route::get('/menu-settings', [SettingController::class, 'menuSettings'])->name('admin.settings.menu');
