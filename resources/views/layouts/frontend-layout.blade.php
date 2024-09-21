@@ -41,29 +41,25 @@
     <div id="vue-components">
         <!-- Header Start -->
         <header class="pb-0">
+            @php
+            $banner_notifications = \App\Models\HomePage::select('top_header_text')->find(1)->top_header_text ?? null;
+            $banner_notifications = json_decode($banner_notifications, true) ?? [];
+            @endphp
+
+            @if(count($banner_notifications) > 0)
             <div class="header-top">
                 <div class="container-fluid-lg">
                     <div class="row">
                         <div class="col-xxl-12 col-lg-12 d-lg-block d-none mx-auto">
                             <div class="header-offer">
                                 <div class="notification-slider">
+                                    @foreach ($banner_notifications as $notification)
                                     <div>
                                         <div class="timer-notification text-center">
-                                            <h6><strong class="me-1">Welcome to Medine Shop!</strong>Wrap new
-                                                offers/gift every single day on Weekends.<strong class="ms-1">New Coupon
-                                                    Code: Med2589
-                                                </strong>
-                                            </h6>
+                                            <h6>{{ $notification }}</h6>
                                         </div>
                                     </div>
-
-                                    <div>
-                                        <div class="timer-notification text-center">
-                                            <h6>Extra 50% Off on All Generic Medicine
-                                                <a href="#" class="text-white">Buy Now !</a>
-                                            </h6>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -71,6 +67,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="top-nav top-header sticky-header">
                 <div class="container-fluid-lg">

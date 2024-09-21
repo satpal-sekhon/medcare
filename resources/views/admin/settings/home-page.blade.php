@@ -16,9 +16,9 @@
                         @csrf
 
                         <fieldset class="border p-4 my-2">
-                            <legend class="fs-5 fw-bold">Top Header Text</legend>
+                            <legend class="fs-5 fw-bold">Top Header Text (Notifications)</legend>
                             <div id="text-inputs">
-                                @foreach (json_decode($settings->top_header_text) as $key => $header_text)
+                                @foreach ((json_decode($settings->top_header_text) ?? []) as $key => $header_text)
                                     <div class="d-flex gap-2 mb-2">
                                         <div class="form-group w-100">
                                             <input type="text" name="top_header_text[{{$key}}]" class="form-control"
@@ -77,7 +77,7 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        let inputCount = {{ count(json_decode($settings->top_header_text, true)) }};
+        let inputCount = {{ count(json_decode($settings->top_header_text, true) ?? []) }};
         
         $('form').validate({
             rules: {
