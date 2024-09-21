@@ -218,6 +218,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('doctor-consultations', DoctorConsultationOrderController::class);
     Route::get('/doctor-consultations', [DoctorConsultationOrderController::class, 'admin_index'])->name('admin.doctor-consultations.index');
     Route::post('/doctor-consultations/get', [DoctorConsultationOrderController::class, 'get'])->name('doctor-consultations.get');
+    Route::post('/doctor-consultations/update-status', [DoctorConsultationOrderController::class, 'updateStatus'])->name('doctor-consultation.update-status');
 
     /* Media routes */
     Route::get('/media', [MediaController::class, 'index'])->name('admin.media.index');

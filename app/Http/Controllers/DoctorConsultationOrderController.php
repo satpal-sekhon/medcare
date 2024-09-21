@@ -66,6 +66,17 @@ class DoctorConsultationOrderController extends Controller
         ]);
     }
 
+    public function updateStatus(Request $request){
+        $order = DoctorConsultationOrder::find($request->id);
+        $order->status = $request->status;
+        $order->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => 'Status Updated successfully!'
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

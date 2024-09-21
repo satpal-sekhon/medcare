@@ -22,6 +22,7 @@
                                         <th>Phone Number</th>
                                         <th>Doctor Type</th>
                                         <th>Doctor Name</th>
+                                        <th>Status</th>
                                         <th>Instructions</th>
                                         <th>Option</th>
                                     </tr>
@@ -99,6 +100,22 @@
                             }
                         },
                         {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                let options = `
+                                    <select class="form-control" name="order-status" data-id="${row.id}" style="width: 145px">
+                                        <option value="Awaiting Confirmation" ${row.status === 'Awaiting Confirmation' ? 'selected' : ''}>Awaiting Confirmation</option>
+                                        <option value="Pending" ${row.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="Approved" ${row.status === 'Approved' ? 'selected' : ''}>Approved</option>
+                                        <option value="Rejected" ${row.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                                    </select>
+                                `;
+                                return options;
+                            }
+                        },
+                        {
                             data: 'instructions',
                             name: 'instructions',
                             orderable: false,
@@ -126,6 +143,22 @@
                         }
                     ],
                     order: [[0, 'desc']]
+                });
+
+
+                $(document).on('change', '[name="order-status"]', function() {
+                    let newStatus = $(this).val();
+                    let id = $(this).data('id');
+                    
+                    $.ajax({
+                        url: `{{ route('doctor-consultation.update-status') }}`,
+                        method: 'POST',
+                        data: {
+                            id: id,
+                            status: newStatus,
+                            _token: `{{ csrf_token() }}`
+                        }
+                    })
                 });
             });
         </script>
