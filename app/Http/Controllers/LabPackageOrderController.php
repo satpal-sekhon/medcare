@@ -125,6 +125,18 @@ class LabPackageOrderController extends Controller
         ]);
     }
 
+    public function updateStatus(Request $request){
+        $labPackageOrder = LabPackageOrder::find($request->id);
+        $labPackageOrder->status = $request->status;
+        $labPackageOrder->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => 'Status Updated successfully!'
+        ]);
+    }
+
+
     /**
      * Display the specified resource.
      */

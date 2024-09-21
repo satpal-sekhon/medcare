@@ -212,6 +212,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('lab-package-orders', LabPackageOrderController::class);
     Route::get('/lab-package-orders', [LabPackageOrderController::class, 'admin_index'])->name('admin.lab-package-orders.index');
     Route::post('/lab-package-orders/get', [LabPackageOrderController::class, 'get'])->name('lab-package-orders.get');
+    Route::post('/lab-package-orders/update-status', [LabPackageOrderController::class, 'updateStatus'])->name('lab-package-orders.update-status');
     
     /* Doctor consultations routes */
     Route::resource('doctor-consultations', DoctorConsultationOrderController::class);
