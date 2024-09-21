@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HomePage;
 use App\Models\MenuItem;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -77,14 +78,37 @@ class SettingController extends Controller
     }
 
     public function homePageSettings(){
-        return view('admin.settings.home-page');
+        $settings = HomePage::find(1);
+        return view('admin.settings.home-page', compact('settings'));
     }
 
     public function saveHomePageSettings(Request $request){
         $request->validate([
             'top_header_text.*' => 'required|string|max:255'
         ]);
-        
-        dd($request->all());
+                
+        $settings = HomePage::find(1);
+        $settings->top_header_text = json_encode($request->top_header_text);
+
+        foreach (['home_main_banner', 'home_offer', 'home_horizontal'] as $prefix) {
+            for ($i = 1; $i <= 4; $i++) { // Adjust based on your requirements
+                // Check if a new file was uploaded
+                if ($request->hasFile("{$prefix}_image_{$i}")) {
+                    // Upload new file and store the path
+                    $file = $request->file("{$prefix}_image_{$i}");
+                    $path = uploadFile($file, "uploads/home-page/{$prefix}/");
+                    $settings->{"{$prefix}_image_{$i}"} = $path;
+                }
+
+                // Update the link regardless of whether a new image was uploaded
+                if ($request->filled("{$prefix}_image_{$i}_link")) {
+                    $settings->{"{$prefix}_image_{$i}_link"} = $request->input("{$prefix}_image_{$i}_link");
+                }
+            }
+        }
+
+        $settings->save();
+
+        return response()->json(['message' => 'Settings updated successfully!']);
     }
 }

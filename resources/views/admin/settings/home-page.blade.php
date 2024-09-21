@@ -12,19 +12,21 @@
                 <x-success-message :message="session('success')" />
 
                 <div class="theme-form theme-form-2 mega-form">
-                    <form action="{{ route('admin.settings.home-page.update') }}" method="post">
+                    <form action="{{ route('admin.settings.home-page.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-4 my-2">
                             <legend class="fs-5 fw-bold">Top Header Text</legend>
                             <div id="text-inputs">
-                                <div class="d-flex gap-2 mb-2">
-                                    <div class="form-group w-100">
-                                        <input type="text" name="top_header_text[]" class="form-control"
-                                            placeholder="Enter text here">
+                                @foreach (json_decode($settings->top_header_text) as $key => $header_text)
+                                    <div class="d-flex gap-2 mb-2">
+                                        <div class="form-group w-100">
+                                            <input type="text" name="top_header_text[{{$key}}]" class="form-control"
+                                                placeholder="Enter text here" value="{{ $header_text }}">
+                                        </div>
+                                        <button type="button" class="btn btn-danger remove-btn">Remove</button>
                                     </div>
-                                    <button type="button" class="btn btn-danger remove-btn">Remove</button>
-                                </div>
+                                @endforeach
                             </div>
                             <button type="button" class="btn btn-primary mt-2 mb-3 h-75" id="add-btn">Add Text Input</button>
                         </fieldset>
@@ -42,9 +44,18 @@
                                     <x-form-input type="file" label="Image {{ $i }}"
                                         name="{{ $info['prefix'] }}_image_{{ $i }}" :labelClass="'form-label-title'">
                                     </x-form-input>
+
+                                    @php
+                                        $image_column = $info['prefix'].'_image_'.$i;
+                                    @endphp
+
+                                    <img src="{{ asset($settings->$image_column) }}" alt="" class="img-fluid w-50 mb-3">
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form-input label="Image {{ $i }} Link"
+                                    @php
+                                        $column_name = $info['prefix'].'_image_'.$i.'_link';
+                                    @endphp
+                                    <x-form-input label="Image {{ $i }} Link" value="{{ $settings->$column_name }}"
                                         name="{{ $info['prefix'] }}_image_{{ $i }}_link" class="h-75"
                                         :labelClass="'form-label-title'"></x-form-input>
                                 </div>
@@ -66,38 +77,7 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        let inputCount = 1;
-
-        $('#add-btn').click(function() {
-            const inputRow = $('<div class="d-flex gap-2 mb-2"></div>');
-            const formGroup = $('<div class="form-group w-100"></div>');
-            const input = $(`<input type="text" name="top_header_text[${inputCount}]" class="form-control" placeholder="Enter text here" required>`);
-            const removeBtn = $('<button type="button" class="btn btn-danger remove-btn h-75">Remove</button>');
-
-            removeBtn.click(function() {
-                inputRow.remove();
-            });
-
-            // Append the input to the form group
-            formGroup.append(input);
-            // Append form group and remove button to the row
-            inputRow.append(formGroup).append(removeBtn);
-            // Append the whole row to the inputs container
-            $('#text-inputs').append(inputRow);
-
-            $('form').validate().settings.rules[`top_header_text[${inputCount}]`] = {
-                required: true
-            };
-
-            inputCount++;
-
-        });
-
-        // Delegate event for dynamically added remove buttons
-        $(document).on('click', '.remove-btn', function() {
-            $(this).closest('.input-row').remove();
-        });
-
+        let inputCount = {{ count(json_decode($settings->top_header_text, true)) }};
         
         $('form').validate({
             rules: {
@@ -159,6 +139,43 @@
                     }
                 });
             }
+        });
+
+        
+        for(let i=0; i<inputCount; i++){
+            $('form').validate().settings.rules[`top_header_text[${i}]`] = {
+                required: true
+            };
+        }
+
+        $('#add-btn').click(function() {
+            const inputRow = $('<div class="d-flex gap-2 mb-2"></div>');
+            const formGroup = $('<div class="form-group w-100"></div>');
+            const input = $(`<input type="text" name="top_header_text[${inputCount}]" class="form-control" placeholder="Enter text here" required>`);
+            const removeBtn = $('<button type="button" class="btn btn-danger remove-btn h-75">Remove</button>');
+
+            removeBtn.click(function() {
+                inputRow.remove();
+            });
+
+            // Append the input to the form group
+            formGroup.append(input);
+            // Append form group and remove button to the row
+            inputRow.append(formGroup).append(removeBtn);
+            // Append the whole row to the inputs container
+            $('#text-inputs').append(inputRow);
+
+            $('form').validate().settings.rules[`top_header_text[${inputCount}]`] = {
+                required: true
+            };
+
+            inputCount++;
+
+        });
+
+        // Delegate event for dynamically added remove buttons
+        $(document).on('click', '.remove-btn', function() {
+            $(this).closest('.d-flex').remove();
         });
     });
 </script>
