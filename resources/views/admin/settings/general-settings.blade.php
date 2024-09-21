@@ -22,6 +22,7 @@
                                     'default_brand_banner_image' => 'Brand Banner',
                                     'default_disease_image' => 'Disease',
                                     'default_disease_banner_image' => 'Disease Banner',
+                                    'default_page_image' => 'Page',
                                     'default_product_image' => 'Product',
                                     'default_doctor_image' => 'Doctor',
                                     'default_lab_test_image' => 'Lab Test',

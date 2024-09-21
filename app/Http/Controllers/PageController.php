@@ -7,6 +7,31 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    public function termsAndConditions(){
+        $page = Page::find(1);
+        return view('frontend.page', compact('page'));
+    }
+
+    public function privacyPolicy(){
+        $page = Page::find(2);
+        return view('frontend.page', compact('page'));
+    }
+
+    public function returnAndRefundPolicy(){
+        $page = Page::find(3);
+        return view('frontend.page', compact('page'));
+    }
+
+    public function shippingAndDelivery(){
+        $page = Page::find(4);
+        return view('frontend.page', compact('page'));
+    }
+
+    public function aboutUs(){
+        $page = Page::find(5);
+        return view('frontend.page', compact('page'));
+    }
+
     /**
      * Display a listing of the resource.
      */

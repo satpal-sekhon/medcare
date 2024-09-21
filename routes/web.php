@@ -42,6 +42,11 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/orders/create', [OrderController::class, 'create_order'])->name('order.create');
 Route::get('/order-success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/return-and-refund-policy', [PageController::class, 'returnAndRefundPolicy'])->name('return-and-refund-policy');
+Route::get('/shipping-and-delivery', [PageController::class, 'shippingAndDelivery'])->name('shipping-and-delivery');
+Route::get('/about-us', [PageController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('products.view');
@@ -69,7 +74,7 @@ Route::get('/quick-order', [QuickOrderController::class, 'create'])->name('quick
 Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick-order.store');
 
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
-Route::get('/about-us', [FrontendController::class, 'about'])->name('about-us');
+/* Route::get('/about-us', [FrontendController::class, 'about'])->name('about-us'); */
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
 Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');

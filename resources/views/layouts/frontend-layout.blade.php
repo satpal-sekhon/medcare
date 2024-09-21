@@ -374,7 +374,7 @@
         <!-- Footer Section Start -->
         <footer class="section-t-space">
             <div class="container-fluid-lg">
-                <div class="service-section">
+                {{-- <div class="service-section">
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="service-contain">
@@ -422,7 +422,8 @@
                     </div>
                 </div>
 
-                <div class="main-footer section-b-space section-t-space">
+                <div class="main-footer section-b-space section-t-space"> --}}
+                <div class="main-footer section-b-space section-t-space border-0">
                     <div class="row g-md-4 g-3">
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="footer-logo">
@@ -452,116 +453,86 @@
 
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Primary Categories</h4>
+                                <h4>Categories</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
+                                @php
+                                    $footerCategories = \App\Models\Category::select('slug', 'name')->limit(6)->latest()->get();
+                                @endphp
                                 <ul>
+                                    @foreach ($footerCategories as $footerCategory)
                                     <li>
-                                        <a href="#" class="text-content">Medicines</a>
+                                        <a href="{{ route('category.view', $footerCategory->slug) }}" class="text-content">{{ $footerCategory->name }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="text-content">Cosmetic</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Suppliments</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Surgical Items</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Vitamins</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Baby Products</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-xl col-lg-2 col-sm-3">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Categories</h4>
+                                <h4>Brands</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
+                                @php
+                                    $footerBrands = \App\Models\Brand::select('slug', 'name')->limit(6)->latest()->get();
+                                @endphp
                                 <ul>
+                                    @foreach ($footerBrands as $footerBrand)
                                     <li>
-                                        <a href="{{ route('home') }}" class="text-content">Home</a>
+                                        <a href="{{ route('brand.view', $footerBrand->slug) }}" class="text-content">{{ $footerBrand->name }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="text-content">Shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">About Us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Contact Us</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-xl-2 col-sm-3">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Brands</h4>
+                                <h4>Diseases</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
+                                @php
+                                    $footerDiseases = \App\Models\Disease::select('slug', 'name')->limit(6)->latest()->get();
+                                @endphp
                                 <ul>
+                                    @foreach ($footerDiseases as $footerDisease)
                                     <li>
-                                        <a href="#" class="text-content">Your Order</a>
+                                        <a href="{{ route('disease.view', $footerDisease->slug) }}" class="text-content">{{ $footerDisease->name }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="text-content">Your Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Track Order</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('wishlist.index') }}" class="text-content">Your Wishlist</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Search</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">FAQ</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="footer-title d-flex justify-content-between">
-                                <h4>Diseases</h4>
+                                <h4>Quick Links</h4>
                                 <i class="fa-solid fa-chevron-down d-md-none"></i>
                             </div>
 
                             <div class="footer-contain">
                                 <ul>
                                     <li>
-                                        <a href="#" class="text-content">Disease 1</a>
+                                        <a href="{{ route('terms-and-conditions') }}" class="text-content">Terms & Conditions</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="text-content">Disease 2</a>
+                                        <a href="{{ route('privacy-policy') }}" class="text-content">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="text-content">Disease 3</a>
+                                        <a href="{{ route('return-and-refund-policy') }}" class="text-content">Return & Refund Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="text-content">Disease 4</a>
+                                        <a href="{{ route('shipping-and-delivery') }}" class="text-content">Shipping & Delivery</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="text-content">Disease 5</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-content">Disease 6</a>
+                                        <a href="{{ route('about-us') }}" class="text-content">About Us</a>
                                     </li>
                                 </ul>
                             </div>
