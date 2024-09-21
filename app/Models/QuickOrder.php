@@ -21,6 +21,10 @@ class QuickOrder extends Model
         });
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * Generate the next order number.
      *

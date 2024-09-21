@@ -72,7 +72,7 @@ class QuickOrderController extends Controller
     public function get(Request $request){
         $columns = ['id', 'name', 'email', 'phone_number'];
 
-        $query = QuickOrder::query();
+        $query = QuickOrder::with('user');
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -80,7 +80,10 @@ class QuickOrderController extends Controller
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('order_number', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('phone_number', 'like', "%{$search}%");
+                  ->orWhere('phone_number', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($q) use ($search) {
+                    $q->where('user_code', 'like', "%{$search}%");
+                  });
             });
         }
 
@@ -101,6 +104,25 @@ class QuickOrderController extends Controller
         }
 
         $data = $query->skip($request->start)->take($request->length)->get();
+
+        $data = $data->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'user_id' => $order->user_id,
+                'order_number' => $order->order_number,
+                'name' => $order->name,
+                'email' => $order->email,
+                'phone_number' => $order->phone_number,
+                'prescription_path' => $order->prescription_path,
+                'mime_type' => $order->mime_type,
+                'status' => $order->status,
+                'instructions' => $order->instructions,
+                'user' => $order->user ? [
+                    'id' => $order->user->id,
+                    'user_code' => $order->user->user_code,
+                ] : null,
+            ];
+        });
 
         return response()->json([
             "draw" => intval($request->draw),

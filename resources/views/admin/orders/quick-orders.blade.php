@@ -16,7 +16,7 @@
                             <table class="table theme-table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Order No.</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
@@ -83,7 +83,7 @@
                             data: null,
                             name: 'id',
                             render: function(data, type, row, meta) {
-                                return meta.row + 1;
+                                return `#${row.order_number}`;
                             }
                         },
                         {
@@ -95,6 +95,8 @@
 
                                 if(!row.user_id){
                                     userBadge = `<span class="badge badge-warning">Guest</span>`;
+                                } else if(row.user){
+                                    userBadge = `<span class="badge badge-success">#${row.user.user_code}</span>`;
                                 }
 
                                 return `${userBadge} ${row.name}`;
