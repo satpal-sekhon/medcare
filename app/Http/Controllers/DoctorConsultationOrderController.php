@@ -104,6 +104,7 @@ class DoctorConsultationOrderController extends Controller
                 'doctor_qualification' => $doctor->qualification ?? '',
                 'doctor_experience' => $doctor->experience ?? 0.0,
                 'amount_paid' => $doctor->fee ?? 0.00,
+                'status' => 'Awaiting Confirmation',
             ]);
     
             

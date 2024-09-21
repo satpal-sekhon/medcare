@@ -57,7 +57,8 @@ class LabPackageOrderController extends Controller
                 'package_title' => $labPackage->package_title,
                 'package_image' => $labPackage->image,
                 'package_amount' => $labPackage->amount,
-                'included_tests' => json_encode($labPackage->labTests->pluck('name')->toArray())
+                'included_tests' => json_encode($labPackage->labTests->pluck('name')->toArray()),
+                'status' => 'Awaiting Confirmation',
             ]);
 
             $data = [

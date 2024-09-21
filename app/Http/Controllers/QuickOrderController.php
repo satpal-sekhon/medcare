@@ -58,6 +58,7 @@ class QuickOrderController extends Controller
             'email' => $request->input('email'),
             'prescription_path' => $prescriptionPath,
             'mime_type' => $mimeType,
+            'status' => 'Pending',
             'instructions' => $request->input('instructions'),
         ]);
 
