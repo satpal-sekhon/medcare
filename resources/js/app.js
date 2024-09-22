@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import ProductItem from './components/products/ProductItem.vue';
+import SearchBar from './components/SearchBar.vue';
 
 import GenericProducts from './pages/products/GenericProducts.vue';
 import Products from './pages/products/Products.vue';
@@ -16,6 +17,7 @@ import MediaLibrary from './pages/media/MediaLibrary.vue';
 const app = createApp({});
 
 app.component('product-item', ProductItem);
+app.component('search-bar', SearchBar);
 app.component('generic-products', GenericProducts);
 app.component('pharmacy-shops', PharmacyShops);
 
