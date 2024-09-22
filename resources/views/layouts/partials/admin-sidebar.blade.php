@@ -257,6 +257,9 @@
                             <li>
                                 <a href="{{ route('admin.settings.general') }}">General Settings</a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.settings.payment') }}">Payment Settings</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

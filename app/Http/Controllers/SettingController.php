@@ -111,4 +111,30 @@ class SettingController extends Controller
 
         return response()->json(['message' => 'Settings updated successfully!']);
     }
+
+    public function paymentSettings(){
+        return view('admin.settings.payment-settings');
+    }
+
+    public function paymentSettingsUpdate(Request $request){
+        $request->validate([
+            'cod_charges' => 'required|numeric|between:0,999999.99',
+        ]);
+
+        $paymentSettings = [
+            'cod_charges' => [
+                'value' => number_format($request->cod_charges, 2, '.', ''),
+                'description' => 'Charges for cash on delivery',
+            ]
+        ];
+        
+        foreach ($paymentSettings as $key => $setting) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $setting['value']]
+            );
+        }
+
+        return redirect()->route('admin.settings.payment')->with('success', 'Payment settings updated successfully.');
+    }
 }
