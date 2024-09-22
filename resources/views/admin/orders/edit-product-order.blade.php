@@ -21,6 +21,7 @@
                                     <label for="orderStatus">Order Status</label>
                                     <select name="status" class="form-control" id="orderStatus">
                                         <option value="Pending" @selected($order->status == 'Pending')>Pending</option>
+                                        <option value="Awaiting Confirmation" @selected($order->status == 'Awaiting Confirmation')>Awaiting Confirmation</option>
                                         <option value="Shipped" @selected($order->status == 'Shipped')>Shipped</option>
                                         <option value="Completed" @selected($order->status == 'Completed')>Completed</option>
                                         <option value="Canceled" @selected($order->status == 'Canceled')>Canceled</option>

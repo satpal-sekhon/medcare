@@ -26,7 +26,7 @@ class OrderController extends Controller
         $columns = ['id', 'name', 'email', 'phone_number'];
     
         // Eager load the items relationship to calculate sum later
-        $query = Order::query()
+        $query = Order::with('user')
             ->withCount('items as total_quantity')
             ->select('orders.*');
     
@@ -34,7 +34,10 @@ class OrderController extends Controller
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
                 $q->where('shipping_address', 'like', "%{$search}%")
-                  ->orWhere('order_number', 'like', "%{$search}%");
+                  ->orWhere('order_number', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($q) use ($search) {
+                    $q->where('user_code', 'like', "%{$search}%");
+                  });;
             });
         }
 

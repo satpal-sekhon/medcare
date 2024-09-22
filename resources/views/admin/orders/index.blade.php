@@ -75,6 +75,8 @@
 
                                 if(!row.user_id){
                                     userBadge = `<span class="badge badge-warning">Guest</span>`;
+                                } else if(row.user){
+                                    userBadge = `<span class="badge badge-success">#${row.user.user_code}</span>`;
                                 }
 
                                 return `${userBadge} ${JSON.parse(row.shipping_address).customerName}`;
