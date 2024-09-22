@@ -107,7 +107,8 @@
                                 let options = `
                                     <select class="form-control" name="order-status" data-id="${row.id}" style="width: 145px">
                                         <option value="Awaiting Confirmation" ${row.status === 'Awaiting Confirmation' ? 'selected' : ''}>Awaiting Confirmation</option>
-                                        <option value="Pending" ${row.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="Confirmed" ${row.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                                        <option value="In Process" ${row.status === 'In Process' ? 'selected' : ''}>In Process</option>
                                         <option value="Approved" ${row.status === 'Approved' ? 'selected' : ''}>Approved</option>
                                         <option value="Rejected" ${row.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
                                     </select>
