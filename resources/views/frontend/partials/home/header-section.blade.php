@@ -1,8 +1,8 @@
 <section class="home-section pt-0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="slick-slider">
+            <div class="col-12 p-0">
+                <div class="slick-slider d-none d-md-block">
                     <div>
                         @if ($homePage->home_main_banner_image_1_link)
                             <a href="{{$homePage->home_main_banner_image_1_link}}">
@@ -21,15 +21,18 @@
                             </a>
                         @endif
                     </div>
+                </div>
+                <div class="d-block d-md-none">
                     <div>
                         @if ($homePage->home_main_banner_image_3_link)
                             <a href="{{$homePage->home_main_banner_image_3_link}}">
                         @endif
-                        <img src="{{ asset($homePage->home_main_banner_image_3) }}" class="img-fluid" alt="">
+                        <img src="{{ asset($homePage->home_main_banner_image_3) }}" class="img-fluid w-100" alt="">
                         @if ($homePage->home_main_banner_image_3_link)
                             </a>
                         @endif
                     </div>
+
                 </div>
             </div>
         </div>

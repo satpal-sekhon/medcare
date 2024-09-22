@@ -74,10 +74,10 @@ export default {
     },
     methods: {
         increaseQuantity() {
-            this.tempQuantity += 1;
+            this.tempQuantity = parseInt(this.tempQuantity) + 1;
         },
         dicreaseQuantity() {
-            this.tempQuantity -= 1;
+            this.tempQuantity = parseInt(this.tempQuantity) - 1;
         },
         addToCart() {
             this.quantity = this.tempQuantity;
@@ -112,7 +112,7 @@ export default {
             try {
                 let response;
 
-                if (this.quantity === 0) {
+                if (this.quantity === 0 || !this.quantity) {
                     response = await axios.delete(`/cart/${this.productId}`);
                 } else {
                     response = await axios.post('/cart', {

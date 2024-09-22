@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3 col-md-4 product-stock-quantity d-none">
+            <div @class(["mb-3 col-md-4 product-stock-quantity", 'd-none' => ($product->stock_type ?? '') !== 'With Stock'])>
                 <div class="mb-2">
                     <label class="form-label-title">Stock Quantity for Customer</label>
                     <div class="form-group">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3 col-md-4 product-stock-quantity d-none">
+            <div @class(["mb-3 col-md-4 product-stock-quantity", 'd-none' => ($product->stock_type ?? '') !== 'With Stock'])>
                 <div class="mb-2">
                     <label class="form-label-title">Stock Quantity for Vendor</label>
                     <div class="form-group">

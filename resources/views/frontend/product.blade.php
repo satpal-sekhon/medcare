@@ -71,7 +71,7 @@
                     <div class="col-xl-6">
                         <div class="right-box-contain">
                             {{-- <h6 class="offer-top">30% Off</h6> --}}
-                            <h2 class="name">{{ $product->name }} - {{ $product->unit }}</h2>
+                            <h2 class="name">{{ $product->name }} - <span class="productUnitName">{{ $product->unit }}</span></h2>
 
                             <div class="chips-container mb-3">
                                 @if($product->product_type=='Generic')
@@ -144,7 +144,7 @@
 
                                     <div class="select-package">
                                         <select name="variant_id" class="form-control form-select">
-                                            <option value="">{{ $product->name }}</option>
+                                            <option value="">{{ $product->unit }}</option>
                                             @foreach($product->variants as $variant)
                                                 <option value="{{ $variant->id }}" data-variant-price="{{$variant->customer_price}}" data-variant-mrp="{{$variant->mrp}}">{{ $variant->name }}</option>
                                             @endforeach
@@ -156,6 +156,8 @@
                                     <script>
                                         $(function(){
                                             $('[name="variant_id"]').change(function(){
+                                                $('.productUnitName').html($(this).find('option:selected').html());
+
                                                 if($(this).val()){
                                                     let variant_price = $(this).find('option:selected').attr('data-variant-price');
                                                     let variant_mrp = $(this).find('option:selected').attr('data-variant-mrp');
@@ -172,7 +174,7 @@
                                 @endpush
                             @endif
 
-                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}"></quantity-box>
+                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}" :initial-quantity="1"></quantity-box>
 
                             <div class="buy-box">
                                 <a href="#">
@@ -183,40 +185,8 @@
 
                             <div class="payment-option">
                                 <div class="product-title">
-                                    <h4>Guaranteed Safe Checkout</h4>
+                                    <h4>Brand:</h4>
                                 </div>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <img src="{{ asset('assets/images/payment-methods/visa.svg') }}"
-                                                class="lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <img src="{{ asset('assets/images/payment-methods/paypal.svg') }}"
-                                                class="lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <img src="{{ asset('assets/images/payment-methods/master-card.svg') }}"
-                                                class="lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <img src="{{ asset('assets/images/payment-methods/stripe.svg') }}"
-                                                class="lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <img src="{{ asset('assets/images/payment-methods/american-express.svg') }}"
-                                                class="lazyload" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
 
                             <div class="mt-2">

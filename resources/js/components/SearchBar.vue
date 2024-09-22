@@ -80,9 +80,9 @@ export default {
             }
         },
         handleFocusOut() {
-            setTimeout(() => {
+            /* setTimeout(() => {
                 this.showSearch = false;
-            }, 150);
+            }, 150); */
         }
     },
     mounted() {
