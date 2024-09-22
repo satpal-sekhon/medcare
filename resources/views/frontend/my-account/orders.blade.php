@@ -124,6 +124,12 @@
                                     </div>
                                 </li>
                                 <li>
+                                    <div class="size-box">
+                                        <h6 class="text-content">Status:</h6>
+                                        <h5>{{ $order->status }}</h5>
+                                    </div>
+                                </li>
+                                <li>
                                     <div @class(["size-box", "d-block" => getFileTypeByMimeType($order->mime_type) == 'image'])>
                                         <h6 class="text-content">Prescription: </h6>
                                         @if(getFileTypeByMimeType($order->mime_type) == 'image')

@@ -132,6 +132,17 @@ class QuickOrderController extends Controller
         ]);
     }
 
+    public function updateStatus(Request $request){
+        $order = QuickOrder::find($request->id);
+        $order->status = $request->status;
+        $order->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => 'Status Updated successfully!'
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

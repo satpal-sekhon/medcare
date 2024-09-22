@@ -208,6 +208,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('quick-orders', QuickOrderController::class);
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('admin.quick-orders.index');
     Route::post('/quick-orders/get', [QuickOrderController::class, 'get'])->name('quick-orders.get');
+    Route::post('/quick-orders/update-status', [QuickOrderController::class, 'updateStatus'])->name('quick-orders.update-status');
 
     /* Lab package order routes */
     Route::resource('lab-package-orders', LabPackageOrderController::class);
