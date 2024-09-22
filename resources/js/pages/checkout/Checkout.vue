@@ -83,7 +83,8 @@ export default {
                 'PaymentOptions': {
                     isSubmitting: this.isSubmitting,
                     paymentOptions: [
-                        { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' }
+                        { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' },
+                        { id: 'razorpay', label: 'Razorpay', description: 'Pay with multile payment methods' },
                     ]
                 }
             };

@@ -39,6 +39,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { emit } from '../../eventBus';
+
 export default {
     name: 'PaymentOptions',
     props: {
@@ -60,9 +63,26 @@ export default {
             selectedPaymentMethod: null
         };
     },
+    watch: {
+        selectedPaymentMethod(newMethod) {
+            this.applyCharges(newMethod);
+        }
+    },
     methods: {
         isExpanded(id) {
             return this.selectedPaymentMethod === id;
+        },
+        async applyCharges(paymentMethod) {
+            try {
+                const response = await axios.post('/cart/apply-charges', {
+                    paymentMethod: paymentMethod
+                });
+
+                let cartDetails = response.data.cart;
+                emit('updated-cart-fetch', cartDetails);
+            } catch (error) {
+                console.error('Error applying charges:', error);
+            }
         },
         submitForm() {
             if (this.selectedPaymentMethod) {

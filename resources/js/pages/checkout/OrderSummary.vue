@@ -25,9 +25,9 @@
                     <h4 class="price">(-) {{ formatPrice(cart.discount_amount) }}</h4>
                 </li>
 
-                <li>
+                <li v-if="cart.cod_charges">
                     <h4>Shipping</h4>
-                    <h4 class="price">-</h4>
+                    <h4 class="price">{{ formatPrice(cart.cod_charges) }}</h4>
                 </li>
 
                 <li>

@@ -214,4 +214,32 @@ class CartController extends Controller
             'cart' => $cart
         ], 200);
     }
+
+    public function applyCharges(Request $request){
+        $cart = session()->get('cart', []);
+        
+        if($request->paymentMethod == 'cash'){
+            $cod_charges = getSetting('cod_charges') ?? 0;
+            $cart['cod_charges'] = (float) $cod_charges;
+            $cart['total'] =  (float) $cart['sub_total']+$cod_charges;
+        } else {
+            unset($cart['cod_charges']);
+            $cart['total'] =  (float) $cart['sub_total'];
+        }
+
+        session()->put('cart', $cart);
+
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+            $userCart->items = json_encode($cart);
+            $userCart->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Charges applied successfully.',
+            'cart' => $cart
+        ], 200);
+    }
 }
