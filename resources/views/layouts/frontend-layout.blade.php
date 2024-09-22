@@ -340,6 +340,7 @@
                         <i class="iconly-Bag-2 icli fly-cate"></i>
                         <span>Cart</span>
                     </a>
+                    <span class="position-absolute badge bg-danger d-none cartCount" style="top: 4px; right: 40px">2</span>
                 </li>
             </ul>
         </div>

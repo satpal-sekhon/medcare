@@ -66,6 +66,20 @@ export default {
     on('cart-updated', this.handleCartUpdate);
     this.fetchCartData();
   },
+  watch: {
+    'cartDetails.total_items': function(count) {
+      const cartCountElements = document.getElementsByClassName('cartCount');
+      Array.from(cartCountElements).forEach((element) => {
+        if (count > 0) {
+          element.innerHTML = count;
+          element.classList.remove('d-none'); // Remove d-none class
+        } else {
+          element.innerHTML = ''; // Clear content
+          element.classList.add('d-none'); // Add d-none class
+        }
+      });
+    }
+  },
   methods: {
     handleCartUpdate(updatedData) {
       this.cartDetails = updatedData.cart;
