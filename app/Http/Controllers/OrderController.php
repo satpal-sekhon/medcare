@@ -95,6 +95,7 @@ class OrderController extends Controller
             'total' => $cart['total'],
             'discount' => $cart['discount_amount'] ?? null,
             'coupon_code' => $cart['applied_coupon'] ?? '',
+            'status' => 'Awaiting Confirmation',
         ]);
 
         $orderItems = $cart['products'];
