@@ -23,6 +23,14 @@
             </div>
             <div class="mb-3 col-md-4">
                 <div class="mb-2">
+                    <label class="form-label-title">Tax</label>
+                    <div class="form-group">
+                        <input type="number" name="tax_amount" class="form-control" placeholder="Enter amount" value="{{ $product->vendor_price ?? '' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-md-4">
+                <div class="mb-2">
                     <label class="form-label-title">MRP</label>
                     <div class="form-group">
                         <input type="number" name="mrp" class="form-control" placeholder="Enter amount" value="{{ $product->mrp ?? '' }}">
