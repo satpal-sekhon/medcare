@@ -635,6 +635,10 @@
                 arrows: false,
             });
 
+            if ($(window).width() <= 768) {
+                $('.footer-contain').hide();
+            }
+
             $('.main-footer .footer-title').click(function() {
                 if ($(window).width() <= 768) {
                     let content = $(this).next('.footer-contain');
