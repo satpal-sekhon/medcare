@@ -15,11 +15,7 @@
                                 <i data-feather="eye"></i>
                             </a>
                         </li>
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                            <a href="#" class="notifi-wishlist">
-                                <i data-feather="heart"></i>
-                            </a>
-                        </li>
+                       <Wishlist :productId="product.id" />
                     </ul>
                 </a>
             </div>
@@ -43,6 +39,7 @@
 
 <script>
 import QuantityBox from '../../components/cart/QuantityBox.vue';
+import Wishlist from '../../components/Wishlist.vue';
 
 export default {
     name: 'ProductCard',
@@ -53,7 +50,8 @@ export default {
         }
     },
     components: {
-        QuantityBox
+        QuantityBox,
+        Wishlist
     },
     methods: {
         getFlagClass(flag) {

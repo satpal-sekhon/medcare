@@ -646,6 +646,9 @@
         });
     </script>
 
+    <script>
+        window.wishlistItems = @json(session()->get('wishlist', []));
+    </script>
     @stack('scripts')
 </body>
 </html>

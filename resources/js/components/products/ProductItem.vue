@@ -15,11 +15,7 @@
                             <i data-feather="eye"></i>
                         </a>
                     </li>
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                        <a href="#" class="notifi-wishlist">
-                            <i data-feather="heart"></i>
-                        </a>
-                    </li>
+                    <Wishlist :productId="product.id"/>
                 </ul>
             </div>
             <div class="product-detail">
@@ -49,6 +45,7 @@
 
 <script>
 import QuantityBox from '../cart/QuantityBox.vue';
+import Wishlist from '../Wishlist.vue';
 
 export default {
     props: {
@@ -58,7 +55,8 @@ export default {
         },
     },
     components: {
-        QuantityBox
+        QuantityBox,
+        Wishlist
     },
     data() {
         return {
