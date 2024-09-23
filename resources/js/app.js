@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import ProductItem from './components/products/ProductItem.vue';
 import SearchBar from './components/SearchBar.vue';
+import Wishlist from './components/Wishlist.vue';
 
 import GenericProducts from './pages/products/GenericProducts.vue';
 import Products from './pages/products/Products.vue';
@@ -20,6 +21,7 @@ app.component('product-item', ProductItem);
 app.component('search-bar', SearchBar);
 app.component('generic-products', GenericProducts);
 app.component('pharmacy-shops', PharmacyShops);
+app.component('wishlist', Wishlist);
 
 app.component('products', Products);
 app.component('category-products', CategoryProducts);

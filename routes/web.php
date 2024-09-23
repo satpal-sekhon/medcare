@@ -90,7 +90,6 @@ Route::prefix('cart')->group(function () {
     Route::post('/apply-charges', [CartController::class, 'applyCharges'])->name('cart.apply-charges');
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::prefix('/my-account')->group(function () {
         Route::resources([

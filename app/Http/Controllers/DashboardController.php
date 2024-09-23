@@ -12,8 +12,8 @@ class DashboardController extends Controller
 {
     public function index(){
         $diseases = Disease::select('id', 'slug', 'name', 'image')->where('show_on_homepage', true)->limit(10)->get();
-        $categories = Category::select('id', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
-        $brands = Brand::select('id', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
+        $categories = Category::select('id', 'slug', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
+        $brands = Brand::select('id', 'slug', 'name', 'image')->where('show_on_homepage', true)->limit(16)->get();
 
         $generalProducts = Product::where('show_on_homepage', true)
             ->where('status', 'Active')

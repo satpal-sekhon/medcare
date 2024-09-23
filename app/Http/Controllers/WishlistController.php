@@ -28,7 +28,35 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'productId' => 'required|exists:products,id',
+        ]);
+
+        // Initialize wishlist in session if not already set
+        if (!$request->session()->has('wishlist')) {
+            $request->session()->put('wishlist', []);
+        }
+
+        // Get current wishlist
+        $wishlist = $request->session()->get('wishlist');
+
+        // Check if product is already in the wishlist
+        if (in_array($request->productId, $wishlist)) {
+            // Remove the product from wishlist
+            $wishlist = array_diff($wishlist, [$request->productId]);
+            $message = 'Removed from wishlist';
+        } else {
+            // Add product to wishlist
+            $wishlist[] = $request->productId;
+            $message = 'Added to wishlist';
+        }
+
+        $wishlist = array_values($wishlist);
+        
+        // Update the session
+        $request->session()->put('wishlist', array_values($wishlist));
+        
+        return response()->json(['message' => $message, 'data' => $wishlist, 'success' => true], 200);
     }
 
     /**
