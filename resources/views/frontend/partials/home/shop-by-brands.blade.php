@@ -6,7 +6,9 @@
     <div class="shop-by-brands-slider overflow-hidden">
         @foreach ($brands as $brand)
             <div>
-                <img src="{{ asset($brand->image ?? 'assets/images/default/brand.png') }}" alt="{{ $brand->name }}" class="img-fluid p-2">
+                <a href="{{ route('brand.view', $brand->slug) }}">
+                    <img src="{{ asset($brand->image ?? 'assets/images/default/brand.png') }}" alt="{{ $brand->name }}" class="img-fluid p-2">
+                </a>
             </div>
         @endforeach
     </div>

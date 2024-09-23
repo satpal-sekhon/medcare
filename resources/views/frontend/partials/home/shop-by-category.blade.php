@@ -6,7 +6,9 @@
     <div class="shop-by-categories-slider overflow-hidden">
         @foreach ($categories as $category)
             <div>
-                <img src="{{ asset($category->image ?? 'assets/images/default/category.jpg') }}" alt="{{ $category->name }}" class="img-fluid p-2">
+                <a href="{{ route('category.view', $category->slug) }}">
+                    <img src="{{ asset($category->image ?? 'assets/images/default/category.jpg') }}" alt="{{ $category->name }}" class="img-fluid p-2">
+                </a>
             </div>
         @endforeach
     </div>
