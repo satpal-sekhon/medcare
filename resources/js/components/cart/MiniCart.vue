@@ -3,7 +3,6 @@
     <i data-feather="shopping-cart"></i>
     <span class="position-absolute top-0 start-100 translate-middle badge" v-if="cartDetails && cartDetails.total_items">
       {{ cartDetails.total_items }}
-      <span class="visually-hidden">unread messages</span>
     </span>
   </button>
 

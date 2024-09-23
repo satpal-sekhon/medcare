@@ -125,6 +125,9 @@
                                             <a href="{{ route('wishlist.index') }}"
                                                 class="btn p-0 position-relative header-wishlist">
                                                 <i data-feather="heart"></i>
+                                                <span @class(["position-absolute top-0 start-100 translate-middle badge", 'd-none' => count(session()->get('wishlist', [])) === 0])>
+                                                    {{ count(session()->get('wishlist', [])) }}
+                                                </span>
                                             </a>
                                         </li>
                                         <li class="right-side">

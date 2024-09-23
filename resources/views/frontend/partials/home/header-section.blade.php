@@ -1,7 +1,7 @@
 <section class="home-section pt-0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 px-md-3">
                 <div class="slick-slider d-none d-md-block">
                     <div>
                         @if ($homePage->home_main_banner_image_1_link)

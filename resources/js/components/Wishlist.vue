@@ -27,6 +27,13 @@ export default {
             try {
                 const response = await axios.post('/wishlist', { productId: this.productId });
                 window.wishlistItems = response.data.data;
+                $('.header-wishlist .badge').html(window.wishlistItems.length);
+
+                if(window.wishlistItems.length > 0){
+                    $('.header-wishlist .badge').removeClass('d-none')
+                } else {
+                    $('.header-wishlist .badge').addClass('d-none')
+                }
                 this.updateWishlistProduct();
             } catch (error) {
                 console.error('Error adding to wishlist:', error);
