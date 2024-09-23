@@ -13,6 +13,7 @@ import Cart from './pages/Cart.vue';
 import Checkout from './pages/checkout/Checkout.vue';
 import CategoryProducts from './pages/products/CategoryProducts.vue';
 import MediaLibrary from './pages/media/MediaLibrary.vue';
+import WishlistPage from './pages/WishlistPage.vue';
 
 // Create Vue application instance
 const app = createApp({});
@@ -22,6 +23,7 @@ app.component('search-bar', SearchBar);
 app.component('generic-products', GenericProducts);
 app.component('pharmacy-shops', PharmacyShops);
 app.component('wishlist', Wishlist);
+app.component('wishlist-page', WishlistPage);
 
 app.component('products', Products);
 app.component('category-products', CategoryProducts);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        return view('frontend.wishlist');
+        $productIds = session()->get('wishlist', []);
+        $products = Product::select('id', 'primary_category_id', 'category_id', 'brand_id', 'name', 'slug', 'unit', 'thumbnail', 'flag', 'customer_price', 'mrp')->whereIn('id', $productIds)->get();
+        return view('frontend.wishlist', compact('products'));
     }
 
     /**
