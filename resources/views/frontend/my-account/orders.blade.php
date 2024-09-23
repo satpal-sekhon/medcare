@@ -39,7 +39,8 @@
             <div class="tab-content custom-tab">
                 <div class="tab-pane fade show active" id="products" role="tabpanel">
                     @forelse ($orders as $order)
-                        <div class="order-container pt-4">
+                    <div class="mb-3 pb-2" style="background: #f8f8f8">
+                        <div class="order-container ps-3 pt-4 pb-3">
                             <div class="order-icon">
                                 <i data-feather="box"></i>
                             </div>
@@ -47,11 +48,16 @@
                             <div class="order-detail">
                                 <h4>#{{ $order->order_number }} <span>{{ $order->status }}</span></h4>
                                 <h6 class="text-content">Product is Under Process & It Will be Delivered to you on Time.</h6>
+                                <h6 class="text-content"><strong class="fw-bold">Ordered On:</strong> {{ $order->created_at->format('F j, Y') }}</h6>
+
+                                @if ($order->update)                                    
+                                <h6 class="text-content fw-bold m-0 p-0"><span class="text-danger">Order Update:</span> {{ $order->update }}</h6>
+                                @endif
                             </div>
                         </div>
 
                         @foreach($order->items as $item)
-                            <div class="product-order-detail">
+                            <div class="product-order-detail m-3 bg-white">
                                 <a href="#" class="order-image w-120px">
                                     <img src="{{ asset($item->thumbnail) }}" class="lazyload w-120px" alt="">
                                 </a>
@@ -86,6 +92,18 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        <div class="px-3">
+                            <p><strong>Payment Method:</strong> {{ $order->payment_method }}</p>
+                            <p><strong>Sub Total:</strong> ₹{{ $order->sub_total }}</p>
+                            @if ($order->discount)
+                            <p><strong>Applied Coupon Code:</strong> ₹{{ $order->coupon_code }}</p>
+                            <p><strong>Discount:</strong> ₹{{ $order->discount }}</p>
+                            @endif
+                            <p><strong>Shipping Charges:</strong> ₹{{ $order->total - $order->sub_total }}</p>
+                            <p><strong>Total:</strong> ₹{{ $order->total }}</p>
+                        </div>
+                    </div>
                         @empty
                         <div class="p-md-4">
                             <x-warning-message message="You don't have any products order yet"></x-warning-message>

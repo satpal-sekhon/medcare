@@ -174,6 +174,7 @@ class OrderController extends Controller
     {
         $order->status = $request->status;
         $order->payment_status = $request->payment_status;
+        $order->update = $request->order_update;
         $order->save();
 
         return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully!');

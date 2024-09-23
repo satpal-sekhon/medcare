@@ -39,6 +39,10 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-12 mt-3">
+                                <x-form-input name="order_update" label="Order Update" value="{{ $order->update }}"></x-form-input>
+                            </div>
                         </div>
 
                         <div class="d-flex gap-3 mt-3">
