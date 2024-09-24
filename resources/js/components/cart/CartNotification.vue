@@ -3,7 +3,7 @@
         <div class="cart-notification-content">
             <img :src="`/${product.image}`" alt="Product Image" class="product-image" />
             <div class="product-details">
-                <p class="product-name">{{ product.name }}</p>
+                <p class="product-name">{{ product.name }}-{{ product.unit }}</p>
                 <a href="/cart" class="go-to-cart-button">Go to Cart</a>
             </div>
         </div>

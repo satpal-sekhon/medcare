@@ -35,7 +35,7 @@ class CartController extends Controller
 
         // Retrieve product details from the database
         $product = Product::with('brand', 'category', 'primaryCategory', 'variants')
-            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail')
+            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'unit', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail')
             ->find($productId);
 
         if (!$product) {
@@ -54,11 +54,14 @@ class CartController extends Controller
                 $cart['products'][$productId]['variants'][$variantId]['quantity'] = $quantity;
                 $cart_status = 'UPDATED';
             } else {
+                $variant = $product->variants->where('id', $variantId)->first();
+
                 // Add new variant to the cart
                 $cart['products'][$productId]['variants'][$variantId] = [
                     'quantity' => $quantity,
                     'product_id' => $product->id,
                     'variant_id' => $variantId,
+                    'unit' => $variant->name,
                     'primary_category_id' => $product->primary_category_id,
                     'brand_id' => $product->brand_id,
                     'name' => $product->name,
@@ -76,9 +79,9 @@ class CartController extends Controller
             }
         } else {
             // Handle product without variants
-            if (isset($cart['products'][$productId])) {
+            if (isset($cart['products'][$productId]['quantity'])) {
                 // Update the quantity for the existing product
-                $cart['products'][$productId]['quantity'] += $quantity;
+                $cart['products'][$productId]['quantity'] += $quantity ?? 0;
                 $cart_status = 'UPDATED';
             } else {
                 // Add new product to the cart
@@ -88,6 +91,7 @@ class CartController extends Controller
                     'primary_category_id' => $product->primary_category_id,
                     'brand_id' => $product->brand_id,
                     'name' => $product->name,
+                    'unit' => $product->unit,
                     'slug' => $product->slug,
                     'product_type' => $product->product_type,
                     'price' => $product->customer_price,
@@ -112,7 +116,7 @@ class CartController extends Controller
         // Iterate through products to sum total quantities including variants
         foreach ($cart['products'] as $product) {
             // Add product quantity
-            $totalItems += $product['quantity'];
+            $totalItems += $product['quantity'] ?? 0;
 
             // If the product has variants, sum their quantities
             if (isset($product['variants'])) {

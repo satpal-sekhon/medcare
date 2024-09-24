@@ -1,6 +1,6 @@
 <template>
     <div v-if="variant === 'product-detail'">
-        <div class="product-package">
+        <div class="product-package" v-if="variants.length > 0">
             <div class="product-title">
                 <h4>Variant</h4>
             </div>
@@ -109,10 +109,17 @@ export default {
         },
         updateVariant(variantId) {
             const selectedVariant = this.variants.find(variant => variant.id == variantId);
+
             if (selectedVariant) {
                 this.variantId  = selectedVariant.id;
+                $('.productUnitName').html(selectedVariant.name);
+                $(`.main-product-price`).html(`₹${selectedVariant.customer_price}`);
+                $(`.main-product-mrp`).html(`₹${selectedVariant.mrp}`);
             } else {
-                this.variantId = this.product.id;
+                this.variantId = 0;
+                $('.productUnitName').html(this.product.unit);
+                $(`.main-product-price`).html(`₹${this.product.customer_price}`);
+                $(`.main-product-mrp`).html(`₹${this.product.mrp}`);
             }
         },
         handleCartUpdate(updatedData) {
@@ -161,6 +168,10 @@ export default {
 
                 if (response.data.status && response.data.status === 'ADDED') {
                     let addedProduct = response.data.cart.products[this.productId] || {};
+
+                    if(this.variantId > 0){
+                        addedProduct = response.data.cart.products[this.productId].variants[this.variantId];
+                    }
                     this.renderNotification(addedProduct);
                 }
 
@@ -190,9 +201,9 @@ export default {
                     },
                     template: '<CartNotification :show="showNotification" :product="addedProduct" />',
                     mounted() {
-                        setTimeout(() => {
+                        /* setTimeout(() => {
                             container.innerHTML = '';
-                        }, 3000);
+                        }, 3000); */
                     }
                 });
 
