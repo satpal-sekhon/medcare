@@ -85,7 +85,7 @@ export default {
         return {
             quantity: this.initialQuantity,
             isAddToCartDisabled: false,
-            tempQuantity: this.initialQuantity,
+            tempQuantity: this.initialQuantity || 1,
             showNotification: false,
             variantId: 0
         };
@@ -111,9 +111,9 @@ export default {
             const selectedVariant = this.variants.find(variant => variant.id == variantId);
 
             if (selectedVariant) {
-                let variants = window.cart.products[this.productId].variants || {};
+                let variants = window.cart.products[this.productId]?.variants || {};
                 if(variants[selectedVariant.id]){
-                    this.tempQuantity = variants[selectedVariant.id].quantity;
+                    this.tempQuantity = variants[selectedVariant.id].quantity || 1;
                 } else {
                     this.tempQuantity = 1;
                 }
@@ -126,7 +126,7 @@ export default {
                 this.variantId = 0;
 
                 if(window.cart.products[this.productId] || null){
-                    this.tempQuantity = window.cart.products[this.productId].quantity;
+                    this.tempQuantity = window.cart.products[this.productId].quantity || 1;
                 } else {
                     this.tempQuantity = 1;
                 }
@@ -140,7 +140,7 @@ export default {
             if (updatedData) {
                 if (updatedData.products && updatedData.products[this.productId]) {
                     this.quantity = updatedData.products[this.productId].quantity;
-                    this.tempQuantity = this.quantity;
+                    this.tempQuantity = this.quantity || 1;
                 }
             }
         },

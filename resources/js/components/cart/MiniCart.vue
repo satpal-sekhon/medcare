@@ -11,7 +11,7 @@
 
       <ul class="cart-list">
         <li v-for="(item, id) in cartDetails.products" :key="id" class="product-box-contain w-100">
-          <div class="drop-cart">
+          <div class="drop-cart" v-if="item.quantity">
             <a :href="`/product/${item.slug}`" class="drop-image">
               <img :src="`/${item.image}`" class="lazyload mh-100px" :alt="item.name" />
             </a>
@@ -42,7 +42,7 @@
                 <span>{{ item.quantity }} x</span>
                 {{ formatPrice(item.price) }}
               </h6>
-              <button @click="removeItem(id)" class="close-button close_button">
+              <button @click="removeItem(item.product_id, item.variant_id)" class="close-button close_button">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
@@ -114,12 +114,12 @@ export default {
     handleCartUpdate(updatedData) {
       this.cartDetails = updatedData.cart;
     },
-    async removeItem(productId) {
+    async removeItem(productId, variantId = 0) {
       try {
         this.isLoading = true;  // Start loading
-        const response = await axios.delete(`/cart/${productId}`);
+        const response = await axios.delete(`/cart/${productId}`, { data: { variantId } });
         this.cartDetails = response.data.cart;
-        emit('product-quantity-updated', productId, 0);
+        emit('product-quantity-updated', productId, 1);
       } catch (error) {
         this.error = 'Error removing item from cart';  // Handle error
         console.error('Error removing item from cart:', error.response?.data || error.message);

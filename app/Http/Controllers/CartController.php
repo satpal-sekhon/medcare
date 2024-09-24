@@ -67,8 +67,8 @@ class CartController extends Controller
                     'name' => $product->name,
                     'slug' => $product->slug,
                     'product_type' => $product->product_type,
-                    'price' => $product->customer_price,
-                    'mrp' => $product->mrp,
+                    'price' => $variant->customer_price,
+                    'mrp' => $variant->mrp,
                     'flag' => $product->flag,
                     'brand' => $product->brand->name,
                     'primary_category' => $product->primaryCategory->name,
@@ -180,10 +180,16 @@ class CartController extends Controller
     }
 
     // Delete item from the cart
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
         // Retrieve the current cart from the session
         $cart = session()->get('cart', []);
+
+        if(isset($request->variantId) && $request->variantId > 0){
+            if (!isset($cart['products'][$id]['variants'][$request->variantId])) {
+                return response()->json(['error' => 'Item not found in cart!'], 404);
+            }
+        }
 
         // Check if the item exists in the cart
         if (!isset($cart['products'][$id])) {
@@ -191,7 +197,15 @@ class CartController extends Controller
         }
 
         // Remove the item from the cart
-        unset($cart['products'][$id]);
+        if(isset($request->variantId) && $request->variantId > 0){
+            unset($cart['products'][$id]['variants'][$request->variantId]);
+        } else if(isset($cart['products'][$id]['variants'])){
+            $variants = $cart['products'][$id]['variants'];
+            unset($cart['products'][$id]);
+            $cart['products'][$id]['variants'] = $variants;
+        } else {
+            unset($cart['products'][$id]);
+        }
 
         // Calculate the new total
         $cart['total'] = $this->calculateTotal($cart['products']);
