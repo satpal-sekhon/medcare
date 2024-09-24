@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
 use App\Models\Cart;
 use App\Models\State;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -19,6 +20,7 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
+            $this->syncWishlist();
 
             if ($user->hasRole('Customer')) {
                 return redirect()->route('my-account');
@@ -234,8 +236,8 @@ class AuthController extends Controller
             ]);
         } else {
             if (Auth::attempt($credentials)) {
-
                 $this->mergeGuestCartToUser();
+                $this->syncWishlist();
 
                 $request->session()->regenerate();
 
@@ -250,6 +252,25 @@ class AuthController extends Controller
         return back()->withErrors([
             'message' => 'Invalid login credentials',
         ]);
+    }
+
+    protected function syncWishlist()
+    {
+        $wishlist = session()->get('wishlist', []);
+        $userId = Auth::id();
+
+        foreach ($wishlist as $productId) {
+            Wishlist::updateOrCreate([
+                'user_id' => $userId,
+                'product_id' => $productId,
+            ]);
+        }
+
+        $savedWishlist = Wishlist::where('user_id', $userId)
+            ->pluck('product_id')
+            ->toArray();
+
+        session()->put('wishlist', $savedWishlist);
     }
 
     protected function mergeGuestCartToUser()
