@@ -8,7 +8,8 @@
             <div class="select-package">
                 <select name="variant_id" class="form-control form-select" @change="updateVariant($event.target.value)">
                     <option :value="0">{{ product.unit }}</option>
-                    <option v-for="variant in variants" :key="variant.id" :value="variant.id">{{ variant.name }}</option>
+                    <option v-for="variant in variants" :key="variant.id" :value="variant.id">{{ variant.name }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -99,7 +100,7 @@ export default {
             this.tempQuantity = parseInt(this.tempQuantity) + 1;
         },
         dicreaseQuantity() {
-            if(parseInt(this.tempQuantity)!==1 && this.variant==='product-detail'){
+            if (parseInt(this.tempQuantity) !== 1 && this.variant === 'product-detail') {
                 this.tempQuantity = parseInt(this.tempQuantity) - 1;
             }
         },
@@ -111,22 +112,30 @@ export default {
             const selectedVariant = this.variants.find(variant => variant.id == variantId) || null;
 
             if (selectedVariant) {
-                let variants = window.cart.products[this.productId]?.variants || {};
-                if(variants[selectedVariant.id]){
-                    this.tempQuantity = variants[selectedVariant.id].quantity || 1;
+                if (window.cart.products) {
+                    let variants = window.cart.products[this.productId]?.variants || {};
+                    if (variants[selectedVariant.id]) {
+                        this.tempQuantity = variants[selectedVariant.id].quantity || 1;
+                    } else {
+                        this.tempQuantity = 1;
+                    }
                 } else {
                     this.tempQuantity = 1;
                 }
 
-                this.variantId  = selectedVariant.id;
+                this.variantId = selectedVariant.id;
                 $('.productUnitName').html(selectedVariant.name);
                 $(`.main-product-price`).html(`₹${selectedVariant.customer_price}`);
                 $(`.main-product-mrp`).html(`₹${selectedVariant.mrp}`);
             } else {
                 this.variantId = 0;
 
-                if(window.cart.products[this.productId] || null){
-                    this.tempQuantity = window.cart.products[this.productId].quantity || 1;
+                if (window.cart.products) {
+                    if (window.cart.products[this.productId] || null) {
+                        this.tempQuantity = window.cart.products[this.productId].quantity || 1;
+                    } else {
+                        this.tempQuantity = 1;
+                    }
                 } else {
                     this.tempQuantity = 1;
                 }
@@ -173,7 +182,7 @@ export default {
                         quantity: this.quantity,
                     }
 
-                    if(this.variantId > 0){
+                    if (this.variantId > 0) {
                         payload.variantId = this.variantId;
                     }
 
@@ -183,7 +192,7 @@ export default {
                 if (response.data.status && response.data.status === 'ADDED') {
                     let addedProduct = response.data.cart.products[this.productId] || {};
 
-                    if(this.variantId > 0){
+                    if (this.variantId > 0) {
                         addedProduct = response.data.cart.products[this.productId].variants[this.variantId];
                     }
                     this.renderNotification(addedProduct);
