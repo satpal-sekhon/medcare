@@ -81,7 +81,7 @@ class CartController extends Controller
             // Handle product without variants
             if (isset($cart['products'][$productId]['quantity'])) {
                 // Update the quantity for the existing product
-                $cart['products'][$productId]['quantity'] += $quantity ?? 0;
+                $cart['products'][$productId]['quantity'] = $quantity ?? 0;
                 $cart_status = 'UPDATED';
             } else {
                 // Add new product to the cart

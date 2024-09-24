@@ -111,12 +111,26 @@ export default {
             const selectedVariant = this.variants.find(variant => variant.id == variantId);
 
             if (selectedVariant) {
+                let variants = window.cart.products[this.productId].variants || {};
+                if(variants[selectedVariant.id]){
+                    this.tempQuantity = variants[selectedVariant.id].quantity;
+                } else {
+                    this.tempQuantity = 1;
+                }
+
                 this.variantId  = selectedVariant.id;
                 $('.productUnitName').html(selectedVariant.name);
                 $(`.main-product-price`).html(`₹${selectedVariant.customer_price}`);
                 $(`.main-product-mrp`).html(`₹${selectedVariant.mrp}`);
             } else {
                 this.variantId = 0;
+
+                if(window.cart.products[this.productId] || null){
+                    this.tempQuantity = window.cart.products[this.productId].quantity;
+                } else {
+                    this.tempQuantity = 1;
+                }
+
                 $('.productUnitName').html(this.product.unit);
                 $(`.main-product-price`).html(`₹${this.product.customer_price}`);
                 $(`.main-product-mrp`).html(`₹${this.product.mrp}`);
@@ -201,9 +215,9 @@ export default {
                     },
                     template: '<CartNotification :show="showNotification" :product="addedProduct" />',
                     mounted() {
-                        /* setTimeout(() => {
+                        setTimeout(() => {
                             container.innerHTML = '';
-                        }, 3000); */
+                        }, 3000);
                     }
                 });
 

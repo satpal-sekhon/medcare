@@ -29,6 +29,25 @@
             </div>
           </div>
         </li>
+        <li v-for="(item, id) in allVariants" :key="id" class="product-box-contain w-100">
+          <div class="drop-cart">
+            <a :href="`/product/${item.slug}`" class="drop-image">
+              <img :src="`/${item.image}`" class="lazyload mh-100px" :alt="item.name" />
+            </a>
+            <div class="drop-contain">
+              <a :href="`/product/${item.slug}`">
+                <h5>{{ item.name }}</h5>
+              </a>
+              <h6>
+                <span>{{ item.quantity }} x</span>
+                {{ formatPrice(item.price) }}
+              </h6>
+              <button @click="removeItem(id)" class="close-button close_button">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+        </li>
       </ul>
 
       <div class="price-box">
@@ -64,6 +83,18 @@ export default {
   created() {
     on('cart-updated', this.handleCartUpdate);
     this.fetchCartData();
+  },
+  computed: {
+    allVariants() {
+      const variants = [];
+      for (const productId in this.cartDetails.products) {
+        const product = this.cartDetails.products[productId];
+        for (const variantId in product.variants) {
+          variants.push(product.variants[variantId]);
+        }
+      }
+      return variants;
+    }
   },
   watch: {
     'cartDetails.total_items': function(count) {
