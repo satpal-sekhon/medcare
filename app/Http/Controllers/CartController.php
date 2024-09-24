@@ -25,14 +25,16 @@ class CartController extends Controller
         // Validate request input
         $validated = $request->validate([
             'productId' => 'required|integer|exists:products,id',
+            'variantId' => 'sometimes|integer|exists:product_variants,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
         $productId = $validated['productId'];
+        $variantId = $validated['variantId'] ?? null; 
         $quantity = $validated['quantity'];
 
         // Retrieve product details from the database
-        $product = Product::with('brand', 'category', 'primaryCategory')
+        $product = Product::with('brand', 'category', 'primaryCategory', 'variants')
             ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail')
             ->find($productId);
 
@@ -45,30 +47,59 @@ class CartController extends Controller
         $cart_status = '';
 
         // Check if the item already exists in the cart
-        if (isset($cart['products'][$productId])) {
-            // Update the quantity
-            $cart['products'][$productId]['quantity'] = $quantity;
-            $cart_status = 'UPDATED';
+        if ($product->variants->isNotEmpty() && $variantId) {
+            // Handle product with variants
+            if (isset($cart['products'][$productId]['variants'][$variantId])) {
+                // Update the quantity for the existing variant
+                $cart['products'][$productId]['variants'][$variantId]['quantity'] = $quantity;
+                $cart_status = 'UPDATED';
+            } else {
+                // Add new variant to the cart
+                $cart['products'][$productId]['variants'][$variantId] = [
+                    'quantity' => $quantity,
+                    'product_id' => $product->id,
+                    'variant_id' => $variantId,
+                    'primary_category_id' => $product->primary_category_id,
+                    'brand_id' => $product->brand_id,
+                    'name' => $product->name,
+                    'slug' => $product->slug,
+                    'product_type' => $product->product_type,
+                    'price' => $product->customer_price,
+                    'mrp' => $product->mrp,
+                    'flag' => $product->flag,
+                    'brand' => $product->brand->name,
+                    'primary_category' => $product->primaryCategory->name,
+                    'category' => $product->category->name,
+                    'image' => $product->thumbnail,
+                ];
+                $cart_status = 'ADDED';
+            }
         } else {
-            // Add new item to the cart with detailed information
-            $cart['products'][$productId] = [
-                'quantity' => $quantity,
-                'product_id' => $product->id,
-                'primary_category_id' => $product->primary_category_id,
-                'brand_id' => $product->brand_id,
-                'product_id' => $product->id,
-                'name' => $product->name,
-                'slug' => $product->slug,
-                'product_type' => $product->product_type,
-                'price' => $product->customer_price,
-                'mrp' => $product->mrp,
-                'flag' => $product->flag,
-                'brand' => $product->brand->name,
-                'primary_category' => $product->primaryCategory->name,
-                'category' => $product->category->name,
-                'image' => $product->thumbnail,
-            ];
-            $cart_status = 'ADDED';
+            // Handle product without variants
+            if (isset($cart['products'][$productId])) {
+                // Update the quantity for the existing product
+                $cart['products'][$productId]['quantity'] += $quantity;
+                $cart_status = 'UPDATED';
+            } else {
+                // Add new product to the cart
+                $cart['products'][$productId] = [
+                    'quantity' => $quantity,
+                    'product_id' => $product->id,
+                    'primary_category_id' => $product->primary_category_id,
+                    'brand_id' => $product->brand_id,
+                    'name' => $product->name,
+                    'slug' => $product->slug,
+                    'product_type' => $product->product_type,
+                    'price' => $product->customer_price,
+                    'mrp' => $product->mrp,
+                    'flag' => $product->flag,
+                    'brand' => $product->brand->name,
+                    'primary_category' => $product->primaryCategory->name,
+                    'category' => $product->category->name,
+                    'image' => $product->thumbnail,
+                ];
+                $cart_status = 'ADDED';
+            }
         }
 
         // Calculate the new total
@@ -76,7 +107,24 @@ class CartController extends Controller
         $cart['total'] = $this->calculateTotal($cart['products']);
 
         // Calculate the total number of items in the cart
-        $cart['total_items'] = array_sum(array_column($cart['products'], 'quantity'));
+        $totalItems = 0;
+
+        // Iterate through products to sum total quantities including variants
+        foreach ($cart['products'] as $product) {
+            // Add product quantity
+            $totalItems += $product['quantity'];
+
+            // If the product has variants, sum their quantities
+            if (isset($product['variants'])) {
+                foreach ($product['variants'] as $variant) {
+                    $totalItems += $variant['quantity'];
+                }
+            }
+        }
+
+        // Set total_items
+        $cart['total_items'] = $totalItems;
+
 
         $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;
 
@@ -97,7 +145,14 @@ class CartController extends Controller
     {
         $total = 0;
         foreach ($products as $product) {
-            $total += $product['price'] * $product['quantity'];
+            $total += ($product['price'] ?? 0) * ($product['quantity'] ?? 0);
+
+            if(isset($product['variants'])){
+                foreach($product['variants'] as $variant){
+                    $total += ($variant['price'] ?? 0) * ($variant['quantity'] ?? 0);
+                }
+            }
+
         }
         return $total;
     }

@@ -136,45 +136,7 @@
                                 </div> --}}
                             </div>
 
-                            @if($product->variants->count() > 0)
-                                <div class="product-package">
-                                    <div class="product-title">
-                                        <h4>Variant</h4>
-                                    </div>
-
-                                    <div class="select-package">
-                                        <select name="variant_id" class="form-control form-select">
-                                            <option value="">{{ $product->unit }}</option>
-                                            @foreach($product->variants as $variant)
-                                                <option value="{{ $variant->id }}" data-variant-price="{{$variant->customer_price}}" data-variant-mrp="{{$variant->mrp}}">{{ $variant->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                @push('scripts')
-                                    <script>
-                                        $(function(){
-                                            $('[name="variant_id"]').change(function(){
-                                                $('.productUnitName').html($(this).find('option:selected').html());
-
-                                                if($(this).val()){
-                                                    let variant_price = $(this).find('option:selected').attr('data-variant-price');
-                                                    let variant_mrp = $(this).find('option:selected').attr('data-variant-mrp');
-
-                                                    $('.main-product-price').html(`₹${variant_price}`);
-                                                    $('.main-product-mrp').html(`₹${variant_mrp}`);
-                                                } else {
-                                                    $('.main-product-price').html(`₹{{ $product->customer_price }}`);
-                                                    $('.main-product-mrp').html(`₹{{ $product->mrp }}`);
-                                                }
-                                            })
-                                        })
-                                    </script>
-                                @endpush
-                            @endif
-
-                            <quantity-box variant="product-detail" :product-Id="{{ $product->id }}" :initial-quantity="1"></quantity-box>
+                            <quantity-box variant="product-detail" :variants="{{ json_encode($product->variants) }}" :product="{{ json_encode($product) }}" :product-Id="{{ $product->id }}" :initial-quantity="1"></quantity-box>
 
                             <div class="buy-box">
                                 <wishlist :product-id="{{ $product->id }}" with-label="Add To Wishlist" with-saved-label="Added To Wishlist"></wishlist>

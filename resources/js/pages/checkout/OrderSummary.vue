@@ -35,11 +35,6 @@
                     <h4 class="price">-</h4>
                 </li>
 
-                <li class="d-none">
-                    <h4>Coupon/Code</h4>
-                    <h4 class="price">-</h4>
-                </li>
-
                 <li class="list-total">
                     <h4>Total (INR)</h4>
                     <h4 class="price">{{ formatPrice(cart.total) }}</h4>

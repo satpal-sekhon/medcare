@@ -1,5 +1,18 @@
 <template>
     <div v-if="variant === 'product-detail'">
+        <div class="product-package">
+            <div class="product-title">
+                <h4>Variant</h4>
+            </div>
+
+            <div class="select-package">
+                <select name="variant_id" class="form-control form-select" @change="updateVariant($event.target.value)">
+                    <option :value="0">{{ product.unit }}</option>
+                    <option v-for="variant in variants" :key="variant.id" :value="variant.id">{{ variant.name }}</option>
+                </select>
+            </div>
+        </div>
+
         <div class="note-box product-package">
             <div class="cart_qty qty-box product-qty">
                 <div class="input-group">
@@ -55,6 +68,14 @@ export default {
             type: Number,
             required: true
         },
+        product: {
+            type: Object,
+            default: {}
+        },
+        variants: {
+            type: Array,
+            default: []
+        },
         variant: {
             type: String,
             default: null
@@ -66,6 +87,7 @@ export default {
             isAddToCartDisabled: false,
             tempQuantity: this.initialQuantity,
             showNotification: false,
+            variantId: 0
         };
     },
     created() {
@@ -77,14 +99,24 @@ export default {
             this.tempQuantity = parseInt(this.tempQuantity) + 1;
         },
         dicreaseQuantity() {
-            this.tempQuantity = parseInt(this.tempQuantity) - 1;
+            if(parseInt(this.tempQuantity)!==1 && this.variant==='product-detail'){
+                this.tempQuantity = parseInt(this.tempQuantity) - 1;
+            }
         },
         addToCart() {
             this.quantity = this.tempQuantity;
             this.updateCart();
         },
+        updateVariant(variantId) {
+            const selectedVariant = this.variants.find(variant => variant.id == variantId);
+            if (selectedVariant) {
+                this.variantId  = selectedVariant.id;
+            } else {
+                this.variantId = this.product.id;
+            }
+        },
         handleCartUpdate(updatedData) {
-            if(updatedData){
+            if (updatedData) {
                 if (updatedData.products && updatedData.products[this.productId]) {
                     this.quantity = updatedData.products[this.productId].quantity;
                     this.tempQuantity = this.quantity;
@@ -115,13 +147,19 @@ export default {
                 if (this.quantity === 0 || !this.quantity) {
                     response = await axios.delete(`/cart/${this.productId}`);
                 } else {
-                    response = await axios.post('/cart', {
+                    let payload = {
                         productId: this.productId,
-                        quantity: this.quantity
-                    });
+                        quantity: this.quantity,
+                    }
+
+                    if(this.variantId > 0){
+                        payload.variantId = this.variantId;
+                    }
+
+                    response = await axios.post('/cart', payload);
                 }
 
-                if(response.data.status && response.data.status==='ADDED'){
+                if (response.data.status && response.data.status === 'ADDED') {
                     let addedProduct = response.data.cart.products[this.productId] || {};
                     this.renderNotification(addedProduct);
                 }
