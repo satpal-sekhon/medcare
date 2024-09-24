@@ -177,10 +177,7 @@
                             <quantity-box variant="product-detail" :product-Id="{{ $product->id }}" :initial-quantity="1"></quantity-box>
 
                             <div class="buy-box">
-                                <a href="#">
-                                    <i data-feather="heart"></i>
-                                    <span>Add To Wishlist</span>
-                                </a>
+                                <wishlist :product-id="{{ $product->id }}" with-label="Add To Wishlist" with-saved-label="Added To Wishlist"></wishlist>
                             </div>
 
                             <div class="payment-option">

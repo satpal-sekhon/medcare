@@ -88,7 +88,7 @@
 
                                 <td class="save-remove">
                                     <h4 class="table-title text-content">Action</h4>
-                                    <a class="save notifi-wishlist" href="javascript:void(0)">Save for later</a>
+                                    <a class="save notifi-wishlist" href="javascript:void(0)" @click="addToWishlist(item.product_id)">Save for later</a>
                                     <a class="remove close_button" href="javascript:void(0)"
                                         @click="removeItem(item.product_id)">Remove</a>
                                 </td>
@@ -209,6 +209,25 @@ export default {
         formatPrice(amount) {
             if (amount == null || isNaN(amount)) { return `-` }
             return `₹${parseFloat(amount).toFixed(2)}`;
+        },
+        async addToWishlist(productId) {
+            if(!window.wishlistItems.includes(productId)){
+                try {
+                    const response = await axios.post('/wishlist', { productId: parseInt(productId) });
+                    window.wishlistItems = response.data.data;
+                    $('.wishlist-count').html(window.wishlistItems.length);
+
+                    if(window.wishlistItems.length > 0){
+                        $('.wishlist-count').removeClass('d-none')
+                    } else {
+                        $('.wishlist-count').addClass('d-none')
+                    }
+                } catch (error) {
+                    console.error('Error adding to wishlist:', error);
+                }
+            }
+
+            this.removeItem(productId);
         },
         async removeItem(productId) {
             try {

@@ -2,6 +2,8 @@
     <li>
         <a href="javascript:void(0)" class="notifi-wishlist" :class="{ added: isAddedToWishlist }" @click="addToWishlist">
             <i data-feather="heart"></i>
+            <span v-if="!isAddedToWishlist">{{withLabel}}</span>
+            <span v-else>{{withSavedLabel}}</span>
         </a>
     </li>
 </template>
@@ -20,6 +22,14 @@ export default {
         productId: {
             type: Number,
             required: true
+        },
+        withLabel: {
+            type: String,
+            default: ""
+        },
+        withSavedLabel: {
+            type: String,
+            default: ""
         }
     },
     methods: {
