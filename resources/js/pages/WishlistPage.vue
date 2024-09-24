@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-        <div class="col-xxl-2 col-lg-3 col-md-4 col-6 product-box-contain" v-for="product in localProducts">
-            <div class="product-box-3 h-100">
+        <div class="product-box-contain" :class="customGridClass" v-for="product in localProducts">
+            <div class="product-box-3 h-100" :class="additionalProductClass">
                 <div class="product-header">
                     <div class="d-inline px-3 py-1 text-white" v-if="product.flag && product.flag !== 'Casual'"
                         :class="getFlagClass(product.flag)">
@@ -55,6 +55,14 @@ export default {
         products: {
             type: Array,
             required: true
+        },
+        customGridClass: {
+            type: String,
+            default: "col-xxl-2 col-lg-3 col-md-4 col-6"
+        },
+        additionalProductClass: {
+            type: String,
+            default: ""
         }
     },
     components: {

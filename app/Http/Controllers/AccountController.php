@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\DoctorConsultationOrder;
 use App\Models\LabPackageOrder;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\QuickOrder;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +26,9 @@ class AccountController extends Controller
 
     public function wishlist()
     {
-        return view('frontend.my-account.wishlist');
+        $productIds = session()->get('wishlist', []);
+        $products = Product::select('id', 'primary_category_id', 'category_id', 'brand_id', 'name', 'slug', 'unit', 'thumbnail', 'flag', 'customer_price', 'mrp')->whereIn('id', $productIds)->get();
+        return view('frontend.my-account.wishlist', compact('products'));
     }
 
     public function orders()
