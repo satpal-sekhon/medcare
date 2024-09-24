@@ -211,7 +211,24 @@ class CartController extends Controller
         $cart['total'] = $this->calculateTotal($cart['products']);
 
         // Calculate the total number of items in the cart
-        $cart['total_items'] = array_sum(array_column($cart['products'], 'quantity'));
+        $totalItems = 0;
+
+        // Iterate through products to sum total quantities including variants
+        foreach ($cart['products'] as $product) {
+            // Add product quantity
+            $totalItems += $product['quantity'] ?? 0;
+
+            // If the product has variants, sum their quantities
+            if (isset($product['variants'])) {
+                foreach ($product['variants'] as $variant) {
+                    $totalItems += $variant['quantity'];
+                }
+            }
+        }
+
+        // Set total_items
+        $cart['total_items'] = $totalItems;
+
 
         // Handle applied coupons if needed
         $cart['applied_coupon'] = $cart['applied_coupon'] ?? null;

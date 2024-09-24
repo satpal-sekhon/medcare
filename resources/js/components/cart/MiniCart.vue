@@ -1,10 +1,10 @@
 <template>
-  <button type="button" class="btn p-0 position-relative header-wishlist">
+  <a href="/cart" class="btn p-0 position-relative header-wishlist">
     <i data-feather="shopping-cart"></i>
     <span class="position-absolute top-0 start-100 translate-middle badge" v-if="cartDetails && cartDetails.total_items">
       {{ cartDetails.total_items }}
     </span>
-  </button>
+  </a>
 
   <div class="onhover-div">
     <div class="mini-cart-container" v-if="cartDetails && cartDetails.total_items">

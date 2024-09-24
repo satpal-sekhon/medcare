@@ -108,7 +108,7 @@ export default {
             this.updateCart();
         },
         updateVariant(variantId) {
-            const selectedVariant = this.variants.find(variant => variant.id == variantId);
+            const selectedVariant = this.variants.find(variant => variant.id == variantId) || null;
 
             if (selectedVariant) {
                 let variants = window.cart.products[this.productId]?.variants || {};
@@ -144,7 +144,7 @@ export default {
                 }
             }
         },
-        handleCartQuantity(productId, quantity = 0) {
+        handleCartQuantity(productId, quantity = 1) {
             if (parseInt(this.productId) === parseInt(productId)) {
                 this.quantity = quantity;
                 this.tempQuantity = quantity;
