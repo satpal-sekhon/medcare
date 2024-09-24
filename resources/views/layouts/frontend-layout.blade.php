@@ -113,11 +113,7 @@
                                         <li class="right-side">
                                             <a href="#" class="delivery-login-box">
                                                 <div class="delivery-icon">
-                                                    <i data-feather="phone-call"></i>
-                                                </div>
-                                                <div class="delivery-detail">
-                                                    <h6>24/7 Delivery</h6>
-                                                    <h5>+91 888 104 2340</h5>
+                                                    <i data-feather="bell"></i>
                                                 </div>
                                             </a>
                                         </li>
