@@ -77,6 +77,7 @@ Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 /* Route::get('/about-us', [FrontendController::class, 'about'])->name('about-us'); */
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::post('/remove-applied-coupon', [CartController::class, 'removeAppliedCoupon'])->name('coupon.remove.applied');
 Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
 
 Route::resources([

@@ -3,6 +3,10 @@
 
 @section('content')
 
+@push('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
+
 @push('styles')
     <script>
         window.appData = {

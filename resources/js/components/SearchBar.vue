@@ -26,7 +26,7 @@
                                     tabindex="0">
                                     <h6 class="name">{{ product.name }}</h6>
                                 </a>
-                                <span>15's</span>
+                                <span>{{ product.unit }}</span>
                                 <h5 class="sold text-content">
                                     <span class="theme-color price">₹{{ product.customer_price }}</span>
                                     <del class="ms-1">₹{{ product.mrp }}</del>

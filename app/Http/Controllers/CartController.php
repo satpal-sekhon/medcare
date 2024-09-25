@@ -313,6 +313,29 @@ class CartController extends Controller
         ], 200);
     }
 
+    public function removeAppliedCoupon(Request $request){
+        $cart = session()->get('cart', []);
+
+        $cart['applied_coupon'] = null;
+        $cart['total'] = (float) $cart['total'] + (float) $cart['discount_amount'];
+        unset($cart['discount_amount']);
+        
+        session()->put('cart', $cart);
+
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $userCart = Cart::firstOrCreate(['user_id' => $userId]);
+            $userCart->items = json_encode($cart);
+            $userCart->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Applied coupon removed successfully.',
+            'cart' => $cart
+        ], 200);
+    }
+
     public function applyCharges(Request $request){
         $cart = session()->get('cart', []);
         

@@ -88,7 +88,7 @@
 
                                 <td class="save-remove">
                                     <h4 class="table-title text-content">Action</h4>
-                                    <a class="save notifi-wishlist" href="javascript:void(0)" @click="addToWishlist(item.product_id)">Save for later</a>
+                                    <a class="save notifi-wishlist" href="javascript:void(0)" @click="addToWishlist(item.product_id, item.variant_id)">Save for later</a>
                                     <a class="remove close_button" href="javascript:void(0)"
                                         @click="removeItem(item.product_id, item.variant_id)">Remove</a>
                                 </td>
@@ -119,7 +119,7 @@
 
                         <div class="applied-coupon d-flex justify-content-between mt-2" v-if="cart.applied_coupon">
                             <div>Applied Coupon: <span class="text-success">{{ cart.applied_coupon }}</span></div>
-                            <div class="text-danger">Remove</div>
+                            <a href="javascript:void(0)" class="text-danger" @click="removeAppliedCoupon">Remove</a>
                         </div>
                     </div>
                     <ul>
@@ -226,7 +226,7 @@ export default {
             if (amount == null || isNaN(amount)) { return `-` }
             return `₹${parseFloat(amount).toFixed(2)}`;
         },
-        async addToWishlist(productId) {
+        async addToWishlist(productId, variantId = 0) {
             if(!window.wishlistItems.includes(productId)){
                 try {
                     const response = await axios.post('/wishlist', { productId: parseInt(productId) });
@@ -243,7 +243,7 @@ export default {
                 }
             }
 
-            this.removeItem(productId);
+            this.removeItem(productId, variantId);
         },
         async removeItem(productId, variantId = 0) {
             try {
@@ -300,6 +300,18 @@ export default {
                 this.couponCodeSuccessMessage = data.message;
                 this.cart = data.cart;
             }
+        },
+        async removeAppliedCoupon(){
+            const response = await fetch('/remove-applied-coupon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.getCsrfToken()
+                },
+            });
+
+            const data = await response.json();
+            this.cart = data.cart;
         },
         getCsrfToken() {
             return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
