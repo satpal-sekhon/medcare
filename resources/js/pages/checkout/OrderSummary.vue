@@ -14,21 +14,23 @@
                 </li>
             </ul>
 
-            <div class="mt-3 coupon-cart">
-                <h6 class="text-content mb-2">Coupon Apply</h6>
-                <div class="coupon-box input-group">
-                    <input type="text" class="form-control" v-model="couponCode"
-                        placeholder="Enter Coupon Code Here..." />
-                    <button class="btn-apply" :disabled="!couponCode" @click="applyCoupon">Apply</button>
-                </div>
+            <div class="summery-contain">
+                <div class="mt-3 coupon-cart">
+                    <h6 class="text-content mb-2">Coupon Apply</h6>
+                    <div class="coupon-box input-group">
+                        <input type="text" class="form-control" v-model="couponCode"
+                            placeholder="Enter Coupon Code Here..." />
+                        <button class="btn-apply" :disabled="!couponCode" @click="applyCoupon">Apply</button>
+                    </div>
 
-                <span class="invalid-feedback d-block" v-if="couponCodeError">{{ couponCodeError }}</span>
-                <span class="valid-feedback d-block" v-if="couponCodeSuccessMessage">{{ couponCodeSuccessMessage
-                    }}</span>
+                    <span class="invalid-feedback d-block" v-if="couponCodeError">{{ couponCodeError }}</span>
+                    <span class="valid-feedback d-block" v-if="couponCodeSuccessMessage">{{ couponCodeSuccessMessage
+                        }}</span>
 
-                <div class="applied-coupon d-flex justify-content-between mt-2" v-if="cart.applied_coupon">
-                    <div>Applied Coupon: <span class="text-success">{{ cart.applied_coupon }}</span></div>
-                    <a href="javascript:void(0)" class="text-danger" @click="removeAppliedCoupon">Remove</a>
+                    <div class="applied-coupon d-flex justify-content-between mt-2" v-if="cart.applied_coupon">
+                        <div>Applied Coupon: <span class="text-success">{{ cart.applied_coupon }}</span></div>
+                        <a href="javascript:void(0)" class="text-danger" @click="removeAppliedCoupon">Remove</a>
+                    </div>
                 </div>
             </div>
 
@@ -48,7 +50,7 @@
                     <h4 class="price">{{ formatPrice(cart.cod_charges) }}</h4>
                 </li>
 
-                <li>
+                <li class="mb-3">
                     <h4>Tax</h4>
                     <h4 class="price">-</h4>
                 </li>
@@ -71,8 +73,6 @@ export default {
         return {
             cart: [],
             couponCode: '',
-            couponDiscount: '0.00',
-            checkoutLink: '/checkout',
             couponCodeError: '',
             couponCodeSuccessMessage: ''
         }
@@ -134,6 +134,8 @@ export default {
 
             const data = await response.json();
             this.cart = data.cart;
+            this.couponCodeError = '';
+            this.couponCodeSuccessMessage = '';
         },
         getCsrfToken() {
             return document.querySelector('meta[name="csrf-token"]').getAttribute('content');

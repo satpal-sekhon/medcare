@@ -12,6 +12,7 @@
         window.appData = {
             states: @json($states),
             addresses: @json(auth()->user()->addresses ?? null),
+            user: @json(auth()->user()),
             user_email: "{{ auth()->user()->email ?? '' }}"
         };
     </script>
