@@ -6,10 +6,10 @@
             </div>
 
             <ul class="summery-contain">
-                <li v-for="(item, index) in cart.products" :key="index">
+                <li v-for="(item, index) in cartProducts" :key="index">
                     <img :src="`/${item.image}`" class="img-fluid lazyloaded checkout-image"
                         alt="">
-                    <h4 class="text-truncate-multiline">{{ item.name }} <span>X {{ item.quantity }}</span></h4>
+                    <h4 class="text-truncate-multiline">{{ item.name }} - {{ item.unit }} <span>X {{ item.quantity }}</span></h4>
                     <h4 class="price">{{ formatPrice(item.price) }}</h4>
                 </li>
             </ul>
@@ -56,6 +56,22 @@ export default {
     },
     created() {
         on('updated-cart-fetch', this.cartDetails);
+    },
+    computed: {
+        cartProducts() {
+            const tempProducts = [];
+            for (const productId in this.cart.products) {
+                const product = this.cart.products[productId];
+                if (product.quantity) {
+                    tempProducts.push(product)
+                }
+
+                for (const variantId in product.variants) {
+                    tempProducts.push(product.variants[variantId]);
+                }
+            }
+            return tempProducts;
+        }
     },
     methods: {
         cartDetails(cartData) {

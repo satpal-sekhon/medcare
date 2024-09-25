@@ -84,6 +84,10 @@ class CartController extends Controller
                 $cart['products'][$productId]['quantity'] = $quantity ?? 0;
                 $cart_status = 'UPDATED';
             } else {
+                if(isset($cart['products'][$productId]['variants'])){
+                    $variants = $cart['products'][$productId]['variants'];
+                }
+
                 // Add new product to the cart
                 $cart['products'][$productId] = [
                     'quantity' => $quantity,
@@ -103,6 +107,10 @@ class CartController extends Controller
                     'image' => $product->thumbnail,
                 ];
                 $cart_status = 'ADDED';
+
+                if(isset($variants)){
+                    $cart['products'][$productId]['variants'] = $variants;
+                }
             }
         }
 

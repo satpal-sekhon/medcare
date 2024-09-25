@@ -5,7 +5,7 @@
                 <div class="table-responsive-xl">
                     <table class="table">
                         <tbody>
-                            <tr class="product-box-contain" v-for="(item, index) in cart.products" :key="index">
+                            <tr class="product-box-contain" v-for="(item, index) in cartProducts" :key="index">
                                 <td class="product-detail">
                                     <div class="product border-0">
                                         <a :href="item.link" class="product-image">
@@ -14,10 +14,10 @@
                                         <div class="product-detail">
                                             <ul>
                                                 <li class="name text-truncate-multiline">
-                                                    <a :href="item.link">{{ item.name }}</a>
+                                                    <a :href="`/product/${item.slug}`">{{ item.name }}</a>
                                                 </li>
-                                                <li class="text-content"><span class="text-title">Category:</span> {{
-                                                    item.category }}</li>
+                                                <li class="text-content"><span class="text-title">Unit:</span> {{
+                                                    item.unit }}</li>
                                                 <li class="text-content"><span class="text-title">Quantity</span> - {{
                                                     item.quantity }}</li>
                                                 <li>
@@ -90,7 +90,7 @@
                                     <h4 class="table-title text-content">Action</h4>
                                     <a class="save notifi-wishlist" href="javascript:void(0)" @click="addToWishlist(item.product_id)">Save for later</a>
                                     <a class="remove close_button" href="javascript:void(0)"
-                                        @click="removeItem(item.product_id)">Remove</a>
+                                        @click="removeItem(item.product_id, item.variant_id)">Remove</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -186,6 +186,22 @@ export default {
         on('updated-cart-fetch', this.handleCartUpdate);
         on('product-quantity-updated', this.handleCartQuantity);
     },
+    computed: {
+        cartProducts(){
+            const tempProducts = [];
+            for (const productId in this.cart.products) {
+                const product = this.cart.products[productId];
+                if(product.quantity){
+                    tempProducts.push(product)
+                }
+
+                for (const variantId in product.variants) {
+                    tempProducts.push(product.variants[variantId]);
+                }
+            }
+            return tempProducts;
+        }
+    },
     methods: {
         async fetchCartData() {
             try {
@@ -229,10 +245,10 @@ export default {
 
             this.removeItem(productId);
         },
-        async removeItem(productId) {
+        async removeItem(productId, variantId = 0) {
             try {
                 this.isLoading = true;  // Start loading
-                const response = await axios.delete(`/cart/${productId}`);
+                const response = await axios.delete(`/cart/${productId}`, { data: { variantId } });
                 this.cart = response.data.cart;
                 emit('cart-updated', response.data);
             } catch (error) {
