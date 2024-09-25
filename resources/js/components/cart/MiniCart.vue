@@ -1,7 +1,8 @@
 <template>
   <a href="/cart" class="btn p-0 position-relative header-wishlist">
     <i data-feather="shopping-cart"></i>
-    <span class="position-absolute top-0 start-100 translate-middle badge" v-if="cartDetails && cartDetails.total_items">
+    <span class="position-absolute top-0 start-100 translate-middle badge"
+      v-if="cartDetails && cartDetails.total_items">
       {{ cartDetails.total_items }}
     </span>
   </a>
@@ -10,27 +11,8 @@
     <div class="mini-cart-container" v-if="cartDetails && cartDetails.total_items">
 
       <ul class="cart-list">
-        <li v-for="(item, id) in cartDetails.products" :key="id" class="product-box-contain w-100">
+        <li v-for="(item, id) in cartProducts" :key="id" class="product-box-contain w-100">
           <div class="drop-cart" v-if="item.quantity">
-            <a :href="`/product/${item.slug}`" class="drop-image">
-              <img :src="`/${item.image}`" class="lazyload mh-100px" :alt="item.name" />
-            </a>
-            <div class="drop-contain">
-              <a :href="`/product/${item.slug}`">
-                <h5>{{ item.name }}</h5>
-              </a>
-              <h6>
-                <span>{{ item.quantity }} x</span>
-                {{ formatPrice(item.price) }}
-              </h6>
-              <button @click="removeItem(id)" class="close-button close_button">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-          </div>
-        </li>
-        <li v-for="(item, id) in allVariants" :key="id" class="product-box-contain w-100">
-          <div class="drop-cart">
             <a :href="`/product/${item.slug}`" class="drop-image">
               <img :src="`/${item.image}`" class="lazyload mh-100px" :alt="item.name" />
             </a>
@@ -85,19 +67,23 @@ export default {
     this.fetchCartData();
   },
   computed: {
-    allVariants() {
-      const variants = [];
+    cartProducts() {
+      const tempProducts = [];
       for (const productId in this.cartDetails.products) {
         const product = this.cartDetails.products[productId];
+        if (product.quantity) {
+          tempProducts.push(product)
+        }
+
         for (const variantId in product.variants) {
-          variants.push(product.variants[variantId]);
+          tempProducts.push(product.variants[variantId]);
         }
       }
-      return variants;
+      return tempProducts;
     }
   },
   watch: {
-    'cartDetails.total_items': function(count) {
+    'cartDetails.total_items': function (count) {
       const cartCountElements = document.getElementsByClassName('cartCount');
       Array.from(cartCountElements).forEach((element) => {
         if (count > 0) {

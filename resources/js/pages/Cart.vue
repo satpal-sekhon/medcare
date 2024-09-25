@@ -14,7 +14,7 @@
                                         <div class="product-detail">
                                             <ul>
                                                 <li class="name text-truncate-multiline">
-                                                    <a :href="item.link">{{ item.name }}</a>
+                                                    <a :href="`/product/${item.slug}`">{{ item.name }}</a>
                                                 </li>
                                                 <li class="text-content"><span class="text-title">Unit:</span> {{
                                                     item.unit }}</li>
