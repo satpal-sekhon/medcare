@@ -93,17 +93,23 @@
 <script>
 export default {
     name: 'DeliveryAddressForm',
+    props: {
+        address: {
+            type: Object,
+            default: {}
+        }
+    },
     data() {
         return {
             form: {
-                customerName: '',
-                addressLine1: '',
-                addressLine2: '',
-                pinCode: '',
-                phone: '',
-                email: '',
-                state: '',
-                instructions: '' // Optional instructions field
+                customerName: this.address.customerName ? this.address.customerName : window.appData.user ? window.appData.user.name : '',
+                addressLine1: this.address.addressLine1 ? this.address.addressLine1 : window.appData.user ? window.appData.user.address : '',
+                addressLine2: this.address.addressLine2 ? this.address.addressLine2 : '',
+                pinCode: this.address.pinCode ? this.address.pinCode : window.appData.user ? window.appData.user.pincode : '',
+                phone: this.address.phone ? this.address.phone : window.appData.user ? window.appData.user.phone_number : '',
+                email: this.address.email ? this.address.email : window.appData.user ? window.appData.user.email : '',
+                state: this.address.state ? this.address.state : window.appData.user ? window.appData.user.state : '',
+                instructions: this.address.instructions ? this.address.instructions : '' // Optional instructions field
             },
             errors: {},
             states: [] // Array to hold states data

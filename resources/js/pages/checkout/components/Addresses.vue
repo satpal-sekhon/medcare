@@ -40,6 +40,8 @@
         </div>
     </div>
 
+    <a href="javascript:void(0)" @click="enterNewAddress">Enter a new address</a>
+
     <button type="button" :disabled="!selectedAddressId" @click="proceedWithSelectedAddress" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold">
         Continue
     </button>
@@ -52,12 +54,16 @@ export default {
         addresses: {
             type: Array,
             required: true
+        },
+        selectedPrevAddressId: {
+            type: Number,
+            default: 0
         }
     },
-    emits: ['submit'],
+    emits: ['submit', 'enterNewAddress'],
     data() {
         return {
-            selectedAddressId: null,
+            selectedAddressId: this.selectedPrevAddressId,
             form: {
                 customerName: '',
                 addressLine1: '',
@@ -72,6 +78,7 @@ export default {
     },
     methods: {
         updateForm(selectedAddress) {
+            this.form.addressId = selectedAddress.id || 0;
             this.form.customerName = selectedAddress.name;
             this.form.addressLine1 = selectedAddress.address_line_1;
             this.form.addressLine2 = selectedAddress.address_line_2 || '';
@@ -83,6 +90,9 @@ export default {
         },
         proceedWithSelectedAddress(){
             this.$emit('submit', this.form);
+        },
+        enterNewAddress(){
+            this.$emit('enter-new-address', true);
         }
     }
 }

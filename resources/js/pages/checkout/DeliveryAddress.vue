@@ -7,11 +7,15 @@
         </div>
 
         <div class="checkout-detail" v-if="step.isActive">
-            <div v-if="!addresses || addresses.length===0">
-                <DeliveryAddressForm @submit="handleFormSubmit" />
+            <div v-if="addresses && addresses.length > 0 && enterNewAddress">
+                <a href="javascript:void(0)" @click="useSavedAddress">Use a saved address</a>
+            </div>
+            
+            <div v-if="!addresses || addresses.length===0 || enterNewAddress">
+                <DeliveryAddressForm :address="address" @submit="handleFormSubmit" />
             </div>
             <div v-else>
-                <Addresses @submit="handleFormSubmit" :addresses="addresses" />
+                <Addresses @submit="handleFormSubmit" :selectedPrevAddressId="address.addressId" :addresses="addresses" @enter-new-address="userNewAddress" />
             </div>
         </div>
         <div class="checkout-detail" v-else>
@@ -71,7 +75,8 @@ export default {
     },
     data() {
         return {
-            addresses: null
+            addresses: null,
+            enterNewAddress: false
         }
     },
     methods: {
@@ -82,6 +87,12 @@ export default {
         },
         editThisStep() {
             this.$emit('on-edit');
+        },
+        userNewAddress(){
+            this.enterNewAddress = true;
+        },
+        useSavedAddress(){
+            this.enterNewAddress = false;
         }
     },
     mounted() {
