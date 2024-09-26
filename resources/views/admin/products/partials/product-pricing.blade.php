@@ -25,7 +25,7 @@
                 <div class="mb-2">
                     <label class="form-label-title">Tax</label>
                     <div class="form-group">
-                        <input type="number" name="tax_amount" class="form-control" placeholder="Enter amount" value="{{ $product->vendor_price ?? '' }}">
+                        <input type="number" name="tax_amount" class="form-control" placeholder="Enter amount" value="{{ $product->tax ?? '' }}">
                     </div>
                 </div>
             </div>
