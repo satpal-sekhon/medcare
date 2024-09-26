@@ -317,8 +317,14 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         $cart['applied_coupon'] = null;
-        $cart['total'] = (float) $cart['total'] + (float) $cart['discount_amount'];
-        unset($cart['discount_amount']);
+        $discount_amount = 0;
+        if(isset($cart['discount_amount'])){
+            $discount_amount = (float)$cart['discount_amount'] ?? 0;
+      
+        }
+
+        $cart['total'] = (float) $cart['total'] + $discount_amount;
+        unset($discount_amount);
         
         session()->put('cart', $cart);
 

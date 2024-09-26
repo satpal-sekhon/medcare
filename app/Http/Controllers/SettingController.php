@@ -119,12 +119,47 @@ class SettingController extends Controller
     public function paymentSettingsUpdate(Request $request){
         $request->validate([
             'cod_charges' => 'required|numeric|between:0,999999.99',
+            'razorpay_key_id' => 'required|string|max:255',
+            'razorpay_key_secret' => 'required|string|max:255',
+            'razorpay_environment' => 'required|string|max:255',
+            'paytm_merchant_id' => 'required|string|max:255',
+            'paytm_merchant_key' => 'required|string|max:255',
+            'paytm_channel_id' => 'required|string|max:255',
+            'paytm_industry_type' => 'required|string|max:255',
+            'paytm_website' => 'required|string|max:255',
+            'paytm_environment' => 'required|string|max:255',
         ]);
 
         $paymentSettings = [
             'cod_charges' => [
                 'value' => number_format($request->cod_charges, 2, '.', ''),
-                'description' => 'Charges for cash on delivery',
+            ],
+            'razorpay_key_id' => [
+                'value' => $request->razorpay_key_id,
+            ],
+            'razorpay_key_secret' => [
+                'value' => $request->razorpay_key_secret,
+            ],
+            'razorpay_environment' => [
+                'value' => $request->razorpay_environment,
+            ],
+            'paytm_merchant_id' => [
+                'value' => $request->paytm_merchant_id,
+            ],
+            'paytm_merchant_key' => [
+                'value' => $request->paytm_merchant_key,
+            ],
+            'paytm_channel_id' => [
+                'value' => $request->paytm_channel_id,
+            ],
+            'paytm_industry_type' => [
+                'value' => $request->paytm_industry_type,
+            ],
+            'paytm_website' => [
+                'value' => $request->paytm_website,
+            ],
+            'paytm_environment' => [
+                'value' => $request->paytm_environment,
             ]
         ];
         

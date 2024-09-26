@@ -31,9 +31,12 @@
                 </div>
             </div>
 
-            <button class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" :disabled="!this.selectedPaymentMethod || isSubmitting" @click="submitForm">
+            <button v-if="selectedPaymentMethod==='cash'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" :disabled="!selectedPaymentMethod || isSubmitting" @click="submitForm">
                 Place Order
             </button>
+
+            <button v-if="selectedPaymentMethod==='razorpay'" @click="payWithRazorpay">Pay with Razorpay</button>
+            <button v-if="selectedPaymentMethod==='paytm'">Pay with PayTM</button>
         </div>
     </div>
 </template>
@@ -83,6 +86,9 @@ export default {
             } catch (error) {
                 console.error('Error applying charges:', error);
             }
+        },
+        async payWithRazorpay(){
+
         },
         submitForm() {
             if (this.selectedPaymentMethod) {
