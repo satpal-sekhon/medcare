@@ -82,6 +82,7 @@ export default {
                 'DeliveryOptions': { deliveryMethod: this.selectedDeliveryMethod },
                 'PaymentOptions': {
                     isSubmitting: this.isSubmitting,
+                    address: this.deliveryAddress,
                     paymentOptions: [
                         { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' },
                         { id: 'razorpay', label: 'Razorpay', description: 'Pay with multile payment methods' },

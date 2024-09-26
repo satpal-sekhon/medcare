@@ -26,5 +26,6 @@
 
 @push('scripts')
 <script src="{{ asset('assets/js/checkout/lusqsztk.js') }}"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 @endpush
 @endsection

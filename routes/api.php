@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PharmacyController;
 use App\Http\Controllers\Api\PrimaryCategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,8 @@ Route::prefix('pharmacies')->group(function () {
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+Route::post('/payment/razorpay/order', [PaymentController::class, 'createRazorpayOrder']);
+Route::post('/payment/paytm/order', [PaymentController::class, 'createPaytmOrder']);
+Route::post('/paytm/callback', [PaymentController::class, 'paytmCallback'])->name('paytm.callback');

@@ -1,5 +1,5 @@
 <template>
-    <div class="row g-4">
+    <div class="row g-4 mb-3">
         <div class="col-xxl-6 col-lg-12 col-md-6">
             <div class="delivery-address-box" v-for="address in addresses">
                 <div>

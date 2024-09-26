@@ -26,17 +26,18 @@
                         aria-labelledby="flush-heading">
                         <div class="accordion-body">
                             <p class="cod-review">{{ option.description }}</p>
+                            <button v-if="selectedPaymentMethod === 'razorpay'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithRazorpay">Pay with Razorpay</button>
+                            <button v-if="selectedPaymentMethod === 'paytm'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithPaytm">Pay with PayTM</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button v-if="selectedPaymentMethod==='cash'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" :disabled="!selectedPaymentMethod || isSubmitting" @click="submitForm">
+            <button v-if="selectedPaymentMethod === 'cash'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold"
+                :disabled="!selectedPaymentMethod || isSubmitting" @click="submitForm">
                 Place Order
             </button>
 
-            <button v-if="selectedPaymentMethod==='razorpay'" @click="payWithRazorpay">Pay with Razorpay</button>
-            <button v-if="selectedPaymentMethod==='paytm'">Pay with PayTM</button>
         </div>
     </div>
 </template>
@@ -49,6 +50,10 @@ export default {
     name: 'PaymentOptions',
     props: {
         step: {
+            type: Object,
+            default: {},
+        },
+        address: {
             type: Object,
             default: {},
         },
@@ -87,8 +92,58 @@ export default {
                 console.error('Error applying charges:', error);
             }
         },
-        async payWithRazorpay(){
+        async payWithRazorpay() {
+            try {
+                const response = await axios.post('/api/payment/razorpay/order', {
+                    amount: window.cart.total,
+                });
 
+                if(response.data.success){
+                    const options = {
+                        key: response.data.key_id,
+                        amount: response.data.amount,
+                        currency: "INR",
+                        name: "Your Company Name",
+                        //description: "Test Transaction",
+                        order_id: response.data.id,
+                        handler: function (response) {
+                            console.log(`response: ${response}`);
+                            // Optionally send payment details to the server for verification
+                            axios.post('/api/payment/razorpay/verify', {
+                               order_id: response.data.id,
+                               payment_id: response.razorpay_payment_id,
+                            });
+                        },
+                        prefill: {
+                            name: this.address.customerName,
+                            email: this.address.email,
+                            contact: this.address.phone
+                        },
+                        theme: {
+                            color: "#0da487"
+                        }
+                    };
+
+                    const rzp = new window.Razorpay(options);
+                    rzp.open();
+                }
+            } catch (error) {
+                console.error(error);
+                //alert('Payment failed');
+            }
+        },
+        async payWithPaytm() {
+            try {
+                const response = await axios.post('/api/payment/paytm/order', {
+                    amount: 500, // amount in INR
+                });
+
+                // Redirect to Paytm's payment page
+                window.location.href = response.data;
+            } catch (error) {
+                console.error(error);
+                alert('Payment failed');
+            }
         },
         submitForm() {
             if (this.selectedPaymentMethod) {
