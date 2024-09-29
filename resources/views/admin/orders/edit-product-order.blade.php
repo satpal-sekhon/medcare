@@ -47,7 +47,6 @@
 
                         <div class="d-flex gap-3 mt-3">
                             <button type="submit" class="btn btn-primary">Update Order</button>
-                            <a href="{{ route('admin.orders.index') }}" class="btn w-auto btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

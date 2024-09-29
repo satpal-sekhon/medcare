@@ -345,7 +345,7 @@ class CartController extends Controller
     public function applyCharges(Request $request){
         $cart = session()->get('cart', []);
 
-        $discount = $cart['discount_amount'];
+        $discount = $cart['discount_amount'] ?? 0;
         $sub_total = $cart['sub_total'];
         $total = $sub_total - $discount;
         

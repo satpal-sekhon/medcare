@@ -193,8 +193,7 @@
 
                             <ul class="summery-contain pb-0 border-bottom-0">
                                 <li class="d-block pt-0">
-                                    <p class="text-content">Pay on Delivery (Cash/Card). Cash on delivery (COD)
-                                        available.</p>
+                                    <p class="text-content">{{ $order->payment_method }}</p>
                                 </li>
                             </ul>
                         </div>
