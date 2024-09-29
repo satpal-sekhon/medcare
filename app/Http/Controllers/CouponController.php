@@ -39,6 +39,8 @@ class CouponController extends Controller
             'discount_type' => 'required|in:amount,percentage',
             'start_date' => 'nullable|date|after_or_equal:today',
             'expires_at' => 'nullable|date|after:start_date',
+            'limit_per_user' => 'nullable|integer|min:0',
+            'minimum_amount' => 'nullable|numeric|min:0',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -48,6 +50,8 @@ class CouponController extends Controller
             'discount_type' => $request->input('discount_type'),
             'start_date' => $request->input('start_date'),
             'expires_at' => $request->input('expires_at'),
+            'limit_per_user' => $request->input('limit_per_user'),
+            'minimum_amount' => $request->input('minimum_amount'),
             'is_active' => $request->input('is_active') ? 1 : 0,
         ]);
 
@@ -112,6 +116,8 @@ class CouponController extends Controller
             ],
             'discount_amount' => 'required|numeric|min:0',
             'discount_type' => 'required|in:amount,percentage',
+            'limit_per_user' => 'nullable|integer|min:0',
+            'minimum_amount' => 'nullable|numeric|min:0',
             'start_date' => 'nullable|date|after_or_equal:today',
             'expires_at' => 'nullable|date|after:start_date',
             'is_active' => 'nullable|boolean',
@@ -121,6 +127,8 @@ class CouponController extends Controller
             'code' => $request->input('code'),
             'discount_amount' => $request->input('discount_amount'),
             'discount_type' => $request->input('discount_type'),
+            'limit_per_user' => $request->input('limit_per_user'),
+            'minimum_amount' => $request->input('minimum_amount'),
             'start_date' => $request->input('start_date'),
             'expires_at' => $request->input('expires_at'),
             'is_active' => $request->input('is_active') ? 1 : 0,
