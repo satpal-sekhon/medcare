@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
-use PaytmWallet;
-
+use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 
 class PaymentController extends Controller
 {
@@ -15,7 +14,7 @@ class PaymentController extends Controller
 
         $orderData = [
             'receipt'         => strval(rand(1000, 9999)),
-            'amount'          => strval($request->amount * 100), // Convert to paise
+            'amount'          => strval(round($request->amount * 100)), // Convert to paise
             'currency'        => 'INR',
             'payment_capture' => 1, // Auto capture
         ];
@@ -31,6 +30,25 @@ class PaymentController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function verifyRazorpayPayment(Request $request)
+    {
+        $api = new Api(getSetting('razorpay_key_id'), getSetting('razorpay_key_secret'));
+
+        $orderId = $request->input('order_id');
+        $paymentId = $request->input('payment_id');
+
+        try {
+            // Verify the payment
+            $api->payment->fetch($paymentId)->capture(['amount' => round($request->amount * 100)]); // Capture payment
+            
+            // Optionally, you can log the payment details or update your database
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
+
 
     public function createPaytmOrder(Request $request)
     {

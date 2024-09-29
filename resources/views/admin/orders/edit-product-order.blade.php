@@ -73,7 +73,7 @@
                         @foreach ($order->items as $item)
                             <tr>
                                 <td><img src="{{ asset($item->thumbnail) }}" alt="" class="img-fluid w-90px"></td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->name }} - {{ $item->unit }}</td>
                                 <td>{{ $item->quantity }}</td>
                                 <td>₹{{ $item->price }}</td>
                             </tr>

@@ -41,5 +41,6 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/payment/razorpay/order', [PaymentController::class, 'createRazorpayOrder']);
+Route::post('/payment/razorpay/verify', [PaymentController::class, 'verifyRazorpayPayment']);
 Route::post('/payment/paytm/order', [PaymentController::class, 'createPaytmOrder']);
 Route::post('/paytm/callback', [PaymentController::class, 'paytmCallback'])->name('paytm.callback');

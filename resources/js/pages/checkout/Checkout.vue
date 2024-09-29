@@ -72,7 +72,8 @@ export default {
             deliveryAddress: {},
             selectedDeliveryMethod: {},
             selectedPaymentMethod: '',
-            isSubmitting: false
+            isSubmitting: false,
+            transactionId: ''
         };
     },
     methods: {
@@ -122,6 +123,7 @@ export default {
         },
         handlePayment(selectedMethod) {
             this.selectedPaymentMethod = selectedMethod;
+            this.transactionId = selectedMethod.txn_id ? selectedMethod.txn_id : ''
         },
         async placeOrder() {
             try {
@@ -130,7 +132,8 @@ export default {
                 const response = await axios.post('/orders/create', {
                     deliveryAddress: this.deliveryAddress,
                     selectedDeliveryMethod: this.selectedDeliveryMethod,
-                    selectedPaymentMethod: this.selectedPaymentMethod
+                    selectedPaymentMethod: this.selectedPaymentMethod,
+                    transactionId: this.transactionId
                 });
 
                 this.isSubmitting = false;

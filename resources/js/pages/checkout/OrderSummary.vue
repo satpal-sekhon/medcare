@@ -118,9 +118,11 @@ export default {
             if(!data.success){
                 this.couponCodeError = data.message;
             } else {
+                this.couponCode = '';
                 this.couponCodeError = '';
                 this.couponCodeSuccessMessage = data.message;
                 this.cart = data.cart;
+                window.cart = data.cart;
             }
         },
         async removeAppliedCoupon(){
@@ -136,6 +138,7 @@ export default {
             this.cart = data.cart;
             this.couponCodeError = '';
             this.couponCodeSuccessMessage = '';
+            window.cart = data.cart;
         },
         getCsrfToken() {
             return document.querySelector('meta[name="csrf-token"]').getAttribute('content');

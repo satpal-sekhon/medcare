@@ -26,14 +26,19 @@
                         aria-labelledby="flush-heading">
                         <div class="accordion-body">
                             <p class="cod-review">{{ option.description }}</p>
-                            <button v-if="selectedPaymentMethod === 'razorpay'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithRazorpay">Pay with Razorpay</button>
-                            <button v-if="selectedPaymentMethod === 'paytm'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithPaytm">Pay with PayTM</button>
+                            <button v-if="selectedPaymentMethod === 'razorpay'"
+                                class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold"
+                                @click="payWithRazorpay">Pay with Razorpay</button>
+                            <button v-if="selectedPaymentMethod === 'paytm'"
+                                class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithPaytm">Pay
+                                with PayTM</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button v-if="selectedPaymentMethod === 'cash'" class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold"
+            <button v-if="selectedPaymentMethod === 'cash'"
+                class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold"
                 :disabled="!selectedPaymentMethod || isSubmitting" @click="submitForm">
                 Place Order
             </button>
@@ -87,6 +92,7 @@ export default {
                 });
 
                 let cartDetails = response.data.cart;
+                window.cart = cartDetails;
                 emit('updated-cart-fetch', cartDetails);
             } catch (error) {
                 console.error('Error applying charges:', error);
@@ -98,21 +104,31 @@ export default {
                     amount: window.cart.total,
                 });
 
-                if(response.data.success){
+                if (response.data.success) {
                     const options = {
                         key: response.data.key_id,
                         amount: response.data.amount,
                         currency: "INR",
-                        name: "Your Company Name",
-                        //description: "Test Transaction",
+                        name: "HealDeal",
                         order_id: response.data.id,
-                        handler: function (response) {
-                            console.log(`response: ${response}`);
+                        handler: (response) => {
+                            console.log(`response:`, response);
+                            this.$emit('continue', { method: this.selectedPaymentMethod, txn_id: response.razorpay_payment_id });
+
                             // Optionally send payment details to the server for verification
+                            /*
                             axios.post('/api/payment/razorpay/verify', {
-                               order_id: response.data.id,
-                               payment_id: response.razorpay_payment_id,
+                                order_id: response.razorpay_order_id,
+                                payment_id: response.razorpay_payment_id,
+                            })
+                            .then((res) => {
+                                console.log(res);
+                            })
+                            .catch((err) => {
+                                // Handle error
+                                alert('Payment verification failed: ' + err.response.data.message);
                             });
+                            */
                         },
                         prefill: {
                             name: this.address.customerName,

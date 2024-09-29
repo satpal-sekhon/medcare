@@ -85,38 +85,63 @@ class OrderController extends Controller
                 'message' => 'Your cart is empty!'
             ]);
         }
+        
 
         $order = Order::create([
             'user_id' => $request->user()->id ?? null,
             'shipping_address' => json_encode($request->deliveryAddress),
             'shipping_method' => json_encode($request->selectedDeliveryMethod),
-            'payment_method' => $request->selectedPaymentMethod,
+            'payment_method' => isset($request->selectedPaymentMethod['method']) ? $request->selectedPaymentMethod['method'] : $request->selectedPaymentMethod,
             'sub_total' => $cart['sub_total'],
             'total' => $cart['total'],
             'discount' => $cart['discount_amount'] ?? null,
             'coupon_code' => $cart['applied_coupon'] ?? '',
+            'transaction_id' => $request->transactionId,
+            'payment_status' => $request->transactionId ? 'Completed' : 'Pending',
             'status' => 'Awaiting Confirmation',
         ]);
 
         $orderItems = $cart['products'];
         if ($orderItems) {
-            foreach ($orderItems as $item) {
-                $order->items()->create([
-                    'order_id' => $order->id,
-                    'product_id' => $item['product_id'],
-                    'name' => $item['name'],
-                    'brand_name' => $item['brand'],
-                    'primary_category_name' => $item['primary_category'],
-                    'category_name' => $item['category'],
-                    'product_type' => $item['product_type'] ?? 'General',
-                    'thumbnail' => $item['image'],
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                    'mrp' => $item['mrp'] ?? 0,
-                ]);
+            foreach ($orderItems as $productId => $item) {
+                if(isset($item['product_id'])){
+                    $order->items()->create([
+                        'order_id' => $order->id,
+                        'product_id' => $item['product_id'],
+                        'name' => $item['name'],
+                        'unit' => $item['unit'],
+                        'brand_name' => $item['brand'],
+                        'primary_category_name' => $item['primary_category'],
+                        'category_name' => $item['category'],
+                        'product_type' => $item['product_type'] ?? 'General',
+                        'thumbnail' => $item['image'],
+                        'quantity' => $item['quantity'],
+                        'price' => $item['price'],
+                        'mrp' => $item['mrp'] ?? 0,
+                    ]);
+                } else{
+                    foreach($item['variants'] as $variant){
+                        $order->items()->create([
+                            'order_id' => $order->id,
+                            'product_id' => $variant['product_id'],
+                            'variant_id' => $variant['variant_id'],
+                            'name' => $variant['name'],
+                            'unit' => $variant['unit'],
+                            'brand_name' => $variant['brand'],
+                            'primary_category_name' => $variant['primary_category'],
+                            'category_name' => $variant['category'],
+                            'product_type' => $variant['product_type'] ?? 'General',
+                            'thumbnail' => $variant['image'],
+                            'quantity' => $variant['quantity'],
+                            'price' => $variant['price'],
+                            'mrp' => $variant['mrp'] ?? 0,
+                        ]);
+                    }
+                }
+                
             }
         }
-        
+
         if (Auth::check()) {
             $user = Auth::user();
             $cart = $user->cart;

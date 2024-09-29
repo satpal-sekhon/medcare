@@ -91,7 +91,7 @@
                                                 <div class="product-detail">
                                                     <ul>
                                                         <li class="name" style="white-space: normal;">
-                                                            <a href="{{ route('products.view', $item->product->slug ?? '#') }}">{{ $item->name }}</a>
+                                                            <a href="{{ route('products.view', $item->product->slug ?? '#') }}">{{ $item->name }} - {{ $item->unit }}</a>
                                                         </li>
 
                                                         <li class="text-content">Brand: {{ $item->brand_name }}</li>
