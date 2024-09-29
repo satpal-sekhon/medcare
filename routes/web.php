@@ -204,6 +204,9 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'admin_index'])->name('admin.orders.index');
     Route::post('/orders/get', [OrderController::class, 'get'])->name('orders.get');
 
+    Route::get('/transactions', [OrderController::class, 'adminTransactions'])->name('admin.transactions');
+    Route::post('/transactions/get', [OrderController::class, 'getTransactions'])->name('transactions.get');
+
     // Quick order routes
     Route::resource('quick-orders', QuickOrderController::class);
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('admin.quick-orders.index');

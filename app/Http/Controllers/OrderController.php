@@ -21,6 +21,10 @@ class OrderController extends Controller
         return view('admin.orders.index');
     }
 
+    public function adminTransactions(){
+        return view('admin.transactions.index');
+    }
+
     public function get(Request $request)
     {
         $columns = ['id', 'name', 'email', 'phone_number'];
@@ -28,6 +32,57 @@ class OrderController extends Controller
         // Eager load the items relationship to calculate sum later
         $query = Order::with('user')
             ->withCount('items as total_quantity')
+            ->select('orders.*');
+    
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where(function ($q) use ($search) {
+                $q->where('shipping_address', 'like', "%{$search}%")
+                  ->orWhere('order_number', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($q) use ($search) {
+                    $q->where('user_code', 'like', "%{$search}%");
+                  });;
+            });
+        }
+
+        if($request->has('user_id')){
+            $user_id = $request->user_id;
+            $query->where(function ($q) use ($user_id) {
+                $q->where('user_id', $user_id);
+            });
+        }
+    
+        $totalRecords = $query->count();
+        $filteredRecords = $query->count(); // This is before applying pagination
+    
+        if ($request->has('order')) {
+            $orderColumn = $columns[$request->order[0]['column']];
+            $orderDirection = $request->order[0]['dir'];
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+    
+        // Apply pagination
+        $orders = $query->skip($request->start)->take($request->length)->get();
+    
+        // Calculate total quantities
+        $orders->each(function ($order) {
+            $order->total_quantity = $order->items->sum('quantity');
+        });
+    
+        return response()->json([
+            "draw" => intval($request->draw),
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            "data" => $orders
+        ]);
+    }
+
+    public function getTransactions(Request $request)
+    {
+        $columns = ['id', 'name', 'payment_method', 'transaction_id', 'payment_status', 'created_at'];
+    
+        // Eager load the items relationship to calculate sum later
+        $query = Order::whereNotNull('transaction_id')->with('user')
             ->select('orders.*');
     
         if ($request->has('search') && $request->search['value']) {

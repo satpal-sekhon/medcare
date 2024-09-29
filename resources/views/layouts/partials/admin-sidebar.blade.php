@@ -150,7 +150,7 @@
                     </li>
                     
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.transactions') }}">
                             <i class="ri-survey-line"></i>
                             <span>Transactions</span>
                         </a>
