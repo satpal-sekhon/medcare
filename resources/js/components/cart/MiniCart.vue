@@ -99,6 +99,7 @@ export default {
   methods: {
     handleCartUpdate(updatedData) {
       this.cartDetails = updatedData.cart;
+      window.cart = updatedData.cart;
     },
     async removeItem(productId, variantId = 0) {
       try {

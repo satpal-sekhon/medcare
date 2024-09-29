@@ -248,6 +248,12 @@ class CartController extends Controller
             $userCart->items = json_encode($cart);
             $userCart->save();
         }
+
+        
+        if($totalItems === 0){
+            $cart = [];
+        }
+
         session()->put('cart', $cart);
 
         return response()->json(['success' => 'Item removed from cart!', 'cart' => $cart]);
