@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Coupon;
+use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -272,7 +273,21 @@ class CartController extends Controller
                 'message' => 'Invalid or expired coupon code.'
             ], 400);
         }
-        
+
+        if(!Auth::id()){
+            return response()->json([
+                'success' => false,
+                'message' => 'You need to login to apply this coupon'
+            ], 400);
+        }
+
+        $isAppliedCoupon = Order::where('user_id', Auth::id())->where('coupon_code', $couponCode)->first();
+        if($isAppliedCoupon){
+            return response()->json([
+                'success' => false,
+                'message' => 'You already used this coupon'
+            ], 400);
+        }
           
         $cart = session()->get('cart', []);
         
@@ -283,8 +298,16 @@ class CartController extends Controller
             ], 400);
         }
 
-        $totalAmount = $cart['total'];
+        $totalAmount = (float) $cart['total'];
         $discount = 0;
+        
+        $eligibleOrderAmount = (float) $coupon->minimum_amount;
+        if($eligibleOrderAmount && ($eligibleOrderAmount > $totalAmount)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Minimum order amount should be ₹'.$eligibleOrderAmount.' to apply this coupon'
+            ], 400);
+        }
 
         if ($coupon->discount_type == 'amount') {
             $discount = $coupon->discount_amount;

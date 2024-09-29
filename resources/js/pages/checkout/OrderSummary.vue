@@ -117,6 +117,7 @@ export default {
             const data = await response.json();
             if(!data.success){
                 this.couponCodeError = data.message;
+                this.couponCodeSuccessMessage = '';
             } else {
                 this.couponCode = '';
                 this.couponCodeError = '';
