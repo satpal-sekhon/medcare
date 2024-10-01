@@ -141,12 +141,11 @@ class OrderController extends Controller
             ]);
         }
         
-
         $order = Order::create([
             'user_id' => $request->user()->id ?? null,
-            'shipping_address' => json_encode($request->deliveryAddress),
-            'shipping_method' => json_encode($request->selectedDeliveryMethod),
-            'payment_method' => isset($request->selectedPaymentMethod['method']) ? $request->selectedPaymentMethod['method'] : $request->selectedPaymentMethod,
+            'shipping_address' => $request->deliveryAddress,
+            'shipping_method' => $request->selectedDeliveryMethod,
+            'payment_method' => isset(json_decode($request->selectedPaymentMethod)->method) ? json_decode($request->selectedPaymentMethod)->method : json_decode($request->selectedPaymentMethod),
             'sub_total' => $cart['sub_total'],
             'total' => $cart['total'],
             'discount' => $cart['discount_amount'] ?? null,

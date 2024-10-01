@@ -169,7 +169,7 @@
                             <div class="summery-header d-block">
                                 <h3>Shipping Address</h3>
                             </div>
-
+                            
                             <ul class="summery-contain pb-0 border-bottom-0">
                                 <li class="d-block">
                                     <h4>{{ json_decode($order->shipping_address, true)['addressLine1'] }}</h4>

@@ -118,7 +118,7 @@ export default {
         handleDeliveryOptions(selectedMethod) {
             this.selectedDeliveryMethod = selectedMethod;
         },
-        handlePrescription(data){
+        handlePrescription(data) {
             this.prescriptionMethod = data;
         },
         handlePayment(selectedMethod) {
@@ -128,17 +128,19 @@ export default {
         async placeOrder() {
             try {
                 this.isSubmitting = true;
-                    
+
                 const formData = new FormData();
                 formData.append('deliveryAddress', JSON.stringify(this.deliveryAddress));
                 formData.append('selectedDeliveryMethod', JSON.stringify(this.selectedDeliveryMethod));
-                formData.append('selectedPaymentMethod', this.selectedPaymentMethod);
+                formData.append('selectedPaymentMethod', JSON.stringify(this.selectedPaymentMethod));
                 formData.append('transactionId', this.transactionId);
 
-                if(this.prescriptionMethod.files && this.prescriptionMethod.files.length > 0){
-                    Array.from(this.prescriptionMethod.files).forEach(file => {
-                        formData.append('prescriptions[]', file);
-                    });
+                if(this.prescriptionMethod){
+                    if (this.prescriptionMethod.files && this.prescriptionMethod.files.length > 0) {
+                        Array.from(this.prescriptionMethod.files).forEach(file => {
+                            formData.append('prescriptions[]', file);
+                        });
+                    }
                 }
 
                 const response = await axios.post('/orders/create', formData, {
@@ -166,15 +168,20 @@ export default {
         }
     },
     mounted() {
-        this.steps.push({
-            component: 'UploadPrescription',
-            iconSrc: '/assets/js/checkout/animated-document.json',
-            iconColors: 'primary:#0baf9a',
-            ariaLabel: 'Upload Prescription',
-            isActive: false,
-            isDisabled: true,
-            isCompleted: false
-        });
+        let cart = window.cart;
+        const hasPrescriptionProduct = Object.values(cart.products).some(product => product.is_prescription_required === 1);
+
+        if (hasPrescriptionProduct) {
+            this.steps.push({
+                component: 'UploadPrescription',
+                iconSrc: '/assets/js/checkout/animated-document.json',
+                iconColors: 'primary:#0baf9a',
+                ariaLabel: 'Upload Prescription',
+                isActive: false,
+                isDisabled: true,
+                isCompleted: false
+            });
+        }
 
         this.steps.push({
             component: 'PaymentOptions',

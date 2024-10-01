@@ -36,7 +36,7 @@ class CartController extends Controller
 
         // Retrieve product details from the database
         $product = Product::with('brand', 'category', 'primaryCategory', 'variants')
-            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'unit', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail')
+            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'unit', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail', 'is_prescription_required')
             ->find($productId);
 
         if (!$product) {
@@ -75,6 +75,7 @@ class CartController extends Controller
                     'primary_category' => $product->primaryCategory->name,
                     'category' => $product->category->name,
                     'image' => $product->thumbnail,
+                    'is_prescription_required' => $product->is_prescription_required,
                 ];
                 $cart_status = 'ADDED';
             }
@@ -106,6 +107,7 @@ class CartController extends Controller
                     'primary_category' => $product->primaryCategory->name,
                     'category' => $product->category->name,
                     'image' => $product->thumbnail,
+                    'is_prescription_required' => $product->is_prescription_required,
                 ];
                 $cart_status = 'ADDED';
 
