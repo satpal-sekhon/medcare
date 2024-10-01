@@ -26,10 +26,11 @@
                         aria-labelledby="flush-heading">
                         <div class="accordion-body">
                             <p class="cod-review">{{ option.description }}</p>
-                            <button v-if="selectedPaymentMethod === 'razorpay'"
+                            <button v-if="selectedPaymentMethod === 'razorpay'" :disabled="isSubmitting"
                                 class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold"
                                 @click="payWithRazorpay">Pay with Razorpay</button>
-                            <button v-if="selectedPaymentMethod === 'paytm'"
+                                
+                            <button v-if="selectedPaymentMethod === 'paytm'" :disabled="isSubmitting"
                                 class="btn theme-bg-color text-white btn-md w-25 mt-4 fw-bold" @click="payWithPaytm">Pay
                                 with PayTM</button>
                         </div>

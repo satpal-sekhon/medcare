@@ -29,12 +29,14 @@ import DeliveryAddress from './DeliveryAddress.vue';
 import DeliveryOptions from './DeliveryOptions.vue';
 import OrderSummary from './OrderSummary.vue';
 import PaymentOptions from './PaymentOptions.vue';
+import UploadPrescription from './UploadPrescription.vue';
 
 export default {
     name: 'Checkout',
     components: {
         DeliveryAddress,
         DeliveryOptions,
+        UploadPrescription,
         PaymentOptions,
         OrderSummary
     },
@@ -50,7 +52,7 @@ export default {
                     isDisabled: false,
                     isCompleted: false
                 },
-                {
+                /* {
                     component: 'DeliveryOptions',
                     iconSrc: '/assets/js/checkout/oaflahpk.json',
                     iconColors: 'primary:#0baf9a',
@@ -58,16 +60,7 @@ export default {
                     isActive: false,
                     isDisabled: true,
                     isCompleted: false
-                },
-                {
-                    component: 'PaymentOptions',
-                    iconSrc: '/assets/js/checkout/qmcsqnle.json',
-                    iconColors: 'primary:#0baf9a,secondary:#0baf9a',
-                    ariaLabel: 'Payment Options Icon',
-                    isActive: false,
-                    isDisabled: true,
-                    isCompleted: false
-                }
+                }, */
             ],
             deliveryAddress: {},
             selectedDeliveryMethod: {},
@@ -80,14 +73,15 @@ export default {
         getComponentProps(componentName) {
             const propsMap = {
                 'DeliveryAddress': { address: this.deliveryAddress },
-                'DeliveryOptions': { deliveryMethod: this.selectedDeliveryMethod },
+                //'DeliveryOptions': { deliveryMethod: this.selectedDeliveryMethod },
+                'UploadPrescription': { deliveryMethod: this.selectedDeliveryMethod },
                 'PaymentOptions': {
                     isSubmitting: this.isSubmitting,
                     address: this.deliveryAddress,
                     paymentOptions: [
                         { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' },
-                        { id: 'razorpay', label: 'Razorpay', description: 'Pay with multile payment methods' },
-                        { id: 'paytm', label: 'PayTM', description: 'Pay with india\'s most trustworthy app' },
+                        { id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' },
+                        //{ id: 'paytm', label: 'PayTM', description: 'Pay with india\'s most trustworthy app' },
                     ]
                 }
             };
@@ -102,6 +96,9 @@ export default {
                     break;
                 case 'DeliveryOptions':
                     this.handleDeliveryOptions(data);
+                    break;
+                case 'UploadPrescription':
+                    this.handlePrescription(data);
                     break;
                 case 'PaymentOptions':
                     this.handlePayment(data);
@@ -121,6 +118,9 @@ export default {
         handleDeliveryOptions(selectedMethod) {
             this.selectedDeliveryMethod = selectedMethod;
         },
+        handlePrescription(data){
+            this.prescriptionMethod = data;
+        },
         handlePayment(selectedMethod) {
             this.selectedPaymentMethod = selectedMethod;
             this.transactionId = selectedMethod.txn_id ? selectedMethod.txn_id : ''
@@ -128,12 +128,23 @@ export default {
         async placeOrder() {
             try {
                 this.isSubmitting = true;
+                    
+                const formData = new FormData();
+                formData.append('deliveryAddress', JSON.stringify(this.deliveryAddress));
+                formData.append('selectedDeliveryMethod', JSON.stringify(this.selectedDeliveryMethod));
+                formData.append('selectedPaymentMethod', this.selectedPaymentMethod);
+                formData.append('transactionId', this.transactionId);
 
-                const response = await axios.post('/orders/create', {
-                    deliveryAddress: this.deliveryAddress,
-                    selectedDeliveryMethod: this.selectedDeliveryMethod,
-                    selectedPaymentMethod: this.selectedPaymentMethod,
-                    transactionId: this.transactionId
+                if(this.prescriptionMethod.files && this.prescriptionMethod.files.length > 0){
+                    Array.from(this.prescriptionMethod.files).forEach(file => {
+                        formData.append('prescriptions[]', file);
+                    });
+                }
+
+                const response = await axios.post('/orders/create', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 });
 
                 this.isSubmitting = false;
@@ -153,6 +164,27 @@ export default {
                 step.isCompleted = i < index;
             });
         }
+    },
+    mounted() {
+        this.steps.push({
+            component: 'UploadPrescription',
+            iconSrc: '/assets/js/checkout/animated-document.json',
+            iconColors: 'primary:#0baf9a',
+            ariaLabel: 'Upload Prescription',
+            isActive: false,
+            isDisabled: true,
+            isCompleted: false
+        });
+
+        this.steps.push({
+            component: 'PaymentOptions',
+            iconSrc: '/assets/js/checkout/qmcsqnle.json',
+            iconColors: 'primary:#0baf9a,secondary:#0baf9a',
+            ariaLabel: 'Payment Options Icon',
+            isActive: false,
+            isDisabled: true,
+            isCompleted: false
+        });
     }
 };
 </script>

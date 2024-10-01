@@ -15,6 +15,11 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function prescriptions()
+    {
+        return $this->hasMany(OrderPrescription::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

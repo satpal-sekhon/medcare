@@ -197,6 +197,18 @@ class OrderController extends Controller
             }
         }
 
+        if ($request->hasFile('prescriptions')) {
+            foreach ($request->file('prescriptions') as $file) {
+                $mimeType = $file->getMimeType();
+                $path = uploadFile($file, 'uploads/orders/prescriptions/');
+
+                $order->prescriptions()->create([
+                    'path' => $path,
+                    'mime_type' => $mimeType
+                ]);
+            }
+        }
+
         if (Auth::check()) {
             $user = Auth::user();
             $cart = $user->cart;
