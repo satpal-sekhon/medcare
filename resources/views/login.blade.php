@@ -25,10 +25,11 @@
                             @csrf
 
                             <div class="col-12">
-                                <div class="form-floating theme-form-floating log-in-form">
+                                <div class="">
+                                    <label for="email">Email Address</label>
+
                                     <input type="email" class="form-control" name="email" id="email"
                                         placeholder="Email Address" value="{{ old('email') }}">
-                                    <label for="email">Email Address</label>
                                     @if ($errors->has('email'))
                                     <span class="invalid-feedback d-block">{{ $errors->first('email') }}</span>
                                     @endif
@@ -40,7 +41,7 @@
                                     <label for="password">Password</label>
 
                                     <div class="input-group">
-                                        <input type="password" name="password" id="password"
+                                        <input type="password" name="password" id="password" placeholder="Password"
                                             value="{{ old('password') }}" @class(['form-control', 'is-invalid'=>
                                         $errors->has('password')])>
                                         <button type="button" class="btn btn-theme-outline btn-sm togglePassword">

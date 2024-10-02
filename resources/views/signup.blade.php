@@ -20,30 +20,30 @@
                     <x-error-message :message="$errors->first('message')" />
 
                     <div class="input-box">
-                        <form class="row g-4" method="POST" action="{{ route('create-account') }}">
+                        <form class="row g-3" method="POST" action="{{ route('create-account') }}">
                             @csrf
                             <div class="col-12">
-                                <div class="form-floating theme-form-floating">
-                                    <input type="text" name="name" id="fullname" placeholder="Full Name" value="{{ old('name') }}" @class(['form-control', 'is-invalid' => $errors->has('name')])>
+                                <div class="">
                                     <label for="fullname">Full Name</label>
+                                    <input type="text" name="name" id="fullname" placeholder="Full Name" value="{{ old('name') }}" @class(['form-control', 'is-invalid' => $errors->has('name')])>
                                     @error('name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-floating theme-form-floating">
-                                    <input type="email" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}" @class(['form-control', 'is-invalid' => $errors->has('email')])>
+                                <div class="">
                                     <label for="email">Email Address</label>
+                                    <input type="email" name="email" id="email" placeholder="Email Address" value="{{ old('email') }}" @class(['form-control', 'is-invalid' => $errors->has('email')])>
                                     @error('email')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-floating theme-form-floating">
-                                    <input type="phone_number" name="phone_number" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" @class(['form-control', 'is-invalid' => $errors->has('phone_number')])>
+                                <div class="">
                                     <label for="phone_number">Phone number</label>
+                                    <input type="phone_number" name="phone_number" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" @class(['form-control', 'is-invalid' => $errors->has('phone_number')])>
                                     @error('phone_number')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -55,13 +55,13 @@
                                     <label for="password">Password</label>
 
                                     <div class="input-group">
-                                        <input type="password" name="password" id="password" value="{{ old('password') }}" @class(['form-control', 'is-invalid' => $errors->has('password')])>
+                                        <input type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}" @class(['form-control', 'is-invalid' => $errors->has('password')])>
                                         <button type="button" class="btn btn-theme-outline btn-sm togglePassword">
                                             <i class="fas fa-eye fs-5"></i>
                                         </button>
                                     </div>
                                     @error('password')
-                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror                           
                                 </div>
                             </div>
@@ -70,13 +70,13 @@
                                 <div class="">
                                     <label for="confirmPassword">Confirm Password</label>
                                     <div class="input-group">
-                                        <input type="password" name="confirm_password" id="confirmPassword" value="{{ old('confirm_password') }}" @class(['form-control', 'is-invalid' => $errors->has('confirm_password')])>
+                                        <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirmPassword" value="{{ old('confirm_password') }}" @class(['form-control', 'is-invalid' => $errors->has('confirm_password')])>
                                         <button type="button" class="btn btn-theme-outline btn-sm togglePassword p-3">
                                             <i class="fas fa-eye fs-5"></i>
                                         </button>
                                     </div>
                                     @error('confirm_password')
-                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
