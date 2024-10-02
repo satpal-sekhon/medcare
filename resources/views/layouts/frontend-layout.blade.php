@@ -111,15 +111,20 @@
                                             </div>
                                         </li>
                                         <li class="right-side">
-                                            <a href="#" class="delivery-login-box">
+                                            <a href="{{ route('my-account.notifications') }}" class="btn p-0 position-relative header-wishlist">
                                                 <div class="delivery-icon">
                                                     <i data-feather="bell"></i>
+
+                                                    @if (auth()->user())
+                                                        <span @class(["position-absolute top-0 start-100 translate-middle badge wishlist-count", 'd-none' => auth()->user()->unreadNotifications()->count() === 0])>
+                                                            {{ auth()->user()->unreadNotifications()->count() }}
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="right-side">
-                                            <a href="{{ route('wishlist.index') }}"
-                                                class="btn p-0 position-relative header-wishlist">
+                                            <a href="{{ route('wishlist.index') }}" class="btn p-0 position-relative header-wishlist">
                                                 <i data-feather="heart"></i>
                                                 <span @class(["position-absolute top-0 start-100 translate-middle badge wishlist-count", 'd-none' => count(session()->get('wishlist', [])) === 0])>
                                                     {{ count(session()->get('wishlist', [])) }}
