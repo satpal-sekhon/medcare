@@ -51,19 +51,30 @@
                             </div>
 
                             <div class="col-6">
-                                <div class="form-floating theme-form-floating">
-                                    <input type="password" name="password" id="password" placeholder="Password" value="{{ old('password') }}" @class(['form-control', 'is-invalid' => $errors->has('password')])>
+                                <div class="">
                                     <label for="password">Password</label>
+
+                                    <div class="input-group">
+                                        <input type="password" name="password" id="password" value="{{ old('password') }}" @class(['form-control', 'is-invalid' => $errors->has('password')])>
+                                        <button type="button" class="btn btn-theme-outline btn-sm togglePassword">
+                                            <i class="fas fa-eye fs-5"></i>
+                                        </button>
+                                    </div>
                                     @error('password')
                                         <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
+                                    @enderror                           
                                 </div>
                             </div>
 
                             <div class="col-6">
-                                <div class="form-floating theme-form-floating">
-                                    <input type="password" name="confirm_password" id="confirmPassword" placeholder="Confirm Password" value="{{ old('confirm_password') }}" @class(['form-control', 'is-invalid' => $errors->has('confirm_password')])>
+                                <div class="">
                                     <label for="confirmPassword">Confirm Password</label>
+                                    <div class="input-group">
+                                        <input type="password" name="confirm_password" id="confirmPassword" value="{{ old('confirm_password') }}" @class(['form-control', 'is-invalid' => $errors->has('confirm_password')])>
+                                        <button type="button" class="btn btn-theme-outline btn-sm togglePassword p-3">
+                                            <i class="fas fa-eye fs-5"></i>
+                                        </button>
+                                    </div>
                                     @error('confirm_password')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
@@ -105,4 +116,24 @@
         </div>
     </div>
 </section>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.togglePassword').on('click', function() {
+            // Find the corresponding password input
+            var passwordInput = $(this).siblings('input[type="password"], input[type="text"]');
+            
+            // Toggle the type attribute between 'password' and 'text'
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+                $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordInput.attr('type', 'password');
+                $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+    });
+    </script>
+@endpush
 @endsection
