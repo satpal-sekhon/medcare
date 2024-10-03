@@ -72,7 +72,7 @@ class LabPackageOrderController extends Controller
                 'instructions' => $labPackage->instructions,
             ];
 
-            Mail::to($request->email)->send(new LabPackageOrderConfirmation($data, 'emails.lab-package-order-confirmation'));
+            Mail::to($request->email)->send(new LabPackageOrderConfirmation($data));
 
             if($request->user()){
                 return redirect()->route('my-account.orders')->with('success', 'Lab package booked successfully!');

@@ -123,14 +123,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mt-3">
-                    <ul class="list-group mt-2">
-                        <li class="list-group-item">
-                            <strong>Delivery Method:</strong>
-                            {{ json_decode($order->shipping_method)->label }}
-                        </li>
-                    </ul>
-                </div>
+                
                 <div class="mt-3">
                     <h3>Shipping Information</h3>
                     <ul class="list-group mt-2">

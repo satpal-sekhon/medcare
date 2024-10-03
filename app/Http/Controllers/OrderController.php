@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProductOrderUpdate;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -267,6 +269,19 @@ class OrderController extends Controller
         $order->payment_status = $request->payment_status;
         $order->update = $request->order_update;
         $order->save();
+
+        $shippingAddress = json_decode($order->shipping_address);
+
+        $data = [
+            'customer_name' => $shippingAddress->customerName,
+            'order_number' => $order->order_number,
+            'status' => $order->status,
+            'payment_status' => $order->payment_status,
+            'order_update' => $order->update,
+            'email' => $shippingAddress->email
+        ];
+
+        Mail::to($shippingAddress->email)->send(new ProductOrderUpdate($data));
 
         return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully!');
     }
