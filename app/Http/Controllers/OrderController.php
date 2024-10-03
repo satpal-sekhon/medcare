@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProductOrderPlaced;
 use App\Mail\ProductOrderUpdate;
 use App\Models\Cart;
 use App\Models\Order;
@@ -209,6 +210,27 @@ class OrderController extends Controller
                 ]);
             }
         }
+
+
+        $shippingAddress = json_decode($order->shipping_address);
+
+        $data = [
+            'customer_name' => $shippingAddress->customerName,
+            'order_number' => $order->order_number,
+            'status' => $order->status,
+            'payment_status' => $order->payment_status,
+            'email' => $shippingAddress->email,
+            'order_items' => array_map(function($item) {
+                return [
+                    'name' => $item['name'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                ];
+            }, $orderItems)
+        ];
+
+        Mail::to($shippingAddress->email)->send(new ProductOrderPlaced($data));
+
 
         if (Auth::check()) {
             $user = Auth::user();
