@@ -59,7 +59,7 @@
         <p>Thank you for choosing us! If you have any questions, feel free to reach out.</p>
         
         <div class="footer">
-            <p>&copy; {{ date('Y') }} Your Company Name. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} {{ getSetting('site_name') ?? '' }}. All rights reserved.</p>
         </div>
     </div>
 </body>

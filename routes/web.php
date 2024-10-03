@@ -248,7 +248,8 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::post('/payment-settings', [SettingController::class, 'paymentSettingsUpdate'])->name('admin.settings.payment.update');
     Route::get('/menu-settings', [SettingController::class, 'menuSettings'])->name('admin.settings.menu');
     Route::post('/menu-settings/{id}', [SettingController::class, 'updateMenuSettings'])->name('admin.settings.menu.update');
-
+    Route::get('/site-settings', [SettingController::class, 'siteSettings'])->name('admin.settings.site');
+    Route::post('/site-settings', [SettingController::class, 'saveSiteSettings'])->name('admin.settings.site.update');
 });
 
 

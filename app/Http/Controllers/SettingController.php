@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function admin_general_settings(){
+    public function admin_general_settings()
+    {
         $settings = Setting::all()->pluck('value', 'key')->toArray();
         return view('admin.settings.general-settings', compact('settings'));
     }
 
-    public function admin_general_settings_update(Request $request){
+    public function admin_general_settings_update(Request $request)
+    {
         $request->validate([
             'primary_category_image' => 'nullable|image|max:2048',
             'category_image' => 'nullable|image|max:2048',
@@ -49,27 +51,29 @@ class SettingController extends Controller
         return redirect()->route('admin.settings.general')->with('success', 'Settings updated successfully.');
     }
 
-    public function menuSettings(){
+    public function menuSettings()
+    {
         $menuItems = MenuItem::with('children')->whereNull('parent_id')->get();
         return view('admin.settings.menu-settings', compact('menuItems'));
     }
 
-    public function updateMenuSettings(Request $request){
+    public function updateMenuSettings(Request $request)
+    {
         $request->validate([
             'label.*' => 'required|string|max:255',
             'meta_name.*' => 'nullable|string|max:255',
             'meta_description.*' => 'nullable|string|max:500',
             'meta_keywords.*' => 'nullable|string|max:255',
         ]);
-        
-        foreach($request->label as $id => $label){
+
+        foreach ($request->label as $id => $label) {
             $menuItem = MenuItem::findOrFail($id);
             $menuItem->label = $label;
-            
+
             $meta_tags['meta_name'] = $request->meta_name[$id] ?? '';
             $meta_tags['meta_description'] = $request->meta_description[$id] ?? '';
             $meta_tags['meta_keywords'] = $request->meta_keywords[$id] ?? '';
-            
+
             $menuItem->meta_tags = $meta_tags;
             $menuItem->save();
         }
@@ -77,16 +81,61 @@ class SettingController extends Controller
         return redirect()->route('admin.settings.menu')->with('success', 'Menu updated successfully.');
     }
 
-    public function homePageSettings(){
+    public function siteSettings()
+    {
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+        return view('admin.settings.site-settings', compact('settings'));
+    }
+
+    public function saveSiteSettings(Request $request)
+    {
+        $request->validate([
+            'site_name' => 'required|string|max:255',
+            'site_logo_1' => 'nullable|image|max:2048',
+            'site_logo_2' => 'nullable|image|max:2048',
+        ]);
+
+        Setting::updateOrCreate(
+            ['key' => 'site_name'],
+            ['value' => $request->site_name]
+        );
+
+        foreach ($request->all() as $key => $image) {
+            if ($key === '_token' || !$request->hasFile($key)) {
+                continue;
+            }
+
+            $currentImagePath = Setting::where('key', $key)->pluck('value')->first();
+            // Delete the old file if it exists
+            if ($currentImagePath && file_exists(public_path($currentImagePath))) {
+                unlink(public_path($currentImagePath));
+            }
+
+            // Handle the file upload
+            $imagePath = uploadFile($image, 'uploads/default-images/');
+
+            // Update or create the setting
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $imagePath]
+            );
+        }
+
+        return redirect()->route('admin.settings.site')->with('success', 'Site settings updated successfully.');
+    }
+
+    public function homePageSettings()
+    {
         $settings = HomePage::find(1);
         return view('admin.settings.home-page', compact('settings'));
     }
 
-    public function saveHomePageSettings(Request $request){
+    public function saveHomePageSettings(Request $request)
+    {
         $request->validate([
             'top_header_text.*' => 'required|string|max:255'
         ]);
-                
+
         $settings = HomePage::find(1);
         $settings->top_header_text = json_encode($request->top_header_text);
 
@@ -112,11 +161,13 @@ class SettingController extends Controller
         return response()->json(['message' => 'Settings updated successfully!']);
     }
 
-    public function paymentSettings(){
+    public function paymentSettings()
+    {
         return view('admin.settings.payment-settings');
     }
 
-    public function paymentSettingsUpdate(Request $request){
+    public function paymentSettingsUpdate(Request $request)
+    {
         $request->validate([
             'cod_charges' => 'required|numeric|between:0,999999.99',
             'razorpay_key_id' => 'required|string|max:255',
@@ -162,7 +213,7 @@ class SettingController extends Controller
                 'value' => $request->paytm_environment,
             ]
         ];
-        
+
         foreach ($paymentSettings as $key => $setting) {
             Setting::updateOrCreate(
                 ['key' => $key],
