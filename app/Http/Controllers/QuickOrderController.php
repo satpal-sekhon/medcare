@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\QuickOrderPlaced;
 use App\Models\QuickOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class QuickOrderController extends Controller
 {
@@ -40,6 +42,8 @@ class QuickOrderController extends Controller
             'instructions' => 'nullable|string',
         ]);
 
+        $customer_email = $request->email;
+
         $prescriptionPath = null;
         $mimeType = null;
         if ($request->hasFile('prescription')) {
@@ -55,12 +59,23 @@ class QuickOrderController extends Controller
             'user_id' => $request->user()->id ?? null,
             'name' => $request->input('customer_name'),
             'phone_number' => $request->input('phone_number'),
-            'email' => $request->input('email'),
+            'email' => $customer_email,
             'prescription_path' => $prescriptionPath,
             'mime_type' => $mimeType,
             'status' => 'Pending',
             'instructions' => $request->input('instructions'),
         ]);
+
+        
+        $data = [
+            'customer_name' => $request->customer_name,
+            'phone_number' => $request->phone_number,
+            'email' => $customer_email,
+            'instructions' => $request->instructions ?? 'None',
+        ];
+        
+        Mail::to($customer_email)->send(new QuickOrderPlaced($data));
+
 
         if($request->user()){
             return redirect()->route('my-account.orders')->with('success', 'Quick order placed successfully!');

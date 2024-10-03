@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-8 mx-auto">
                 <div class="log-in-box">
                     <div class="log-in-title">
                         <h4>Order With Prescription</h4>
@@ -24,10 +24,11 @@
                     <div class="input-box">
                         @if (!$errors->count())
                         @guest
-                        <div class="d-flex justify-content-between mb-3" id="guestConfirmation">
+                        <div class="d-flex justify-content-between mb-3 gap-2" id="guestConfirmation">
                             <button id="continueOrderAsGuest" type="button" class="btn btn-sm btn-theme-outline">Continue
                                 as Guest</button>
                             <a href="{{ route('sign-up') }}" class="btn btn-sm btn-theme-outline">Create an Account</a>
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-theme-outline">Login</a>
                         </div>
                         @endguest
                         @endif
