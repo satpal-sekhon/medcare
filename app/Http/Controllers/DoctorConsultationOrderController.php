@@ -7,6 +7,7 @@ use App\Models\DoctorConsultationOrder;
 use App\Models\DoctorType;
 use Illuminate\Http\Request;
 use App\Mail\DoctorConsultationOrderConfirmation;
+use App\Mail\OrderStatusUpdated;
 use Illuminate\Support\Facades\Mail;
 
 class DoctorConsultationOrderController extends Controller
@@ -70,6 +71,15 @@ class DoctorConsultationOrderController extends Controller
         $order = DoctorConsultationOrder::find($request->id);
         $order->status = $request->status;
         $order->save();
+
+        $data = [
+            'customer_name' => $order->name,
+            'order_number' => $order->order_number,
+            'email' => $order->email,
+            'status' => $order->status,
+        ];
+
+        Mail::to($order->email)->send(new OrderStatusUpdated($data));
 
         return response()->json([
             "success" => true,

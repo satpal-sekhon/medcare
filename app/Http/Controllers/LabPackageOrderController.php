@@ -7,6 +7,8 @@ use App\Models\LabPackageOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LabPackageOrderConfirmation;
+use App\Mail\OrderStatusUpdated;
+use App\Mail\QuickOrderPlaced;
 
 class LabPackageOrderController extends Controller
 {
@@ -129,6 +131,15 @@ class LabPackageOrderController extends Controller
         $labPackageOrder = LabPackageOrder::find($request->id);
         $labPackageOrder->status = $request->status;
         $labPackageOrder->save();
+
+        $data = [
+            'customer_name' => $labPackageOrder->name,
+            'order_number' => $labPackageOrder->order_number,
+            'email' => $labPackageOrder->email,
+            'status' => $labPackageOrder->status,
+        ];
+
+        Mail::to($labPackageOrder->email)->send(new OrderStatusUpdated($data));
 
         return response()->json([
             "success" => true,
