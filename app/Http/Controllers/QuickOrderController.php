@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderStatusUpdated;
 use App\Mail\QuickOrderPlaced;
 use App\Models\QuickOrder;
 use Illuminate\Http\Request;
@@ -151,6 +152,15 @@ class QuickOrderController extends Controller
         $order = QuickOrder::find($request->id);
         $order->status = $request->status;
         $order->save();
+
+        $data = [
+            'customer_name' => $order->name,
+            'order_number' => $order->order_number,
+            'email' => $order->email,
+            'status' => $order->status,
+        ];
+
+        Mail::to($order->email)->send(new OrderStatusUpdated($data));
 
         return response()->json([
             "success" => true,
