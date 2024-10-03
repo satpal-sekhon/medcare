@@ -13,6 +13,7 @@ use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\DoctorConsultationOrderController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorTypeController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LabPackageController;
 use App\Http\Controllers\LabPackageOrderController;
@@ -233,6 +234,10 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     /* Additional page routes */
     Route::get('/pages/{page:slug}', [PageController::class, 'edit'])->name('admin.pages.edit');
     Route::put('/pages/{page:slug}', [PageController::class, 'update'])->name('admin.pages.update');
+
+    Route::get('/manage-faqs', [FAQController::class, 'adminIndex'])->name('admin.faq');
+    Route::resource('faq', FAQController::class);
+    Route::post('/get-faqs', [FAQController::class, 'get'])->name('faqs.get');
 
     /* Setting routes */
     Route::get('/manage-home-page', [SettingController::class, 'homePageSettings'])->name('admin.settings.home-page');

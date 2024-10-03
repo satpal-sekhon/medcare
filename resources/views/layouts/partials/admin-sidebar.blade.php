@@ -242,6 +242,10 @@
                                 <a href="{{ route('admin.pages.edit', $page->slug) }}">{{ $page->name }}</a>
                             </li>                                
                             @endforeach
+
+                            <li>
+                                <a href="{{ route('admin.faq') }}">FAQs</a>
+                            </li>
                         </ul>
                     </li>
 
