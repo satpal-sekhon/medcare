@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\State;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -48,6 +50,14 @@ class UserController extends Controller
         $user = User::find($request->user_id);
 
         $user->notify(new UserNotification($request->message));
+
+        $data = [
+            'notificationMessage' => $request->message
+        ];
+
+        $subject = 'New Notification from '.getSetting('site_name');
+
+        Mail::to($user->email)->send(new SendMail($data, $subject, 'notification'));
 
         return response()->json([
             'success' => true,
