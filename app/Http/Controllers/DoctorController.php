@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use App\Models\DoctorConsultationOrder;
 use App\Models\DoctorType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
