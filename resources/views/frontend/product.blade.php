@@ -2,6 +2,12 @@
 @section('title', 'View Product')
 
 @section('content')
+@push('meta')
+<meta name="title" content="{{ $product->name }}">
+<meta name="description" content="{{ $product->meta_description }}">
+<meta property="og:image" content="{{ asset($product->thumbnail) }}" />
+@endpush
+
 <section class="product-section">
     <div class="container-fluid-lg">
         <div class="row">
