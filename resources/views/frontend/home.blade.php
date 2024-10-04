@@ -1,6 +1,11 @@
 @extends('layouts.frontend-layout')
 
 @section('content')
+@push('meta')
+<meta name="title" content="{{ getSetting("home_meta_title") }}">
+<meta name="keywords" content="{{ getSetting("home_meta_keywords") }}">
+<meta name="description" content="{{ getSetting("home_meta_description") }}">
+@endpush
 
 @include('frontend.partials.home.header-section')
 

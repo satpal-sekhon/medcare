@@ -12,23 +12,32 @@
                 <x-success-message :message="session('success')" />
 
                 <div class="theme-form theme-form-2 mega-form">
-                    <form action="{{ route('admin.settings.home-page.update') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.settings.home-page.update') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-4 my-2">
                             <legend class="fs-5 fw-bold">Top Header Text (Notifications)</legend>
                             <div id="text-inputs">
                                 @foreach ((json_decode($settings->top_header_text) ?? []) as $key => $header_text)
-                                    <div class="d-flex gap-2 mb-2">
-                                        <div class="form-group w-100">
-                                            <input type="text" name="top_header_text[{{$key}}]" class="form-control"
-                                                placeholder="Enter text here" value="{{ $header_text }}">
-                                        </div>
-                                        <button type="button" class="btn btn-danger remove-btn">Remove</button>
+                                <div class="d-flex gap-2 mb-2">
+                                    <div class="form-group w-100">
+                                        <input type="text" name="top_header_text[{{$key}}]" class="form-control"
+                                            placeholder="Enter text here" value="{{ $header_text }}">
                                     </div>
+                                    <button type="button" class="btn btn-danger remove-btn">Remove</button>
+                                </div>
                                 @endforeach
                             </div>
-                            <button type="button" class="btn btn-primary mt-2 mb-3 h-75" id="add-btn">Add Text Input</button>
+                            <button type="button" class="btn btn-primary mt-2 mb-3 h-75" id="add-btn">Add Text
+                                Input</button>
+                        </fieldset>
+
+                        <fieldset class="border p-4 my-2">
+                            <legend class="fs-5 fw-bold">Meta Tags</legend>
+                            <x-form-input name="meta_title" label="Meta Title" value="{{ getSetting('home_meta_title') }}"></x-form-input>
+                            <x-form-input name="meta_keywords" label="Meta Keywords" value="{{ getSetting('home_meta_keywords') }}"></x-form-input>
+                            <x-form-input name="meta_description" label="Meta Description" value="{{ getSetting('home_meta_description') }}"></x-form-input>
                         </fieldset>
 
                         @foreach ([
@@ -38,38 +47,37 @@
                         ] as $section => $info)
                         <fieldset class="border p-4 my-2">
                             <legend class="fs-5 fw-bold">{{ $section }}</legend>
-                            @for ($i = 1; $i <= $info['count']; $i++)
-                            <div class="row">
+                            @for ($i = 1; $i <= $info['count']; $i++) <div class="row">
                                 <div class="col-md-6">
                                     <x-form-input type="file" label="Image {{ $i }}"
                                         name="{{ $info['prefix'] }}_image_{{ $i }}" :labelClass="'form-label-title'">
                                     </x-form-input>
 
                                     @php
-                                        $image_column = $info['prefix'].'_image_'.$i;
+                                    $image_column = $info['prefix'].'_image_'.$i;
                                     @endphp
 
                                     <img src="{{ asset($settings->$image_column) }}" alt="" class="img-fluid w-50 mb-3">
                                 </div>
                                 <div class="col-md-6">
                                     @php
-                                        $column_name = $info['prefix'].'_image_'.$i.'_link';
+                                    $column_name = $info['prefix'].'_image_'.$i.'_link';
                                     @endphp
                                     <x-form-input label="Image {{ $i }} Link" value="{{ $settings->$column_name }}"
                                         name="{{ $info['prefix'] }}_image_{{ $i }}_link" class="h-75"
                                         :labelClass="'form-label-title'"></x-form-input>
                                 </div>
-                            </div>
-                            @endfor
-                        </fieldset>
-                        @endforeach
-
-                        <button class="btn theme-bg-color text-white mt-3">Save</button>
-                    </form>
                 </div>
+                @endfor
+                </fieldset>
+                @endforeach
+
+                <button class="btn theme-bg-color text-white mt-3">Save</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <x-include-plugins :plugins="['jQueryValidate']"></x-include-plugins>

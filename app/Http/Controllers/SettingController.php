@@ -139,8 +139,28 @@ class SettingController extends Controller
         $settings = HomePage::find(1);
         $settings->top_header_text = json_encode($request->top_header_text);
 
+        $metaSettings = [
+            'home_meta_title' => [
+                'value' => $request->meta_title,
+            ],
+            'home_meta_keywords' => [
+                'value' => $request->meta_keywords,
+            ],
+            'home_meta_description' => [
+                'value' => $request->meta_description,
+            ],
+        ];
+
+        foreach ($metaSettings as $key => $setting) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $setting['value']]
+            );
+        }
+
+
         foreach (['home_main_banner', 'home_offer', 'home_horizontal'] as $prefix) {
-            for ($i = 1; $i <= 4; $i++) { // Adjust based on your requirements
+            for ($i = 1; $i <= 4; $i++) {
                 // Check if a new file was uploaded
                 if ($request->hasFile("{$prefix}_image_{$i}")) {
                     // Upload new file and store the path
