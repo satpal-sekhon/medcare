@@ -2,6 +2,13 @@
 @section('title', 'Doctors')
 
 @section('content')
+@push('meta')
+<meta name="title" content="{{ $metaTags->meta_name }}">
+<meta name="keywords" content="{{ $metaTags->meta_keywords }}">
+<meta name="description" content="{{ $metaTags->meta_description }}">
+@endpush
+
+
 <img src="{{ asset('assets/images/banners/horizontal-4.png') }}" class="mw-100">
 
 <section class="section-b-space shop-section">

@@ -14,7 +14,12 @@ class PharmacyController extends Controller
      */
     public function index()
     {
-        return view('frontend.pharmacy');
+        $metaTags = \App\Models\MenuItem::find(7)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
+
+        return view('frontend.pharmacy', compact('metaTags'));
     }
 
     public function admin_index()

@@ -9,7 +9,6 @@ use App\Models\PrimaryCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -31,8 +30,13 @@ class ProductController extends Controller
         if ($currentPage > $lastPage) {
             return redirect()->route('brands.index', ['page' => $lastPage]);
         }
+        
+        $metaTags = \App\Models\MenuItem::find(4)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
 
-        return view('frontend.products', compact('categories', 'products'));
+        return view('frontend.products', compact('categories', 'products', 'metaTags'));
     }
 
     /**
@@ -257,7 +261,12 @@ class ProductController extends Controller
 
         $alphabets = range('A', 'Z');
 
-        return view('frontend.search-medicines', compact('alphabet', 'alphabets', 'products'));
+        $metaTags = \App\Models\MenuItem::find(3)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
+
+        return view('frontend.search-medicines', compact('alphabet', 'alphabets', 'products', 'metaTags'));
     }
 
     /**

@@ -25,7 +25,12 @@ class LabPackageController extends Controller
             return redirect()->route('lab-test.index', ['page' => $lastPage]);
         }
 
-        return view('frontend.lab-test', compact('labPackages'));
+        $metaTags = \App\Models\MenuItem::find(6)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
+
+        return view('frontend.lab-test', compact('labPackages', 'metaTags'));
     }
 
     public function admin_index(){

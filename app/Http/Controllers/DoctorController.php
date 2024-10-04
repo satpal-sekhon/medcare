@@ -28,7 +28,12 @@ class DoctorController extends Controller
 
         $doctorTypes = DoctorType::select('id', 'name')->get();
 
-        return view('frontend.doctors', compact('doctors', 'doctorTypes'));
+        $metaTags = \App\Models\MenuItem::find(8)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
+
+        return view('frontend.doctors', compact('doctors', 'doctorTypes', 'metaTags'));
     }
 
     public function admin_index()

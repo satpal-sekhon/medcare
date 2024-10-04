@@ -23,8 +23,13 @@ class BrandController extends Controller
         if ($currentPage > $lastPage) {
             return redirect()->route('brands.index', ['page' => $lastPage]);
         }
+
+        $metaTags = \App\Models\MenuItem::find(5)->meta_tags;
+        if($metaTags){
+            $metaTags = json_decode($metaTags);
+        }
         
-        return view('frontend.brands', compact('brands'));
+        return view('frontend.brands', compact('brands', 'metaTags'));
     }
 
     public function admin_brands_index(){
