@@ -9,16 +9,19 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $data, $subject, $view;
 
-    public function __construct($data)
+    public function __construct($data, $subject, $view)
     {
         $this->data = $data;
+        $this->subject = $subject;
+        $this->view = $view;
     }
 
     public function build()
     {
-        return $this->view('emails.lab-package-order-confirmation')
+        return $this->view('emails.'.$this->view)
+            ->subject($this->subject)
             ->with($this->data);
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ResetPasswordMail;
+use App\Mail\SendMail;
 use App\Models\Cart;
 use App\Models\State;
 use App\Models\Wishlist;
@@ -418,6 +419,14 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if ($user && $user->otp == $request->otp) {
+            $data = [
+                'userName' => $user->name
+            ];
+
+            $subject = 'Welcome to '.getSetting('site_name');
+
+            Mail::to($user->email)->send(new SendMail($data, $subject, 'welcome'));
+
             $user->update([
                 'otp' => null,
                 'email_verified_at' => $user->email_verified_at ?? now()
