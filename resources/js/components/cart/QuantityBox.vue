@@ -125,7 +125,13 @@ export default {
 
                 this.variantId = selectedVariant.id;
                 $('.productUnitName').html(selectedVariant.name);
-                $(`.main-product-price`).html(`₹${selectedVariant.customer_price}`);
+
+                if(window.isVendor){
+                    $(`.main-product-price`).html(`₹${selectedVariant.vendor_price}`);
+                } else {
+                    $(`.main-product-price`).html(`₹${selectedVariant.customer_price}`);
+                }
+
                 $(`.main-product-mrp`).html(`₹${selectedVariant.mrp}`);
             } else {
                 this.variantId = 0;
@@ -141,7 +147,13 @@ export default {
                 }
 
                 $('.productUnitName').html(this.product.unit);
-                $(`.main-product-price`).html(`₹${this.product.customer_price}`);
+                
+                if(window.isVendor){
+                    $(`.main-product-price`).html(`₹${this.product.vendor_price}`);
+                } else {
+                    $(`.main-product-price`).html(`₹${this.product.customer_price}`);
+                }
+
                 $(`.main-product-mrp`).html(`₹${this.product.mrp}`);
             }
         },

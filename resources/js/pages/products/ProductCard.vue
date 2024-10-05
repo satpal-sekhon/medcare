@@ -68,7 +68,7 @@ export default {
     },
     computed: {
         isVendor() {
-            return window.isVendor || false; // Fallback to false if undefined
+            return window.isVendor || false;
         }
     },
     mounted() {

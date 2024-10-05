@@ -28,7 +28,8 @@
                                 </a>
                                 <span>{{ product.unit }}</span>
                                 <h5 class="sold text-content">
-                                    <span class="theme-color price">₹{{ product.customer_price }}</span>
+                                    <span class="theme-color price" v-if="isVendor">₹{{ product.vendor_price }}</span>
+                                    <span class="theme-color price" v-else>₹{{ product.customer_price }}</span>
                                     <del class="ms-1">₹{{ product.mrp }}</del>
                                 </h5>
                             </div>
@@ -83,6 +84,11 @@ export default {
             /* setTimeout(() => {
                 this.showSearch = false;
             }, 150); */
+        }
+    },
+    computed: {
+        isVendor() {
+            return window.isVendor || false;
         }
     },
     mounted() {

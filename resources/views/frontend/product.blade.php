@@ -116,7 +116,13 @@
 
                             <div class="price-rating mt-3">
                                 <h3 class="theme-color price">
-                                    <span class="main-product-price fs-4 me-1">₹{{ $product->customer_price }}</span>
+                                    <span class="main-product-price fs-4 me-1">
+                                        @if(isVendor())
+                                        ₹{{ $product->vendor_price }}
+                                        @else
+                                        ₹{{ $product->customer_price }}
+                                        @endif
+                                    </span>
                                     <del class="text-content main-product-mrp">₹{{ $product->mrp }}</del>
                                     {{-- <span class="offer theme-color">(8% off)</span> --}}
                                 </h3>
