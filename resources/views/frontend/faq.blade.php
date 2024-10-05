@@ -12,7 +12,7 @@
                     @foreach ($faqs as $key => $faq)
                         <div class="accordion-item mb-2">
                             <h2 class="accordion-header" id="heading{{$key}}">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button @class(["accordion-button", 'collapsed' => $key !== 0]) type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse{{$key}}" aria-expanded="{{ $key===0 ? "true" : 'false' }}" aria-controls="collapse{{$key}}">
                                     {{ $faq->question }}
 
