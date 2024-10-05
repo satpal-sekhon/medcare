@@ -72,7 +72,7 @@
                             @if(auth()->user()->address)
                                 <tr>
                                     <td>Address :</td>
-                                    <td>{{ auth()->user()->address }}</td>
+                                    <td>{!! nl2br(auth()->user()->address) !!}</td>
                                 </tr>
                             @endif
                         </tbody>

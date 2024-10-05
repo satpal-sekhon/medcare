@@ -42,8 +42,8 @@ class AuthController extends Controller
             'name'              => 'required|string|max:50',
             'email'             => 'required|email|max:100|unique:users,email',
             'phone_number'      => 'required|digits:10',
-            'password'          => 'required|string|regex:/^[a-zA-Z0-9]{8,15}$/',
-            'confirm_password'  => 'required|string|min:6|same:password',
+            'password'          => 'required|string|regex:/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"\'<>,.?~`-]{8,25}$/',
+            'confirm_password'  => 'required|string|min:8|same:password',
             'terms'             => 'required|in:accepted',
         ]);
 
@@ -103,8 +103,8 @@ class AuthController extends Controller
             'city'                  => 'required|string|max:50',
             'pincode'               => 'required|digits:6',
             'state'                 => 'required|string|max:50',
-            'new_password'          => 'required|string|regex:/^[a-zA-Z0-9]{8,15}$/',
-            'confirm_password'      => 'required|string|max:25|same:new_password',
+            'new_password'          => 'required|string|regex:/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"\'<>,.?~`-]{8,25}$/',
+            'confirm_password'      => 'required|string|min:8|same:new_password',
             'terms'                 => 'required|in:accepted',
 
             'business_name'         => 'required|string|max:75',
