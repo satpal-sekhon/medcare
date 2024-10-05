@@ -7,6 +7,18 @@
 <meta name="description" content="{{ getSetting("home_meta_description") }}">
 @endpush
 
+@php
+    $priceParam = 'customer_price';
+@endphp
+
+@if (auth()->user())
+    @if(auth()->user()->hasRole('Vendor'))
+        @php
+            $priceParam = 'vendor_price';
+        @endphp
+    @endif
+@endif
+
 @include('frontend.partials.home.header-section')
 
 @if($diseases->count() > 0)

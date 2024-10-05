@@ -10,14 +10,15 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                            assets/images/default/product.jpg'), "price"=> $product->customer_price,
-                            "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->slug),
-                            "stock_type" => $product->stock_type,
-                            "available_quantity" => $product->stock_quantity_for_customer,
-                            /* "rating" => [1, 1, 1, 1, 0],
-                            "ratingValue" => 4, */
-                            ]) }}'></product-item>
+                            assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
+                        "originalPrice" => $product->mrp,
+                        "link" => route('products.view', $product->slug),
+                        "stock_type" => $product->stock_type,
+                        "available_quantity" => $product->stock_quantity_for_customer,
+                        /* "rating" => [1, 1, 1, 1, 0],
+                        "ratingValue" => 4, */
+                        ]) }}'></product-item>
                     </div>
                     @endforeach
                 </div>
@@ -31,15 +32,15 @@
                         "id" => $product->id,
                         "name" => $product->name,
                         "flag" => $product->flag,
-                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                            assets/images/default/product.jpg'), "price"=> $product->customer_price,
-                            "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->slug),
-                            "stock_type" => $product->stock_type,
-                            "available_quantity" => $product->stock_quantity_for_customer,
-                            /* "rating" => [1, 1, 1, 1, 0],
-                            "ratingValue" => 4, */
-                            ]) }}'></product-item>
+                        "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
+                        "originalPrice" => $product->mrp,
+                        "link" => route('products.view', $product->slug),
+                        "stock_type" => $product->stock_type,
+                        "available_quantity" => $product->stock_quantity_for_customer,
+                        /* "rating" => [1, 1, 1, 1, 0],
+                        "ratingValue" => 4, */
+                        ]) }}'></product-item>
                     </div>
                     @endforeach
                 </div>
@@ -54,14 +55,15 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                            assets/images/default/product.jpg'), "price"=> $product->customer_price,
-                            "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->slug),
-                            "stock_type" => $product->stock_type,
-                            "quantity" => $product->stock_quantity_for_customer,
-                            /* "rating" => [1, 1, 1, 1, 0],
-                            "ratingValue" => 4, */
-                            ]) }}'></product-item>
+                            assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
+                        "originalPrice" => $product->mrp,
+                        "link" => route('products.view', $product->slug),
+                        "stock_type" => $product->stock_type,
+                        "quantity" => $product->stock_quantity_for_customer,
+                        /* "rating" => [1, 1, 1, 1, 0],
+                        "ratingValue" => 4, */
+                        ]) }}'></product-item>
                     </div>
                     @endforeach
                 </div>
@@ -76,14 +78,15 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                            assets/images/default/product.jpg'), "price"=> $product->customer_price,
-                            "originalPrice" => $product->mrp,
-                            "link" => route('products.view', $product->slug),
-                            "stock_type" => $product->stock_type,
-                            "quantity" => $product->stock_quantity_for_customer,
-                            /* "rating" => [1, 1, 1, 1, 0],
-                            "ratingValue" => 4, */
-                            ]) }}'></product-item>
+                            assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
+                        "originalPrice" => $product->mrp,
+                        "link" => route('products.view', $product->slug),
+                        "stock_type" => $product->stock_type,
+                        "quantity" => $product->stock_quantity_for_customer,
+                        /* "rating" => [1, 1, 1, 1, 0],
+                        "ratingValue" => 4, */
+                        ]) }}'></product-item>
                     </div>
                     @endforeach
                 </div>

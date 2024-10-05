@@ -9,7 +9,8 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                        assets/images/default/product.jpg'), "price"=> $product->customer_price,
+                        assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->slug),
                         "stock_type" => $product->stock_type,
@@ -29,7 +30,8 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                        assets/images/default/product.jpg'), "price"=> $product->customer_price,
+                        assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->slug),
                         "stock_type" => $product->stock_type,
@@ -49,7 +51,8 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                        assets/images/default/product.jpg'), "price"=> $product->customer_price,
+                        assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->slug),
                         "stock_type" => $product->stock_type,
@@ -69,7 +72,8 @@
                         "name" => $product->name,
                         "flag" => $product->flag,
                         "image" => file_exists(public_path($product->thumbnail)) ? asset($product->thumbnail) : asset('
-                        assets/images/default/product.jpg'), "price"=> $product->customer_price,
+                        assets/images/default/product.jpg'), 
+                        "price"=> $product->$priceParam,
                         "originalPrice" => $product->mrp,
                         "link" => route('products.view', $product->slug),
                         "stock_type" => $product->stock_type,

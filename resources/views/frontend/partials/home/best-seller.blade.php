@@ -26,7 +26,7 @@
                             </a>
                             <span>{{ $product->unit }}</span>
                             <h5 class="sold text-content">
-                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                <span class="theme-color price">₹{{ $product->$priceParam }}</span>
                                 @if($product->mrp > 0)
                                     <del class="ms-1">₹{{ $product->mrp }}</del>
                                 @endif
@@ -55,7 +55,7 @@
                             </a>
                             <span>{{ $product->unit }}</span>
                             <h5 class="sold text-content">
-                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                <span class="theme-color price">₹{{ $product->$priceParam }}</span>
                                 @if($product->mrp > 0)
                                     <del class="ms-1">₹{{ $product->mrp }}</del>
                                 @endif
@@ -84,7 +84,7 @@
                             </a>
                             <span>{{ $product->unit }}</span>
                             <h5 class="sold text-content">
-                                <span class="theme-color price">₹{{ $product->customer_price }}</span>
+                                <span class="theme-color price">₹{{ $product->$priceParam }}</span>
                                 @if($product->mrp > 0)
                                     <del class="ms-1">₹{{ $product->mrp }}</del>
                                 @endif
