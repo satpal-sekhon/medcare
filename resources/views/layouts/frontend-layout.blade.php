@@ -650,9 +650,22 @@
         });
     </script>
 
+    @php
+        $isVendor = false;
+    @endphp
+
+    @if (auth()->user())
+        @if(auth()->user()->hasRole('Vendor'))
+            @php
+                $isVendor = true;
+            @endphp
+        @endif
+    @endif
+
     <script>
         window.wishlistItems = @json(session()->get('wishlist', []));
         window.cart = @json(session()->get('cart', []));
+        window.isVendor = '{{ $isVendor }}'
     </script>
     @stack('scripts')
 </body>

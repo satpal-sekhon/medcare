@@ -75,11 +75,24 @@ function getSetting($key)
  */
 function uploadFile($file, $directory)
 {
-    if(!$file){
+    if (!$file) {
         return null;
     }
 
     $filename = uniqid() . '.' . $file->getClientOriginalExtension();
     $file->move(public_path($directory), $filename);
     return $directory . $filename;
+}
+
+
+function isVendor()
+{
+    $isVendor = false;
+    if (auth()->user()) {
+        if (auth()->user()->hasRole('Vendor')) {
+            $isVendor = true;
+        }
+    }
+
+    return $isVendor;
 }

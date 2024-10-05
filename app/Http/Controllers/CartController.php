@@ -30,13 +30,18 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
+        $priceColumn = 'customer_price';
+        if(isVendor()){
+            $priceColumn = 'vendor_price';
+        }
+
         $productId = $validated['productId'];
         $variantId = $validated['variantId'] ?? null; 
         $quantity = $validated['quantity'];
 
         // Retrieve product details from the database
         $product = Product::with('brand', 'category', 'primaryCategory', 'variants')
-            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'unit', 'slug', 'customer_price', 'mrp', 'product_type', 'flag', 'thumbnail', 'is_prescription_required')
+            ->select('id', 'brand_id', 'category_id', 'primary_category_id', 'name', 'unit', 'slug', 'customer_price', 'vendor_price', 'mrp', 'product_type', 'flag', 'thumbnail', 'is_prescription_required')
             ->find($productId);
 
         if (!$product) {
@@ -68,7 +73,7 @@ class CartController extends Controller
                     'name' => $product->name,
                     'slug' => $product->slug,
                     'product_type' => $product->product_type,
-                    'price' => $variant->customer_price,
+                    'price' => $variant->$priceColumn,
                     'mrp' => $variant->mrp,
                     'flag' => $product->flag,
                     'brand' => $product->brand->name,
@@ -100,7 +105,7 @@ class CartController extends Controller
                     'unit' => $product->unit,
                     'slug' => $product->slug,
                     'product_type' => $product->product_type,
-                    'price' => $product->customer_price,
+                    'price' => $product->$priceColumn,
                     'mrp' => $product->mrp,
                     'flag' => $product->flag,
                     'brand' => $product->brand->name,

@@ -15,7 +15,7 @@
                                 <i data-feather="eye"></i>
                             </a>
                         </li>
-                       <Wishlist :productId="product.id" />
+                        <Wishlist :productId="product.id" />
                     </ul>
                 </a>
             </div>
@@ -28,7 +28,8 @@
                 </a>
                 <h6 class="unit">{{ product.unit }}</h6>
                 <h5 class="price">
-                    <span class="theme-color">₹{{ product.customer_price }}</span>
+                    <span class="theme-color" v-if="isVendor">₹{{ product.vendor_price }}</span>
+                    <span class="theme-color" v-else>₹{{ product.customer_price }}</span>
                     <del>₹{{ product.mrp }}</del>
                 </h5>
                 <QuantityBox :productId="product.id" />
@@ -63,6 +64,11 @@ export default {
                 default:
                     return '';
             }
+        }
+    },
+    computed: {
+        isVendor() {
+            return window.isVendor || false; // Fallback to false if undefined
         }
     },
     mounted() {
