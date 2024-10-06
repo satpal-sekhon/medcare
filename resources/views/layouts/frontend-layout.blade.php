@@ -175,7 +175,11 @@
 
                                                     @auth
                                                     <li class="product-box-contain">
+                                                        @if(isVendor())
+                                                        <a href="{{ route('vendor-dashboard') }}">Dashboard</a>
+                                                        @else 
                                                         <a href="{{ route('my-account') }}">My Account</a>
+                                                        @endif
                                                     </li>
                                                     <li class="product-box-contain">
                                                         <a href="{{ route('logout') }}">Logout</a>
@@ -650,22 +654,10 @@
         });
     </script>
 
-    @php
-        $isVendor = false;
-    @endphp
-
-    @if (auth()->user())
-        @if(auth()->user()->hasRole('Vendor'))
-            @php
-                $isVendor = true;
-            @endphp
-        @endif
-    @endif
-
     <script>
         window.wishlistItems = @json(session()->get('wishlist', []));
         window.cart = @json(session()->get('cart', []));
-        window.isVendor = '{{ $isVendor }}'
+        window.isVendor = '{{ isVendor() }}'
     </script>
     @stack('scripts')
 </body>

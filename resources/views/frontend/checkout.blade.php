@@ -13,7 +13,9 @@
             states: @json($states),
             addresses: @json(auth()->user()->addresses ?? null),
             user: @json(auth()->user()),
-            user_email: "{{ auth()->user()->email ?? '' }}"
+            user_email: "{{ auth()->user()->email ?? '' }}",
+            razorpay_for_vendor: "{{ getSetting('razorpay_for_vendor') }}",
+            razorpay_for_customer: "{{ getSetting('razorpay_for_customer') }}"
         };
     </script>
 @endpush

@@ -386,7 +386,12 @@ class CartController extends Controller
         $total = $sub_total - $discount;
         
         if($request->paymentMethod == 'cash'){
-            $cod_charges = getSetting('cod_charges') ?? 0;
+            if(isVendor()){
+                $cod_charges = getSetting('vendor_cod_charges') ?? 0;
+            } else {
+                $cod_charges = getSetting('cod_charges') ?? 0;
+            }
+
             $cart['cod_charges'] = (float) $cod_charges;
             $cart['total'] =  $total + $cod_charges;
         } else {

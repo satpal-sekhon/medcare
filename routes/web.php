@@ -115,6 +115,7 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Dashboard route
     Route::get('/', [DashboardController::class, 'vendor_dashboard'])->name('vendor-dashboard');
     Route::get('/my-orders', [OrderController::class, 'vendorOrders'])->name('vendor.my-orders');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('vendor.view-order');
 });
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.vendor-layout')
 
 @section('content')
     <div class="row">
@@ -17,12 +17,10 @@
                                 <thead>
                                     <tr>
                                         <th>Order ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Email</th>
-                                        <th>Phone Number</th>
-                                        <th>Address</th>
                                         <th>Items</th>
                                         <th>Status</th>
+                                        <th>Update</th>
+                                        {{-- <th>Options</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -62,45 +60,9 @@
                             data: null,
                             name: 'id',
                             render: function(data, type, row, meta) {
-                                let editUrl = `{{ route('orders.edit', ':id') }}`.replace(':id', row.id);
+                                let viewUrl = `{{ route('vendor.view-order', ':id') }}`.replace(':id', row.id);
 
-                                return `<a href="${editUrl}">#${row.order_number}</a>`;
-                            }
-                        },
-                        {
-                            data: 'name',
-                            name: 'name',
-                            render: function(data, type, row) {
-                                let userBadge = ``;
-
-                                if(!row.user_id){
-                                    userBadge = `<span class="badge badge-warning">Guest</span>`;
-                                } else if(row.user){
-                                    userBadge = `<span class="badge badge-success">#${row.user.user_code}</span>`;
-                                }
-
-                                return `${userBadge} ${JSON.parse(row.shipping_address).customerName}`;
-                            }
-                        },
-                        {
-                            data: 'email',
-                            name: 'email',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).email}`;
-                            }
-                        },
-                        {
-                            data: 'phone_number',
-                            name: 'phone_number',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).phone}`;
-                            }
-                        },
-                        {
-                            data: 'address',
-                            name: 'address',
-                            render: function(data, type, row) {
-                                return `${JSON.parse(row.shipping_address).addressLine1}`;
+                                return `<a href="${viewUrl}">#${row.order_number}</a>`;
                             }
                         },
                         {
@@ -117,7 +79,33 @@
                             render: function(data, type, row) {
                                 return `${row.status}`;
                             }
-                        }
+                        },
+                        {
+                            data: 'update',
+                            name: 'update',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                return `${row.update ? row.update : '-'}`;
+                            }
+                        },
+                        /* {
+                            data: null,
+                            name: 'actions',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                let viewUrl = `{{ route('vendor.view-order', ':id') }}`.replace(':id', row.order_number);
+                    
+                                return `
+                                <ul>
+                                    <li>
+                                        <a href="${viewUrl}">
+                                            <i class="ri-eye-line"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            `;
+                            }
+                        } */
                     ],
                     order: [[0, 'desc']]
                 });

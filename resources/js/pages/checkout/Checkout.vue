@@ -73,10 +73,10 @@ export default {
         getComponentProps(componentName) {
             let paymentMethods = [{ id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' }];
 
-            if (!window.isVendor) {
+            if (!window.isVendor && window.razorpay_for_vendor) {
                 paymentMethods.push({ id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' });
                 //paymentMethods.push({ id: 'paytm', label: 'PayTM', description: 'Pay with india\'s most trustworthy app' });
-            } else {
+            } else if(window.isVendor && window.razorpay_for_vendor){
                 paymentMethods.push({ id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' });
             }
 
