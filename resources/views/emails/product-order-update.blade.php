@@ -15,6 +15,10 @@
     <p><strong>Order Update:</strong> {{ $order_update }}</p>
     @endif
 
+    @if ($assigned_to)
+    <p><strong>Vendor:</strong> {{ $vendor_name }}</p>
+    @endif
+
     <p>Thank you for your continued support!</p>
 
     <p>Best regards,<br>{{ getSetting('site_name') ?? '' }}</p>

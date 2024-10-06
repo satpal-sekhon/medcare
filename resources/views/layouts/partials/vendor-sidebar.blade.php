@@ -39,6 +39,12 @@
                             <span>My Orders</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.orders') }}">
+                            <i class="ri-list-unordered"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

@@ -11,7 +11,7 @@
 
                     <x-success-message :message="session('success')" />
 
-                    <form action="{{ route('orders.update', $order->id) }}" method="POST">
+                    <form action="{{ route('vendor.orders.update', $order->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -48,10 +48,8 @@
                                 <div class="form-group">
                                     <label for="assignedTo">Assigned To</label>
                                     <select name="assigned_to" class="form-control select2" id="assignedTo">
-                                        <option value="" @selected(!$order->assigned_to)>Self</option>
-                                        @foreach ($vendors as $vendor)
-                                            <option value="{{ $vendor->id }}" @selected($order->assigned_to==$vendor->id)>{{ $vendor->name }}</option>
-                                        @endforeach
+                                        <option value="" @selected(!$order->assigned_to)>Unassign order</option>
+                                        <option value="{{$order->assigned_to}}" @selected($order->assigned_to == auth()->user()->id)>{{ auth()->user()->name }}</option>
                                     </select>
                                 </div>
                             </div>

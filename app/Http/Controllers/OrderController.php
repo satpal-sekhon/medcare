@@ -6,6 +6,7 @@ use App\Mail\ProductOrderPlaced;
 use App\Mail\ProductOrderUpdate;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -21,6 +22,9 @@ class OrderController extends Controller
     }
 
     public function admin_index(){
+        if(isVendor()){
+            return view('vendor.orders.assigned');
+        }
         return view('admin.orders.index');
     }
 
@@ -34,7 +38,7 @@ class OrderController extends Controller
 
     public function get(Request $request)
     {
-        $columns = ['id', 'name', 'email', 'phone_number'];
+        $columns = ['id', 'name', 'shipping_address', 'phone_number'];
     
         // Eager load the items relationship to calculate sum later
         $query = Order::with('user')
@@ -45,6 +49,11 @@ class OrderController extends Controller
             $user_id = $request->user_id;
             $query->where('user_id', $user_id);
         }
+
+        if ($request->has('assignedTo') && $request->assignedTo) {
+            $assignedTo = $request->assignedTo;
+            $query->where('assigned_to', $assignedTo);
+        }
     
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -54,13 +63,6 @@ class OrderController extends Controller
                   ->orWhereHas('user', function($q) use ($search) {
                     $q->where('user_code', 'like', "%{$search}%");
                   });;
-            });
-        }
-
-        if($request->has('user_id')){
-            $user_id = $request->user_id;
-            $query->where(function ($q) use ($user_id) {
-                $q->where('user_id', $user_id);
             });
         }
     
@@ -288,7 +290,16 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('admin.orders.edit-product-order', compact('order'));
+        $vendors = User::role('Vendor')->get();
+
+        if(isVendor()){
+            if($order->assigned_to!==Auth::id()){
+                abort(403);
+            }
+            return view('vendor.orders.edit', compact('order'));
+        }
+
+        return view('admin.orders.edit-product-order', compact('order', 'vendors'));
     }
 
     /**
@@ -299,6 +310,7 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->payment_status = $request->payment_status;
         $order->update = $request->order_update;
+        $order->assigned_to = $request->assigned_to;
         $order->save();
 
         $shippingAddress = json_decode($order->shipping_address);
@@ -309,11 +321,20 @@ class OrderController extends Controller
             'status' => $order->status,
             'payment_status' => $order->payment_status,
             'order_update' => $order->update,
-            'email' => $shippingAddress->email
+            'email' => $shippingAddress->email,
+            'assigned_to' => $order->assigned_to,
         ];
+
+        if($order->assigned_to){
+            $vendor = User::find($order->assigned_to);
+            $data['vendor_name'] = $vendor->name ?? 'Unknown';
+        }
 
         Mail::to($shippingAddress->email)->send(new ProductOrderUpdate($data));
 
+        if(isVendor()){
+            return redirect()->route('vendor.orders')->with('success', 'Order updated successfully!');
+        }
         return redirect()->route('admin.orders.index')->with('success', 'Order updated successfully!');
     }
 
