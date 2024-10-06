@@ -71,6 +71,15 @@ export default {
     },
     methods: {
         getComponentProps(componentName) {
+            let paymentMethods = [{ id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' }];
+
+            if (!window.isVendor) {
+                paymentMethods.push({ id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' });
+                //paymentMethods.push({ id: 'paytm', label: 'PayTM', description: 'Pay with india\'s most trustworthy app' });
+            } else {
+                paymentMethods.push({ id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' });
+            }
+
             const propsMap = {
                 'DeliveryAddress': { address: this.deliveryAddress },
                 //'DeliveryOptions': { deliveryMethod: this.selectedDeliveryMethod },
@@ -78,11 +87,7 @@ export default {
                 'PaymentOptions': {
                     isSubmitting: this.isSubmitting,
                     address: this.deliveryAddress,
-                    paymentOptions: [
-                        { id: 'cash', label: 'Cash On Delivery', description: 'You can pay when you receive the order' },
-                        { id: 'razorpay', label: 'Pay Online (UPI | Credit & Debit Card | Net Banking )', description: 'Pay with multile payment methods' },
-                        //{ id: 'paytm', label: 'PayTM', description: 'Pay with india\'s most trustworthy app' },
-                    ]
+                    paymentOptions: paymentMethods
                 }
             };
             return propsMap[componentName] || {};
@@ -135,7 +140,7 @@ export default {
                 formData.append('selectedPaymentMethod', JSON.stringify(this.selectedPaymentMethod));
                 formData.append('transactionId', this.transactionId);
 
-                if(this.prescriptionMethod){
+                if (this.prescriptionMethod) {
                     if (this.prescriptionMethod.files && this.prescriptionMethod.files.length > 0) {
                         Array.from(this.prescriptionMethod.files).forEach(file => {
                             formData.append('prescriptions[]', file);
@@ -171,7 +176,7 @@ export default {
         let cart = window.cart;
         const hasPrescriptionProduct = Object.values(cart.products).some(product => product.is_prescription_required === 1);
 
-        if (hasPrescriptionProduct) {
+        if (hasPrescriptionProduct && !window.isVendor) {
             this.steps.push({
                 component: 'UploadPrescription',
                 iconSrc: '/assets/js/checkout/animated-document.json',

@@ -33,6 +33,12 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.my-orders') }}">
+                            <i class="ri-shopping-basket-line"></i>
+                            <span>My Orders</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

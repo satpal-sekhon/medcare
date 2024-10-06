@@ -16,7 +16,10 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
-                                    <x-form-input type="number" name="cod_charges" label="COD Charges" value="{{ getSetting('cod_charges') ?? '' }}"></x-form-input>
+                                    <x-form-input type="number" name="vendor_cod_charges" label="COD Charges For Vendor" value="{{ getSetting('vendor_cod_charges') ?? '' }}"></x-form-input>
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form-input type="number" name="cod_charges" label="COD Charges For Customer" value="{{ getSetting('cod_charges') ?? '' }}"></x-form-input>
                                 </div>
                             </div>
 
@@ -30,11 +33,27 @@
                                 <div class="col-md-6">
                                     <x-form-input name="razorpay_key_secret" label="Key Secret" value="{{ getSetting('razorpay_key_secret') ?? '' }}"></x-form-input>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label-title" id="razorpayEnvironment">Environment</label>
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label-title" for="razorpayEnvironment">Environment</label>
                                     <select name="razorpay_environment" id="razorpayEnvironment" class="form-control">
-                                        <option value="Production">Production</option>
-                                        <option value="Sandbox">Sandbox</option>
+                                        <option value="Production" @selected(getSetting('razorpay_environment') === "Production")>Production</option>
+                                        <option value="Sandbox" @selected(getSetting('razorpay_environment') === "Sandbox")>Sandbox</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label-title" for="razorpayForVendor">Enable for Vendor</label>
+                                    <select name="razorpay_for_vendor" id="razorpayForVendor" class="form-control">
+                                        <option value="1" @selected(getSetting('razorpay_for_vendor') === "1")>Yes</option>
+                                        <option value="" @selected(!getSetting('razorpay_for_vendor'))>No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label-title" fpr="razorpayForCustomer">Enable for Customer</label>
+                                    <select name="razorpay_for_customer" id="razorpayForCustomer" class="form-control">
+                                        <option value="1" @selected(getSetting('razorpay_for_customer') === "1")>Yes</option>
+                                        <option value="" @selected(!getSetting('razorpay_for_customer'))>No</option>
                                     </select>
                                 </div>
                             </div>
@@ -57,10 +76,10 @@
                                     <x-form-input name="paytm_website" label="Website" value="{{ getSetting('paytm_website') ?? '' }}"></x-form-input>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label-title" id="paytm_environment">Environment</label>
+                                    <label class="form-label-title" for="paytm_environment">Environment</label>
                                     <select name="paytm_environment" id="paytm_environment" class="form-control">
-                                        <option value="Production">Production</option>
-                                        <option value="Sandbox">Sandbox</option>
+                                        <option value="Production" @selected(getSetting('paytm_environment') === "Production")>Production</option>
+                                        <option value="Sandbox" @selected(getSetting('paytm_environment') === "Sandbox")>Sandbox</option>
                                     </select>
                                 </div>
                             </div>

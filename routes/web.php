@@ -79,7 +79,7 @@ Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
 Route::post('/remove-applied-coupon', [CartController::class, 'removeAppliedCoupon'])->name('coupon.remove.applied');
-Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
+Route::post('/send-notification', [UserController::class, 'sendNotifica+tion'])->name('notification.send');
 
 Route::resources([
     '/wishlist' => WishlistController::class,
@@ -106,6 +106,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::post('/orders/get', [OrderController::class, 'get'])->name('orders.get');
 
 Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Submit docs for verification
@@ -113,6 +114,7 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
 
     // Dashboard route
     Route::get('/', [DashboardController::class, 'vendor_dashboard'])->name('vendor-dashboard');
+    Route::get('/my-orders', [OrderController::class, 'vendorOrders'])->name('vendor.my-orders');
 });
 
 
@@ -203,7 +205,6 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Orders routes
     Route::resource('orders', OrderController::class);
     Route::get('/orders', [OrderController::class, 'admin_index'])->name('admin.orders.index');
-    Route::post('/orders/get', [OrderController::class, 'get'])->name('orders.get');
 
     Route::get('/transactions', [OrderController::class, 'adminTransactions'])->name('admin.transactions');
     Route::post('/transactions/get', [OrderController::class, 'getTransactions'])->name('transactions.get');

@@ -28,6 +28,10 @@ class OrderController extends Controller
         return view('admin.transactions.index');
     }
 
+    public function vendorOrders(){
+        return view('vendor.orders.my-orders');
+    }
+
     public function get(Request $request)
     {
         $columns = ['id', 'name', 'email', 'phone_number'];
@@ -36,6 +40,11 @@ class OrderController extends Controller
         $query = Order::with('user')
             ->withCount('items as total_quantity')
             ->select('orders.*');
+
+        if ($request->has('user_id') && $request->user_id) {
+            $user_id = $request->user_id;
+            $query->where('user_id', $user_id);
+        }
     
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];

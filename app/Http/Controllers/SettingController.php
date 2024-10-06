@@ -190,6 +190,7 @@ class SettingController extends Controller
     {
         $request->validate([
             'cod_charges' => 'required|numeric|between:0,999999.99',
+            'vendor_cod_charges' => 'required|numeric|between:0,999999.99',
             'razorpay_key_id' => 'required|string|max:255',
             'razorpay_key_secret' => 'required|string|max:255',
             'razorpay_environment' => 'required|string|max:255',
@@ -205,6 +206,9 @@ class SettingController extends Controller
             'cod_charges' => [
                 'value' => number_format($request->cod_charges, 2, '.', ''),
             ],
+            'vendor_cod_charges' => [
+                'value' => number_format($request->vendor_cod_charges, 2, '.', ''),
+            ],
             'razorpay_key_id' => [
                 'value' => $request->razorpay_key_id,
             ],
@@ -213,6 +217,12 @@ class SettingController extends Controller
             ],
             'razorpay_environment' => [
                 'value' => $request->razorpay_environment,
+            ],
+            'razorpay_for_vendor' => [
+                'value' => $request->razorpay_for_vendor,
+            ],
+            'razorpay_for_customer' => [
+                'value' => $request->razorpay_for_customer,
             ],
             'paytm_merchant_id' => [
                 'value' => $request->paytm_merchant_id,
