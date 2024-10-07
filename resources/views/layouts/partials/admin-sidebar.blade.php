@@ -157,6 +157,13 @@
                     </li>
                     
                     <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.bills.index') }}">
+                            <i class="ri-bill-line"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-list-unordered"></i>
                             <span>Orders</span>

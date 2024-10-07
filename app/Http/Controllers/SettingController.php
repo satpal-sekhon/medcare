@@ -93,13 +93,25 @@ class SettingController extends Controller
             'site_name' => 'required|string|max:255',
             'site_logo_1' => 'nullable|image|max:2048',
             'site_logo_2' => 'nullable|image|max:2048',
+            'site_contact_number' => 'required|digits:10',
+            'site_contact_email' => 'required|email|max:255',
+            'site_address' => 'required|string|max:255',
         ]);
 
-        Setting::updateOrCreate(
-            ['key' => 'site_name'],
-            ['value' => $request->site_name]
-        );
-
+        $settings = [
+            'site_name' => $request->site_name,
+            'site_contact_number' => $request->site_contact_number,
+            'site_contact_email' => $request->site_contact_email,
+            'site_address' => $request->site_address,
+        ];
+    
+        foreach ($settings as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+        
         foreach ($request->all() as $key => $image) {
             if ($key === '_token' || !$request->hasFile($key)) {
                 continue;

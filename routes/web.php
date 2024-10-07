@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -182,6 +183,11 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::resource('doctor-types', DoctorTypeController::class);
     Route::get('/doctor-types', [DoctorTypeController::class, 'admin_index'])->name('admin.doctor-types.index');
     Route::post('/doctor-types/get', [DoctorTypeController::class, 'get'])->name('doctor-types.get');
+
+    // Bill routes
+    Route::resource('bills', BillController::class);
+    Route::get('/bills', [BillController::class, 'adminIndex'])->name('admin.bills.index');
+    Route::post('/bills/get', [BillController::class, 'get'])->name('bills.get');
 
     // Doctors routes
     Route::resource('doctors', DoctorController::class);

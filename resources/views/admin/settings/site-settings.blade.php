@@ -32,13 +32,25 @@
                                             @endif
 
                                             @if (isset($settings[$key]))
-                                                <div class="my-2">
+                                                <div @class(["my-2", "bg-primary" => $key=='site_logo_1'])>
                                                     <img src="{{ asset($settings[$key]) }}" alt="{{ $label }} Image" width="100">
                                                 </div>
                                             @endif
                                         </div>
                                     </div>
                                 @endforeach
+
+                                <div class="col-md-6 mb-2">
+                                    <x-form-input name="site_contact_number" label="Site Contact Number" value="{{ getSetting('site_contact_number') ?? '' }}"></x-form-input>
+                                </div>
+
+                                <div class="col-md-6 mb-2">
+                                    <x-form-input name="site_contact_email" label="Site email address" value="{{ getSetting('site_contact_email') ?? '' }}"></x-form-input>
+                                </div>
+
+                                <div class="col-md-6 mb-2">
+                                    <x-textarea name="site_address" label="Site Address" value="{{ getSetting('site_address') ?? '' }}"></x-textarea>
+                                </div>
                             </div>
 
                             <div class="mb-4 mt-2">
