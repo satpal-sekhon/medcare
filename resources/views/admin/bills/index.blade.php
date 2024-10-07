@@ -27,10 +27,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Banner Image</th>
-                                        <th>Flag</th>
+                                        <th>Bill From</th>
+                                        <th>Bill To</th>
+                                        <th>Bill to number</th>
+                                        <th>Total Products</th>
+                                        <th>Total</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -52,7 +53,7 @@
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('brands.get') }}",
+                        url: "{{ route('bills.get') }}",
                         type: 'POST',
                         data: {
                             _token: "{{ csrf_token() }}"
@@ -66,38 +67,26 @@
                             }
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'bill_from',
+                            name: 'bill_from'
                         },
                         {
-                            data: 'image',
-                            name: 'image',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                let defaultImagePath = '{{ getSetting("default_brand_image") }}';
-                                let imageUrl = data ? data : defaultImagePath;
-
-                                return `<img src="{{ asset('${imageUrl}') }}" alt="Brand Image" class="dt-image" onerror="this.onerror=null; this.src='{{ asset('${defaultImagePath}') }}';">`;
-                            }
+                            data: 'bill_to_name',
+                            name: 'bill_to_name'
                         },
                         {
-                            data: 'banner_image',
-                            name: 'banner_image',
-                            orderable: false,
-                            render: function(data, type, row) {
-                                return `<img src="{{ asset('${data}') }}" alt="" class="dt-image">`;
-                            }
+                            data: 'bill_to_contact',
+                            name: 'bill_to_contact'
                         },
                         {
-                            data: 'status',
-                            name: 'status',
-                            orderable: false,
+                            data: 'products_count',
+                            name: 'products_count'
+                        },
+                        {
+                            data: 'products_sum_total',
+                            name: 'products_sum_total',
                             render: function(data, type, row) {
-                                if(row.show_on_homepage != '1'){
-                                    return ``;
-                                }
-
-                                return `<span class="badge badge-success">Show On Homepage</span>`;
+                                return `₹${row.products_sum_total}`;
                             }
                         },
                         {
@@ -105,18 +94,18 @@
                             name: 'actions',
                             orderable: false,
                             render: function(data, type, row) {
-                                let editUrl = `{{ route('brands.edit', ':id') }}`.replace(':id', row.id);
-                                let deleteUrl = `{{ route('brands.destroy', ':id') }}`.replace(':id', row.id);
+                                let viewUrl = `{{ route('bills.show', ':id') }}`.replace(':id', row.id);
+                                let deleteUrl = `{{ route('bills.destroy', ':id') }}`.replace(':id', row.id);
                     
                                 return `
                                 <ul>
                                     <li>
-                                        <a href="${editUrl}">
-                                            <i class="ri-pencil-line"></i>
+                                        <a href="${viewUrl}">
+                                            <i class="ri-eye-line"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <button class="btn p-0 fs-6 delete-btn" data-source="brand" data-endpoint="${deleteUrl}">
+                                        <button class="btn p-0 fs-6 delete-btn" data-source="bill" data-endpoint="${deleteUrl}">
                                             <i class="ri-delete-bin-line"></i>
                                         </button>
                                     </li>

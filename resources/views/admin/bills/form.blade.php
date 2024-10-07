@@ -26,7 +26,9 @@
                 <select class="form-select chosen" name="customer" id="customerSelect" aria-label="Select customer">
                     <option value="">Select a customer</option>
                     @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}" data-address="{{$customer->address}}" data-phone-number="{{$customer->phone_number}}">#{{ $customer->user_code }} {{ $customer->name }}</option>
+                    <option value="{{ $customer->id }}" data-address="{{$customer->address}}"
+                        data-phone-number="{{$customer->phone_number}}">#{{ $customer->user_code }} {{ $customer->name
+                        }}</option>
                     @endforeach
                     <option value="custom">Add Custom Customer</option>
                 </select>
@@ -39,7 +41,8 @@
             </div>
 
             <div class="mb-2">
-                <x-form-input type="number" name="bill_to_contact" label="Contact Number" placeholder="Enter customer contact number">
+                <x-form-input type="number" name="bill_to_contact" label="Contact Number"
+                    placeholder="Enter customer contact number">
                 </x-form-input>
             </div>
         </div>
@@ -54,7 +57,8 @@
                     <select class="form-select chosen" id="product" aria-label="Select product">
                         <option value="">Select product</option>
                         @foreach ($products as $product)
-                            <option value="{{ $product->name }}" data-price="{{ $product->customer_price }}">{{ $product->name }}</option>
+                        <option value="{{ $product->name }}" data-price="{{ $product->customer_price }}">{{
+                            $product->name }}</option>
                         @endforeach
                         <option value="custom">Add Custom Product</option>
                     </select>
@@ -236,9 +240,23 @@
                     type: $(form).attr('method'),
                     data: formData,
                     success: function(response) {
-                        console.log('response',response)
-                        //alert('Bill generated successfully!');
-                        //form.reset();
+                        if(response.success){
+                            Swal.fire(
+                                'Success!',
+                                `${response.message}`,
+                                'success'
+                            );
+
+                            setTimeout(() => {
+                                window.location = "{{ route('admin.bills.index') }}";
+                            }, 2000);
+                        } else{
+                            Swal.fire(
+                                'Oops!',
+                                'Something went wrong...',
+                                'error'
+                            );
+                        }
                     },
                     error: function(xhr, status, error) {
                         alert('An error occurred. Please try again.');
