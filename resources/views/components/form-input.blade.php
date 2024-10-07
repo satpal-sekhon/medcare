@@ -2,6 +2,7 @@
     <label for="{{ $name }}" @class([$labelClass, 'mb-0' => $labelClass])>{{ $label }}</label>
 
     <input type="{{ $type }}"
+        id="{{ $name }}"
         name="{{ $name }}{{ $type === 'file' && $multiple ? '[]' : '' }}"
         @if ((old($name, $value) !== null) && $type!=='file') 
            value="{{ old($name, $value) }}"

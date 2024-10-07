@@ -26,7 +26,7 @@
                 <select class="form-select chosen" name="customer" id="customerSelect" aria-label="Select customer">
                     <option value="">Select a customer</option>
                     @foreach($customers as $customer)
-                    <option value="{{ $customer->id }}">#{{ $customer->user_code }} {{ $customer->name }}</option>
+                    <option value="{{ $customer->id }}" data-address="{{$customer->address}}" data-phone-number="{{$customer->phone_number}}">#{{ $customer->user_code }} {{ $customer->name }}</option>
                     @endforeach
                     <option value="custom">Add Custom Customer</option>
                 </select>
@@ -53,9 +53,9 @@
                     <label for="product" class="form-label mb-0">Product</label>
                     <select class="form-select chosen" id="product" aria-label="Select product">
                         <option value="">Select product</option>
-                        <option value="product1">Product 1</option>
-                        <option value="product2">Product 2</option>
-                        <option value="product3">Product 3</option>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->name }}" data-price="{{ $product->customer_price }}">{{ $product->name }}</option>
+                        @endforeach
                         <option value="custom">Add Custom Product</option>
                     </select>
                     <input type="text" class="form-control mt-2 d-none" id="customProduct"
@@ -102,7 +102,68 @@
         $('.chosen').chosen({
             width: '100%',
         });
+    })
+</script>
 
+
+<script>
+    $(document).ready(function() {
+        let totalAmount = 0;
+        let addedProducts = [];
+
+        $('#customerSelect').change(function() {
+            $('#bill_to_address').val($(`#customerSelect option:selected`).attr('data-address'))
+            $('#bill_to_contact').val($(`#customerSelect option:selected`).attr('data-phone-number'))
+
+            if ($(this).val() === 'custom') {
+                $('#customCustomer').removeClass('d-none').val('');
+            } else {
+                $('#customCustomer').addClass('d-none').val('');
+            }
+        });
+
+        $('#product').change(function() {
+            $('#price').val($(`#product option:selected`).attr('data-price'))
+
+            if ($(this).val() === 'custom') {
+                $('#customProduct').removeClass('d-none').val('');
+            } else {
+                $('#customProduct').addClass('d-none').val('');
+            }
+        });
+
+        $('#addProduct').click(function() {
+            const product = $('#product').val() === 'custom' ? $('#customProduct').val() : $('#product option:selected').text();
+            const quantity = Number($('#quantity').val());
+            const price = Number($('#price').val());
+            const total = (quantity * price).toFixed(2);
+
+            if (product && quantity > 0 && price >= 0) {
+                $('#addedProducts').append(`<tr>
+                    <td>${product}</td>
+                    <td>${quantity}</td>
+                    <td>${price.toFixed(2)}</td>
+                    <td>${total}</td>
+                </tr>`);
+
+                totalAmount += Number(total);
+                $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
+
+                const exists = addedProducts.some(item => item.product === product);
+                if(!exists){
+                    addedProducts.push({ product, quantity, price, total });
+                }
+
+                $('#product').val('').trigger('chosen:updated');
+                $('#quantity').val('');
+                $('#price').val('');
+                $('#customProduct').val('').addClass('d-none');
+            } else {
+                alert('Please fill out all fields correctly.');
+            }
+        });
+
+        
         $('#billingForm').validate({
             rules: {
                 bill_from: 'required',
@@ -156,12 +217,27 @@
                     return;
                 }
 
+                const product = $('#product').val() === 'custom' ? $('#customProduct').val() : $('#product option:selected').text();
+                const quantity = Number($('#quantity').val());
+                const price = Number($('#price').val());
+                const total = (quantity * price).toFixed(2);
+                
+                const formData = $(form).serializeArray();
+                const exists = addedProducts.some(item => item.product === product);
+
+                if (product && quantity > 0 && price >= 0 && !exists) {
+                    addedProducts.push({ product, quantity, price, total });
+                }
+                
+                formData.push({ name: 'addedProducts', value: JSON.stringify(addedProducts) });
+
                 $.ajax({
                     url: $(form).attr('action'),
                     type: $(form).attr('method'),
-                    data: $(form).serialize(),
+                    data: formData,
                     success: function(response) {
-                        alert('Bill generated successfully!');
+                        console.log('response',response)
+                        //alert('Bill generated successfully!');
                         //form.reset();
                     },
                     error: function(xhr, status, error) {
@@ -169,56 +245,6 @@
                     }
                 });
                 return false;
-            }
-        });
-    })
-</script>
-
-
-<script>
-    $(document).ready(function() {
-        let totalAmount = 0;
-
-        $('#customerSelect').change(function() {
-            if ($(this).val() === 'custom') {
-                $('#customCustomer').removeClass('d-none').val('');
-            } else {
-                $('#customCustomer').addClass('d-none').val('');
-            }
-        });
-
-        $('#product').change(function() {
-            if ($(this).val() === 'custom') {
-                $('#customProduct').removeClass('d-none').val('');
-            } else {
-                $('#customProduct').addClass('d-none').val('');
-            }
-        });
-
-        $('#addProduct').click(function() {
-            const product = $('#product').val() === 'custom' ? $('#customProduct').val() : $('#product option:selected').text();
-            const quantity = Number($('#quantity').val());
-            const price = Number($('#price').val());
-            const total = (quantity * price).toFixed(2);
-
-            if (product && quantity > 0 && price >= 0) {
-                $('#addedProducts').append(`<tr>
-                    <td>${product}</td>
-                    <td>${quantity}</td>
-                    <td>${price.toFixed(2)}</td>
-                    <td>${total}</td>
-                </tr>`);
-
-                totalAmount += Number(total);
-                $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
-
-                // Clear inputs
-                $('#product').val('');
-                $('#quantity').val('');
-                $('#price').val('');
-                $('#customProduct').val('').addClass('d-none');
-            } else {
-                alert('Please fill out all fields correctly.');
             }
         });
     });
