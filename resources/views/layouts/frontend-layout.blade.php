@@ -81,7 +81,7 @@
                                     </span>
                                 </button>
                                 <a href="{{ route('home') }}" class="web-logo nav-logo">
-                                    <img src="{{ asset('assets/images/logo/1.png') }}" class="img-fluid lazyload"
+                                    <img src="{{ asset(getSetting('site_logo_1')) }}" class="img-fluid lazyload"
                                         alt="">
                                 </a>
 
@@ -439,11 +439,11 @@
                                     <ul class="address">
                                         <li>
                                             <i data-feather="home"></i>
-                                            <a href="javascript:void(0)">Noida, Sector 78, India</a>
+                                            <a href="javascript:void(0)">{{ getSetting('site_address') }}</a>
                                         </li>
                                         <li>
                                             <i data-feather="mail"></i>
-                                            <a href="javascript:void(0)">support@fastkart.com</a>
+                                            <a href="mailto:{{ getSetting('site_contact_email') }}">{{ getSetting('site_contact_email') }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -539,9 +539,9 @@
                     </div>
                 </div>
 
-                <div class="sub-footer section-small-space">
+                {{-- <div class="sub-footer section-small-space">
                     <div class="reserve">
-                        <h6 class="text-content">©2022 Heal+ All rights reserved</h6>
+                        <h6 class="text-content">©2022 {{ getSetting('site_name') }} All rights reserved</h6>
                     </div>
 
                     <div class="payment">
@@ -573,7 +573,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </footer>
         <!-- Footer Section End -->

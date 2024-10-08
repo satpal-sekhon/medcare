@@ -3,14 +3,14 @@
         <div class="header-logo-wrapper p-0">
             <div class="logo-wrapper">
                 <a href="{{ route('vendor-dashboard') }}">
-                    <img class="img-fluid main-logo" src="{{ asset('assets/images/logo/2.png') }}" alt="logo">
-                    <img class="img-fluid white-logo" src="{{ asset('assets/images/logo/1.png') }}" alt="logo">
+                    <img class="img-fluid main-logo" src="{{ asset(getSetting('site_logo_2')) }}" alt="logo">
+                    <img class="img-fluid white-logo" src="{{ asset(getSetting('site_logo_1')) }}" alt="logo">
                 </a>
             </div>
             <div class="toggle-sidebar">
                 <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
                 <a href="{{ route('vendor-dashboard') }}">
-                    <img src="{{ asset('assets/images/logo/1.png') }}" class="img-fluid" alt="">
+                    <img src="{{ asset(getSetting('site_logo_1')) }}" class="img-fluid" alt="">
                 </a>
             </div>
         </div>

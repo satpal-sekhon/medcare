@@ -31,7 +31,7 @@
                                             </div>
 
                                             <div class="contact-detail-contain">
-                                                <p>(+1) 618 190 496</p>
+                                                <a href="tel:{{ getSetting('site_contact_number') }}">{{ getSetting('site_contact_number') }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -46,37 +46,22 @@
                                             </div>
 
                                             <div class="contact-detail-contain">
-                                                <p>geweto9420@chokxus.com</p>
+                                                <a href="mailto:{{ getSetting('site_email') }}">{{ getSetting('site_contact_email') }}</a>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                    <div class="col-xxl-12 col-lg-12 col-sm-12">
                                         <div class="contact-detail-box">
                                             <div class="contact-icon">
                                                 <i class="fa-solid fa-location-dot"></i>
                                             </div>
                                             <div class="contact-detail-title">
-                                                <h4>London Office</h4>
+                                                <h4>Office</h4>
                                             </div>
 
                                             <div class="contact-detail-contain">
-                                                <p>Cruce Casa de Postas 29</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                                        <div class="contact-detail-box">
-                                            <div class="contact-icon">
-                                                <i class="fa-solid fa-building"></i>
-                                            </div>
-                                            <div class="contact-detail-title">
-                                                <h4>Bournemouth Office</h4>
-                                            </div>
-
-                                            <div class="contact-detail-contain">
-                                                <p>Visitación de la Encina 22</p>
+                                                <p>{!! nl2br(getSetting('site_address')) !!}</p>
                                             </div>
                                         </div>
                                     </div>

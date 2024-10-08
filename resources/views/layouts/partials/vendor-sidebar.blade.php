@@ -3,7 +3,7 @@
     <div>
         <div class="logo-wrapper logo-wrapper-center">
             <a href="{{ route('vendor-dashboard') }}" data-bs-original-title="" title="">
-                <img class="img-fluid for-white" src="{{ asset('assets/images/logo/1.png') }}" alt="logo">
+                <img class="img-fluid for-white" src="{{ asset(getSetting('site_logo_1')) }}" alt="logo">
             </a>
             <div class="back-btn">
                 <i class="fa fa-angle-left"></i>
@@ -14,8 +14,8 @@
         </div>
         <div class="logo-icon-wrapper">
             <a href="{{ route('vendor-dashboard') }}">
-                <img class="img-fluid main-logo main-white" src="{{ asset('assets/images/logo/2.png') }}" alt="logo">
-                <img class="img-fluid main-logo main-dark" src="{{ asset('assets/images/logo/1.png') }}" alt="logo">
+                <img class="img-fluid main-logo main-white" src="{{ asset(getSetting('site_logo_2')) }}" alt="logo">
+                <img class="img-fluid main-logo main-dark" src="{{ asset(getSetting('site_logo_1')) }}" alt="logo">
             </a>
         </div>
         <nav class="sidebar-main">
