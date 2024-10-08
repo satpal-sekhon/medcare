@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive mt-4">
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>

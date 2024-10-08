@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/orders/get', [OrderController::class, 'get'])->name('orders.get');
+Route::post('/bills/get', [BillController::class, 'get'])->name('bills.get');
 
 Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Submit docs for verification
@@ -120,6 +121,12 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     Route::get('/orders', [OrderController::class, 'admin_index'])->name('vendor.orders');
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('vendor.orders.edit');
     Route::put('/orders/{order}', [OrderController::class, 'update'])->name('vendor.orders.update');
+
+    Route::get('/bills', [BillController::class, 'adminIndex'])->name('vendor.bills');
+    Route::get('/bills/create', [BillController::class, 'create'])->name('vendor.bills.create');
+    Route::post('/bills', [BillController::class, 'store'])->name('vendor.bills.store');
+    Route::get('/bills/{bill}', [BillController::class, 'show'])->name('vendor.bills.show');
+    Route::delete('/bills/{bill}', [BillController::class, 'destroy'])->name('vendor.bills.destroy');
 });
 
 
@@ -187,7 +194,6 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Bill routes
     Route::resource('bills', BillController::class);
     Route::get('/bills', [BillController::class, 'adminIndex'])->name('admin.bills.index');
-    Route::post('/bills/get', [BillController::class, 'get'])->name('bills.get');
 
     // Doctors routes
     Route::resource('doctors', DoctorController::class);

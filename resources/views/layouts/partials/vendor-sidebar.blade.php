@@ -45,6 +45,12 @@
                             <span>Orders</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.bills') }}">
+                            <i class="ri-bill-line"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

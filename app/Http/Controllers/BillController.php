@@ -20,6 +20,10 @@ class BillController extends Controller
     }
 
     public function adminIndex(){
+        if(isVendor()){
+            return view('vendor.bills.index');
+        }
+
         return view('admin.bills.index');
     }
 
@@ -32,6 +36,11 @@ class BillController extends Controller
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
             $query->where('bill_to_name', 'like', "%{$search}%");
+        }
+
+        if ($request->has('user_id') && $request->user_id) {
+            $user_id = $request->user_id;
+            $query->where('billed_by', $user_id);
         }
 
         // Total records count before filtering
@@ -61,8 +70,13 @@ class BillController extends Controller
      */
     public function create()
     {
-        $customers = User::latest()->get();
+        $customers = User::where('id', '!=', Auth::id())->latest()->get();
         $products = Product::latest()->get();
+
+        if(isVendor()){
+            return view('vendor.bills.create', compact('customers', 'products'));
+        }
+
         return view('admin.bills.create', compact('customers', 'products'));
     }
 
