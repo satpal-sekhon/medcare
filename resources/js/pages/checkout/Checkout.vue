@@ -174,6 +174,10 @@ export default {
     },
     mounted() {
         let cart = window.cart;
+        if(window.isVendor && cart.sub_total < 5000){
+            window.location = '/cart';
+        }
+
         const hasPrescriptionProduct = Object.values(cart.products).some(product => product.is_prescription_required === 1);
 
         if (hasPrescriptionProduct && !window.isVendor) {

@@ -7,6 +7,7 @@ use App\Models\BillProduct;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
@@ -83,6 +84,7 @@ class BillController extends Controller
         }
         
         $bill = Bill::create([
+            'billed_by' => Auth::id(), 
             'bill_from' => $request->bill_from, 
             'bill_from_address' => $request->bill_from_address, 
             'bill_from_contact' => $request->bill_from_contact, 

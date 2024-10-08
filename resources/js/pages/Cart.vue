@@ -1,6 +1,8 @@
 <template>
     <div class="row g-sm-5 g-3" v-if="cart.total">
         <div class="col-xxl-9">
+            <WarningMessage message="Minimum order should be ₹5,000/-" v-if="!minOrderReached"></WarningMessage>
+
             <div class="cart-table">
                 <div class="table-responsive-xl">
                     <table class="table">
@@ -147,7 +149,7 @@
 
                 <div class="button-group cart-button">
                     <ul>
-                        <li>
+                        <li v-if="minOrderReached">
                             <a :href="checkoutLink" class="btn btn-animation proceed-btn fw-bold">Process To
                                 Checkout</a>
                         </li>
@@ -170,6 +172,7 @@
 <script>
 import axios from 'axios';
 import { emit, on } from '../eventBus';
+import WarningMessage from '../components/WarningMessage.vue';
 
 export default {
     data() {
@@ -186,6 +189,9 @@ export default {
         on('updated-cart-fetch', this.handleCartUpdate);
         on('product-quantity-updated', this.handleCartQuantity);
     },
+    components: {
+        WarningMessage
+    },
     computed: {
         cartProducts(){
             const tempProducts = [];
@@ -200,6 +206,9 @@ export default {
                 }
             }
             return tempProducts;
+        },
+        minOrderReached(){
+            return !(window.isVendor && window.cart.sub_total < 5000);
         }
     },
     methods: {
@@ -261,6 +270,10 @@ export default {
         async updateCart(productId, quantity) {
             if (quantity < 0) return;
 
+            if(window.isVendor && quantity < 5){
+                quantity = 0;
+            }
+            
             try {
                 let response;
 

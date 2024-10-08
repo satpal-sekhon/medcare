@@ -94,6 +94,10 @@ export default {
     created() {
         on('updated-cart-fetch', this.handleCartUpdate);
         on('product-quantity-updated', this.handleCartQuantity);
+
+        if(window.isVendor && this.tempQuantity<5){
+            this.tempQuantity = 5;
+        }
     },
     methods: {
         increaseQuantity() {
@@ -101,7 +105,11 @@ export default {
         },
         dicreaseQuantity() {
             if (parseInt(this.tempQuantity) !== 1 && this.variant === 'product-detail') {
-                this.tempQuantity = parseInt(this.tempQuantity) - 1;
+                if(window.isVendor && this.tempQuantity===5){
+                    this.tempQuantity = 5;
+                } else {
+                    this.tempQuantity = parseInt(this.tempQuantity) - 1;
+                }
             }
         },
         addToCart() {
@@ -172,7 +180,14 @@ export default {
             }
         },
         changeQuantity(amount) {
-            this.quantity = Math.max(0, this.quantity + amount);
+            if(this.quantity<5 && window.isVendor){
+                this.quantity = 5;
+            } else if(this.quantity===5 && window.isVendor && amount<0){
+                this.quantity = 0;
+            } else {
+                this.quantity = Math.max(0, this.quantity + amount);
+            }
+
             this.updateCart();
 
             if (this.quantity <= 0) return;

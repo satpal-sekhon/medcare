@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('billed_by')->nullable();
             $table->string('bill_from');
             $table->string('bill_from_address');
             $table->string('bill_from_contact');
@@ -22,9 +23,11 @@ return new class extends Migration
             $table->string('bill_to_contact');
             $table->timestamps();
 
+            $table->foreign('billed_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bill_to')->references('id')->on('users')->onDelete('cascade');
 
             // Adding indexes
+            $table->index('billed_by');
             $table->index('bill_to');
         });
     }
