@@ -36,34 +36,25 @@
 
                     <div class="ratio_156">
                         <div class="home-contain hover-effect bg-size blur-up lazyloaded">
-                            <img src="{{ asset('assets/images/banners/vertical-1.png') }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
-                            <div class="home-detail p-top-left home-p-medium">
-                                <div>
-                                    <h6 class="text-yellow home-banner">All Range Available</h6>
-                                    <h3 class="text-uppercase fw-normal"><span class="theme-color fw-bold">Medical
-                                            Equipments</span></h3>
-                                    <h3 class="fw-light">Same Day Delivery</h3>
-                                    <button onclick="#" class="btn btn-animation btn-md mend-auto">Shop Now <i
-                                            class="fa-solid fa-arrow-right icon"></i></button>
-                                </div>
-                            </div>
+                            @if ($homePage->home_vertical_image_1_link)
+                            <a href="{{ $homePage->home_vertical_image_1_link }}">
+                            @endif
+                                <img src="{{ asset($homePage->home_vertical_image_1) }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
+                            @if ($homePage->home_vertical_image_1_link)
+                            </a>
+                            @endif
                         </div>
                     </div>
 
                     <div class="ratio_medium section-t-space">
                         <div class="home-contain hover-effect">
-                            <img src="{{ asset('assets/images/banners/vertical-2.png') }}" class="img-fluid blur-up lazyloaded" alt="">
-                            <div class="home-detail p-top-left home-p-medium">
-                                <div>
-                                    <h4 class="text-yellow text-exo home-banner">Extra Discount On</h4>
-                                    <h2 class="text-uppercase fw-normal mb-0 text-russo theme-color">Baby Care</h2>
-                                    <p class="mb-3">Super Offer to 50% Off</p>
-                                    <button class="btn btn-animation btn-md mend-auto">
-                                        Shop Now 
-                                        <i class="fa-solid fa-arrow-right icon"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            @if ($homePage->home_vertical_image_2_link)
+                            <a href="{{ $homePage->home_vertical_image_2_link }}">
+                            @endif
+                                <img src="{{ asset($homePage->home_vertical_image_2) }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
+                            @if ($homePage->home_vertical_image_2_link)
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -79,8 +70,14 @@
                     <div class="row g-md-4 g-3">
                         <div class="col-md-12">
                             <div class="banner-contain">
+                                @if ($homePage->home_horizontal_image_3_link)
+                                    <a href="{{ $homePage->home_horizontal_image_3_link }}">
+                                @endif
                                 <img src="{{ asset($homePage->home_horizontal_image_1) }}"
                                     class="lazyload d-block mx-auto" alt="" style="max-height: 150px">
+                                @if ($homePage->home_horizontal_image_3_link)
+                                    <a href="{{ $homePage->home_horizontal_image_3_link }}">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -115,7 +112,13 @@
                 @endif
             </div>
             <div class="col-xxl-2 col-xl-2 reto">
-                <img src="{{ asset('assets/images/banners/vertical-3.png') }}" width="100%" class="img-fluid social-image blur-up w-100 lazyloaded" alt="">
+                @if ($homePage->home_vertical_image_3_link)
+                    <a href="{{ $homePage->home_vertical_image_3_link }}">
+                @endif
+                    <img src="{{ asset($homePage->home_vertical_image_3) }}" class="img-fluid social-image blur-up w-100 lazyloaded" alt="">
+                @if ($homePage->home_vertical_image_3_link)
+                    </a>
+                @endif
             </div>
         </div>
     </div>
