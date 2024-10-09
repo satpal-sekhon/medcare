@@ -9,12 +9,6 @@
                 <div class="left-sidebar-box">
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="contact-image">
-                                <img src="../assets/images/inner-page/contact-us.png"
-                                    class="img-fluid lazyloaded" alt="">
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
                             <div class="contact-title">
                                 <h3>Get In Touch</h3>
                             </div>
@@ -77,64 +71,89 @@
                     <h2>Contact Us</h2>
                 </div>
                 <div class="right-sidebar-box">
-                    <div class="row">
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput" class="form-label">First Name</label>
-                                <div class="custom-input">
-                                    <input type="text" class="form-control" id="exampleFormControlInput"
-                                        placeholder="Enter First Name">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
+                    <x-success-message :message="session('success')" />
+                    
+                    <form action="{{ route('contact-us.store') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <div class="custom-input">
+                                        <input type="text" name="first_name" id="firstName" placeholder="Enter First Name"
+                                        value="{{ old('first_name') }}" @class(['form-control', 'is-invalid'=> $errors->has('first_name')])>
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
 
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                                <div class="custom-input">
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Enter Last Name">
-                                    <i class="fa-solid fa-user"></i>
+                                    @if ($errors->has('first_name'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('first_name') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput2" class="form-label">Email Address</label>
-                                <div class="custom-input">
-                                    <input type="email" class="form-control" id="exampleFormControlInput2"
-                                        placeholder="Enter Email Address">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </div>
-                            </div>
-                        </div>
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <div class="custom-input">
+                                        <input type="text" name="last_name" id="lastName" placeholder="Enter Last Name"
+                                        value="{{ old('last_name') }}" @class(['form-control', 'is-invalid'=> $errors->has('last_name')])>
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
 
-                        <div class="col-xxl-6 col-lg-12 col-sm-6">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlInput3" class="form-label">Phone Number</label>
-                                <div class="custom-input">
-                                    <input type="tel" class="form-control" id="exampleFormControlInput3"
-                                        placeholder="Enter Your Phone Number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value =
-                                        this.value.slice(0, this.maxLength);">
-                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                    @if ($errors->has('last_name'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('last_name') }}</span>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <div class="mb-md-4 mb-3 custom-form">
-                                <label for="exampleFormControlTextarea" class="form-label">Message</label>
-                                <div class="custom-textarea">
-                                    <textarea class="form-control" id="exampleFormControlTextarea"
-                                        placeholder="Enter Your Message" rows="6"></textarea>
-                                    <i class="fa-solid fa-message"></i>
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="emailAddress" class="form-label">Email Address</label>
+                                    <div class="custom-input">
+                                        <input type="email" name="email_address" id="emailAddress" placeholder="Enter Email Address"
+                                        value="{{ old('email_address') }}" @class(['form-control', 'is-invalid'=> $errors->has('email_address')])>
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    
+                                    @if ($errors->has('email_address'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('email_address') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <div class="custom-input">
+                                        <input type="tel" name="phone_number" id="phoneNumber" @class(['form-control', 'is-invalid'=> $errors->has('phone_number')])
+                                        value="{{ old('phone_number') }}" placeholder="Enter Your Phone Number" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value =
+                                            this.value.slice(0, this.maxLength);">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                    
+                                    @if ($errors->has('phone_number'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('phone_number') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="message" class="form-label">Message</label>
+                                    <div class="custom-textarea">
+                                        <textarea name="message" id="message" placeholder="Enter Your Message" rows="6"
+                                        @class(['form-control', 'is-invalid'=> $errors->has('message')])>{{ old('message') }}</textarea>
+                                        <i class="fa-solid fa-message"></i>
+                                    </div>
+                                    
+                                    @if ($errors->has('message'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('message') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button class="btn btn-animation btn-md fw-bold ms-auto">Send Message</button>
+                        <button class="btn btn-animation btn-md fw-bold ms-auto">Send Message</button>
+                    </form>
                 </div>
             </div>
         </div>

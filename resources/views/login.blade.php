@@ -28,8 +28,9 @@
                                 <div class="">
                                     <label for="email">Email Address</label>
 
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Email Address" value="{{ old('email') }}">
+                                    <input type="email" name="email" id="email"
+                                        placeholder="Email Address" value="{{ old('email') }}"
+                                        @class(['form-control', 'is-invalid'=> $errors->has('email')])>
                                     @if ($errors->has('email'))
                                     <span class="invalid-feedback d-block">{{ $errors->first('email') }}</span>
                                     @endif
@@ -60,8 +61,7 @@
                                         <input class="checkbox_animated check-box" type="checkbox" id="rememberMe">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
-                                    <a href="{{ route('forgot-password') }}" class="forgot-password">Forgot
-                                        Password?</a>
+                                    <a href="{{ route('forgot-password') }}" class="forgot-password">Forgot Password?</a>
                                 </div>
                             </div>
 

@@ -40,6 +40,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-us.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/orders/create', [OrderController::class, 'create_order'])->name('order.create');

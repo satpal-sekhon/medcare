@@ -43,7 +43,8 @@
                         @foreach ([
                         'Main Banner' => ['prefix' => 'home_main_banner', 'count' => 3],
                         'Offer Images' => ['prefix' => 'home_offer', 'count' => 4],
-                        'Horizontal Images' => ['prefix' => 'home_horizontal', 'count' => 3]
+                        'Horizontal Images' => ['prefix' => 'home_horizontal', 'count' => 3],
+                        'Vertical Images' => ['prefix' => 'home_vertical', 'count' => 3]
                         ] as $section => $info)
                         <fieldset class="border p-4 my-2">
                             <legend class="fs-5 fw-bold">{{ $section }}</legend>
@@ -66,10 +67,10 @@
                                     <x-form-input label="Image {{ $i }} Link" value="{{ $settings->$column_name }}"
                                         name="{{ $info['prefix'] }}_image_{{ $i }}_link" class="h-75"
                                         :labelClass="'form-label-title'"></x-form-input>
+                                    </div>
                                 </div>
-                </div>
-                @endfor
-                </fieldset>
+                            @endfor
+                    </fieldset>
                 @endforeach
 
                 <button class="btn theme-bg-color text-white mt-3">Save</button>

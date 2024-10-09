@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -28,7 +30,26 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name'    => 'required|string|max:50',
+            'last_name'     => 'required|string|max:50',
+            'email_address' => 'required|email',
+            'phone_number'  => 'required|digits:10',
+            'message'       => 'required|string'
+        ]);
+
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email_address' => $request->email_address,
+            'phone_number' => $request->phone_number,
+            'contact_message' => $request->message,
+        ];
+
+        $subject = 'New Contact Form Submission';
+        Mail::to(getSetting('site_contact_email'))->send(new SendMail($data, $subject, 'contact-to-admin'));
+
+        return redirect()->back()->with('success', 'Your message has been sent!');
     }
 
     /**

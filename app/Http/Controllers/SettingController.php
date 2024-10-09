@@ -171,7 +171,7 @@ class SettingController extends Controller
         }
 
 
-        foreach (['home_main_banner', 'home_offer', 'home_horizontal'] as $prefix) {
+        foreach (['home_main_banner', 'home_offer', 'home_horizontal', 'home_vertical'] as $prefix) {
             for ($i = 1; $i <= 4; $i++) {
                 // Check if a new file was uploaded
                 if ($request->hasFile("{$prefix}_image_{$i}")) {
