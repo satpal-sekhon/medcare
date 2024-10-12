@@ -110,7 +110,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="right-side">
+                                        <li class="right-side d-block">
                                             <a href="{{ route('my-account.notifications') }}" class="btn p-0 position-relative header-wishlist">
                                                 <div class="delivery-icon">
                                                     <i data-feather="bell"></i>
@@ -320,7 +320,7 @@
                 </li>
 
                 <li>
-                    <a href="#" class="search-box">
+                    <a href="{{ route('products.index') }}" class="search-box">
                         <i class="iconly-Search icli"></i>
                         <span>Search</span>
                     </a>

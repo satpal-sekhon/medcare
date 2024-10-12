@@ -130,6 +130,11 @@ class BillController extends Controller
      */
     public function show(Bill $bill)
     {
+        if(isVendor()){
+            return view('vendor.bills.show', compact('bill'));
+        }
+
+
         return view('admin.bills.show', compact('bill'));
     }
 
