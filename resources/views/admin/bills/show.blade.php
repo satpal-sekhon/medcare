@@ -10,6 +10,8 @@
                 </div>
 
                 <div class="container text-dark" id="bill-section">
+                    <img src="{{ asset(getSetting('site_logo_2')) }}" alt="" width="150" style="margin-bottom: 12px">
+                    
                     <div class="bill-header">
                         <p class="mb-1">Date: {{ $bill->created_at }}</p>
                         <p>Invoice #: INV-000{{ $bill->id }}</p>

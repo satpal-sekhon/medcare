@@ -4,11 +4,11 @@
         <div class="col-md-6 mb-3">
             <h4>Bill From</h4>
             <div class="mb-2">
-                <x-form-input name="bill_from" label="Name" value="{{ getSetting('site_name') }}"></x-form-input>
+                <x-form-input name="bill_from" label="Name" value="{{ isVendor() ? auth()->user()->name : getSetting('site_name') }}"></x-form-input>
             </div>
 
             <div class="mb-2">
-                <x-textarea name="bill_from_address" label="Address" value="{{ getSetting('site_address') }}">
+                <x-textarea name="bill_from_address" label="Address" value="{{ isVendor() ? auth()->user()->address : getSetting('site_address') }}">
                 </x-textarea>
             </div>
 
@@ -22,8 +22,8 @@
         <div class="col-md-6 mb-3">
             <h4>Bill To</h4>
             <div class="mb-2">
-                <label for="customerSelect" class="form-label mb-0">Select Customer</label>
-                <select class="form-select chosen" name="customer" id="customerSelect" aria-label="Select customer">
+                <label for="customerSelect" class="form-label mb-0">Customer Name</label>
+                {{-- <select class="form-select chosen" name="customer" id="customerSelect" aria-label="Select customer">
                     <option value="">Select a customer</option>
                     @foreach($customers as $customer)
                     <option value="{{ $customer->id }}" data-address="{{$customer->address}}"
@@ -33,7 +33,9 @@
                     <option value="custom">Add Custom Customer</option>
                 </select>
                 <input type="text" class="form-control mt-2 d-none" name="custom_name" id="customCustomer"
-                    placeholder="Enter custom customer name">
+                    placeholder="Enter custom customer name"> --}}
+                    <input type="text" class="form-control mt-2" name="custom_name" id="customCustomer"
+                    placeholder="Enter customer name">
             </div>
 
             <div class="mb-2">
@@ -143,40 +145,54 @@
             const total = (quantity * price).toFixed(2);
 
             if (product && quantity > 0 && price >= 0) {
-                $('#addedProducts').append(`<tr>
-                    <td>${product}</td>
-                    <td>${quantity}</td>
-                    <td>${price.toFixed(2)}</td>
-                    <td>${total}</td>
-                </tr>`);
-
-                totalAmount += Number(total);
-                $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
-
                 const exists = addedProducts.some(item => item.product === product);
                 if(!exists){
+                    $('#addedProducts').append(`<tr>
+                        <td>${product}</td>
+                        <td>${quantity}</td>
+                        <td>${price.toFixed(2)}</td>
+                        <td>${total}</td>
+                    </tr>`);
+
+                    totalAmount += Number(total);
+                    $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
+
                     addedProducts.push({ product, quantity, price, total });
+                    totalAmount += Number(total);
+                    $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
+                    
+                    $('#product').val('').trigger('chosen:updated');
+                    $('#quantity').val('');
+                    $('#price').val('');
+                    $('#customProduct').val('').addClass('d-none');
+                } else {
+                    alert('Product is already added.');
                 }
 
-                $('#product').val('').trigger('chosen:updated');
-                $('#quantity').val('');
-                $('#price').val('');
-                $('#customProduct').val('').addClass('d-none');
             } else {
                 alert('Please fill out all fields correctly.');
             }
         });
+
+        $.validator.addMethod("requiredIfNoProducts", function(value, element) {
+            return addedProducts.length > 0 || value.trim() !== "";
+        }, "This field is required.");
 
         
         $('#billingForm').validate({
             rules: {
                 bill_from: 'required',
                 bill_from_address: 'required',
-                bill_from_contact: 'required',
+                custom_name: 'required',
+                bill_to_address: 'required',
                 bill_to_address: 'required',
                 bill_to_contact: 'required',
-                quantity: 'required',
-                price: 'required'
+                quantity: {
+                    requiredIfNoProducts: true
+                },
+                price: {
+                    requiredIfNoProducts: true
+                }
             },
             errorPlacement: function(error, element) {
                 // Create a new div with the class invalid-feedback if it doesn't exist
@@ -201,17 +217,17 @@
                 }
             },
             submitHandler: function(form) {
-                if(!$('#customerSelect').val()){
+                /* if(!$('#customerSelect').val()){
                     alert('Please select customer');
                     return;
-                }
+                } */
 
                 if($('#customerSelect').val()=='custom' && !$('#customCustomer').val()){
                     alert('Please enter customer name');
                     return;
                 }
 
-                if(!$('#product').val()){
+                if(!$('#product').val() && addedProducts.length===0){
                     alert('Please select product');
                     return;
                 }
@@ -248,7 +264,7 @@
                             );
 
                             setTimeout(() => {
-                                window.location = "{{ route('admin.bills.index') }}";
+                                window.location = "{{ route('vendor.bills') }}";
                             }, 2000);
                         } else{
                             Swal.fire(
