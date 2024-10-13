@@ -61,24 +61,29 @@ export default {
     },
     methods: {
         async fetchResults() {
-            try {
-                let params = {
-                    page: 1,
-                    per_page: this.perPage,
-                    search: this.searchQuery
-                }
+            if(this.searchQuery){
+                try {
+                    let params = {
+                        page: 1,
+                        per_page: this.perPage,
+                        search: this.searchQuery
+                    }
 
-                const response = await axios.get('/api/products', {
-                    params
-                });
+                    const response = await axios.get('/api/products', {
+                        params
+                    });
 
-                if (response.data.data) {
-                    this.showSearch = true;
-                    this.searchResults = response.data.data;
+                    if (response.data.data) {
+                        this.showSearch = true;
+                        this.searchResults = response.data.data;
+                    }
+                } catch (error) {
+                    console.error('Error fetching products:', error);
                 }
-            } catch (error) {
-                console.error('Error fetching products:', error);
+            } else {
+                this.showSearch = false;
             }
+            
         },
         handleFocusOut() {
             /* setTimeout(() => {

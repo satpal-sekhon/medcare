@@ -2,14 +2,14 @@
     <div class="header-wrapper m-0">
         <div class="header-logo-wrapper p-0">
             <div class="logo-wrapper">
-                <a href="{{ route('vendor-dashboard') }}">
+                <a href="{{ route('home') }}">
                     <img class="img-fluid main-logo" src="{{ asset(getSetting('site_logo_2')) }}" alt="logo">
                     <img class="img-fluid white-logo" src="{{ asset(getSetting('site_logo_1')) }}" alt="logo">
                 </a>
             </div>
             <div class="toggle-sidebar">
                 <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
-                <a href="{{ route('vendor-dashboard') }}">
+                <a href="{{ route('home') }}">
                     <img src="{{ asset(getSetting('site_logo_1')) }}" class="img-fluid" alt="">
                 </a>
             </div>

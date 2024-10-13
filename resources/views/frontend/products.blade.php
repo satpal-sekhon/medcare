@@ -10,6 +10,9 @@
 
 <section class="section-b-space shop-section">
     <div class="container-fluid-lg">
+        <div class="position-relative mb-3">
+            <search-bar></search-bar>
+        </div>
         <products></products>
     </div>
 </section>

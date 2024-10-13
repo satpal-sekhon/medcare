@@ -149,4 +149,14 @@ body.admin-login {
     .mob-height-0{
         height: 0;
     }
+
+    .search-results{
+        width: auto!important;
+        top: 100%!important;
+    }
+
+    .search-box .btn{
+        background: #0da487;
+        color: #fff;
+    }
 }
