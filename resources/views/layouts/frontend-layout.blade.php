@@ -266,21 +266,24 @@
                                         <div class="offcanvas-body">
                                             <ul class="navbar-nav">
         @foreach($menus->skip(1)->take(6) as $item)
-        <li @class(["nav-item", 'dropdown' => $item->is_dropdown])>
-            @if($item->is_dropdown)
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $item->label }}</a>
-                <ul class="dropdown-menu">
-                    @foreach($item->children as $child)
-                        <li>
-                            <a class="dropdown-item" href="{{ $child->route_name ? route($child->route_name): '#' }}">{{ $child->label }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <a class="nav-link" href="{{ $item->route_name ? route($item->route_name) : '#' }}">{{ $item->label }}</a>
+            @if (!isVendor() || (isVendor() && $item->route_name!=='lab-test.index' && $item->route_name!=='pharmacy.index' && $item->route_name!=='doctors.index'))
+
+            <li @class(["nav-item", 'dropdown' => $item->is_dropdown])>
+                @if($item->is_dropdown)
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $item->label }}</a>
+                    <ul class="dropdown-menu">
+                        @foreach($item->children as $child)
+                            <li>
+                                <a class="dropdown-item" href="{{ $child->route_name ? route($child->route_name): '#' }}">{{ $child->label }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <a class="nav-link" href="{{ $item->route_name ? route($item->route_name) : '#' }}">{{ $item->label }}</a>
+                @endif
+            </li>
             @endif
-        </li>
-    @endforeach
+        @endforeach
                                             </ul>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.vendor-layout')
 
 @section('content')
     <div class="row">
@@ -44,7 +44,7 @@
                                 <x-form-input name="order_update" label="Order Update" value="{{ $order->update }}"></x-form-input>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <div class="form-group">
                                     <label for="assignedTo">Assigned To</label>
                                     <select name="assigned_to" class="form-control select2" id="assignedTo">

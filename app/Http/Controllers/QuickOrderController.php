@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\OrderStatusUpdated;
 use App\Mail\QuickOrderPlaced;
 use App\Models\QuickOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,7 +20,12 @@ class QuickOrderController extends Controller
     }
 
     public function admin_index(){
-        return view('admin.orders.quick-orders');
+        if(isVendor()){
+            return view('vendor.orders.quick-orders');
+        }
+
+        $vendors = User::role('Vendor')->get();
+        return view('admin.orders.quick-orders', compact('vendors'));
     }
 
     /**
@@ -90,6 +96,17 @@ class QuickOrderController extends Controller
 
         $query = QuickOrder::with('user');
 
+        if ($request->has('user_id') && $request->user_id) {
+            $user_id = $request->user_id;
+            $query->where('user_id', $user_id);
+        }
+
+        if ($request->has('assignedTo') && $request->assignedTo) {
+            $assignedTo = $request->assignedTo;
+            $query->where('assigned_to', $assignedTo);
+        }
+
+
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
             $query->where(function ($q) use ($search) {
@@ -125,6 +142,7 @@ class QuickOrderController extends Controller
             return [
                 'id' => $order->id,
                 'user_id' => $order->user_id,
+                'assigned_to' => $order->assigned_to,
                 'order_number' => $order->order_number,
                 'name' => $order->name,
                 'email' => $order->email,
@@ -161,6 +179,26 @@ class QuickOrderController extends Controller
         ];
 
         Mail::to($order->email)->send(new OrderStatusUpdated($data));
+
+        return response()->json([
+            "success" => true,
+            "message" => 'Status Updated successfully!'
+        ]);
+    }
+
+    public function updateAssignee(Request $request){
+        $order = QuickOrder::find($request->id);
+        $order->assigned_to = $request->assigned_to;
+        $order->save();
+
+        $data = [
+            'customer_name' => $order->name,
+            'order_number' => $order->order_number,
+            'email' => $order->email,
+            'assigned_to' => $order->assigned_to,
+        ];
+
+        //Mail::to($order->email)->send(new OrderStatusUpdated($data));
 
         return response()->json([
             "success" => true,

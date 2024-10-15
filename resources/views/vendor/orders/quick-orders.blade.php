@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.vendor-layout')
 
 @section('content')
     <div class="row">
@@ -21,10 +21,9 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Status</th>
-                                        <th>Assigned To</th>
                                         <th>Instructions</th>
                                         <th>Prescription</th>
-                                        <th>Option</th>
+                                        {{-- <th>Option</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -78,7 +77,8 @@
                         url: "{{ route('quick-orders.get') }}",
                         type: 'POST',
                         data: {
-                            _token: "{{ csrf_token() }}"
+                            _token: "{{ csrf_token() }}",
+                            assignedTo: "{{ auth()->user()->id }}"
                         }
                     },
                     columns: [{
@@ -130,25 +130,6 @@
                             }
                         },
                         {
-                            data: 'assigned_to',
-                            name: 'assigned_to',
-                            render: function(data, type, row){
-                                const vendors = @json($vendors);
-
-                                let options = `<select class="form-control" name="assigned_to" data-id="${row.id}" style="width: 145px">`;
-                                options += '<option value="">Self</option>';
-                                vendors.forEach(user => {
-                                    if(row.user_id !== user.id){
-                                        options += `<option value="${user.id}" ${user.id === row.assigned_to ? 'selected' : ''}>${user.name}</option>`;
-                                    }
-                                });
-                                options += '</select>';
-                                return options;
-                                
-                                console.log(vendors)
-                            }
-                        },
-                        {
                             data: 'instructions',
                             name: 'instructions',
                             orderable: false,
@@ -170,7 +151,7 @@
 
                             }
                         },
-                        {
+                        /* {
                             data: null,
                             name: 'actions',
                             orderable: false,
@@ -187,7 +168,7 @@
                                 </ul>
                             `;
                             }
-                        }
+                        } */
                     ],
                     order: [[0, 'desc']]
                 });
@@ -202,21 +183,6 @@
                         data: {
                             id: id,
                             status: newStatus,
-                            _token: `{{ csrf_token() }}`
-                        }
-                    })
-                });
-
-                $(document).on('change', '[name="assigned_to"]', function() {
-                    let userId = $(this).val();
-                    let id = $(this).data('id');
-                    
-                    $.ajax({
-                        url: `{{ route('quick-orders.update-assignee') }}`,
-                        method: 'POST',
-                        data: {
-                            id: id,
-                            assigned_to: userId,
                             _token: `{{ csrf_token() }}`
                         }
                     })

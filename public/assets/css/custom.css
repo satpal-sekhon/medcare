@@ -140,6 +140,10 @@ body.admin-login {
 }
 /* Homepage Diseases Section End */
 
+.shop-section .middle-box{
+    display: none;
+}
+
 /* Mobile responisve */
 @media (max-width: 767px) {
     header .onhover-category-list .onhover-category-box {
@@ -158,5 +162,9 @@ body.admin-login {
     .search-box .btn{
         background: #0da487;
         color: #fff;
+    }
+
+    .shop-section .middle-box{
+        display: block;
     }
 }

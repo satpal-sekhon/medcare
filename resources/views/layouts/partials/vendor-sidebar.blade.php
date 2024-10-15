@@ -40,11 +40,20 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.orders') }}">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-list-unordered"></i>
                             <span>Orders</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('vendor.orders') }}">Product Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('vendor.quick-orders.index') }}">Quick Orders</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.bills') }}">
                             <i class="ri-bill-line"></i>
@@ -52,7 +61,7 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('products.index') }}">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('products.index') }}" target="_blank">
                             <i class="ri-store-3-line"></i>
                             <span>Shop Now</span>
                         </a>

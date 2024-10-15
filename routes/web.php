@@ -110,6 +110,9 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/orders/get', [OrderController::class, 'get'])->name('orders.get');
 Route::post('/bills/get', [BillController::class, 'get'])->name('bills.get');
+Route::post('/quick-orders/get', [QuickOrderController::class, 'get'])->name('quick-orders.get');
+Route::post('/quick-orders/update-status', [QuickOrderController::class, 'updateStatus'])->name('quick-orders.update-status');
+Route::post('/quick-orders/update-assignee', [QuickOrderController::class, 'updateAssignee'])->name('quick-orders.update-assignee');
 
 Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Submit docs for verification
@@ -122,6 +125,9 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     Route::get('/orders', [OrderController::class, 'admin_index'])->name('vendor.orders');
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('vendor.orders.edit');
     Route::put('/orders/{order}', [OrderController::class, 'update'])->name('vendor.orders.update');
+
+    Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('vendor.quick-orders.index');
+
 
     Route::get('/bills', [BillController::class, 'adminIndex'])->name('vendor.bills');
     Route::get('/bills/create', [BillController::class, 'create'])->name('vendor.bills.create');
@@ -229,8 +235,6 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // Quick order routes
     Route::resource('quick-orders', QuickOrderController::class);
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('admin.quick-orders.index');
-    Route::post('/quick-orders/get', [QuickOrderController::class, 'get'])->name('quick-orders.get');
-    Route::post('/quick-orders/update-status', [QuickOrderController::class, 'updateStatus'])->name('quick-orders.update-status');
 
     /* Lab package order routes */
     Route::resource('lab-package-orders', LabPackageOrderController::class);
