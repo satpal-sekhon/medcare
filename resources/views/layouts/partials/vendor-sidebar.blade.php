@@ -33,12 +33,22 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.my-orders') }}">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-shopping-basket-line"></i>
                             <span>My Orders</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('vendor.my-orders') }}">Product Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('vendor.my-quick-orders') }}">Quick Orders</a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
                             <i class="ri-list-unordered"></i>

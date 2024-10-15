@@ -19,6 +19,10 @@ class QuickOrderController extends Controller
         //
     }
 
+    public function myOrders(){
+        return view('vendor.orders.my-quick-orders');
+    }
+
     public function admin_index(){
         if(isVendor()){
             return view('vendor.orders.quick-orders');
@@ -84,7 +88,7 @@ class QuickOrderController extends Controller
         Mail::to($customer_email)->send(new QuickOrderPlaced($data));
 
 
-        if($request->user()){
+        if($request->user() && !isVendor()){
             return redirect()->route('my-account.orders')->with('success', 'Quick order placed successfully!');
         }
 

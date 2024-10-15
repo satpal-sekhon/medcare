@@ -126,6 +126,7 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('vendor.orders.edit');
     Route::put('/orders/{order}', [OrderController::class, 'update'])->name('vendor.orders.update');
 
+    Route::get('/my-quick-orders', [QuickOrderController::class, 'myOrders'])->name('vendor.my-quick-orders');
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('vendor.quick-orders.index');
 
 
