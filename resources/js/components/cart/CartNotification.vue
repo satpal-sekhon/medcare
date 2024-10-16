@@ -22,6 +22,14 @@ export default {
             type: Object,
             required: true
         }
+    },
+    computed: {
+        truncatedProductName() {
+            const maxLength = 25;
+            return this.product.name.length > maxLength
+                ? this.product.name.substring(0, maxLength) + '…'
+                : this.product.name;
+        }
     }
 }
 </script>
@@ -70,6 +78,10 @@ export default {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
+    max-width: 25ch; /* Limit to 25 characters */
+    overflow: hidden; /* Hide overflow */
+    white-space: nowrap; /* Prevent line breaks */
+    text-overflow: ellipsis;
 }
 
 .cart-notification .go-to-cart-button {

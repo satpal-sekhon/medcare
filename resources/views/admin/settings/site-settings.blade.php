@@ -22,6 +22,7 @@
                                 @foreach ([
                                     'site_logo_1' => 'Site Logo 1',
                                     'site_logo_2' => 'Site logo 2',
+                                    'site_icon' => 'Site Icon'
                                 ] as $key => $label)
                                     <div class="col-md-6 mb-2">
                                         <label class="form-label-title mb-0">Default {{ $label }} Image</label>
