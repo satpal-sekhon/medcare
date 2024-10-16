@@ -45,7 +45,7 @@
                                     <strong>Location:</strong> {{ pharmacy.address }}
                                 </div>
                                 <div>
-                                    <a :href="pharmacy.orderLink"
+                                    <a :href="`/quick-order/${pharmacy.id}`"
                                         class="badge theme-bg-color text-white rounded-pill px-3 py-2 fs-12">
                                         <i class="fa fa-shopping-cart me-2"></i>
                                         <span>Order Medicine</span>

@@ -74,6 +74,7 @@ Route::get('/search-medicines', [ProductController::class, 'searchMedicines'])->
 Route::get('/search-medicines/{alphabet}', [ProductController::class, 'searchMedicines'])->name('search-medicine.alphabet');
 
 Route::get('/quick-order', [QuickOrderController::class, 'create'])->name('quick-order');
+Route::get('/quick-order/{pharmacy}', [QuickOrderController::class, 'pharmacyOrder'])->name('quick-order.by-pharmacy');
 Route::post('/quick-order', [QuickOrderController::class, 'store'])->name('quick-order.store');
 
 Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');

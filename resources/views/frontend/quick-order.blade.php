@@ -37,6 +37,14 @@
                             @class(["row", "d-none"=> !auth()->check() && !$errors->count() ]) id="orderForm">
                             @csrf
 
+                            @isset($pharmacy)   
+                            <input type="hidden" name="pharmacy_user_id" value="{{ $pharmacy->user_id }}">
+                            
+                            <div class="col-12 mb-2">
+                                <x-form-input name="pharmacy_name" label="Pharmacy Store" value="{{ $pharmacy->name }}" readonly></x-form-input>
+                            </div>
+                            @endisset
+
                             <div class="col-12 mb-2">
                                 <x-form-input name="customer_name" label="Name" value="{{ auth()->user()->name ?? '' }}"></x-form-input>
                             </div>

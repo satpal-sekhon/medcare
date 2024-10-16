@@ -6,6 +6,7 @@ use App\Mail\OrderStatusUpdated;
 use App\Mail\QuickOrderPlaced;
 use App\Models\QuickOrder;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,6 +41,10 @@ class QuickOrderController extends Controller
         return view('frontend.quick-order');
     }
 
+    public function pharmacyOrder(Request $request, Vendor $pharmacy){
+        return view('frontend.quick-order', compact('pharmacy'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -68,6 +73,7 @@ class QuickOrderController extends Controller
 
         QuickOrder::create([
             'user_id' => $request->user()->id ?? null,
+            'pharmacy_user_id' => $request->pharmacy_user_id ?? null,
             'name' => $request->input('customer_name'),
             'phone_number' => $request->input('phone_number'),
             'email' => $customer_email,
