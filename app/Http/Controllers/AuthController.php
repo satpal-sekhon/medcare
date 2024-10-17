@@ -42,7 +42,15 @@ class AuthController extends Controller
             'name'              => 'required|string|max:50',
             'email'             => 'required|email|max:100|unique:users,email',
             'phone_number'      => 'required|digits:10',
-            'password'          => 'required|string|regex:/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"\'<>,.?~`-]{8,25}$/',
+            'password' => [
+                'required',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[!@#$%^&*()_+\-=\[\]{};":\\|,.<>\/?~`]/', // must contain a special character
+            ],
             'confirm_password'  => 'required|string|min:8|same:password',
             'terms'             => 'required|in:accepted',
         ]);
@@ -103,7 +111,15 @@ class AuthController extends Controller
             'city'                  => 'required|string|max:50',
             'pincode'               => 'required|digits:6',
             'state'                 => 'required|string|max:50',
-            'new_password'          => 'required|string|regex:/^(?=.*[a-zA-Z0-9])[a-zA-Z0-9!@#$%^&*()_+={}\[\]:;"\'<>,.?~`-]{8,25}$/',
+            'new_password'          => [
+                'required',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[!@#$%^&*()_+\-=\[\]{};":\\|,.<>\/?~`]/', // must contain a special character
+            ],
             'confirm_password'      => 'required|string|min:8|same:new_password',
             'terms'                 => 'required|in:accepted',
 
@@ -213,7 +229,15 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[!@#$%^&*()_+\-=\[\]{};":\\|,.<>\/?~`]/', // must contain a special character
+            ],
         ]);
 
 

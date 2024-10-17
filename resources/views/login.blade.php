@@ -49,9 +49,10 @@
                                             <i class="fas fa-eye fs-5"></i>
                                         </button>
                                     </div>
-                                    @error('password')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
+
+                                    @if ($errors->has('password'))
+                                    <span class="invalid-feedback d-block">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
                             </div>
 
