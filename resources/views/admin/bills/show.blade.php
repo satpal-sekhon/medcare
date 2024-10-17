@@ -28,6 +28,10 @@
                             <p class="mb-1">Name: {{ $bill->bill_to_name }}</p>
                             <p>Address: {!! nl2br($bill->bill_to_address) !!}</p>
                         </div>
+                        <div class="col-md-6 my-2">
+                            <h5>Payment Method</h5>
+                            <p class="mb-1">{{ $bill->payment_type }}</p>
+                        </div>
                     </div>
 
                     <div class="table-responsive mt-4">

@@ -48,6 +48,17 @@
                 </x-form-input>
             </div>
         </div>
+
+        <div class="col-md-6 mb-3">
+            <h4>Payment Information</h4>
+            <div class="my-2">
+                <label for="paymentType" class="form-label mb-0">Payment Method</label>
+                <select class="form-select" name="payment_type" id="paymentType">
+                    <option value="Cash">Cash</option>
+                    <option value="Online">Online</option>
+                </select>
+            </div>
+        </div>
     </div>
 
 
@@ -187,6 +198,7 @@
                 bill_to_address: 'required',
                 bill_to_address: 'required',
                 bill_to_contact: 'required',
+                payment_type: 'required',
                 quantity: {
                     requiredIfNoProducts: true
                 },

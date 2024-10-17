@@ -106,6 +106,7 @@ class BillController extends Controller
             'bill_to_name' => $customerName, 
             'bill_to_address' => $request->bill_to_address, 
             'bill_to_contact' => $request->bill_to_contact, 
+            'payment_type' => $request->payment_type ?? 'Unkown', 
         ]);
         
         $products = json_decode($request->addedProducts);

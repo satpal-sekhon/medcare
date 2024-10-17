@@ -73,7 +73,7 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('products.index') }}" target="_blank">
                             <i class="ri-store-3-line"></i>
-                            <span>Shop Now</span>
+                            <span>Buy Products</span>
                         </a>
                     </li>
 
