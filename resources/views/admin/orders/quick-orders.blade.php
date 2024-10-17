@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <x-include-plugins :plugins="['dataTable']" />
+    <x-include-plugins :plugins="['dataTable', 'chosen']" />
 
     @push('scripts')
         <script>
@@ -134,8 +134,11 @@
                             name: 'assigned_to',
                             render: function(data, type, row){
                                 const vendors = @json($vendors);
+                                if(row.user && row.user.is_vendor){
+                                    return ``;
+                                }
 
-                                let options = `<select class="form-control" name="assigned_to" data-id="${row.id}" style="width: 145px">`;
+                                let options = `<select class="form-control chosen" name="assigned_to" data-id="${row.id}" style="width: 145px">`;
                                 options += '<option value="">Self</option>';
                                 vendors.forEach(user => {
                                     if(row.user_id !== user.id){
@@ -189,7 +192,12 @@
                             }
                         }
                     ],
-                    order: [[0, 'desc']]
+                    order: [[0, 'desc']],
+                    drawCallback: function() {
+                        $('.chosen').chosen({
+                            width: '100%',
+                        });
+                    }
                 });
 
                 $(document).on('change', '[name="order-status"]', function() {

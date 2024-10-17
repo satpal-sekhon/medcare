@@ -82,7 +82,7 @@ Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
 
 Route::post('/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
 Route::post('/remove-applied-coupon', [CartController::class, 'removeAppliedCoupon'])->name('coupon.remove.applied');
-Route::post('/send-notification', [UserController::class, 'sendNotifica+tion'])->name('notification.send');
+Route::post('/send-notification', [UserController::class, 'sendNotification'])->name('notification.send');
 
 Route::resources([
     '/wishlist' => WishlistController::class,

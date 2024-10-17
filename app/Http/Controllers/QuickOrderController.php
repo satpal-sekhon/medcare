@@ -164,6 +164,7 @@ class QuickOrderController extends Controller
                 'user' => $order->user ? [
                     'id' => $order->user->id,
                     'user_code' => $order->user->user_code,
+                    'is_vendor' => $order->user->vendor ? true: false,
                 ] : null,
             ];
         });
