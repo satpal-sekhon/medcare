@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="dashboard-title">
+    {{-- <div class="dashboard-title">
         <h3>Account Information</h3>
     </div>
 
@@ -90,6 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection
