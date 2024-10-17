@@ -47,11 +47,11 @@
                 <div class="container-fluid">
                     <x-success-message :message="session('success')" />
 
-                    @if(auth()->user() && !auth()->user()->vendor->image)
+                    @if(auth()->user() && !auth()->user()->vendor->image && Route::currentRouteName() !=='vendor.resubmit-docs')
                         @include('vendor.partials.upload-documents-for-verification')
-                    @elseif(auth()->user() && auth()->user()->status == 'Pending Approval')
+                    @elseif(auth()->user() && auth()->user()->status == 'Pending Approval' && Route::currentRouteName() !=='vendor.resubmit-docs')
                         @include('vendor.partials.pending-approval')
-                    @elseif(auth()->user() && auth()->user()->status == 'Suspended')
+                    @elseif(auth()->user() && auth()->user()->status == 'Suspended' && Route::currentRouteName() !=='vendor.resubmit-docs')
                         @include('vendor.partials.suspended-account')
                     @else
                         @yield('content')

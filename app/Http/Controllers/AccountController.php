@@ -55,6 +55,10 @@ class AccountController extends Controller
     }
 
     /* Vendor Module */
+    public function resubmitDocs(){
+        return view('vendor.resubmit-docs');
+    }
+
     public function submit_vendor_docs_for_verification(Request $request)
     {
         // Validate the request

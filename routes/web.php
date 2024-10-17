@@ -118,6 +118,7 @@ Route::post('/quick-orders/update-assignee', [QuickOrderController::class, 'upda
 Route::prefix('/vendor')->middleware('vendor')->group(function () {
     // Submit docs for verification
     Route::post('/submit-docs-for-verification', [AccountController::class, 'submit_vendor_docs_for_verification'])->name('vendor.submit-docs-for-verification');
+    Route::get('/resubmit-docs', [AccountController::class, 'resubmitDocs'])->name('vendor.resubmit-docs');
 
     // Dashboard route
     Route::get('/', [DashboardController::class, 'vendor_dashboard'])->name('vendor-dashboard');
