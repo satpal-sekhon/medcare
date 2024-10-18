@@ -35,6 +35,10 @@
     @stack('styles')
 
     @vite('resources/js/app.js')
+
+    <script>
+        window.userRole = '{{ auth()->user() ? auth()->user()->roles->first()->name : "Customer" }}';
+    </script>
 </head>
 
 <body class="bg-effect">

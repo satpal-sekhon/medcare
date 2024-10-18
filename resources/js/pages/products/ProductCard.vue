@@ -32,7 +32,12 @@
                     <span class="theme-color" v-else>₹{{ product.customer_price }}</span>
                     <del>₹{{ product.mrp }}</del>
                 </h5>
-                <QuantityBox :productId="product.id" />
+                <div class="theme-color" v-if="isAvailable">
+                    <QuantityBox :productId="product.id" />
+                </div>
+                <div v-else>
+                    <button class="btn btn-danger text-white py-2 mt-2 w-100">Out of Stock</button>
+                </div>
             </div>
         </div>
     </div>
@@ -69,6 +74,19 @@ export default {
     computed: {
         isVendor() {
             return window.isVendor || false;
+        },
+        isAvailable(){
+            if(this.product.stock_type==='Without Stock'){
+                return true;
+            }
+
+            if(window.userRole==='Vendor' && this.product.stock_quantity_for_vendor < 5){
+                return false;
+            } else if(window.userRole!=='Vendor' && this.product.stock_quantity_for_customer < 1){
+                return false;
+            }
+
+            return true
         }
     },
     mounted() {

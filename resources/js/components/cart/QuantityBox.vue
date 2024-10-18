@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="note-box product-package">
+        <div class="note-box product-package" v-if="isAvailable">
             <div class="cart_qty qty-box product-qty">
                 <div class="input-group">
                     <button type="button" class="qty-left-minus" :disabled="tempQuantity < 1" @click="dicreaseQuantity">
@@ -29,6 +29,9 @@
             </div>
 
             <button class="btn btn-md bg-dark cart-button text-white w-100" @click="addToCart">Add To Cart</button>
+        </div>
+        <div v-else>
+            <button class="btn btn-danger text-white mt-2 py-2">Out of Stock</button>
         </div>
     </div>
     <div class="add-to-cart-box" v-else>
@@ -91,6 +94,21 @@ export default {
             variantId: 0
         };
     },
+    computed: {
+        isAvailable(){
+            if(this.product.stock_type==='Without Stock'){
+                return true;
+            }
+
+            if(window.userRole==='Vendor' && this.product.stock_quantity_for_vendor < 5){
+                return false;
+            } else if(window.userRole!=='Vendor' && this.product.stock_quantity_for_customer < 1){
+                return false;
+            }
+
+            return true
+        }
+    },
     created() {
         on('updated-cart-fetch', this.handleCartUpdate);
         on('product-quantity-updated', this.handleCartQuantity);
@@ -101,7 +119,18 @@ export default {
     },
     methods: {
         increaseQuantity() {
-            this.tempQuantity = parseInt(this.tempQuantity) + 1;
+            if(this.product.stock_type==='Without Stock'){
+                this.tempQuantity = parseInt(this.tempQuantity) + 1;
+            } else {
+                let maxQuantity = this.product.stock_quantity_for_customer;
+                if(window.userRole==='Vendor'){
+                    maxQuantity = this.product.stock_quantity_for_vendor;
+                }
+
+                if(this.tempQuantity < maxQuantity){
+                    this.tempQuantity = parseInt(this.tempQuantity) + 1;
+                }
+            }
         },
         dicreaseQuantity() {
             if (parseInt(this.tempQuantity) !== 1 && this.variant === 'product-detail') {
