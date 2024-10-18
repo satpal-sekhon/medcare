@@ -76,7 +76,7 @@
             </div>
             
             <div class="col-md-6">
-                <x-form-input name="new_password" label="Password" :labelClass="'form-label-title'"></x-form-input>
+                <x-form-input type="password" name="new_password" label="Password" :labelClass="'form-label-title'"></x-form-input>
             </div>
         </div>
     </div>
