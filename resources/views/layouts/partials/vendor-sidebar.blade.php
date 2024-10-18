@@ -64,22 +64,28 @@
                         </ul>
                     </li>
 
+                    @if (auth()->user()->vendor->type !=='Other')
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.bills') }}">
                             <i class="ri-bill-line"></i>
                             <span>Bills</span>
                         </a>
                     </li>
+                    @endif
+
+                    @if (auth()->user()->vendor->type !=='Channel Partner')
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('products.index') }}" target="_blank">
                             <i class="ri-store-3-line"></i>
                             <span>Buy Products</span>
                         </a>
                     </li>
+                    @endif
 
                 </ul>
             </div>
 
+            
             <div class="right-arrow" id="right-arrow">
                 <i data-feather="arrow-right"></i>
             </div>

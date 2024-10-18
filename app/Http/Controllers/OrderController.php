@@ -300,7 +300,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $vendors = User::role('Vendor')->where('status', 'Active')->get();
+        $vendors = User::role('Vendor')->where('status', 'Active')->whereHas('vendor', function ($query) {
+                $query->where('type', '!=', 'Other');
+            })->get();
 
         if(isVendor()){
             if($order->assigned_to!==Auth::id()){

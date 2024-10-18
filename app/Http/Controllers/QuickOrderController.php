@@ -29,7 +29,9 @@ class QuickOrderController extends Controller
             return view('vendor.orders.quick-orders');
         }
 
-        $vendors = User::role('Vendor')->where('status', 'Active')->get();
+        $vendors = User::role('Vendor')->where('status', 'Active')->whereHas('vendor', function ($query) {
+            $query->where('type', '!=', 'Other');
+        })->get();
         return view('admin.orders.quick-orders', compact('vendors'));
     }
 
