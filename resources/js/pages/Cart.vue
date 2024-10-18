@@ -2,6 +2,7 @@
     <div class="row g-sm-5 g-3" v-if="cart.total">
         <div class="col-xxl-9">
             <WarningMessage message="Minimum order should be ₹5,000/-" v-if="!minOrderReached"></WarningMessage>
+            <WarningMessage message="Your account is not activated. At this moment, you are not eligible to place an order as a vendor" v-if="!accountIsActivated"></WarningMessage>
 
             <div class="cart-table">
                 <div class="table-responsive-xl">
@@ -108,7 +109,7 @@
                 </div>
 
                 <div class="summery-contain">
-                    <div class="mb-3 coupon-cart">
+                    <div class="mb-3 coupon-cart" v-if="accountIsActivated">
                         <h6 class="text-content mb-2">Coupon Apply</h6>
                         <div class="coupon-box input-group">
                             <input type="text" class="form-control" v-model="couponCode"
@@ -149,7 +150,7 @@
 
                 <div class="button-group cart-button">
                     <ul>
-                        <li v-if="minOrderReached">
+                        <li v-if="minOrderReached && accountIsActivated">
                             <a :href="checkoutLink" class="btn btn-animation proceed-btn fw-bold">Process To
                                 Checkout</a>
                         </li>
@@ -209,6 +210,9 @@ export default {
         },
         minOrderReached(){
             return !(window.isVendor && window.cart.sub_total < 5000);
+        },
+        accountIsActivated(){
+            return !(window.isVendor && window.appData.user && window.appData.user.status !== 'Active');
         }
     },
     methods: {

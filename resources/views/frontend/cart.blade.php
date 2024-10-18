@@ -7,6 +7,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 
+@push('styles')
+    <script>
+        window.appData = {
+            user: @json(auth()->user())
+        };
+    </script>
+@endpush
+
+
 <section class="cart-section section-b-space">
     <div class="container-fluid-lg">
         <cart></cart>
