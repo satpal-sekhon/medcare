@@ -116,6 +116,7 @@ class BillController extends Controller
                 'product_name' => $product->product,
                 'quantity' => $product->quantity,
                 'price' => $product->price,
+                'discount_percentage' => $product->discount_percentage ?? 0,
                 'total' => $product->total,
             ]);
         }

@@ -40,6 +40,7 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Quantity</th>
+                                    <th>Discount</th>
                                     <th>Price</th>
                                     <th>Total</th>
                                 </tr>
@@ -53,6 +54,7 @@
                                 <tr class="item-row">
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product->discount_percentage ?? '0.00' }}%</td>
                                     <td>₹{{ $product->price }}</td>
                                     <td>₹{{ $product->total }}</td>
                                 </tr>

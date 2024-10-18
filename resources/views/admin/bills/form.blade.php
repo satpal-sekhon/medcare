@@ -64,7 +64,7 @@
 
     <div id="productList mt-2">
         <div class="row mb-3 align-items-end">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="mb-2">
                     <label for="product" class="form-label mb-0">Product</label>
                     <select class="form-select chosen" id="product" aria-label="Select product">
@@ -79,12 +79,16 @@
                         placeholder="Enter custom product name">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <x-form-input type="number" name="quantity" label="Quantity" placeholder="Enter quantity" min="1">
                 </x-form-input>
             </div>
             <div class="col-md-3">
                 <x-form-input type="number" name="price" label="Price per Unit" placeholder="Enter price per unit"
+                    step="0.01" min="0"></x-form-input>
+            </div>
+            <div class="col-md-2">
+                <x-form-input type="number" name="discount_percentage" label="Discount (in percentage)" placeholder="Enter price per unit"
                     step="0.01" min="0"></x-form-input>
             </div>
             <div class="col-md-1">
@@ -101,6 +105,7 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Discount</th>
                 <th>Price</th>
                 <th>Total</th>
             </tr>
@@ -153,6 +158,7 @@
             const product = $('#product').val() === 'custom' ? $('#customProduct').val() : $('#product option:selected').text();
             const quantity = Number($('#quantity').val());
             const price = Number($('#price').val());
+            const discount_percentage = Number($('#discount_percentage').val());
             const total = (quantity * price).toFixed(2);
 
             if (product && quantity > 0 && price >= 0) {
@@ -161,19 +167,21 @@
                     $('#addedProducts').append(`<tr>
                         <td>${product}</td>
                         <td>${quantity}</td>
-                        <td>${price.toFixed(2)}</td>
-                        <td>${total}</td>
+                        <td>${discount_percentage.toFixed(2)}%</td>
+                        <td>₹${price.toFixed(2)}</td>
+                        <td>₹${total}</td>
                     </tr>`);
 
                     totalAmount += Number(total);
                     $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
 
-                    addedProducts.push({ product, quantity, price, total });
+                    addedProducts.push({ product, quantity, discount_percentage, price, total });
                     totalAmount += Number(total);
                     $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
                     
                     $('#product').val('').trigger('chosen:updated');
                     $('#quantity').val('');
+                    $('#discount_percentage').val('');
                     $('#price').val('');
                     $('#customProduct').val('').addClass('d-none');
                 } else {
@@ -251,6 +259,7 @@
 
                 const product = $('#product').val() === 'custom' ? $('#customProduct').val() : $('#product option:selected').text();
                 const quantity = Number($('#quantity').val());
+                const discountPercentage = Number($('#discount_percentage').val());
                 const price = Number($('#price').val());
                 const total = (quantity * price).toFixed(2);
                 
@@ -258,7 +267,7 @@
                 const exists = addedProducts.some(item => item.product === product);
 
                 if (product && quantity > 0 && price >= 0 && !exists) {
-                    addedProducts.push({ product, quantity, price, total });
+                    addedProducts.push({ product, quantity, discountPercentage, price, total });
                 }
                 
                 formData.push({ name: 'addedProducts', value: JSON.stringify(addedProducts) });
