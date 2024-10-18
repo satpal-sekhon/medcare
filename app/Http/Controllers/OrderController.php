@@ -41,7 +41,7 @@ class OrderController extends Controller
         $columns = ['id', 'name', 'shipping_address', 'phone_number'];
     
         // Eager load the items relationship to calculate sum later
-        $query = Order::with('user')
+        $query = Order::with(['user.vendor'])
             ->withCount('items as total_quantity')
             ->select('orders.*');
 
@@ -53,6 +53,16 @@ class OrderController extends Controller
         if ($request->has('assignedTo') && $request->assignedTo) {
             $assignedTo = $request->assignedTo;
             $query->where('assigned_to', $assignedTo);
+        }
+
+        if ($request->has('filter_orders_by') && $request->filter_orders_by) {
+            $filterOrdersBy = $request->filter_orders_by;
+        
+            if ($filterOrdersBy === 'Vendors') {
+                $query->whereHas('user.vendor');
+            } elseif ($filterOrdersBy === 'Customers') {
+                $query->whereDoesntHave('user.vendor');
+            }
         }
     
         if ($request->has('search') && $request->search['value']) {

@@ -116,6 +116,15 @@ class QuickOrderController extends Controller
             $query->where('assigned_to', $assignedTo);
         }
 
+        if ($request->has('filter_orders_by') && $request->filter_orders_by) {
+            $filterOrdersBy = $request->filter_orders_by;
+        
+            if ($filterOrdersBy === 'Vendors') {
+                $query->whereHas('user.vendor');
+            } elseif ($filterOrdersBy === 'Customers') {
+                $query->whereDoesntHave('user.vendor');
+            }
+        }
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -163,7 +172,7 @@ class QuickOrderController extends Controller
                 'instructions' => $order->instructions,
                 'user' => $order->user ? [
                     'id' => $order->user->id,
-                    'user_code' => $order->user->user_code,
+                    'user_code' => $order->user->vendor ? $order->user->vendor->vendor_code : $order->user->user_code,
                     'is_vendor' => $order->user->vendor ? true: false,
                 ] : null,
             ];

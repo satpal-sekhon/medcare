@@ -12,6 +12,17 @@
                     <x-success-message :message="session('success')" />
 
                     <div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="filterOrdersBy">Filter Orders By</label>
+                                <select name="filter_orders_by" id="filterOrdersBy" class="form-control mb-3">
+                                    <option value="All">All</option>
+                                    <option value="Vendors">Vendors</option>
+                                    <option value="Customers">Customers</option>
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="table-responsive">
                             <table class="table theme-table">
                                 <thead>
@@ -77,8 +88,9 @@
                     ajax: {
                         url: "{{ route('quick-orders.get') }}",
                         type: 'POST',
-                        data: {
-                            _token: "{{ csrf_token() }}"
+                        data: function(d){
+                            d._token = "{{ csrf_token() }}",
+                            d.filter_orders_by = $('#filterOrdersBy').val();
                         }
                     },
                     columns: [{
@@ -199,6 +211,11 @@
                         });
                     }
                 });
+
+                $('#filterOrdersBy').on('change', function() {
+                    window.table.ajax.reload();
+                });
+
 
                 $(document).on('change', '[name="order-status"]', function() {
                     let newStatus = $(this).val();
