@@ -40,8 +40,8 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Quantity</th>
+                                    <th>Sub Total</th>
                                     <th>Discount</th>
-                                    <th>Price</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
@@ -54,18 +54,20 @@
                                 <tr class="item-row">
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->quantity }}</td>
-                                    <td>{{ $product->discount_percentage ?? '0.00' }}%</td>
                                     <td>₹{{ $product->price }}</td>
-                                    <td>₹{{ $product->total }}</td>
+                                    <td>{{ $product->discount_percentage ?? '0.00' }}%</td>
+                                    @php
+                                        $discountPercentage = $product->discount_percentage ?? 0;
+                                        $discountAmount = ($discountPercentage / 100) * $product->price;
+                                        $discountedTotal = $product->price - $discountAmount;
+                                        $totalSum += $discountedTotal;
+                                    @endphp
+                                    <td>₹{{ number_format($discountedTotal, 2) }}</td>
                                 </tr>
 
-                                @php
-                                    $totalSum += $product->total;
-                                @endphp
-                                
                                 @endforeach
                                 <tr>
-                                    <td colspan="3" class="text-right total">Total:</td>
+                                    <td colspan="4" class="text-right total">Total:</td>
                                     <td class="total">₹{{ number_format($totalSum, 2) }}</td>
                                 </tr>
                             </tbody>

@@ -67,7 +67,7 @@
                         type: 'POST',
                         data: function(d){
                             d._token = "{{ csrf_token() }}",
-                            d.filter_orders_by = $('#filterOrdersBy').val();
+                            d.filter_orders_by = $('#filterOrdersBy').val()
                         }
                     },
                     columns: [{

@@ -31,7 +31,7 @@ class BillController extends Controller
     {
         $columns = ['id', 'bill_from', 'bill_from_address', 'bill_from_contact', 'bill_to_name', 'bill_to_address', 'bill_to_contact'];
 
-        $query = Bill::query();
+        $query = Bill::with('user.vendor');
 
         if ($request->has('search') && $request->search['value']) {
             $search = $request->search['value'];
@@ -41,6 +41,16 @@ class BillController extends Controller
         if ($request->has('user_id') && $request->user_id) {
             $user_id = $request->user_id;
             $query->where('billed_by', $user_id);
+        }
+
+        if ($request->has('filter_bills_by') && $request->filter_bills_by) {
+            $filterBillsBy = $request->filter_bills_by;
+        
+            if ($filterBillsBy === 'Vendors') {
+                $query->whereHas('user.vendor');
+            } elseif ($filterBillsBy === 'Self') {
+                $query->where('billed_by', Auth::id());
+            }
         }
 
         // Total records count before filtering

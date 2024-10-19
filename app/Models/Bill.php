@@ -15,4 +15,7 @@ class Bill extends Model
         return $this->hasMany(BillProduct::class);
     }
 
+    public function user() {
+        return $this->belongsTo(User::class, 'billed_by');
+    }
 }

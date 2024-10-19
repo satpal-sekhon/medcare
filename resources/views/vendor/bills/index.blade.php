@@ -31,7 +31,7 @@
                                         <th>Bill To</th>
                                         <th>Bill to number</th>
                                         <th>Total Products</th>
-                                        <th>Total</th>
+                                        {{-- <th>Total</th> --}}
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -83,13 +83,13 @@
                             data: 'products_count',
                             name: 'products_count'
                         },
-                        {
+                        /* {
                             data: 'products_sum_total',
                             name: 'products_sum_total',
                             render: function(data, type, row) {
                                 return `₹${row.products_sum_total}`;
                             }
-                        },
+                        }, */
                         {
                             data: null,
                             name: 'actions',

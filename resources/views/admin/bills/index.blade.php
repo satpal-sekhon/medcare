@@ -21,6 +21,17 @@
 
                     <x-success-message :message="session('success')" />
 
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="filterBillsBy">Filter Bills By</label>
+                            <select name="filter_bills_by" id="filterBillsBy" class="form-control mb-3">
+                                <option value="All">All</option>
+                                <option value="Vendors">Vendors</option>
+                                <option value="Self">Only my bills</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div>
                         <div class="table-responsive">
                             <table class="table theme-table">
@@ -31,7 +42,7 @@
                                         <th>Bill To</th>
                                         <th>Bill to number</th>
                                         <th>Total Products</th>
-                                        <th>Total</th>
+                                        {{-- <th>Total</th> --}}
                                         <th>Option</th>
                                     </tr>
                                 </thead>
@@ -49,14 +60,19 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
+                $('#filterBillsBy').on('change', function() {
+                    window.table.ajax.reload();
+                });
+
                 window.table = $('table').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: {
                         url: "{{ route('bills.get') }}",
                         type: 'POST',
-                        data: {
-                            _token: "{{ csrf_token() }}"
+                        data: function(d){
+                            d._token = "{{ csrf_token() }}",
+                            d.filter_bills_by = $('#filterBillsBy').val()
                         }
                     },
                     columns: [{
@@ -67,8 +83,21 @@
                             }
                         },
                         {
-                            data: 'bill_from',
-                            name: 'bill_from'
+                            data: null,
+                            name: 'bill_from',
+                            render: function(data, type, row) {
+                                let userBadge = ``;
+
+                                if(row.user){
+                                    if(row.user.vendor){
+                                        userBadge = `<span class="badge badge-success">#${row.user.vendor.vendor_code}</span>`;
+                                    }/*  else {
+                                        userBadge = `<span class="badge badge-success">#${row.user.user_code}</span>`;
+                                    } */
+                                }
+
+                                return `${userBadge} ${row.bill_from}`;
+                            }
                         },
                         {
                             data: 'bill_to_name',
@@ -82,13 +111,13 @@
                             data: 'products_count',
                             name: 'products_count'
                         },
-                        {
+                        /* {
                             data: 'products_sum_total',
                             name: 'products_sum_total',
                             render: function(data, type, row) {
                                 return `₹${row.products_sum_total}`;
                             }
-                        },
+                        }, */
                         {
                             data: null,
                             name: 'actions',

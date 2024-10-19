@@ -164,20 +164,21 @@
             if (product && quantity > 0 && price >= 0) {
                 const exists = addedProducts.some(item => item.product === product);
                 if(!exists){
+                    const discountAmount = (discount_percentage / 100) * price;
+                    const discountedTotal = price - discountAmount;
+
                     $('#addedProducts').append(`<tr>
                         <td>${product}</td>
                         <td>${quantity}</td>
                         <td>${discount_percentage.toFixed(2)}%</td>
                         <td>₹${price.toFixed(2)}</td>
-                        <td>₹${total}</td>
+                        <td>₹${discountedTotal.toFixed(2)}</td>
                     </tr>`);
 
-                    totalAmount += Number(total);
+                    totalAmount += Number(discountedTotal);
                     $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
 
                     addedProducts.push({ product, quantity, discount_percentage, price, total });
-                    totalAmount += Number(total);
-                    $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
                     
                     $('#product').val('').trigger('chosen:updated');
                     $('#quantity').val('');
