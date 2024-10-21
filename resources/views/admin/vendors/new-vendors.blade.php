@@ -62,12 +62,26 @@
                             }
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: null,
+                            name: 'name',
+                            render: function(data,type, row){
+                                let userBadge = ``;
+
+                                if(row.vendor){
+                                    if(row.vendor){
+                                        userBadge = `<span class="badge badge-success">#${row.vendor.vendor_code}</span>`;
+                                    } else {
+                                        userBadge = `<span class="badge badge-success">#${row.user.user_code}</span>`;
+                                    }
+                                    
+                                }
+
+                                return `${userBadge} ${row.name}`;
+                            }
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'vendor.name',
+                            name: 'vendor.name'
                         },
                         {
                             data: 'email',
