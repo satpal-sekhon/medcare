@@ -41,17 +41,33 @@
                         </fieldset>
 
                         @foreach ([
-                        'Main Banner' => ['prefix' => 'home_main_banner', 'count' => 3],
+                        'Main Banner' => ['prefix' => 'home_main_banner', 'count' => 4],
                         'Offer Images' => ['prefix' => 'home_offer', 'count' => 4],
                         'Horizontal Images' => ['prefix' => 'home_horizontal', 'count' => 3],
                         'Vertical Images' => ['prefix' => 'home_vertical', 'count' => 3]
                         ] as $section => $info)
+
+                        @php
+                            $tempCount = 0;
+                        @endphp
+
                         <fieldset class="border p-4 my-2">
                             <legend class="fs-5 fw-bold">{{ $section }}</legend>
                             @for ($i = 1; $i <= $info['count']; $i++) <div class="row">
                                 <div class="col-md-6">
-                                    <x-form-input type="file" label="Image {{ $i }}"
-                                        name="{{ $info['prefix'] }}_image_{{ $i }}" :labelClass="'form-label-title'">
+                                    @php
+                                        $inputLabel = 'Image '.$i;
+                                    @endphp
+
+                                    @if ($section=='Main Banner' && $i > 2)
+                                        @php
+                                            $tempCount ++;
+                                            $inputLabel = 'Mobile Image '.$tempCount;
+                                        @endphp
+                                    @endif
+
+                                    <x-form-input type="file" label="{{ $inputLabel }}"
+                                        name="{{ $info['prefix'] }}_image_{{ $i }}" :labelClass="'form-label-title'" accept="image/*">
                                     </x-form-input>
 
                                     @php

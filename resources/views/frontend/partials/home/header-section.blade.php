@@ -22,13 +22,22 @@
                         @endif
                     </div>
                 </div>
-                <div class="d-block d-md-none">
-                    <div>
+                <div class="slick-slider d-block d-md-none">
+                    <div style="max-height: 240px">
                         @if ($homePage->home_main_banner_image_3_link)
                             <a href="{{$homePage->home_main_banner_image_3_link}}">
                         @endif
                         <img src="{{ asset($homePage->home_main_banner_image_3) }}" class="img-fluid w-100" alt="">
                         @if ($homePage->home_main_banner_image_3_link)
+                            </a>
+                        @endif
+                    </div>
+                    <div style="max-height: 240px">
+                        @if ($homePage->home_main_banner_image_4_link)
+                            <a href="{{$homePage->home_main_banner_image_4_link}}">
+                        @endif
+                        <img src="{{ asset($homePage->home_main_banner_image_4) }}" class="img-fluid w-100" alt="">
+                        @if ($homePage->home_main_banner_image_4_link)
                             </a>
                         @endif
                     </div>
