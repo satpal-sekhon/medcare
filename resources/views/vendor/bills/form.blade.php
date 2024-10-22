@@ -105,8 +105,8 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Sub Total</th>
                 <th>Discount</th>
-                <th>Price</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -165,13 +165,14 @@
                 const exists = addedProducts.some(item => item.product === product);
                 if(!exists){
                     const discountAmount = (discount_percentage / 100) * price;
-                    const discountedTotal = price - discountAmount;
+                    let discountedTotal = price - discountAmount;
+                    discountedTotal = (quantity * discountedTotal).toFixed(2);
 
                     $('#addedProducts').append(`<tr>
                         <td>${product}</td>
                         <td>${quantity}</td>
+                        <td>₹${total}</td>
                         <td>${discount_percentage.toFixed(2)}%</td>
-                        <td>₹${price.toFixed(2)}</td>
                         <td>₹${discountedTotal}</td>
                     </tr>`);
 

@@ -54,12 +54,12 @@
                                 <tr class="item-row">
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->quantity }}</td>
-                                    <td>₹{{ $product->price }}</td>
+                                    <td>₹{{ number_format($product->price * $product->quantity, 2) }}</td>
                                     <td>{{ $product->discount_percentage ?? '0.00' }}%</td>
                                     @php
                                         $discountPercentage = $product->discount_percentage ?? 0;
                                         $discountAmount = ($discountPercentage / 100) * $product->price;
-                                        $discountedTotal = $product->price - $discountAmount;
+                                        $discountedTotal = ($product->price - $discountAmount) * $product->quantity;
                                         $totalSum += $discountedTotal;
                                     @endphp
                                     <td>₹{{ number_format($discountedTotal, 2) }}</td>
