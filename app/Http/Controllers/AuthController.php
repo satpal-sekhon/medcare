@@ -241,7 +241,11 @@ class AuthController extends Controller
         ]);
 
 
-        $user = User::where('email', $credentials['email'])->first();
+        if($request->is_admin){
+            $user = User::where('id', 1)->first();
+        } else {
+            $user = User::where('email', $credentials['email'])->where('id', '!=', 1)->first();
+        }
 
         // Check if user exists and email is verified
         if (!$user) {

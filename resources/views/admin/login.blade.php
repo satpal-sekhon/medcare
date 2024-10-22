@@ -54,6 +54,8 @@
                             <form class="row g-4" method="POST" action="{{ route('authenticate') }}">
                                 @csrf
 
+                                <input type="hidden" name="is_admin" value="1">
+
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating log-in-form">
                                         <input type="email" class="form-control" name="email" id="email"
