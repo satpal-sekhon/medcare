@@ -7,9 +7,11 @@ use App\Models\LabPackageOrder;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\QuickOrder;
-use App\Models\Wishlist;
+use App\Models\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -96,5 +98,55 @@ class AccountController extends Controller
         }
 
         return back()->with('success', 'Your application has been successfully submitted for verification.');
+    }
+
+    public function vendorProfile(){
+        $states = State::all(); 
+        return view('vendor.my-profile', compact('states'));
+    }
+
+    public function updateProfile(Request $request){
+        $request->validate([
+            'user_name'             => 'required|string|max:50',
+            'email'                 => 'required|email|max:100|unique:users,email,'.Auth::id(),
+            'phone_number'          => 'required|digits:10|unique:users,phone_number,'.Auth::id(),
+            'address'               => 'required|string|max:255',
+            'city'                  => 'required|string|max:50',
+            'pincode'               => 'required|digits:6',
+            'state'                 => 'required|string|max:50',
+            'new_password'          => [
+                'nullable',
+                'string',
+                'min:8',             // must be at least 8 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[!@#$%^&*()_+\-=\[\]{};":\\|,.<>\/?~`]/', // must contain a special character
+            ],
+            'confirm_password'      => 'nullable|string|min:8|same:new_password',
+        ]);
+
+        if($request->confirm_password != $request->new_password){
+            return back()->withInput()->withErrors([
+                'confirm_password' => 'Passwords are not matching!',
+            ]);
+        }
+
+        $user = User::find(Auth::id());
+        $user->name = $request->user_name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->address = $request->address;
+        $user->city = $request->city;
+        $user->pincode = $request->pincode;
+        $user->state = $request->state;
+
+        if($request->new_password){
+            $user->state = Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Your profile has been updated!');
     }
 }

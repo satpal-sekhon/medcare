@@ -82,6 +82,19 @@
                     </li>
                     @endif
 
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.profile') }}">
+                            <i class="ri-user-line"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('vendor.business') }}">
+                            <i class="ri-store-2-line"></i>
+                            <span>My Business Profile</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

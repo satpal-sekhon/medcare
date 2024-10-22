@@ -131,12 +131,15 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     Route::get('/my-quick-orders', [QuickOrderController::class, 'myOrders'])->name('vendor.my-quick-orders');
     Route::get('/quick-orders', [QuickOrderController::class, 'admin_index'])->name('vendor.quick-orders.index');
 
-
     Route::get('/bills', [BillController::class, 'adminIndex'])->name('vendor.bills');
     Route::get('/bills/create', [BillController::class, 'create'])->name('vendor.bills.create');
     Route::post('/bills', [BillController::class, 'store'])->name('vendor.bills.store');
     Route::get('/bills/{bill}', [BillController::class, 'show'])->name('vendor.bills.show');
     Route::delete('/bills/{bill}', [BillController::class, 'destroy'])->name('vendor.bills.destroy');
+
+    Route::get('/my-profile', [AccountController::class, 'vendorProfile'])->name('vendor.profile');
+    Route::post('/my-profile', [AccountController::class, 'updateProfile'])->name('vendor.update-profile');
+    Route::get('/my-business', [AccountController::class, 'vendorBusiness'])->name('vendor.business');
 });
 
 
