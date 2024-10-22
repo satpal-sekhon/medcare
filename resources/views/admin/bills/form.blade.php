@@ -108,6 +108,7 @@
                 <th>Sub total</th>
                 <th>Discount</th>
                 <th>Total</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="addedProducts"></tbody>
@@ -174,6 +175,7 @@
                         <td>₹${total}</td>
                         <td>${discount_percentage.toFixed(2)}%</td>
                         <td>₹${discountedTotal}</td>
+                        <td><button type="button" class="btn btn-danger btn-sm deleteProduct">Delete</button></td>
                     </tr>`);
 
                     totalAmount += Number(discountedTotal);
@@ -194,6 +196,23 @@
                 alert('Please fill out all fields correctly.');
             }
         });
+
+        $(document).on('click', '.deleteProduct', function() {
+            const row = $(this).closest('tr');
+            const totalToRemove = Number(row.find('td:nth-last-child(2)').text().replace('₹', ''));
+
+            // Remove the row from the table
+            row.remove();
+
+            // Update the total amount
+            totalAmount -= totalToRemove;
+            $('#totalAmount').text(`₹${totalAmount.toFixed(2)}`);
+
+            // Optionally, remove the product from addedProducts array (if tracking)
+            const productName = row.find('td:first').text();
+            addedProducts = addedProducts.filter(item => item.product !== productName);
+        });
+
 
         $.validator.addMethod("requiredIfNoProducts", function(value, element) {
             return addedProducts.length > 0 || value.trim() !== "";
