@@ -18,6 +18,12 @@
                         <h4>Order With Prescription</h4>
                     </div>
 
+                    @if(auth()->user() && auth()->user()->vendor)
+                        @if(auth()->user()->status!=='Active')
+                            <x-warning-message message="Your account is not activated. At this moment, you are not eligible to place an order as a vendor" />
+                        @endif
+                    @endif
+
                     <x-error-message :message="session('error')" />
                     <x-success-message :message="session('success')" />
 
@@ -62,10 +68,22 @@
                                 <x-textarea name="instructions" label="Enter Instructions (If any)"></x-textarea>
                             </div>
 
+                            
+                            @if(auth()->user() && auth()->user()->vendor)
+                                @if(auth()->user()->status==='Active')
+                                    <div class="col-12">
+                                        <button class="btn btn-animation w-100 justify-content-center"
+                                            type="submit">Submit</button>
+                                    </div>
+                                @endif
+                            @else
                             <div class="col-12">
                                 <button class="btn btn-animation w-100 justify-content-center"
                                     type="submit">Submit</button>
                             </div>
+                            @endif
+                            
+                            
                         </form>
                     </div>
 
