@@ -106,7 +106,7 @@ class QuickOrderController extends Controller
     public function get(Request $request){
         $columns = ['id', 'name', 'email', 'phone_number'];
 
-        $query = QuickOrder::with('user');
+        $query = QuickOrder::with(['user', 'pharmacy']);
 
         if ($request->has('user_id') && $request->user_id) {
             $user_id = $request->user_id;
@@ -158,7 +158,6 @@ class QuickOrderController extends Controller
         }
 
         $data = $query->skip($request->start)->take($request->length)->get();
-
         $data = $data->map(function ($order) {
             return [
                 'id' => $order->id,
@@ -176,6 +175,11 @@ class QuickOrderController extends Controller
                     'id' => $order->user->id,
                     'user_code' => $order->user->vendor ? $order->user->vendor->vendor_code : $order->user->user_code,
                     'is_vendor' => $order->user->vendor ? true: false,
+                ] : null,
+                'preferred_store' => $order->pharmacy ? [
+                    'vendor_user_id' => $order->pharmacy->id,
+                    'vendor_code' => $order->pharmacy->vendor->vendor_code,
+                    'store_name' => $order->pharmacy->vendor->name,
                 ] : null,
             ];
         });

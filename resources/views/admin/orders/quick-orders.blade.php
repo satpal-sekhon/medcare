@@ -32,6 +32,7 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Status</th>
+                                        <th>Prefered Store</th>
                                         <th>Assigned To</th>
                                         <th>Instructions</th>
                                         <th>Prescription</th>
@@ -139,6 +140,20 @@
                                     </select>
                                 `;
                                 return options;
+                            }
+                        },
+                        {
+                            data: null,
+                            name: 'preferred_store',
+                            orderable: false,
+                            render: function(data, type, row) {
+                                if(!row.preferred_store){
+                                    return `any`;
+                                }
+
+                                let vendorBadge = `<span class="badge badge-success mb-1">#${row.preferred_store.vendor_code}</span>`;
+                                let storeName = row.preferred_store.store_name;
+                                return `${vendorBadge}<br> ${storeName}`;
                             }
                         },
                         {

@@ -25,6 +25,10 @@ class QuickOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function pharmacy(){
+        return $this->belongsTo(User::class, 'pharmacy_user_id');
+    }
+
     /**
      * Generate the next order number.
      *
