@@ -140,6 +140,7 @@ Route::prefix('/vendor')->middleware('vendor')->group(function () {
     Route::get('/my-profile', [AccountController::class, 'vendorProfile'])->name('vendor.profile');
     Route::post('/my-profile', [AccountController::class, 'updateProfile'])->name('vendor.update-profile');
     Route::get('/my-business', [AccountController::class, 'vendorBusiness'])->name('vendor.business');
+    Route::post('/my-business', [AccountController::class, 'updateVendorBusiness'])->name('vendor.update-business-profile');
 });
 
 

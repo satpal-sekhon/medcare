@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
@@ -148,5 +149,76 @@ class AccountController extends Controller
         $user->save();
 
         return back()->with('success', 'Your profile has been updated!');
+    }
+
+    public function vendorBusiness() {
+        $states = State::all(); 
+        $vendor = Auth::user()->vendor; 
+        return view('vendor.my-business', compact('states', 'vendor'));
+    }
+
+    public function updateVendorBusiness(Request $request) {
+        $vendor = Auth::user()->vendor;
+
+        $request->validate([
+            'business_name'         => 'required|string|max:75',
+            'business_email'        => [
+                                        'required',
+                                        'email',
+                                        'max:100',
+                                        Rule::unique('vendors', 'email')->ignore($vendor->id),
+                                    ],
+            'business_phone_number' => [
+                                        'required',
+                                        'digits:10',
+                                        Rule::unique('vendors', 'phone_number')->ignore($vendor->id),
+                                    ],
+            'business_address'      => 'required|string|max:255',
+            'business_city'         => 'required|string|max:50',
+            'business_pincode'      => 'required|digits:6',
+            'business_state'        => 'required|string|max:50',
+            'license_number'        => 'required|string',
+            'store_image'           => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'documents.*'           => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+        ]);
+
+        $storeImagePath = $vendor->image;
+        if ($request->hasFile('store_image')) {
+            $storeImage = $request->file('store_image');
+            $storeImagePath = uploadFile($storeImage, 'uploads/stores/');
+        }
+
+        $user = User::find(Auth::id());
+        $user->status = 'Pending Approval';
+        $user->save();
+
+        $vendor->update([
+            'name'              => $request->input('business_name'),
+            'email'             => $request->input('business_email'),
+            'phone_number'      => preg_replace('/\D/', '', $request->input('business_phone_number')),
+            'address'           => $request->input('business_address'),
+            'city'              => $request->input('business_city'),
+            'state'             => $request->input('business_state'),
+            'image'             => $storeImagePath,
+            'pincode'           => $request->input('business_pincode'),
+            'type'              => $request->input('business_type'),
+            'shop_type'         => $request->input('shop_type'),
+            'license_number'    => $request->input('license_number'),
+        ]);
+
+        // Handle the documents
+        if ($request->hasFile('documents')) {
+            $documents = $request->file('documents');
+            foreach ($documents as $document) {
+                $mimeType = $document->getMimeType();
+                $documentPath = uploadFile($document, 'uploads/vendor-documents/');
+                $vendor->assets()->create([
+                    'path' => $documentPath,
+                    'mime_type' => $mimeType,
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Your business details are being sent for verification!');
     }
 }
